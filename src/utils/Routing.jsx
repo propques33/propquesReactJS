@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home.jsx";
 import Book from "../pages/Book.jsx";
 import Contact from "../pages/Contact.jsx";
+import ContactPage from "../pages/ContactPage.jsx";
 import Shop from "../pages/Shop.jsx";
 import About from "../pages/About.jsx";
 import Blog from "../pages/Blog.jsx";
@@ -17,7 +18,7 @@ const Routing = () => {
         <Route path="/about" element={<About />} />
         <Route path="/book" element={<Book />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/blogs" element={<Blog />} />
       </Routes>
     </>

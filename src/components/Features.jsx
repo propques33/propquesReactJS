@@ -52,7 +52,7 @@ const Features = () => {
             matchmaking while you enjoy the benefits.
           </p>
           <div className="py-2">
-            <Button name="Match making with coworker" />
+            <Button name="Match Making With Coworking" />
           </div>
         </div>
       </div>

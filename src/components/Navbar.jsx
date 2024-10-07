@@ -63,7 +63,7 @@ const Navbar = () => {
               <Link to="/" className="text-lg hover:text-blue-400" onClick={toggleMenu}>Blogs</Link>
             </li>
             <li>
-              <Link to="/" className="text-lg hover:text-blue-400" onClick={toggleMenu}>Careers</Link>
+              <Link to="https://propques.zohorecruit.in/jobs/Careers" className="text-lg hover:text-blue-400" onClick={toggleMenu}>Careers</Link>
             </li>
           </ul>
         </div>

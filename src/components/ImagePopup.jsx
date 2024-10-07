@@ -31,7 +31,7 @@ const ImagePopup = () => {
       <div className=" flex justify-evenly pb-8">
         {images.map((val, key) => {
           return (
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center " key={key}>
               <img
                 src={val.src}
                 alt=""

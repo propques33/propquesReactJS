@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5"; // Import close icon
 import { useModal } from "../ModalContext"; // Import modal context
-import HCaptcha from '@hcaptcha/react-hcaptcha'; // Import hCaptcha
+import emailjs from 'emailjs-com'; // Import EmailJS
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'; // Import Google reCAPTCHA v3
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 const ModalForm = () => {
   const { isFormOpen, toggleForm } = useModal();
@@ -19,6 +21,8 @@ const ModalForm = () => {
     coworkingOption: "",
   });
 
+  const { executeRecaptcha } = useGoogleReCaptcha(); // Google reCAPTCHA v3
+
   // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,47 +32,66 @@ const ModalForm = () => {
     }));
   };
 
-  // Handle captcha verification
-  const onCaptchaChange = (token) => {
-    if (token) {
-      setIsCaptchaVerified(true);
-    }
-  };
-
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (!isCaptchaVerified) {
-      alert("Please complete the CAPTCHA verification.");
+
+    if (!executeRecaptcha) {
+      console.log("Execute recaptcha not yet available");
       return;
     }
-  
-    // Send form to Formspree
-    fetch("https://formspree.io/f/xjkvbrzq", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+
+    // Execute the reCAPTCHA and get the token
+    const token = await executeRecaptcha("submit_form");
+
+    if (!token) {
+      alert("reCAPTCHA verification failed.");
+      return;
+    }
+
+    const emailParams = {
+      from_name: formData.name,
+      to_name: "Admin", // You can replace this with the recipient's name
+      phone: formData.phone,
+      rentalExpectation: formData.rentalExpectation,
+      city: formData.city,
+      microMarket: formData.microMarket,
+      areaCarpet: formData.areaCarpet,
+      areaSuper: formData.areaSuper,
+      propertyDetails: formData.propertyDetails,
+      coworkingOption: formData.coworkingOption,
+      message: "Here is the information about the property", // Optional message content
+      recaptcha_token: token, // Pass the reCAPTCHA token
+    };
+
+    // Send form data using EmailJS
+    emailjs.send('service_vcnub3o', 'template_wkjd0zu', emailParams, 'KM6kJPymVVzg7Aim1')
       .then((response) => {
-        if (response.ok) {
-          alert("Form submitted successfully!");
-        } else {
-          alert("Failed to send email.");
-        }
+        alert('Form submitted successfully!');
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          rentalExpectation: "",
+          city: "",
+          microMarket: "",
+          areaCarpet: "",
+          areaSuper: "",
+          propertyDetails: "",
+          coworkingOption: "",
+        });
       })
       .catch((error) => {
-        console.error("Error:", error);
-        alert("Error sending email.");
+        console.error('Error:', error);
+        alert('Error sending email.');
       });
   };
-  
 
   if (!isFormOpen) return null;
 
   return (
+    <GoogleReCaptchaProvider reCaptchaKey="6LfMEFoqAAAAAPbBd0mRptXaI8AfZN30AI9CqY1N">
+
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[10000000000000]">
       <div className="relative bg-zinc-300 rounded-lg shadow-lg p-8 max-w-2xl w-full">
         {/* Close Button */}
@@ -136,6 +159,7 @@ const ModalForm = () => {
             </div>
           </div>
 
+          {/* Additional input fields */}
           <div className="flex flex-wrap mb-1">
             <div className="w-1/2 pr-2">
               <input
@@ -144,7 +168,7 @@ const ModalForm = () => {
                 value={formData.city}
                 onChange={handleInputChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Your city"
+                placeholder="City"
               />
             </div>
 
@@ -155,7 +179,7 @@ const ModalForm = () => {
                 value={formData.microMarket}
                 onChange={handleInputChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Micro market"
+                placeholder="Micro Market"
               />
             </div>
           </div>
@@ -168,7 +192,7 @@ const ModalForm = () => {
                 value={formData.areaCarpet}
                 onChange={handleInputChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Area carpet"
+                placeholder="Area sqft. (Carpet)"
               />
             </div>
 
@@ -179,7 +203,7 @@ const ModalForm = () => {
                 value={formData.areaSuper}
                 onChange={handleInputChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                placeholder="Area super"
+                placeholder="Area sqft. (Super)"
               />
             </div>
           </div>
@@ -190,9 +214,9 @@ const ModalForm = () => {
               value={formData.propertyDetails}
               onChange={handleInputChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              placeholder="Tell us about your property"
+              placeholder="Property details"
               rows="4"
-            ></textarea>
+            />
           </div>
 
           <div className="mb-1">
@@ -202,34 +226,25 @@ const ModalForm = () => {
               onChange={handleInputChange}
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
             >
-              <option value="">Select an option</option>
-              <option value="start_coworking">Start your own coworking</option>
-              <option value="matchmaking_coworking">
-                Matchmaking with coworking
-              </option>
+              <option value="">Select coworking option</option>
+              <option value="Start Your Own Coworking">Start Your Own Coworking</option>
+              <option value="Match Making With Coworking">Match Making With Coworking</option>
             </select>
           </div>
 
-          {/* HCaptcha */}
-          <div className="mb-4 flex justify-center">
-            <HCaptcha
-              sitekey="c424c346-6194-4e12-b53a-51944a8a5168" 
-              onVerify={onCaptchaChange}
-            />
-          </div>
+          {/* No need for visible reCAPTCHA widget as reCAPTCHA v3 runs in the background */}
 
           <button
             type="submit"
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors w-full ${
-              !isCaptchaVerified ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={!isCaptchaVerified}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors w-full"
           >
             Submit
           </button>
         </form>
       </div>
     </div>
+    </GoogleReCaptchaProvider>
+
   );
 };
 
