@@ -5,7 +5,7 @@ import emailjs from 'emailjs-com'; // Import EmailJS
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'; // Import Google reCAPTCHA v3
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { AiOutlineCheckCircle } from 'react-icons/ai'; // Import success icon
-
+import axios from 'axios'
 const ModalForm = () => {
   const { isFormOpen, toggleForm } = useModal();
   const [formData, setFormData] = useState({
@@ -64,6 +64,25 @@ const ModalForm = () => {
       recaptcha_token: token, // Pass the reCAPTCHA token
       subject: '[IMPORTANT] Here is the information about the property' // Ensure the subject is meaningful
     };
+
+    try {
+      await axios.post('https://hook.eu2.make.com/d5vili6kgssy05yd56gvu8ycrzfj9m9j', {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        rentalExpectation: formData.rentalExpectation,
+        city: formData.city,
+        microMarket: formData.microMarket,
+        areaCarpet: formData.areaCarpet,
+        areaSuper: formData.areaSuper,
+        propertyDetails: formData.propertyDetails,
+        coworkingOption: formData.coworkingOption,
+      });
+    } catch (error) {
+      console.error('Error sending data to Google Sheets:', error);
+      alert('Error sending data to Google Sheets.');
+      return;
+    }
     
     // Send form data using EmailJS
     emailjs.send('service_vcnub3o', 'template_wkjd0zu', emailParams, 'KM6kJPymVVzg7Aim1')
