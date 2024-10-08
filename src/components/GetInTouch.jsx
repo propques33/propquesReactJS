@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import emailjs from 'emailjs-com'; // Import EmailJS
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'; // Import Google reCAPTCHA v3
+import emailjs from 'emailjs-com'; 
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'; 
 import Button from "./Button";
 
 const GetInTouch = () => {
@@ -14,7 +14,7 @@ const GetInTouch = () => {
     category: "",
   });
 
-  const { executeRecaptcha } = useGoogleReCaptcha(); // Google reCAPTCHA v3
+  const { executeRecaptcha } = useGoogleReCaptcha(); // Get the reCAPTCHA function
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -30,7 +30,7 @@ const GetInTouch = () => {
     e.preventDefault();
 
     if (!executeRecaptcha) {
-      console.log("Execute recaptcha not yet available");
+      alert("reCAPTCHA is still loading. Please try again later.");
       return;
     }
 
@@ -76,7 +76,7 @@ const GetInTouch = () => {
 
   return (
     <div className="flex flex-col sm:flex-row  md:px-8 space-y-6 sm:space-y-0">
-      <div className="w-full sm:w-1/2 bg-white rounded-lg md:p-6 p-4 t]">
+      <div className="w-full sm:w-1/2 bg-white rounded-lg md:p-6 p-4">
         <h2 className="md:text-5xl text-xl font-bold mb-4 text-blue-600">Get In Touch</h2>
         <p className="mb-6 text-gray-700 leading-relaxed">
           We are here to assist. Simply fill the form to help us understand your business, vision, and goals,
@@ -85,16 +85,14 @@ const GetInTouch = () => {
         <blockquote className="md:text-4xl text-xl italic mb-6 text-blue-600 font">
           “Turn Your Vision Into a Reality”
         </blockquote>
-       
         <Button name={"Let's Talk"} />
       </div>
 
       <div className="w-full sm:w-1/2">
-        {/* Contact Form */}
         <form onSubmit={handleSubmit} className="w-full p-6 bg-white rounded-lg shadow-md">
-  <p className="mb-6 text-gray-700 leading-relaxed">
-    Please submit your inquiry via the form and you’ll hear back from us shortly.
-  </p>
+          <p className="mb-6 text-gray-700 leading-relaxed">
+            Please submit your inquiry via the form and you’ll hear back from us shortly.
+          </p>
 
   {/* First Row: Name and Email */}
   <div className="mb-4 flex flex-col sm:flex-row space-x-4">
@@ -185,14 +183,12 @@ const GetInTouch = () => {
 
   {/* Submit Button */}
   <button
-    type="submit"
-    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors w-full shadow-md"
-  >
-    Send
-  </button>
-</form>
-
-
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors w-full shadow-md"
+          >
+            Send
+          </button>
+        </form>
       </div>
     </div>
   );
