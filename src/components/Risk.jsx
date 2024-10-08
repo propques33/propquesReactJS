@@ -14,7 +14,7 @@ const Risk = () => {
       </div>
 
       {/* Right Section - Text Content */}
-      <div className="flex-1 flex flex-col justify-center">
+      <div className="flex-1 flex flex-col ">
         <h1 className="text-2xl md:text-4xl font-semibold text-[#000000] mb-4">
           Maximize Revenue and Minimize Risk with Coworking Spaces
         </h1>

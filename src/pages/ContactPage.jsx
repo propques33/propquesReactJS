@@ -68,7 +68,7 @@ const Contact = () => {
 
           {/* Right Section - Corporate Office Address with Map */}
           <div className="space-y-8">
-            <div className="bg-zinc-50 shadow-lg rounded-lg p-6">
+            <div className="">
               <h2 className="text-3xl font-bold text-blue-500 mb-4">
                 Corporate Office
               </h2>
