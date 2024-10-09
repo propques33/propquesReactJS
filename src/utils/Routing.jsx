@@ -8,6 +8,8 @@ import Shop from "../pages/Shop.jsx";
 import About from "../pages/About.jsx";
 import Blog from "../pages/Blog.jsx";
 import Button from "../components/Button.jsx";
+import PrivacyPolicy from "../components/PrivacyPolicy.jsx";
+import TermsAndConditions from "../components/TermsAndConditions.jsx";
 
 const Routing = () => {
   return (
@@ -20,6 +22,8 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blogs" element={<Blog />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       </Routes>
     </>
   );
