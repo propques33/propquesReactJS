@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-
+import logo from '../../public/logo.png'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* Logo in the center */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link to="/" className="text-white text-2xl font-bold">
-            <img src="https://propques.com/wp-content/uploads/2023/12/Untitled_design__2_-removebg-preview-e1702983011868-60x61.png" alt="Logo" className=" "/>
+            <img src={logo} alt="Logo" className=" "/>
           </Link>
         </div>
 
