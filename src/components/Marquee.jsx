@@ -1,43 +1,48 @@
 import { cn } from "../lib/utils";
 import Marquee from "../components/ui/marquee";
-
+import workvistarlogo from '../../public/workvistarlogo.png'
+import siolimAsset from '../../public/siolimAsset.png'
+import workjarAsset from '../../public/workjarAsset.png'
+import workviaalogo from '../../public/workviaalogo.png'
+import cubilogo from '../../public/cubilogo.png'
+import summit from '../../public/summit.png'
 const reviews = [
   {
     name: "Jack",
     username: "@jack",
     body: "An underperforming standalone building was refurbished into an attractive & promising managed office space with a bucketful of recreational facilities—the result was increased revenue with over 90% office occupancy.",
-    img: "https://propques.com/wp-content/uploads/2023/02/workjarAsset-9@0.75x-8.png",
+    img: workjarAsset,
   },
   {
     name: "Jill",
     username: "@jill",
     body: "Innovative & research-backed facelift of a strategically located commercial space into a well-facilitated hybrid office to tap the nearby home office needs.",
-    img: "https://propques.com/wp-content/uploads/2023/02/cubispaceAsset-7@0.75x-8.png",
+    img: cubilogo,
   },
   {
     name: "John",
     username: "@john",
     body: "Over 1.6X increase in the rental rate of the corporate property.  3X increase in the occupancy rate in just 6 months. Complete marketing & strategic makeover to increase the visibility & revenue generation.",
-    img: "https://propques.com/wp-content/uploads/2023/03/summit-spaceAsset-27@0.75x-8.png",
+    img: summit,
   },
   {
     name: "Jane",
     username: "@jane",
     body: "100% occupancy in less than 3 months. Increased rental income by 42 rs. Assistance in revenue increase by 3X. Achieved great results with optimum occupancy with multiple clients,.",
-    img: "https://propques.com/wp-content/uploads/2023/02/workviaaAsset-10@0.75x-8.png",
+    img: workviaalogo,
   },
  
   {
     name: "James",
     username: "@james",
     body: "An unoccupied villa refurbished into an attractive and promising coworking café. Rising to optimum occupancy with a bucketful of office facilities along with delectable food.",
-    img: "https://propques.com/wp-content/uploads/2023/02/siolimAsset-19@0.75x-8.png",
+    img: siolimAsset,
   },
   {
     name: "James",
     username: "@james",
     body: "Growth in the rental income of workspaces by almost 75%. Increased 60-70% occupancy rate throughout the year and continuous cash flow. Complete strategic makeover to increase leads, revenue generation, and proper visibility.",
-    img: "https://propques.com/wp-content/uploads/2023/02/workvistarAsset-11@0.75x-8.png",
+    img: workvistarlogo,
   },
 ];
 
@@ -58,10 +63,14 @@ const ReviewCard = ({ img, name, username, body }) => {
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-      <div className="flex flex-row items-center gap-2">
-        <img className="" width="" height="" alt={name} src={img} />
-        
-      </div>
+    <div className="flex flex-row items-center gap-2">
+  <img 
+    className=" h-16  md:h-16 object-cover" 
+    alt={name} 
+    src={img} 
+  />
+</div>
+
       <blockquote className="mt-2 text-sm">{body}</blockquote>
     </figure>
   );
