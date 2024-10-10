@@ -24,7 +24,7 @@ const Apply = () => {
   return (
     <>
       <div
-        className={`flex md:px-16 px-4 bg-zinc-900 items-center justify-between fixed bottom-0 w-full z-[100000] py-2 transition-all ease-in-out duration-500 transform ${
+        className={`flex md:px-16 px-4 bg-zinc-900 items-center justify-between fixed bottom-0 w-full z-[100000] md:py-4 py-6  transition-all ease-in-out duration-500 transform ${
           showApply ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
         }`}
       >

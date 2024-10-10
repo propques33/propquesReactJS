@@ -1,11 +1,11 @@
 import { cn } from "../lib/utils";
 import Marquee from "../components/ui/marquee";
-import workvistarlogo from '../../public/workvistarlogo.png'
-import siolimAsset from '../../public/siolimAsset.png'
-import workjarAsset from '../../public/workjarAsset.png'
-import workviaalogo from '../../public/workviaalogo.png'
-import cubilogo from '../../public/cubilogo.png'
-import summit from '../../public/summit.png'
+import workvistarlogo from '/workvistarlogo.png'
+import siolimAsset from '/siolimAsset.png'
+import workjarAsset from '/workjarAsset.png'
+import workviaalogo from '/workviaalogo.png'
+import cubilogo from '/cubilogo.png'
+import summit from '/summit.png'
 const reviews = [
   {
     name: "Jack",
