@@ -284,7 +284,7 @@ const ModalForm = () => {
           {/* Success Popup */}
           {isSuccess && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-              <div className="bg-white rounded-lg p-4 text-center w-full">
+              <div className="bg-white rounded-lg p-4 text-center">
                 <AiOutlineCheckCircle className="text-green-500 text-4xl mb-2 w-full text-center" />
                 <h3 className="text-lg font-semibold">Form Submitted Successfully!</h3>
                 <p className="mt-2">Thank you for your submission.</p>
