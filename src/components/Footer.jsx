@@ -64,7 +64,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom - Links */}
-        <div className="text-center  my-8 pt-4 text-sm">
+        <div className="text-center  my-10 pt-4 text-sm">
           <p className="text-gray-500">
             <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link> | 
             <Link to="/terms-and-conditions" className="hover:underline ml-2">Terms and Conditions</Link> | 

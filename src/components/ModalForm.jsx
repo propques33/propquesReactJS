@@ -35,24 +35,31 @@ const ModalForm = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Validate Super Area and Carpet Area
+    if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
+      alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
+      return;
+    }
+  
     if (!executeRecaptcha) {
       console.log("Execute recaptcha not yet available");
       return;
     }
-
+  
     // Execute the reCAPTCHA and get the token
     const token = await executeRecaptcha("submit_form");
-
+  
     if (!token) {
       alert("reCAPTCHA verification failed.");
       return;
     }
-
+  
     const emailParams = {
       from_name: formData.name,
-      to_name: "Admin", // You can replace this with the recipient's name
+      to_name: "Admin", 
       phone: formData.phone,
+      email: formData.email,
       rentalExpectation: formData.rentalExpectation,
       city: formData.city,
       microMarket: formData.microMarket,
@@ -64,7 +71,7 @@ const ModalForm = () => {
       recaptcha_token: token, // Pass the reCAPTCHA token
       subject: '[IMPORTANT] Here is the information about the property' // Ensure the subject is meaningful
     };
-
+  
     try {
       await axios.post('https://hook.eu2.make.com/d5vili6kgssy05yd56gvu8ycrzfj9m9j', {
         name: formData.name,
@@ -108,7 +115,8 @@ const ModalForm = () => {
         console.error('Error:', error);
         alert('Error sending email.');
       });
-  };    
+  };
+     
 
   if (!isFormOpen) return null;
 
