@@ -71,9 +71,10 @@ const ModalForm = () => {
       recaptcha_token: token, // Pass the reCAPTCHA token
       subject: '[IMPORTANT] Here is the information about the property' // Ensure the subject is meaningful
     };
-  
+    
+
     try {
-      await axios.post('https://hook.eu2.make.com/d5vili6kgssy05yd56gvu8ycrzfj9m9j', {
+      await axios.post('https://hook.eu2.make.com/ivc5yd7jwbd790y7ytckeyvcqfk6axm7', {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
