@@ -74,7 +74,7 @@ const ModalForm = () => {
     
 
     try {
-      await axios.post('https://hook.eu2.make.com/ivc5yd7jwbd790y7ytckeyvcqfk6axm7', {
+      await axios.post('https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1', {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -284,8 +284,8 @@ const ModalForm = () => {
           {/* Success Popup */}
           {isSuccess && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-              <div className="bg-white rounded-lg p-4 text-center">
-                <AiOutlineCheckCircle className="text-green-500 text-4xl mb-2" />
+              <div className="bg-white rounded-lg p-4 text-center w-full">
+                <AiOutlineCheckCircle className="text-green-500 text-4xl mb-2 w-full text-center" />
                 <h3 className="text-lg font-semibold">Form Submitted Successfully!</h3>
                 <p className="mt-2">Thank you for your submission.</p>
                 <button onClick={() => setIsSuccess(false)} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
