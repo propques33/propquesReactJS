@@ -135,7 +135,7 @@ Moreover, we know that after the COVID & lockdown, corporate is searching for ne
       </section>
 
       {/* Positive Results Section */}
-      <section className="bg-blue-50 py-12 px-4">
+      <section className="   py-12 ">
         <div className="container mx-auto">
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">
             Positive End Result

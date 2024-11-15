@@ -32,7 +32,7 @@ const WorkViaa = () => {
         <h1 className="text-4xl font-semibold text-gray-800 mb-4">
           Discover the Power of 100% Occupancy
         </h1>
-        <p className="text-lg text-gray-600 mb-6">
+        <p className=" text-gray-600 mb-6">
           Learn how we helped increase rental income and occupancy rates to new
           heights in just 3 months.
         </p>
@@ -66,14 +66,14 @@ const WorkViaa = () => {
                 <img
                   src={workviaa1}
                   alt="Workviaa Image 1"
-                  className="rounded-lg shadow-md h-60 w-auto"
+                  className="rou shadow-md h-60 w-auto"
                 />
               </div>
               <div className="relative">
                 <img
                   src={workviaa2}
                   alt="Workviaa Image 2"
-                  className="rounded-lg shadow-md h-60 w-auto"
+                  className="rou shadow-md h-60 w-auto"
                 />
               </div>
             </div>
@@ -107,28 +107,28 @@ const WorkViaa = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
           <FaLightbulb className="text-blue-500 mr-3" /> About Workviaa
         </h2>
-        <p className="text-lg text-gray-600 mb-6">
+        <p className=" text-gray-600 mb-6">
           Growth in rental income of workspaces by almost 75%. Continuous cash
           flow with occupancy rates consistently above 60%.
         </p>
-        <p className="text-lg text-gray-600">
+        <p className=" text-gray-600">
           Our strategies helped businesses increase visibility, improve revenue
           generation, and boost client occupancy in prime locations.
         </p>
       </section>
 
       {/* Problem Identification Section */}
-      <section className="bg-blue-50 py-12">
+      <section className="0 py-12">
         <div className="container mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
             <FaClipboardCheck className="text-blue-500 mr-3" /> Identifying the
             Problem
           </h2>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className=" text-gray-600 mb-4">
             A well-located property was unoccupied for years due to lack of
             visibility, despite being fully compliant with industry standards.
           </p>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className=" text-gray-600 mb-4">
             The property needed a strategic marketing approach to fill vacancies
             and increase revenue.
           </p>
@@ -140,28 +140,28 @@ const WorkViaa = () => {
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
           <FaLightbulb className="text-blue-500 mr-3" /> Designing a Solution
         </h2>
-        <p className="text-lg text-gray-600 mb-4">
+        <p className=" text-gray-600 mb-4">
           A visibility-focused strategy was proposed, including marketing,
           plug-and-play office spaces, and a dedicated management team.
         </p>
-        <p className="text-lg text-gray-600 mb-4">
+        <p className=" text-gray-600 mb-4">
           This approach targeted small business owners and entrepreneurs for
           long-term rental stability.
         </p>
       </section>
 
       {/* Positive Results Section */}
-      <section className="bg-blue-50 py-12">
+      <section className="0 py-12">
         <div className="container mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
             <FaRegHandshake className="text-blue-500 mr-3" /> Positive End
             Result
           </h2>
-          <p className="text-lg text-gray-600 mb-4">
+          <p className=" text-gray-600 mb-4">
             The property reached full occupancy in just three months, boosting
             rental income significantly and providing a stable revenue stream.
           </p>
-          <p className="text-lg text-gray-600">
+          <p className=" text-gray-600">
             The property’s rental price increased from ₹50/sqft to ₹92/sqft,
             generating a massive cash flow and leading to a 3x revenue growth.
           </p>
@@ -186,7 +186,7 @@ const WorkViaa = () => {
             className="border rounded-md p-3 w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>  y
-        <button className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-full flex items-center justify-center transition duration-300">
+        <button className="00 hover:bg-blue-600 text-white py-3 px-6 rounded-full flex items-center justify-center transition duration-300">
           <AiOutlineDownload className="mr-2" /> Download
         </button>
       </section> */}

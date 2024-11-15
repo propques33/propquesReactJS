@@ -26,6 +26,7 @@ import dice from '../../public/dice.png'
 
 import workjarAsset from '../../public/workjarAsset.png'
 import workvistar from '../../public/workvistar.png'
+import partner8 from '../../public/partner8.webp'
 
 
 
@@ -48,7 +49,7 @@ const Works = () => {
       {/* Hero Section */}
       <section
         className="bg-cover relative mt-20 bg-center py-32 h-80 text-white text-center flex items-center justify-center"
-        style={{ backgroundImage: "url('../../public/partner8.webp')" }}
+        style={{ backgroundImage: `url(${partner8})` }}
       >
         <div className="absolute z-20 text-center px-4 md:px-0">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">Case Studies</h1>
@@ -74,73 +75,72 @@ const Works = () => {
                 "Innovative research-backed coworking space strategically located for maximum productivity.",
               icon: (
                 <MdOutlineBusinessCenter className="text-4xl text-blue-500" />
-
               ),
-              logo: cubi
+              logo: cubi,
             },
             {
               name: "Worqspot",
               description:
                 "Located in a prime area, this space offers a perfect blend of style and convenience, ensuring an optimal environment for your activities.",
               icon: <BiBuildingHouse className="text-4xl text-blue-500" />,
-              logo: worqspot
+              logo: worqspot,
             },
-           
+
             {
               name: "Karyasthal",
               description:
                 "A boutique coworking space that offers premium facilities tailored for professionals.",
               icon: <BiBuildingHouse className="text-4xl text-blue-500" />,
-              logo: karyasthal
+              logo: karyasthal,
             },
             {
               name: "Workdesq",
               description:
                 "Step into our premium coworking space in Mahalakshmi Nagar for a perfect blend of comfort and functionality.",
               icon: <BiBuildingHouse className="text-4xl text-blue-500" />,
-              logo: workdesq
+              logo: workdesq,
             },
             {
               name: "Workviaa",
               description:
                 "Achieved 100% occupancy in under 3 months, increased rental income by 1.5x.",
               icon: <FaThumbsUp className="text-4xl text-blue-500" />,
-              logo: workviaalogo
+              logo: workviaalogo,
             },
             {
               name: "Sapna Sangeeta Office",
               description:
                 "Discover a vibrant environment where your ideas can flourish. Sapna Sangeeta Offices blend functionality and inspiration.",
               icon: <FaBuilding className="text-4xl text-blue-500" />,
-              logo: sapna
+              logo: sapna,
             },
             {
               name: "WellWork",
               description:
                 "Discover a vibrant environment where your ideas can flourish. Sapna Sangeeta Offices blend functionality and inspiration.",
               icon: <FaBuilding className="text-4xl text-blue-500" />,
-              logo: well
+              logo: well,
             },
             {
               name: "Summit Space",
               description:
                 "Over 1.5x increase in rental rate of the corporate property. 3x increase in its occupancy rate as a premier corporate address.",
               icon: <FaBuilding className="text-4xl text-blue-500" />,
-              logo: summit
+              logo: summit,
             },
             {
               name: "Work Vistar",
               description:
                 "Growth in rental income of workspaces by almost 70%, increased occupancy to 90%, and complete strategic rebranding.",
               icon: <GiOfficeChair className="text-4xl text-blue-500" />,
-              logo: workvistar
+              logo: workvistar,
             },
             {
               name: "Workjar",
               description:
                 "An underperforming standalone building was refurbished into a co-working facility with increased revenue and occupancy.",
               icon: <FaBuilding className="text-4xl text-blue-500" />,
-              logo: workjarAsset
+              logo: workjarAsset,
             },
 
             {
@@ -148,7 +148,7 @@ const Works = () => {
               description:
                 "An unoccupied villa was transformed into an attractive office space, achieving full occupancy.",
               icon: <HiOutlineUsers className="text-4xl text-blue-500" />,
-              logo: siolim
+              logo: siolim,
             },
 
             {
@@ -158,14 +158,14 @@ const Works = () => {
               icon: (
                 <MdOutlineBusinessCenter className="text-4xl text-blue-500" />
               ),
-              logo: elco
+              logo: elco,
             },
             {
               name: "Collabspace",
               description:
                 "Transformed a traditional office space into a vibrant coworking environment.",
               icon: <GiOfficeChair className="text-4xl text-blue-500" />,
-              logo: collab
+              logo: collab,
             },
 
             {
@@ -173,37 +173,37 @@ const Works = () => {
               description:
                 "Refurbished an outdated building into a modern, thriving coworking space.",
               icon: <FaBuilding className="text-4xl text-blue-500" />,
-              logo: acro
+              logo: acro,
             },
             {
               name: "Coworking Studio",
               description:
                 "Improved occupancy by 60% and enhanced collaboration and client satisfaction.",
               icon: <HiOutlineUsers className="text-4xl text-blue-500" />,
-              logo: cstudio
+              logo: cstudio,
             },
-         
+
             {
               name: "The Dice",
               description:
                 "Modernized space with creative layouts and optimal usage for startups.",
               icon: <FaRegLightbulb className="text-4xl text-blue-500" />,
-              logo: dice
+              logo: dice,
             },
             {
               name: "Desker",
               description:
                 "A vibrant community and premium boutique office space that achieved significant growth.",
               icon: <FaPenAlt className="text-4xl text-blue-500" />,
-              logo: desker
+              logo: desker,
             },
             {
               name: "Livewire",
               description: "Enhanced and optimized space for tech startups.",
               icon: <FaSearch className="text-4xl text-blue-500" />,
-              logo: live
+              logo: live,
             },
-          ].map((project, index) =>
+          ].map((project, index) => (
             <div
               key={index}
               className=" p-6 rounded-lg shadow-md flex flex-col items-center text-center"
@@ -211,17 +211,13 @@ const Works = () => {
               <div className="mb-4">
                 <img src={project.logo} alt="" className="h-8" />
               </div>
-              <h3 className="text-xl font-bold mb-2">
-                {project.name}
-              </h3>
-              <p className="text-gray-600">
-                {project.description}
-              </p>
+              <h3 className="text-xl font-bold mb-2">{project.name}</h3>
+              <p className="text-gray-600">{project.description}</p>
               <button className="mt-4 bg-blue-500 text-white px-4 py-2 w-full rounded hover:bg-blue-600">
                 Read More
               </button>
             </div>
-          )}
+          ))}
         </div>
       </section>
 
