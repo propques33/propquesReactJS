@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { FaUsers, FaLightbulb, FaRegCalendarAlt } from "react-icons/fa";
+import {
+  FaUsers,
+  FaLightbulb,
+  FaRegCalendarAlt,
+  FaQuoteLeft,
+} from "react-icons/fa";
 import { BsGraphUp } from "react-icons/bs";
 import { GiMoneyStack } from "react-icons/gi";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
@@ -21,150 +26,146 @@ const WebinarPage = () => {
   }, []);
 
   return (
-    <div className="font-sans">
+    <div className="font-sans mt-10   ">
       {/* Hero Section */}
-      <section
-        className="bg-cover bg-center py-32  text-center"
-        style={{ backgroundImage: "url('/path/to/hero-image.jpg')" }}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Unlock the Potential of Your Commercial Assets
-        </h1>
-        <button className="mt-4 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-          Join Now
-        </button>
-      </section>
-
-      {/* New Webinar Sections */}
-      <section className="py-16 px-8 md:px-32">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-          Webinar Options
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Client Webinar Section */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md text-center">
-            <h3 className="text-2xl font-bold mb-4">Client Webinar</h3>
-            <p className="text-gray-600 mb-4">
-              Engage with our exclusive webinar designed for our esteemed
-              clients. Learn how to enhance your commercial space utilization
-              effectively.
+      <section className="bg-gray-50 py-16 px-4 md:px-0">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+              Unlock the Potential of Your Commercial Assets
+            </h1>
+            <p className="text-lg text-gray-600">
+              Discover actionable strategies to boost your revenue by 3X and
+              transform your underutilized commercial spaces into profitable
+              assets.
             </p>
-            <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-              Join Client Webinar
+            <button
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg shadow-lg hover:bg-blue-600"
+              onClick={() =>
+                window.open(
+                  "https://webinar.zoho.in/meeting/register?sessionId=1338139536",
+                  "_blank"
+                )
+              }
+            >
+              Register for the Webinar
             </button>
-          </div>
-
-          {/* Review Webinar Section */}
-          <div className="bg-blue-50 p-6 rounded-lg shadow-md text-center">
-            <h3 className="text-2xl font-bold mb-4">Review Webinar</h3>
-            <p className="text-gray-600 mb-4">
-              Attend our review webinar to explore feedback, success stories,
-              and actionable insights from our community.
-            </p>
-            <button className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-              Join Review Webinar
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Event Details Section */}
-      <section className="py-16 px-8 md:px-32">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          Drive 3X revenue from your commercial space
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <p className="text-gray-600">
-              Join us for an insightful webinar conducted by Adarsh, where we
-              will uncover strategies and proven methods to maximize the revenue
-              potential of your vacant commercial asset. Whether you own an
-              office space, retail property, or any other commercial real
-              estate, this webinar is designed to equip you with the knowledge
-              and tools to unlock its true earning potential.
-            </p>
           </div>
           <img
-            src="/path/to/webinar-image.jpg"
-            alt="Webinar Promo"
-            className="w-full rounded-md"
+            src="../../public/126c187f5b810329f4d74ed7f30d5d05c197271e.jpg"
+            alt="Hero"
+            className="w-full rounded-lg shadow-lg"
           />
         </div>
       </section>
 
-      {/* Learning Points Section */}
-      <section className="bg-gray-100 py-16 px-8 md:px-32">
-        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-center">
-          You Will Learn How To
+      {/* Why Attend Section */}
+      <section className="py-16 px-8 md:px-32 bg-blue-50">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          Why Attend This Webinar?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <BsGraphUp className="text-6xl mx-auto mb-4 text-blue-500" />
-            <h3 className="text-xl font-semibold">Drive Higher Revenue</h3>
-            <p className="text-gray-600">
-              Effective strategies to earn 3X more revenue from commercial
-              assets.
-            </p>
-          </div>
-          <div className="text-center">
-            <FaLightbulb className="text-6xl mx-auto mb-4 text-blue-500" />
-            <h3 className="text-xl font-semibold">Maximize Utilization</h3>
-            <p className="text-gray-600">
-              Learn key steps to boost occupancy and maximize space usage.
-            </p>
-          </div>
-          <div className="text-center">
-            <AiOutlineFundProjectionScreen className="text-6xl mx-auto mb-4 text-blue-500" />
-            <h3 className="text-xl font-semibold">Enhance Asset Value</h3>
-            <p className="text-gray-600">
-              Use proven enhancements to make your space more profitable.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Audience Section */}
-      <section className="py-16 px-8 md:px-32">
-        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-center">
-          Who Should Attend?
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
-              title: "Property Owners and Asset Managers",
-              icon: <FaUsers className="text-6xl text-blue-500 mx-auto mb-4" />,
-            },
-            {
-              title: "Real Estate Investors and Developers",
+              title: "Proven Strategies",
+              description:
+                "Learn actionable methods to optimize your commercial property.",
               icon: (
-                <GiMoneyStack className="text-6xl text-blue-500 mx-auto mb-4" />
+                <BsGraphUp className="text-6xl mx-auto text-blue-500 mb-4" />
               ),
             },
             {
-              title: "Facility Managers and Consultants",
+              title: "Expert Insights",
+              description:
+                "Hear from industry leaders and understand market trends.",
               icon: (
-                <IoPeopleOutline className="text-6xl text-blue-500 mx-auto mb-4" />
+                <FaLightbulb className="text-6xl mx-auto text-yellow-500 mb-4" />
               ),
             },
             {
-              title: "Entrepreneurs Exploring New Ventures",
+              title: "Maximize ROI",
+              description:
+                "Discover tools and techniques to enhance your property's value.",
               icon: (
-                <FaRegCalendarAlt className="text-6xl text-blue-500 mx-auto mb-4" />
+                <GiMoneyStack className="text-6xl mx-auto text-green-500 mb-4" />
               ),
             },
-          ].map((audience, index) => (
+          ].map((item, index) => (
             <div
               key={index}
-              className="bg-blue-50 p-6 rounded-lg shadow-md text-center"
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
             >
-              {audience.icon}
-              <h3 className="text-lg font-semibold">{audience.title}</h3>
+              {item.icon}
+              <h3 className="text-xl font-semibold">{item.title}</h3>
+              <p className="text-gray-600">{item.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-    
+      {/* Testimonials Section */}
+      <section className="py-16 px-8 md:px-32">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          What Our Attendees Say
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              quote:
+                "This webinar was a game-changer! I learned how to increase revenue without major investments.",
+              author: "Ramesh Gupta",
+              role: "Property Manager",
+            },
+            {
+              quote:
+                "The strategies shared were incredibly practical and easy to implement. Highly recommended!",
+              author: "Anjali Shah",
+              role: "Real Estate Developer",
+            },
+            {
+              quote:
+                "This session helped me transform my vacant property into a high-performing asset.",
+              author: "Karan Mehta",
+              role: "Entrepreneur",
+            },
+          ].map((testimonial, index) => (
+            <div
+              key={index}
+              className="bg-blue-100 p-6 rounded-lg shadow-lg text-center"
+            >
+              <FaQuoteLeft className="text-3xl text-blue-500 mb-4 mx-auto" />
+              <p className="text-gray-700 italic">"{testimonial.quote}"</p>
+              <p className="text-blue-600 font-semibold mt-4">
+                {testimonial.author}
+              </p>
+              <p className="text-gray-500">{testimonial.role}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="bg-gray-100 py-16 px-8 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Ready to Transform Your Property?
+        </h2>
+        <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-8">
+          Join our webinar and take the first step toward unlocking the full
+          earning potential of your commercial assets. Don’t miss this
+          opportunity!
+        </p>
+        <button
+          className="bg-blue-500 text-white px-8 py-3 rounded-lg text-lg shadow-lg hover:bg-blue-600"
+          onClick={() =>
+            window.open(
+              "https://webinar.zoho.in/meeting/register?sessionId=1338139536",
+              "_blank"
+            )
+          }
+        >
+          Register Now
+        </button>
+      </section>
     </div>
   );
 };
