@@ -27,7 +27,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed p-4 z-[800000000000] w-full top-0  py-5 transition-colors ${isScrolled ? 'bg-white ' : 'bg-white '}`}>
+    <nav className={`fixed p-4 z-[800000000000] w-full -top-1  py-5 transition-colors ${isScrolled ? 'bg-white ' : 'bg-white '}`}>
       <div className="container mx-auto flex justify-between items-center">
         
         {/* Logo in the center */}

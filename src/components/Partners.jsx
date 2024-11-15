@@ -19,6 +19,8 @@ import plogo6 from "../../public/plogo6.png";
 import plogo7 from "../../public/plogo7.webp";
 import pImg from "../../public/pImg.jpg";
 import Button from "./Button";
+import partner9 from "../../public/partner9.webp";
+import partner8 from "../../public/partner8.webp";
 
 const Partners = () => {
   useEffect(() => {
@@ -40,7 +42,7 @@ const Partners = () => {
       {/* Hero Section */}
       <section
         className="bg-cover mt-20 h-96 flex flex-col w-full items-center justify-center relative bg-center py-32 text-white text-center"
-        style={{ backgroundImage: "url('../../public/partner.webp')" }}
+        style={{ backgroundImage: `url(${partner})`  }}
       >
         <div className="absolute z-20">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 z-20 ">
@@ -126,7 +128,7 @@ const Partners = () => {
             </ul>
           </div>
           <img
-            src="../../public/partner9.webp"
+            src={partner9}
             alt="Solution Overview"
             className="w-full rounded-md"
           />
@@ -146,7 +148,7 @@ const Partners = () => {
           valuation.
         </p>
         <img
-          src="../../public/partner8.webp"
+          src={partner8}
           alt="Flexible Solutions"
           className="w-full rounded-md mt-8"
         />

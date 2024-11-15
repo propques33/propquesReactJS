@@ -9,7 +9,7 @@ import { BsGraphUp } from "react-icons/bs";
 import { GiMoneyStack } from "react-icons/gi";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { IoPeopleOutline } from "react-icons/io5";
-
+import c187f5b810329f4d74ed7f30d5d05c197271e from "../../public/126c187f5b810329f4d74ed7f30d5d05c197271e.jpg";
 const WebinarPage = () => {
   useEffect(() => {
     // Ensure scrolling to the top of the document when the component is mounted
@@ -52,7 +52,7 @@ const WebinarPage = () => {
             </button>
           </div>
           <img
-            src="../../public/126c187f5b810329f4d74ed7f30d5d05c197271e.jpg"
+            src={c187f5b810329f4d74ed7f30d5d05c197271e}
             alt="Hero"
             className="w-full rounded-lg shadow-lg"
           />
