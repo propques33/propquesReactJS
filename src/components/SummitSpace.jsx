@@ -92,7 +92,7 @@ const SummitSpaceCaseStudy = () => {
       </section>
 
       {/* Positive Results Section */}
-      <section className="bg-blue-50 py-16 ">
+      <section className=" py-16 ">
         <div className="container mx-auto">
           <h2 className="text-3xl font-semibold text-gray-800 mb-6">Positive End Result</h2>
           <p className="text-gray-700 leading-relaxed">

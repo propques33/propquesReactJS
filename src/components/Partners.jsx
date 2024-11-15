@@ -45,7 +45,7 @@ const Partners = () => {
         style={{ backgroundImage: `url(${partner})`  }}
       >
         <div className="absolute z-20">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 z-20 ">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 z-20 px-5 ">
             Collaborating with Landlord Reps for Effective Partnerships
           </h1>
           <p className="text-lg md:text-xl z-20 ">
