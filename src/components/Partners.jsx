@@ -193,7 +193,7 @@ const Partners = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 px-8 md:px-32 text-center flex  items-center">
+      <section className="py-16 px-8 md:px-32 text-center md:flex  items-center">
         <img
           src={pImg}
           alt="Mission Image"

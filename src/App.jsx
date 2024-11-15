@@ -12,7 +12,7 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 function App() {
   return (
-    <GoogleReCaptchaProvider reCaptchaKey="6LfMEFoqAAAAAPbBd0mRptXaI8AfZN30AI9CqY1N">
+    <GoogleReCaptchaProvider reCaptchaKey="6LfMEFoqAAAAAPbBd0mRptXaI8AfZN30AI9CqY1N" >
 
       <ModalProvider>
         <ModalForm /> {/* Modal form that is globally accessible */}
@@ -50,9 +50,7 @@ function App() {
           <Navbar />
           <Routing />
           <Footer />
-          {/* Optional WhatsApp button image */}
-          {/* <img src={wh} className="absolute md:bottom-16 md:right-16 bottom-12 right-2 md:h-20 h-16 text-green-600 fixed text-6xl" alt="WhatsApp" /> */}
-        </div>
+         </div>
       </ModalProvider>
       </GoogleReCaptchaProvider>
 
