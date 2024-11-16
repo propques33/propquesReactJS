@@ -34,7 +34,7 @@ const PartnerWebinarPage = () => {
 
   return (
     <div className="font-sans mt-10">
-      <section className=" py-16 px-4 md:px-0">
+      <section className=" py-1 px-4 md:px-0">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}
           <div className="space-y-6 text-center md:text-left">
@@ -162,16 +162,14 @@ const PartnerWebinarPage = () => {
           </p>
           <ul className="list-disc list-inside">
             <li>
-              Flexible Workspace Management: Create and operate branded flexible
-              spaces.
+              Flexible Workspace Management
             </li>
             <li>
-              Enhanced Property Experience: Offer personalized tenant apps to
-              improve engagement.
+              Offer personalized tenant apps to
+              improve engagement
             </li>
             <li>
-              Tenant-Centric Strategies: Reduce churn, enable flexible tenancy,
-              and foster loyalty.
+              Tenant-Centric Strategies
             </li>
           </ul>
         </div>
