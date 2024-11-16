@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import {
-  FaUsers,
+  FaRegHandshake,
   FaLightbulb,
-  FaRegCalendarAlt,
-  FaCogs,
-  FaHandshake,
-  FaBuilding,
-  FaComments,
+  FaRegBuilding,
+  FaBullhorn,
+  FaEnvelope,
+  FaUsers,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
-import { AiOutlineSolution, AiOutlineLineChart } from "react-icons/ai";
-import { IoPeopleOutline } from "react-icons/io5";
+import { BsArrowRight } from "react-icons/bs";
+import connect from '../../public/connect.png'
+
 import partner from "../../public/partner.webp";
 import plogo from "../../public/plogo.webp";
 import plogo2 from "../../public/plogo2.png";
@@ -22,136 +23,200 @@ import Button from "./Button";
 import partner9 from "../../public/partner9.webp";
 import partner8 from "../../public/partner8.webp";
 
-const Partners = () => {
+const PartnerWebinarPage = () => {
   useEffect(() => {
-    // Ensure scrolling to the top of the document when the component is mounted
+    // Scroll to the top when the component is mounted
     window.scrollTo({
       top: 0,
       behavior: "auto",
     });
-
-    // As a fallback, scroll the root element
-    document.documentElement.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   }, []);
 
   return (
-    <div className="font-sans">
-      {/* Hero Section */}
-      <section
-        className="bg-cover mt-20 h-96 flex flex-col w-full items-center justify-center relative bg-center py-32 text-white text-center"
-        style={{ backgroundImage: `url(${partner})`  }}
-      >
-        <div className="absolute z-20">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 z-20 px-5 ">
-            Collaborating with Landlord Reps for Effective Partnerships
-          </h1>
-          <p className="text-lg md:text-xl z-20 ">
-            Assisting landlords in adapting to changing office markets.
-          </p>
-          {/* First Zoho Button */}
-          <button
-            className="mt-6 bg-blue-500 text-white px-8 py-3 rounded-lg text-lg shadow-lg hover:bg-blue-600"
-            onClick={() =>
-              window.open("https://zoho.com/webinar-link", "_blank")
-            }
-          >
-            Explore Our Zoho Webinar
-          </button>
+    <div className="font-sans mt-10">
+      <section className=" py-16 px-4 md:px-0">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+          {/* Text Content */}
+          <div className="space-y-6 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+              How to Generate More Leads for Your Property Listings
+            </h1>
+            <p className="text-md text-gray-600">
+              Boost Your Listings' Visibility & Drive Tenant Engagement. Join us
+              for an insightful webinar to discover innovative strategies and
+              tools for attracting tenants and maximizing your property's
+              potential.
+            </p>
+            <button
+              className="flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-lg text-md shadow-lg hover:bg-blue-600 mx-auto md:mx-0"
+              onClick={() =>
+                window.open(
+                  "https://webinarlab.zoho.in/meeting/register?sessionId=1346185406",
+                  "_blank"
+                )
+              }
+            >
+              Register Here <BsArrowRight className="ml-2" />
+            </button>
+          </div>
+
+          {/* Hero Image */}
+          <div className="relative">
+            <img src={connect} alt="Webinar" className="w-full" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r  rounded-lg"></div>
+          </div>
         </div>
-        <div className="bg-black opacity-70 top-0 absolute w-full h-full z-10"></div>
       </section>
 
-      {/* Challenges Section */}
-      <section className="py-16 px-8 md:px-32">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-          Do Your Clients Face These Current Challenges Too?
+      {/* What You'll Learn Section */}
+      <section className="py-16 px-8 md:px-32 ">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          What You’ll Learn
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              title: "Lack of Flexible Workspaces",
+              title: "Optimize Your Online Listings",
+              description: `
+                Professional Media
+                Compelling Descriptions
+                SEO-Optimized Content
+              `,
               icon: (
-                <FaBuilding className="text-6xl text-blue-500 mx-auto mb-4" />
+                <FaRegBuilding className="text-5xl text-blue-500 mb-4 mx-auto" />
               ),
             },
             {
-              title: "Tenant Experience Software Desired",
-              icon: <FaCogs className="text-6xl text-blue-500 mx-auto mb-4" />,
-            },
-            {
-              title: "Increased Vacancy Rates",
+              title: "Leverage Social Media",
+              description: `
+                Targeted Ads
+                Engaging Content
+                Live Virtual Tours
+              `,
               icon: (
-                <AiOutlineLineChart className="text-6xl text-blue-500 mx-auto mb-4" />
+                <FaBullhorn className="text-5xl text-yellow-500 mb-4 mx-auto" />
               ),
             },
             {
-              title: "Surging Need for Flexible Offices",
+              title: "Master Email Marketing",
+              description: `
+                Segmented Campaigns
+                Consistent Updates
+                Automation
+              `,
               icon: (
-                <FaComments className="text-6xl text-blue-500 mx-auto mb-4" />
+                <FaEnvelope className="text-5xl text-green-500 mb-4 mx-auto" />
               ),
             },
-          ].map((challenge, index) => (
+            {
+              title: "Collaborate for Partnerships",
+              description: `
+                Landlord Reps
+                Influencers & Agents
+                Community Engagement
+              `,
+              icon: (
+                <FaRegHandshake className="text-5xl text-purple-500 mb-4 mx-auto" />
+              ),
+            },
+            {
+              title: "Build Trust with Resources",
+              description: `
+                Free Market Insights
+                Interactive Tools
+                Testimonials
+              `,
+              icon: <FaUsers className="text-5xl text-red-500 mb-4 mx-auto" />,
+            },
+          ].map((item, index) => (
             <div
               key={index}
-              className="bg-zinc-50 p-6 rounded-lg shadow-md text-center"
+              className="bg-blue-50 p-6 rounded-lg shadow-lg text-center"
             >
-              {challenge.icon}
-              <h3 className="text-lg font-semibold">{challenge.title}</h3>
+              {item.icon}
+              <h3 className="text-xl font-semibold">{item.title}</h3>
+              <p className="text-gray-600 whitespace-pre-line -mt-4">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section className="bg-gray-100 py-16 px-8 md:px-32">
-        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-center">
-          We Provide the Solution
+      {/* Addressing Market Challenges Section */}
+      <section className="py-16 px-8 md:px-16 bg-gray-100">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Addressing Current Market Challenges
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-4">
-            <ul className="list-disc pl-6 text-gray-600 text-xl">
-              <li>
-                Crafting, managing, and operating branded flexible workspaces.
-              </li>
-              <li>Enhancing property experience with a personalized app.</li>
-              <li>
-                Reducing churn, enabling flexible tenancy, and fostering tenant
-                reliance.
-              </li>
-              <li>
-                Elevated services and amenities boost building-wide rents.
-              </li>
-              <li>Premium tenants raise market valuation attractively.</li>
-            </ul>
-          </div>
-          <img
-            src={partner9}
-            alt="Solution Overview"
-            className="w-full rounded-md"
-          />
+        <div className=" text-gray-600 md:text-lg text-base  mx-auto">
+          <p>
+            <strong>Do your clients face issues like:</strong>
+          </p>
+          <ul className="list-disc list-inside">
+            <li>Lack of flexible workspaces?</li>
+            <li>Increased vacancy rates?</li>
+            <li>Surging demand for offices?</li>
+          </ul>
+          <p className="pt-8">
+            <strong>We Provide Solutions:</strong>
+          </p>
+          <ul className="list-disc list-inside">
+            <li>
+              Flexible Workspace Management: Create and operate branded flexible
+              spaces.
+            </li>
+            <li>
+              Enhanced Property Experience: Offer personalized tenant apps to
+              improve engagement.
+            </li>
+            <li>
+              Tenant-Centric Strategies: Reduce churn, enable flexible tenancy,
+              and foster loyalty.
+            </li>
+          </ul>
         </div>
       </section>
 
-      {/* Flexible & Adjustable Section */}
-      <section className="py-16 px-8 md:px-32">
-        <h2 className="text-2xl md:text-4xl font-bold mb-6 text-center">
-          Flexible & Adjustable
+      {/* Flexible Solutions Section */}
+      <section className="py-16 px-8 md:px-32 0 flex flex-col items-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+          Flexible Solutions for Every Requirement
         </h2>
-        <p className="text-gray-600 text-lg text-center max-w-3xl mx-auto">
-          Our conventional flexible workspace products serve prime and suburban
-          locations. A network including flexible and on-demand office space
-          solutions meets occupier requirements with ease. These innovative
-          tenant experiences attract top-quality tenants and elevate market
-          valuation.
-        </p>
-        <img
-          src={partner8}
-          alt="Flexible Solutions"
-          className="w-full rounded-md mt-8"
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[
+            {
+              title: "Prime & Suburban Locations",
+              description:
+                "Meet tenant needs with conventional and on-demand office spaces.",
+              icon: (
+                <i className="text-5xl text-blue-500 mb-4 mx-auto">
+                  <FaMapMarkerAlt />
+                </i>
+              ),
+            },
+            {
+              title: "Innovative Tenant Experiences",
+              description:
+                "Attract top-quality tenants and elevate market valuations.",
+              icon: (
+                <i className="text-5xl text-yellow-500 mb-4 mx-auto">
+                  <FaLightbulb />
+                </i>
+              ),
+            },
+          ].map((item, index) => (
+            <div
+              key={index}
+              className="bg-white p-8 flex flex-col items-center rounded-lg shadow-lg text-center transform transition-transform hover:scale-105"
+            >
+              {item.icon}
+              <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                {item.title}
+              </h3>
+              <p className="text-gray-600">{item.description}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Clients Section */}
@@ -177,50 +242,29 @@ const Partners = () => {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-16 px-8 md:px-32">
-        <blockquote className="bg-blue-50 p-6 rounded-lg shadow-md text-center">
-          <p className="text-lg text-gray-600 italic">
-            "Propques maximizes ROI for clients with vacant properties in
-            Lucknow, ensuring substantial returns. Their expertise and
-            successful assistance optimize real estate investments, delivering
-            reliable and efficient services."
-          </p>
-          <footer className="mt-4 text-gray-700">
-            — NAMIT GAUR, Owner at DHARITRI Total Property Solutions
-          </footer>
-        </blockquote>
-      </section>
-
-      {/* Mission Section */}
-      <section className="py-16 px-8 md:px-32 text-center md:flex  items-center">
-        <img
-          src={pImg}
-          alt="Mission Image"
-          className="w-80 rounded-full mb-4"
-        />
-
-        <div className="mt-6">
-          <h2 className="text-2xl md:text-4xl font-bold mb-4 ">Our Mission</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
-            With broad smiles, more than eight years of experience, operational
-            know-how, and in-depth industry knowledge, we aim to assist as many
-            people as possible in establishing a presence in the flexible
-            workspace sector.
-          </p>
-          {/* Second Zoho Button */}
-          <button
-            className="mt-6 bg-blue-500 text-white px-8 py-3 rounded-lg text-lg shadow-lg hover:bg-blue-600"
-            onClick={() =>
-              window.open("https://zoho.com/webinar-link", "_blank")
-            }
-          >
-            Register for the Webinar
-          </button>
-        </div>
+      {/* Our Mission Section */}
+      <section className="bg-blue-500 flex flex-col items-center py-16 px-8 text-center text-white">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Mission</h2>
+        <p className="text-lg max-w-3xl mx-auto mb-8">
+          With over eight years of industry expertise, we strive to assist as
+          many people as possible in building a successful presence in the
+          flexible workspace sector, delivering innovative solutions and
+          operational excellence.
+        </p>
+        <button
+          className="flex items-center justify-center bg-white text-blue-500 px-8 py-3 rounded-lg text-lg shadow-lg hover:bg-gray-100"
+          onClick={() =>
+            window.open(
+              "https://webinarlab.zoho.in/meeting/register?sessionId=1346185406",
+              "_blank"
+            )
+          }
+        >
+          Join the Webinar Now <BsArrowRight className="ml-2" />
+        </button>
       </section>
     </div>
   );
 };
 
-export default Partners;
+export default PartnerWebinarPage;
