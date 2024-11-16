@@ -24,6 +24,16 @@ const Footer = () => {
             <h3 className="font-semibold text-lg mb-4">Menu</h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/about-us" className="hover:underline">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact-us" className="hover:underline">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
                 <Link to="/" className="hover:underline">
                   Blog
                 </Link>
@@ -35,22 +45,6 @@ const Footer = () => {
                 >
                   Careers
                 </a>
-              </li>
-              <li>
-                <Link to="/about-us" className="hover:underline">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact-us" className="hover:underline">
-                  Contact Us
-                </Link>
-              </li>
-
-              <li>
-                <Link to="/works" className="hover:underline">
-                  Works
-                </Link>
               </li>
             </ul>
           </div>
