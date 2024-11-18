@@ -126,38 +126,12 @@ const ModalForm = () => {
     }
   };
 
-  // Send form data using EmailJS
-  //   emailjs.send('service_vcnub3o', 'template_wkjd0zu', emailParams, 'KM6kJPymVVzg7Aim1')
-  //     .then((response) => {
-  //       setIsSuccess(true); // Show success popup
-  //       setFormData({
-  //         name: "",
-  //         email: "",
-  //         phone: "",
-  //         rentalExpectation: "",
-  //         city: "",
-  //         microMarket: "",
-  //         areaCarpet: "",
-  //         areaSuper: "",
-  //         propertyDetails: "",
-  //         coworkingOption: "",
-  //       });
-  //       setTimeout(() => {
-  //         setIsSuccess(false); // Hide success popup after 3 seconds
-  //       }, 3000);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //       alert('Error sending email.');
-  //     });
-  // };
-
   if (!isFormOpen) return null;
 
   return (
     <GoogleReCaptchaProvider reCaptchaKey="6LfMEFoqAAAAAPbBd0mRptXaI8AfZN30AI9CqY1N">
       <div
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[10000000000000]"
+        className="fixed  inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000000000000000000000000]"
         id="contact-btn"
       >
         <div className="relative bg-zinc-300 rounded-lg shadow-lg p-8 max-w-2xl w-full">
@@ -232,17 +206,38 @@ const ModalForm = () => {
             </div>
 
             <div className="flex flex-wrap mb-1">
-              <div className="w-1/2 pr-2">
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-                  placeholder="City"
-                  required
-                />
+              <div className="w-1/2">
+                <div className="w-full">
+                  <select
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                    required
+                  >
+                    <option value="">Select City</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Ghaziabad">Ghaziabad</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gurgaon">Gurgaon</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Indore">Indore</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Kochi">Kochi</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Noida">Noida</option>
+                    <option value="Pondicherry">Pondicherry</option>
+                    <option value="Pune">Pune</option>
+                  </select>
+                </div>
               </div>
+
               <div className="w-1/2 pl-2">
                 <input
                   type="text"
