@@ -6,6 +6,8 @@ import workjarAsset from '/workjarAsset.png'
 import workviaalogo from '/workviaalogo.png'
 import cubilogo from '/cubilogo.png'
 import summit from '/summit.png'
+import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
+
 const reviews = [
   {
     name: "Jack",
@@ -78,26 +80,39 @@ const ReviewCard = ({ img, name, username, body }) => {
 
 export default function Marqueee() {
   return (
-    <>
-    <h1 className="md:text-5xl text-3xl capitalize w-full font-semibold text-center  mt-4 md:py-8 py-2 ">
-    Spaces we have transformed 
-
-    </h1>
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((review, key) => (
-          <ReviewCard key={key} {...review} />
-        ))}
-      </Marquee>
-      <Marquee reverse pauseOnHover className="[--duration:20s]">
-        {secondRow.map((review, key) => (
-          <ReviewCard key={key} {...review} />
-        ))}
-      </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white dark:from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background"></div>
+    <div className="md:px-16 px-4 py-8">
+      <h1 className="md:text-4xl text-3xl font-semibold   mt-4 md:pt-8 py-4 ">
+        Spaces we have transformed
+        <span className="text-blue-500 text-4xl rounded-full">.</span>
+      </h1>
+      <h1 className="text-xl md:text-2xl lg:text-3xl text-center md:text-left">
+        <RiDoubleQuotesL
+          className="text-blue-500 inline-block text mb-4 "
+          size={20}
+        />
+        Transforming underutilized spaces into thriving,{" "}
+        <span className="font-semibold font">
+          revenue-generating commercial hubs
+        </span>
+        <RiDoubleQuotesR
+          className="text-blue-500 inline-block text mb-4"
+          size={20}
+        />
+      </h1>
+      <div className="relative flex w-full mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
+        <Marquee pauseOnHover className="[--duration:20s]">
+          {firstRow.map((review, key) => (
+            <ReviewCard key={key} {...review} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s]">
+          {secondRow.map((review, key) => (
+            <ReviewCard key={key} {...review} />
+          ))}
+        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-white dark:from-background"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white dark:from-background"></div>
+      </div>
     </div>
-    
-    </>
   );
 }

@@ -19,22 +19,22 @@ const WebinarPage = () => {
   }, []);
 
   return (
-    <div className="font-sans mt-10">
+    <div className="font-sans mt-10 ">
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16 px-4 md:px-0">
+      <section className="bg-gray-50 py-16 px-4  md:px-16 ">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}
           <div className="space-y-6 text-center md:text-left">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-           Monetize Your Commercial Assets for Stable & Rapid Income
+              Monetize Your Commercial Assets for Stable & Rapid Income
             </h1>
             <p className="text-md text-gray-600">
               Are you ready to turn your commercial assets into consistent,
-              high-yield revenue streams? 
+              high-yield revenue streams?
               <br />
-              Whether you’re a property owner or
-              investor, join our webinar to explore proven strategies that
-              generate stable and rapid income from commercial properties.
+              Whether you’re a property owner or investor, join our webinar to
+              explore proven strategies that generate stable and rapid income
+              from commercial properties.
             </p>
             <button
               className="flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-lg text-md shadow-lg hover:bg-blue-600 mx-auto md:mx-0"

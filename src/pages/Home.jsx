@@ -11,23 +11,27 @@ import Contact from "./Contact.jsx";
 import Faq from "@/components/Faq.jsx";
 import Apply from "@/components/Apply.jsx";
 import Impact from "../components/Impact.jsx";
+import Cities from "../components/Cities.jsx";
 import Revenue from "../components/Revenue.jsx";
+import Collab from "../components/Collab.jsx";
+
 const Home = () => {
   return (
     <div>
       <Hero id="home" />
+      {/* <Cities /> */}
       <Apply />
       <Features id="service" />
-      <Marqueee id="case" />
-      <ImagePopup id="about" />
-      <Offer id="" />
       <Offer2 id="" />
+      {/* <Offer id="" /> */}
       <Profit id="" />
       <Risk id="" />
+      <Marqueee id="case" />
+      <Collab  />
       <Impact />
       {/* <Revenue /> */}
       {/* <TestimonialsUser /> */}
-
+      <ImagePopup id="about" />
       <Faq id="faq" />
       <Contact id="contact" />
     </div>

@@ -5,8 +5,9 @@ import logo from '../../public/logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-[#2362AB] py-12 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-zinc-
+    00 text-blue-500 py-12 px-6 md:px-0">
+      <div className="maxw-7xl mx-auto px-8">
         {/* Footer Content - Grid Layout for Desktop and Flex Column for Mobile */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 py-8 border-t-2 border-b-2 border-blue-600">
           {/* Logo and Description */}
@@ -118,13 +119,13 @@ const Footer = () => {
               <a href="https://www.linkedin.com/company/propques/posts/?feedView=all">
                 <FaLinkedin
                   size={24}
-                  className="text-[#2362AB] hover:text-blue-600"
+                  className="text-blue-500"
                 />
               </a>
               <a href="https://www.instagram.com/propques_services/?hl=en">
                 <FaInstagram
                   size={24}
-                  className="text-[#2362AB] hover:text-blue-600"
+                  className="text-blue-500"
                 />
               </a>
             </div>

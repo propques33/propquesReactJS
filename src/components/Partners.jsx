@@ -34,7 +34,7 @@ const PartnerWebinarPage = () => {
 
   return (
     <div className="font-sans mt-10">
-      <section className=" py-1 px-4 md:px-0">
+      <section className=" py-1 md:px-16 px-4">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}
           <div className="space-y-6 text-center md:text-left">
@@ -128,6 +128,15 @@ const PartnerWebinarPage = () => {
               `,
               icon: <FaUsers className="text-5xl text-red-500 mb-4 mx-auto" />,
             },
+            {
+              title: "Better Potential Idea of Your Property",
+              description: `
+             Maximize Your Property's True Potential
+              `,
+              icon: (
+                <FaLightbulb className="text-5xl text-yellow-500 mb-4 mx-auto" />
+              ),
+            },
           ].map((item, index) => (
             <div
               key={index}
@@ -161,16 +170,9 @@ const PartnerWebinarPage = () => {
             <strong>We Provide Solutions:</strong>
           </p>
           <ul className="list-disc list-inside">
-            <li>
-              Flexible Workspace Management
-            </li>
-            <li>
-              Offer personalized tenant apps to
-              improve engagement
-            </li>
-            <li>
-              Tenant-Centric Strategies
-            </li>
+            <li>Flexible Workspace Management</li>
+            <li>Offer personalized tenant apps to improve engagement</li>
+            <li>Tenant-Centric Strategies</li>
           </ul>
         </div>
       </section>

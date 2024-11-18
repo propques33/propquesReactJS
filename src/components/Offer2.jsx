@@ -74,18 +74,19 @@ const services = [
 
 const Offer = () => {
   return (
-    <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8">
+    <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 bg-[#3b82f6] rounded-t-[100px] mt-20">
       {/* Main Heading */}
       <div className="flex flex-col items-center space-y-8">
         {/* Text Content */}
         <div className="text-center space-y-4">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-blue-500 leading-snug">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold leading-snug">
             Leverage Our Expertise in Coworking Consultancy
           </h1>
-          <p className="text-gray-800 text-lg leading-tight md:px-64 ">
-            We are India’s only coworking consultancy that offers comprehensive
-            services to help you build or partner with a coworking brand. Here’s
-            what we do:
+          <p className="text-zinc-100 md:text-xl leading-[4] md:px-64  ">
+            We are{" "}
+            <span className="font-bold underine text-2xl">India’s only</span>{" "}
+            coworking consultancy that offers comprehensive services to help you
+            build or partner with a coworking brand. Here’s what we do:
           </p>
         </div>
 
@@ -94,7 +95,7 @@ const Offer = () => {
           {services.map((service, index) => (
             <li
               key={index}
-              className="flex items-center text-lg w-full flex-col border-2 border-blue-500 rounded-lg p-4 sm:p-6 bg-white hover:bg-blue-100 transition-all"
+              className="flex items-center text-lg w-full flex-col border-2 border-[#3b82f6] rounded-lg p-4 sm:p-6 bg-white hover:scale-105 hover:rounded-2xl transition-all"
             >
               {service.icon}
               <span className="font-semibold text-zinc-900 text-center capitalize mt-2">
@@ -108,9 +109,9 @@ const Offer = () => {
         </ul>
 
         {/* Button */}
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <Button name="Submit Your Interest" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

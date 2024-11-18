@@ -1,6 +1,9 @@
 import React from "react";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { IoMdBarcode } from "react-icons/io";
+import { RiSearchEyeLine } from "react-icons/ri";
+import { FaUserFriends } from "react-icons/fa";
+
 import { IoIosLink } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Button from "./Button";
@@ -8,32 +11,60 @@ import rocket from "../../public/rocket.gif";
 import hnad from "../../public/hnad.webp";
 const Features = () => {
   return (
-    <>
-      <h1 className="md:text-5xl text-3xl  capitalize w-full font-semibold text-center md:py-8 pt-4  ">
-        Our Services​
+    <div className="md:px-16 px-4 ">
+      <h1 className="md:text-4xl text-3xl  w-full font-semibold md:pb-4   ">
+        Explore our host of services
+        <span className="text-blue-500 text-4xl rounded-full">.</span>
       </h1>
-      <div className="flex flex-col md:flex-row w-full gap-8 md:px-16 px-4">
-        {/* Left Section - Quote */}
-        <div className="md:w-1/3 h-auto flex items-center">
-          <h1 className="text-xl md:text-4xl lg:text-5xl text-center md:text-left">
-            <RiDoubleQuotesL className="text-blue-500 inline-block text " />
-            Maximize Your Asset's Potential with{" "}
-            <span className="font-semibold font">Coworking Consultancy</span>
-            <RiDoubleQuotesR className="text-blue-500 inline-block text " />
-          </h1>
-        </div>
-
-        {/* Middle Section - Branding */}
-        <div className="md:w-1/3 w-full  rounded md:mt-10 hover:scale-105 transition-all ease-in-out bg-zinc-100  flex flex-col items-center justify-around p-8 shadow-xl text-center">
-          <div className="mb-8">
-            <img src={rocket} alt="" className="h-20" />
-          </div>
-          <p className="text-black md:text-base text-sm leading-5 text-justify">
-            Looking to build your own commercial asset brand with seamless
-            management? We’ll handle everything — from creating your brand name
-            and website to designing marketing strategies and implementing SOPs.
-            You focus on growth, while we manage the day-to-day operations,
-            turning your asset into a sellable, thriving brand.
+      <h1 className="text-xl text-zinc-700 md:text-2xl lg:text-3xl text-center md:text-left">
+        <RiDoubleQuotesL
+          className="text-blue-500 inline-block text mb-4 "
+          size={20}
+        />
+        Maximize Your Asset's Potential with{" "}
+        <span className="font-semibold font text-zinc-900">
+          Coworking Consultancy
+        </span>
+        <RiDoubleQuotesR
+          className="text-blue-500 inline-block text mb-4"
+          size={20}
+        />
+      </h1>
+      <div className="flex flex-col md:flex-row w-full gap-8 ">
+        {/* Left Section - Branding */}
+        <div className="md:w-1/2 w-full rounded-xl mt-6  hover:scale-105 transition-all ease-in-out   flex flex-col items-center justify-around py-6 px-8 border-[1px] border-zinc-100   hover:shadow-xl text-center">
+          <p className="text-black gap-6 leading-tight flex md:text-lg text-sm text-left text-jutify">
+            <div className="mb-8">
+              {/* <img src={rocket} alt="" className="w-96" /> */}
+              <RiSearchEyeLine className="" size={60} />
+            </div>
+            <div className="text-zinc-700">
+              <span className="text-[#0067d6]  font-semibold text-2xl flex">
+                {" "}
+                Looking to build your own commercial asset brand with seamless
+                management?
+              </span>
+              <div className="mt-2"></div>
+              We’ll handle everything — from{" "}
+              <span className="font-bold text-zinc-800">
+                creating your brand name
+              </span>
+              ,
+              <span className="font-bold text-zinc-800">
+                {" "}
+                website designing
+              </span>
+              ,{" "}
+              <span className="font-bold text-zinc-800">
+                marketing strategies
+              </span>{" "}
+              and
+              <span className="font-bold text-zinc-800">
+                {" "}
+                implementing SOPs
+              </span>
+              {/* . You focus on growth, while we manage your asset into a sellable, thriving brand */}
+            </div>
           </p>
           <div className="py-2">
             <Button name="Start Your Own Coworking" />
@@ -41,22 +72,45 @@ const Features = () => {
         </div>
 
         {/* Right Section - Partnership */}
-        <div className="md:w-1/3 w-full rounded mb-10 md:mb-10 hover:scale-105 transition-all ease-in-out  shadow-xl  bg-zinc-100 flex flex-col items-center justify-around p-8 text-center">
-          <div className="mb-6 md:mb-0">
-            <img src={hnad} alt="" className="h-20 rounded-full" />
-          </div>{" "}
-          <p className="text-black md:text-base text-sm  leading-5 text-justify">
-            Looking to partner with a coworking brand? We’ll take a mandate and
-            use our industry connections to find the perfect brand for your
-            property, whether through partnership or rental. Let us handle the
-            matchmaking while you enjoy the benefits.
+        <div className="md:w-1/2 w-full rounded-xl mt-6  border-[1px] border-zinc-100 hover:scale-105 transition-all ease-in-out   flex flex-col items-center justify-around py-6 px-8 hover:shadow-xl text-center">
+          <p className="text-black gap-6 leading-tight flex md:text-lg text-sm text-left text-jutify">
+            <div className="mb-8">
+              {/* <img src={rocket} alt="" className="w-96" /> */}
+              <FaUserFriends className="" size={60} />
+            </div>
+            <div className="text-zinc-700">
+              <span className="text-[#0067d6] font-semibold text-2xl flex">
+                {" "}
+                Looking to partner with a coworking brand?
+              </span>
+              <div className="mt-2"></div>
+              We’ll take a mandate and use our{" "}
+              <span className="font-bold text-zinc-800">
+                industry connections
+              </span>{" "}
+              to find the
+              <span className="font-bold text-zinc-800">
+                {" "}
+                perfect brand for your property
+              </span>
+              , whether
+              <span className="font-bold text-zinc-800">
+                {" "}
+                partnership or rental.
+              </span>{" "}
+              {/* Let us handle the matchmaking while you */}
+              <span className="font-bold text-zinc-800">
+                {" "}
+                {/* enjoy the benefits. */}
+              </span>
+            </div>
           </p>
           <div className="py-2">
             <Button name="Match Making With Coworking" />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

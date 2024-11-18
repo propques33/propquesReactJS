@@ -44,39 +44,46 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto md:py-12 py-8 mt-16 px-4 md:px-8">
-      <h1 className="text-3xl md:text-4xl font-semibold text-center mb-10">
-        Frequently Asked Questions
-      </h1>
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border border-gray-300 rounded-lg shadow-md"
-          >
-            {/* Question */}
+    <div className="max-w-7xl mx-auto md:pb-16 py-8 px-4 md:px-8 gap-8 flex w-full">
+      <div className="bg-blue-500 rounded-xl w-1/2 flex items-center justify-center p-8">
+        <h1 className="text-white text-8xl">We believe in growth</h1>
+      </div>
+      <div className="w-1/2">
+        <h1 className="text-3xl md:text-4xl font-semibold text-center mb-10">
+          Frequently Asked Questions
+        </h1>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
             <div
-              className="flex justify-between  items-center px-6 py-4 cursor-pointer"
-              onClick={() => toggleFAQ(index)}
+              key={index}
+              className="border border-gray-200 rounded-lg "
             >
-              <h2 className="text-md md:text-lg font-semibold">{faq.question}</h2>
-              <span className="text-xl md:text-2xl">
-                {activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}
-              </span>
-            </div>
+              {/* Question */}
+              <div
+                className="flex justify-between  items-center px-6 py-4 cursor-pointer"
+                onClick={() => toggleFAQ(index)}
+              >
+                <h2 className="text-md md:text-lg font-semibold">
+                  {faq.question}
+                </h2>
+                <span className="text-xl md:text-2xl">
+                  {activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}
+                </span>
+              </div>
 
-            {/* Smooth Transition for Answer */}
-            <div
-              className={`overflow-hidden transition-all ease-in-out ${
-                activeIndex === index ? "" : "max-h-0"
-              }`}
-            >
-              <div className="px-6 py-4 bg-gray-50">
-                <p className="text-gray-700">{faq.answer}</p>
+              {/* Smooth Transition for Answer */}
+              <div
+                className={`overflow-hidden transition-all ease-in-out ${
+                  activeIndex === index ? "" : "max-h-0"
+                }`}
+              >
+                <div className="px-6 py-4 bg-gray-50">
+                  <p className="text-gray-700">{faq.answer}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
