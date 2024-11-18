@@ -81,9 +81,9 @@ const ReviewCard = ({ img, name, username, body }) => {
 export default function Marqueee() {
   return (
     <div className="md:px-16 px-4 py-">
-      <div className="px-4 sm:px-8 md:px-16 py-8">
+      <div className="px-4 sm:px-8 md:px-0 pt-8">
         {/* Main Title */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 md:pt-8 py-4 text-center md:text-left">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 md:pt-0 py-4 text-center md:text-left">
           Spaces we have transformed
           <span className="text-blue-500 text-3xl sm:text-4xl rounded-full">
             .
@@ -107,7 +107,7 @@ export default function Marqueee() {
         </h1>
       </div>
 
-      <div className="relative flex w-full mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
+      <div className="relative flex w-full md:mt-4 mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
         <Marquee pauseOnHover className="[--duration:20s]">
           {firstRow.map((review, key) => (
             <ReviewCard key={key} {...review} />

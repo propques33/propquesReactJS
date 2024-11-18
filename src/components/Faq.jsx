@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const FAQ = () => {
@@ -44,29 +44,31 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto md:pb-16 py-8 px-4 md:px-8 gap-8 flex w-full">
-      <div className="bg-blue-500 rounded-xl w-1/2 flex items-center justify-center p-8">
-        <h1 className="text-white text-8xl">We believe in growth</h1>
+    <div className="max-w-7xl mx-auto py-8 px-4 md:py-16 md:px-8 flex flex-col md:flex-row gap-8 w-full">
+      {/* Left Section */}
+      <div className="bg-blue-500 rounded-xl w-full md:w-1/2 flex items-center justify-center p-6 md:p-8">
+        <h1 className="text-white text-3xl sm:text-5xl md:text-7xl font-bold text-center leading-tight">
+          We believe in growth
+        </h1>
       </div>
-      <div className="w-1/2">
-        <h1 className="text-3xl md:text-4xl font-semibold text-center mb-10">
+
+      {/* Right Section */}
+      <div className="w-full md:w-1/2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center md:text-left mb-8">
           Frequently Asked Questions
         </h1>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 rounded-lg "
-            >
+            <div key={index} className="border border-gray-200 rounded-lg">
               {/* Question */}
               <div
-                className="flex justify-between  items-center px-6 py-4 cursor-pointer"
+                className="flex justify-between items-center px-4 md:px-6 py-4 cursor-pointer"
                 onClick={() => toggleFAQ(index)}
               >
-                <h2 className="text-md md:text-lg font-semibold">
+                <h2 className="text-md sm:text-lg md:text-xl font-semibold">
                   {faq.question}
                 </h2>
-                <span className="text-xl md:text-2xl">
+                <span className="text-lg md:text-2xl">
                   {activeIndex === index ? <FiChevronUp /> : <FiChevronDown />}
                 </span>
               </div>
@@ -74,11 +76,13 @@ const FAQ = () => {
               {/* Smooth Transition for Answer */}
               <div
                 className={`overflow-hidden transition-all ease-in-out ${
-                  activeIndex === index ? "" : "max-h-0"
+                  activeIndex === index ? "max-h-screen" : "max-h-0"
                 }`}
               >
-                <div className="px-6 py-4 bg-gray-50">
-                  <p className="text-gray-700">{faq.answer}</p>
+                <div className="px-4 md:px-6 py-4 bg-gray-50">
+                  <p className="text-gray-700 text-sm sm:text-base">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             </div>
