@@ -44,8 +44,8 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger Menu on the right */}
-        <div className="ml-auto z-40 flex gap-4">
-          <Button name="Let's Talk" />
+        <div className="ml-auto z-40 flex gap-4 ">
+          {/* <Button name="Let's Talk" /> */}
 
           <button
             onClick={toggleMenu}
