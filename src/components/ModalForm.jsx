@@ -5,8 +5,11 @@ import emailjs from "emailjs-com"; // Import EmailJS
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3"; // Import Google reCAPTCHA v3
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ModalForm = () => {
+  const navigate = useNavigate();
+
   const { isFormOpen, toggleForm } = useModal();
   const [formData, setFormData] = useState({
     name: "",
@@ -71,9 +74,9 @@ const ModalForm = () => {
       areaSuper: formData.areaSuper,
       propertyDetails: formData.propertyDetails,
       coworkingOption: formData.coworkingOption,
-      message: "Here is the information about the property", // Optional message content
-      recaptcha_token: token, // Pass the reCAPTCHA token
-      subject: "[IMPORTANT] Here is the information about the property", // Ensure the subject is meaningful
+      message: "Here is the information about the property",
+      recaptcha_token: token,
+      subject: "[IMPORTANT] Here is the information about the property",
     };
 
     try {
@@ -99,8 +102,9 @@ const ModalForm = () => {
         emailParams,
         "KM6kJPymVVzg7Aim1"
       );
-      setIsSuccess(true); // Show success popup
-      // Reset form data after successful submission
+
+      // Show success popup
+      setIsSuccess(true);
       setFormData({
         name: "",
         email: "",
@@ -113,18 +117,18 @@ const ModalForm = () => {
         propertyDetails: "",
         coworkingOption: "",
       });
+    toggleForm();
 
-      // Hide success popup after 3 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000);
+      // Redirect to thank you page after success
+      navigate("/thankyou");
     } catch (error) {
-      console.error("Error sending data to Google Sheets:", error);
-      alert("Error sending data to Google Sheets.");
+      console.error("Error sending data:", error);
+      alert("Error sending data.");
+    } finally {
       setIsLoading(false); // Hide loading spinner
-      return;
     }
   };
+
 
   if (!isFormOpen) return null;
 
@@ -323,23 +327,7 @@ const ModalForm = () => {
           </form>
 
           {/* Success Popup */}
-          {isSuccess && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[1000]">
-              <div className="bg-white rounded-lg p-4 text-center">
-                <AiOutlineCheckCircle className="text-green-500 text-4xl mb-2 w-full text-center" />
-                <h3 className="text-lg font-semibold">
-                  Form Submitted Successfully!
-                </h3>
-                <p className="mt-2">Thank you for your submission.</p>
-                <button
-                  onClick={() => setIsSuccess(false)}
-                  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
+          {isSuccess && navigate("/thankyou")}
         </div>
       </div>
     </GoogleReCaptchaProvider>
