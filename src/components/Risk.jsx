@@ -33,7 +33,7 @@ const Risk = () => {
           </p>
         </div>
       </div>
-      <div className="pt-8">
+      <div className="md:pt-8">
         <Button name="Know Your Property Potential" />
       </div>
       

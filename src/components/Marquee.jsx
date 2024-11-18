@@ -80,25 +80,33 @@ const ReviewCard = ({ img, name, username, body }) => {
 
 export default function Marqueee() {
   return (
-    <div className="md:px-16 px-4 py-8">
-      <h1 className="md:text-4xl text-3xl font-semibold   mt-4 md:pt-8 py-4 ">
-        Spaces we have transformed
-        <span className="text-blue-500 text-4xl rounded-full">.</span>
-      </h1>
-      <h1 className="text-xl md:text-2xl lg:text-3xl text-center md:text-left">
-        <RiDoubleQuotesL
-          className="text-blue-500 inline-block text mb-4 "
-          size={20}
-        />
-        Transforming underutilized spaces into thriving,{" "}
-        <span className="font-semibold font">
-          revenue-generating commercial hubs
-        </span>
-        <RiDoubleQuotesR
-          className="text-blue-500 inline-block text mb-4"
-          size={20}
-        />
-      </h1>
+    <div className="md:px-16 px-4 py-">
+      <div className="px-4 sm:px-8 md:px-16 py-8">
+        {/* Main Title */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 md:pt-8 py-4 text-center md:text-left">
+          Spaces we have transformed
+          <span className="text-blue-500 text-3xl sm:text-4xl rounded-full">
+            .
+          </span>
+        </h1>
+
+        {/* Subtitle with Quotes */}
+        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center md:text-left text-zinc-700">
+          <RiDoubleQuotesL
+            className="text-blue-500 inline-block mb-2 sm:mb-4"
+            size={20}
+          />
+          Transforming underutilized spaces into thriving,{" "}
+          <span className="font-semibold text-zinc-900  font">
+            revenue-generating commercial hubs
+          </span>
+          <RiDoubleQuotesR
+            className="text-blue-500 inline-block mb-2 sm:mb-4"
+            size={20}
+          />
+        </h1>
+      </div>
+
       <div className="relative flex w-full mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
         <Marquee pauseOnHover className="[--duration:20s]">
           {firstRow.map((review, key) => (
