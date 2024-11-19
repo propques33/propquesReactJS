@@ -21,7 +21,7 @@ const AboutUs = () => {
     });
   }, []);
   return (
-    <div className="font-sans">
+    <div className="font-sans md:mt-0 mt-20">
       {/* Hero Section */}
 
       <section className=" text-wite px-6 md:pt-20">

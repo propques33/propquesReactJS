@@ -33,7 +33,7 @@ const PartnerWebinarPage = () => {
   }, []);
 
   return (
-    <div className="font-sans mt-10">
+    <div className="font-sans md:mt-0 mt-20">
       <section className=" py-1 md:px-16 px-4">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}
