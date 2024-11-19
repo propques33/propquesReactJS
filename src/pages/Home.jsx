@@ -21,17 +21,20 @@ const Home = () => {
       <Hero id="home" />
       {/* <Cities /> */}
       <Apply />
+      <Marqueee id="case" />
+
       <Features id="service" />
+      <ImagePopup id="about" />
+
       <Offer2 id="" />
       {/* <Offer id="" /> */}
-      <Profit id="" />
       <Risk id="" />
-      <Marqueee id="case" />
-      <Collab  />
+      <Profit id="" />
       <Impact />
       {/* <Revenue /> */}
       {/* <TestimonialsUser /> */}
-      <ImagePopup id="about" />
+      <Collab />
+
       <Faq id="faq" />
       <Contact id="contact" />
     </div>
