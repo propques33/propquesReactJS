@@ -6,12 +6,14 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ModalForm = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState(null);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [isOtpSent, setIsOtpSent] = useState(false); // OTP sent state
 
   const { isFormOpen, toggleForm } = useModal();
   const [formData, setFormData] = useState({
@@ -46,13 +48,15 @@ const ModalForm = () => {
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading when sending OTP
+
     const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
     setGeneratedOtp(generatedOtp);
 
     const otpParams = {
       to_name: formData.name,
       to_email: formData.email,
-      message: `Your OTP for verification is: ${generatedOtp}`,
+      message: `HYour OTP for verification is: ${generatedOtp}`,
       subject: "OTP Verification for Appointment",
     };
 
@@ -63,9 +67,11 @@ const ModalForm = () => {
         otpParams,
         "KM6kJPymVVzg7Aim1"
       );
-      alert("OTP has been sent to your email!");
+      setIsLoading(false); // Reset loading state
+      setIsOtpSent(true); // Indicate OTP was sent successfully
     } catch (error) {
       console.error("Error sending OTP:", error);
+      setIsLoading(false); // Reset loading state even on failure
       alert("Error sending OTP. Please try again.");
     }
   };
@@ -198,9 +204,22 @@ const ModalForm = () => {
               <>
                 <button
                   onClick={handleSendOtp}
-                  className="bg-blue-500 text-white px-4 py-2 rounded w-full mb-4"
+                  disabled={isLoading || isOtpSent} // Disable button while sending or after successful OTP sent
+                  className={`px-4 py-2 rounded w-full mb-4 flex items-center justify-center ${
+                    isOtpSent
+                      ? "bg-green-500 text-white"
+                      : "bg-blue-500 text-white hover:bg-blue-600"
+                  } ${isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
                 >
-                  Send OTP
+                  {isLoading ? (
+                    "Sending OTP..."
+                  ) : isOtpSent ? (
+                    <>
+                      <FaCheckCircle className="mr-2" /> OTP Sent
+                    </>
+                  ) : (
+                    "Send OTP"
+                  )}
                 </button>
                 <div className="mb-4 flex gap-2">
                   <input
@@ -209,10 +228,16 @@ const ModalForm = () => {
                     onChange={(e) => setOtp(e.target.value)}
                     className="w-full p-2 border rounded"
                     placeholder="Enter OTP"
+                    disabled={isLoading} // Disable input while loading
                   />
                   <button
                     onClick={handleVerifyOtp}
-                    className="bg-green-500 text-white px-4 py- rounded w-full mb-"
+                    disabled={isLoading} // Disable button while loading
+                    className={`bg-green-500 text-white px-4 py-2 rounded w-full ${
+                      isLoading
+                        ? "opacity-70 cursor-not-allowed"
+                        : "hover:bg-green-600"
+                    }`}
                   >
                     Verify OTP
                   </button>
