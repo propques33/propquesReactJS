@@ -56,7 +56,7 @@ const ModalForm = () => {
     const otpParams = {
       to_name: formData.name,
       to_email: formData.email,
-      message: `HYour OTP for verification is: ${generatedOtp}`,
+      message: `Your OTP for verification is: ${generatedOtp}`,
       subject: "OTP Verification for Appointment",
     };
 
