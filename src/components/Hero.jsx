@@ -5,9 +5,9 @@ import overlays2 from "../../public/overlays2.png";
 import heroimg from "../../public/heroimg.webp";
 const Hero = () => {
   return (
-    <div className="w-full relative bg-white  py-20 md:py-40 flex flex-col items-center justify-center px-4 md:px-0 bg-cover overflow-hidden bg-center">
+    <div className="w-full relative bg-white  py-40 md:py-40 flex flex-col items-center justify-center px-4 md:px-0 bg-cover overflow-hidden bg-center">
       <div className="backdrop-blur- py- px-4 rounded-xl z-20 flex flex-col items-center justify-center ">
-        <h1 className="text-3xl md:text-5xl lg:text-7xl text-gray-950 text-center max-w-5xl leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl text-gray-950 text-center max-w-5xl leading-tight">
           <span className="text-blue-500">Your Premier</span> Partner for
           Monetizing Commercial Assets with{" "}
           <span className="text-blue-500">Coworking Spaces</span>
@@ -25,7 +25,7 @@ const Hero = () => {
       <img
         src={heroimg}
         alt=""
-        className="absolute  md:w-full md:p-96 w-60 md:ml-[55vw] ml-[0vw]  "
+        className="absolute  md:w-full md:p-96 w-60 md:ml-[55vw] ml-[45vw] md:mb-0 -mb-5  "
       />
       {/* <img
         src={overlays}
