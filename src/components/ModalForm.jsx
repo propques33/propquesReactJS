@@ -62,10 +62,11 @@ const ModalForm = () => {
 
     try {
       await emailjs.send(
-        "service_vcnub3o",
-        "template_19bo1qg",
+        "service_v6g9oma",
+
+        "template_80pp0hf",
         otpParams,
-        "KM6kJPymVVzg7Aim1"
+        "Cc40gM85ddXyCOaHD"
       );
       setIsLoading(false); // Reset loading state
       setIsOtpSent(true); // Indicate OTP was sent successfully
