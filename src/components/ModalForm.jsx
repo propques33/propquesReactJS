@@ -116,17 +116,36 @@ const ModalForm = () => {
         subject: "[IMPORTANT] Property Details Submission",
       };
 
-      await axios.post(
-        "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
-        formData
-      );
+      try {
+        await axios.post(
+          "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
+          formData
+        );
+      } catch (error) {
+        console.error(
+          "API submission error:",
+          error.response?.data || error.message
+        );
+        // alert(
+        //   `Error submitting data to API: ${
+        //     error.response?.data || error.message
+        //   }`
+        // );
+      }
 
-      await emailjs.send(
-        "service_vcnub3o",
-        "template_wkjd0zu",
-        emailParams,
-        "KM6kJPymVVzg7Aim1"
-      );
+
+      try {
+        await emailjs.send(
+          "service_v6g9oma",
+          "template_jkasb3l",
+          emailParams,
+          "Cc40gM85ddXyCOaHD"
+        );
+      } catch (error) {
+        console.error("EmailJS error:", error.response?.data || error.message);
+        // alert(`Error sending email: ${error.response?.data || error.message}`);
+      }
+
 
       setIsSuccess(true);
       setFormData({
