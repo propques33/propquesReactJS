@@ -21,13 +21,13 @@ function App() {
         <Helmet>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Start Your Own Coworking Space In India | Propques</title>
+          <title>Coworking Matchmaking Services in India by Propques</title>
           <meta name="description" content="Propques is a coworking consultancy that specializes in assisting real estate owners in India to add coworking spaces to their portfolio." />
 
           {/* Open Graph Meta Tags */}
           <meta property="og:locale" content="en_US" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Start Your Own Coworking Space In India | Propques" />
+          <meta property="og:title" content="Coworking Matchmaking Services in India by Propques" />
           <meta property="og:description" content="Propques is a coworking consultancy that specializes in assisting real estate owners in India to add coworking spaces to their portfolio." />
           <meta property="og:url" content="https://propques.com/" />
           <meta property="og:site_name" content="Propques" />
