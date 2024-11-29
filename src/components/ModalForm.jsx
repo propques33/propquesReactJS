@@ -36,45 +36,58 @@ const ModalForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+   e.preventDefault();
 
-    // Validate form data
-    if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
-      alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
-      return;
-    }
+   // Validate form data
+   if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
+     alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
+     return;
+   }
 
-    setIsLoading(true);
+   setIsLoading(true);
 
-    try {
-      // Send data to Make.com webhook
-      await axios.post(
-        "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
-        formData
-      );
+   try {
+     // Add the current timestamp with IST timezone to the formData
+     const now = new Date();
+     const offset = 330; // IST offset in minutes (5 hours 30 minutes)
+     const istDate = new Date(now.getTime() + offset * 60 * 1000);
+     const timestamp = istDate.toISOString().replace("T", " ").split(".")[0]; // Format to YYYY-MM-DD HH:mm:ss
 
-      setIsSuccess(true);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        rentalExpectation: "",
-        city: "",
-        microMarket: "",
-        areaCarpet: "",
-        areaSuper: "",
-        propertyDetails: "",
-        coworkingOption: "",
-      });
-      toggleForm();
-    } catch (error) {
-      console.error("Error sending data:", error);
-      alert("Error sending data.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+     const dataToSend = {
+       ...formData,
+       timestamp, // Add timestamp field
+     };
+
+     // Send data to Make.com webhook
+     await axios.post(
+       "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
+       dataToSend
+     );
+
+     setIsSuccess(true);
+     setFormData({
+       name: "",
+       email: "",
+       phone: "",
+       rentalExpectation: "",
+       city: "",
+       microMarket: "",
+       areaCarpet: "",
+       areaSuper: "",
+       propertyDetails: "",
+       coworkingOption: "",
+     });
+     toggleForm();
+   } catch (error) {
+     console.error("Error sending data:", error);
+     alert("Error sending data.");
+   } finally {
+     setIsLoading(false);
+   }
+ };
+
+
 
   if (!isFormOpen) return null;
 
