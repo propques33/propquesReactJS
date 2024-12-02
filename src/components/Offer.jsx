@@ -7,7 +7,7 @@ const Offer = () => {
     <div className="mx-auto px-4 md:px-16 md:py-8 py-">
       {/* Main Heading */}
       <h1 className="md:text-5xl text-3xl capitalize font-semibold text-center pb-4 md:pb-8">
-       Know Our Story
+        Know Our Story
       </h1>
 
       <div className="flex flex-col md:flex-row justify-between space-y-6 md:space-y-0 md:space-x-12">
@@ -17,6 +17,7 @@ const Offer = () => {
             src={interier}
             alt="Coworking Spaces"
             className="w-full h-64 md:h-[75vh] rounded-lg shadow-lg object-cover"
+            loading="lazy"
           />
         </div>
 

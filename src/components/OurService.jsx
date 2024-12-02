@@ -44,6 +44,7 @@ const OurServicesPage = () => {
               src={blogbanner}
               alt="Workspace Optimization"
               className="w-full rounded-lg shadowlg"
+              loading="lazy"
             />
           </div>
         </div>

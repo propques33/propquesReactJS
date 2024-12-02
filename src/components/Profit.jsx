@@ -22,6 +22,7 @@ const Profit = () => {
             src={six}
             alt="six months"
             className="h-12 md:h-20 mb-1 inline-block align-middle"
+            loading="lazy"
           />
         </span>{" "}
         Months
@@ -33,7 +34,7 @@ const Profit = () => {
           <span className="text-5xl font-semibold text-black">
             <CounterItalic desiredNumber="65" />
           </span>
-           of our clients have tripled their profits in the first 6 months by
+          of our clients have tripled their profits in the first 6 months by
           monetizing their assets with our proven strategies.
         </h1>
 

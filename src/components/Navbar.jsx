@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import logo from '/logo.png'
-import Button from './Button';
 import { RiMenu3Fill } from "react-icons/ri";
 
 const Navbar = () => {
@@ -39,7 +38,7 @@ const Navbar = () => {
         {/* Logo in the center */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link to="/" className="text-white text-2xl font-bold">
-            <img src={logo} alt="Logo" className=" " />
+            <img src={logo} alt="Logo" className=" " loading="lazy" />
           </Link>
         </div>
 

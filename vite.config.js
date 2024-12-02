@@ -11,6 +11,22 @@ export default defineConfig({
   },
   server: {
     port: 8080, // Ensure the app runs on port 8080
-    host: true  // Exposes the server to be accessible from external sources
+    host: true, // Exposes the server to be accessible from external sources
+  },
+  build: {
+    minify: "esbuild", // Fast and efficient minification
+    target: "esnext",
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return id.split("node_modules/")[1].split("/")[0];
+          }
+        },
+      },
+    },
   },
 });
+
+
+

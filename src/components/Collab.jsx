@@ -36,6 +36,7 @@ const Collab = () => {
                     src={client}
                     alt={`Client ${index + 1}`}
                     className="md:w-32 w-24 h-auto"
+                    loading="lazy"
                   />
                 </div>
               )

@@ -12,6 +12,7 @@ const Risk = () => {
             src={blogbanner}
             alt="Operational Efficiency"
             className="w-full h-64 md:h-auto object-cover "
+            loading="lazy"
           />
         </div>
 
@@ -26,7 +27,7 @@ const Risk = () => {
             multiple clients, reducing the risk of complete vacancy and ensuring
             steady occupancy. Unlike traditional leases where your income relies
             on a single tenant, coworking spaces allow you to spread the risk
-            across several clients. Plus, by outsourcing management.           
+            across several clients. Plus, by outsourcing management.
             {/* you can
             maintain and extend the life of your property, protecting your CAPEX
             investment for the long term. */}
@@ -36,7 +37,6 @@ const Risk = () => {
       <div className="md:pt-8">
         <Button name="Know Your Property Potential" />
       </div>
-      
     </div>
   );
 };

@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 py-8 border-t-2 border-b-2 border-blue-600">
           {/* Logo and Description */}
           <div className="flex flex-col items-center md:items-start col-span-1 space-y-4">
-            <img src={logo} alt="Logo" className="h-16 mb-2" />
+            <img src={logo} alt="Logo" className="h-16 mb-2" loading="lazy" />
             <p className="text-center md:text-left text-sm leading-relaxed">
               Helping property owners, entrepreneurs, and real estate
               professionals transform and matchmake spaces into profitable

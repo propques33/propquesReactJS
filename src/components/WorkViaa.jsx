@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import {
-  FaUsers,
   FaChartLine,
   FaClipboardList,
   FaRegHandshake,
   FaLightbulb,
   FaClipboardCheck
 } from "react-icons/fa";
-import { AiOutlineMail, AiOutlineDownload } from "react-icons/ai";
+import {  AiOutlineDownload } from "react-icons/ai";
 import workviaa1 from "../../public/workviaa1.png";
 import workviaa2 from "../../public/workviaa2.png";
 const WorkViaa = () => {
@@ -25,7 +24,6 @@ const WorkViaa = () => {
     });
   }, []);
   return (
-
     <div className=" font-sans px-16">
       {/* Header Section */}
       <section className="container mx-auto py-16 text-center mt-24 flex flex-col items-center">
@@ -48,8 +46,7 @@ const WorkViaa = () => {
             {/* Left Section */}
             <div className="text-center md:text-left md:w-1/2">
               <h2 className="text-5xl font-semibold mb-4 flex items-center justify-center md:justify-start">
-                 100% Occupancy in
-                3 Months
+                100% Occupancy in 3 Months
               </h2>
               <p className="text-gray-700 mb-4">
                 Increased rental income by 42% and helped multiple clients
@@ -67,6 +64,7 @@ const WorkViaa = () => {
                   src={workviaa1}
                   alt="Workviaa Image 1"
                   className="rou shadow-md h-60 w-auto"
+                  loading="lazy"
                 />
               </div>
               <div className="relative">
@@ -74,6 +72,7 @@ const WorkViaa = () => {
                   src={workviaa2}
                   alt="Workviaa Image 2"
                   className="rou shadow-md h-60 w-auto"
+                  loading="lazy"
                 />
               </div>
             </div>

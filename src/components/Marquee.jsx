@@ -55,7 +55,6 @@ const secondRow = reviews.slice(reviews.length / 2);
 
 const ReviewCard = ({ img, name, username, body }) => {
   return (
-    
     <figure
       className={cn(
         "relative w-96 cursor-pointer overflow-hidden rounded-xl border p-4",
@@ -65,13 +64,14 @@ const ReviewCard = ({ img, name, username, body }) => {
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
-    <div className="flex flex-row items-center gap-2">
-  <img 
-    className=" h-16  md:h-16 object-cover" 
-    alt={name} 
-    src={img} 
-  />
-</div>
+      <div className="flex flex-row items-center gap-2">
+        <img
+          className=" h-16  md:h-16 object-cover"
+          alt={name}
+          src={img}
+          loading="lazy"
+        />
+      </div>
 
       <blockquote className="mt-2 text-sm">{body}</blockquote>
     </figure>

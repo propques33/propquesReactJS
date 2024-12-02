@@ -1,4 +1,3 @@
-import React from "react";
 import {
   FaCheckCircle,
   FaChartBar,
@@ -6,12 +5,10 @@ import {
   FaIndustry,
   FaUsers,
   FaBullseye,
-  FaHandshake,
   FaTachometerAlt,
   FaFileInvoiceDollar, 
   FaClipboardCheck, 
 } from "react-icons/fa";
-import Button from "./Button";
 
 // Array of service items with corresponding icon and text
 const services = [

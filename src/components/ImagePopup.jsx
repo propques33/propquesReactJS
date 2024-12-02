@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import img1 from "../../public/img1.png";
-import img2 from "../../public/img2.png";
+import img1 from "../../public/t.webp";
+import img2 from "../../public/a.webp";
 import { Link } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa6";
 const ImagePopup = () => {
@@ -31,11 +31,15 @@ const ImagePopup = () => {
       <div className=" flex justify-evenly pb-8">
         {images.map((val, key) => {
           return (
-            <div className="flex flex-col items-center justify-center " key={key}>
+            <div
+              className="flex flex-col items-center justify-center "
+              key={key}
+            >
               <img
                 src={val.src}
                 alt=""
                 className="rounded-full md:h-80 md:w-80 h-40 w-40 "
+                loading="lazy"
               />
               <h1 className="md:text-2xl text-sm font-semibold mt-2">
                 {val.name}

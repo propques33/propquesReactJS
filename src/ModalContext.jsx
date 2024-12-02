@@ -14,7 +14,7 @@ export const ModalProvider = ({ children }) => {
     setIsFormOpen(!isFormOpen);
   };
 
-  console.log("Modal is open?", isFormOpen); // Log to check if state is changing
+  // console.log("Modal is open?", isFormOpen); // Log to check if state is changing
 
   return (
     <ModalContext.Provider value={{ isFormOpen, toggleForm }}>

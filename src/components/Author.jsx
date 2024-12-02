@@ -115,28 +115,49 @@ const BlogPage = () => {
     <div className="font-sans mt-20 ">
       {/* Header Section */}
       <section className="py-16 px-8 md:px-32 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Author: Adarsh Dixit - Flexible Workspace Specialist</h1>
-        <p className="text-lg md:text-xl text-gray-700">At our managed office spaces, we possess a wealth of valuable information that we are enthusiastic about sharing with our friends and clients. Our team of seasoned consultants offers expert insights that we believe will be highly advantageous to you.</p>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          Author: Adarsh Dixit - Flexible Workspace Specialist
+        </h1>
+        <p className="text-lg md:text-xl text-gray-700">
+          At our managed office spaces, we possess a wealth of valuable
+          information that we are enthusiastic about sharing with our friends
+          and clients. Our team of seasoned consultants offers expert insights
+          that we believe will be highly advantageous to you.
+        </p>
       </section>
 
       {/* Blog Post Section */}
       <section className="py-16 px-8 md:px-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.slice(0, visibleBlogs).map((post, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-48 object-cover"
+                loading="lazy"
+              />
               <div className="p-6">
-                {post.tag && <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full mb-2 inline-block">{post.tag}</span>}
+                {post.tag && (
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full mb-2 inline-block">
+                    {post.tag}
+                  </span>
+                )}
                 <h3 className="text-xl font-bold mb-2">{post.title}</h3>
                 <p className="text-gray-600 mb-4">{post.description}</p>
-                <button 
+                <button
                   onClick={() => navigate(`/blog/${post.slug}`)}
                   className="text-blue-500 hover:underline"
                 >
                   Read More
                 </button>
                 <div className="text-gray-500 text-sm mt-4">
-                  <p>{post.date} | {post.comments}</p>
+                  <p>
+                    {post.date} | {post.comments}
+                  </p>
                 </div>
               </div>
             </div>
@@ -144,8 +165,8 @@ const BlogPage = () => {
         </div>
         {visibleBlogs < blogPosts.length && (
           <div className="text-center mt-8">
-            <button 
-              onClick={showMoreBlogs} 
+            <button
+              onClick={showMoreBlogs}
               className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
             >
               Load More
@@ -153,9 +174,6 @@ const BlogPage = () => {
           </div>
         )}
       </section>
-
-
-
     </div>
   );
 };

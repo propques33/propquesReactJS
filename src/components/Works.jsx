@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { FaRegLightbulb, FaSearch, FaPenAlt, FaThumbsUp } from "react-icons/fa";
-import { AiOutlinePhone } from "react-icons/ai";
-import { BsEnvelope } from "react-icons/bs";
 import { MdOutlineBusinessCenter } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi";
 import { BiBuildingHouse } from "react-icons/bi";
@@ -209,7 +207,7 @@ const Works = () => {
               className=" p-6 rounded-lg shadow-md flex flex-col items-center text-center"
             >
               <div className="mb-4">
-                <img src={project.logo} alt="" className="h-8" />
+                <img src={project.logo} alt="" className="h-8" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold mb-2">{project.name}</h3>
               <p className="text-gray-600">{project.description}</p>

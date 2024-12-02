@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FaClipboardCheck } from "react-icons/fa";
 import cubii1 from "../../public/cubii1.jpg";
 import cubii2 from "../../public/cubii2.jpg";
 const Cubispace = () => {
@@ -17,7 +16,6 @@ const Cubispace = () => {
     });
 }, []);
   return (
-  
     <div className="overflow-hidden md:px-16 px-4 ">
       {/* Overview Section */}
       <section className="container  mx-auto mt-20">
@@ -44,13 +42,14 @@ const Cubispace = () => {
                   src={cubii1}
                   alt="Work Vistar Image 1"
                   className="rounded-lg shadow-md w-[80%] h-auto absolute top-0 left-0 transform translate-x-40 translate-y-40"
+                  loading="lazy"
                 />
                 <img
                   src={cubii2}
                   alt="Work Vistar Image 2"
                   className="rounded-lg shadow-md w-[80%] h-auto relative z-10"
                 />
-              </div> 
+              </div>
             </div>
           </div>
         </div>
@@ -105,7 +104,7 @@ const Cubispace = () => {
             office. But, IInd floor was more like a revenue-eating burden, which
             needed to be monetized better & was a stressed asset for the owner.
           </p>
-         
+
           {/* <div className="mt-4 flex justify-center">
             <FaClipboardCheck className="text-4xl text-blue-500" />
           </div> */}
@@ -118,19 +117,25 @@ const Cubispace = () => {
           Designing a Solution
         </h2>
         <p className="text-gray-600 mb-4">
-        Propques’s experienced staff started putting together their minds to analyze the concern & to come up with a promising solution. We did proper research to find out that all JSV showrooms were in strategic locations, on the main road & near residential colonies. 
-
-
-
-
+          Propques’s experienced staff started putting together their minds to
+          analyze the concern & to come up with a promising solution. We did
+          proper research to find out that all JSV showrooms were in strategic
+          locations, on the main road & near residential colonies.
         </p>
         <p className="text-gray-600 mb-4">
-        
-Moreover, we know that after the COVID & lockdown, corporate is searching for nearby home offices. Especially the companies with HOs in metro cities are looking for micro offices on a hybrid model for their remote team. Flexible offices that are near residential areas were thumbs up for them.  
+          Moreover, we know that after the COVID & lockdown, corporate is
+          searching for nearby home offices. Especially the companies with HOs
+          in metro cities are looking for micro offices on a hybrid model for
+          their remote team. Flexible offices that are near residential areas
+          were thumbs up for them.
         </p>
         <p className="text-gray-600">
-          
-        Everything was strategically developed in meeting rooms, training rooms, manager cabins, conference rooms, boutique offices & open seats. We also noticed the growing demand for day & night shifts in micro offices. Therefore, we considered it in our plan & developed the property for 24-Hour operations. It required a successful transformation of building facilities & features. 
+          Everything was strategically developed in meeting rooms, training
+          rooms, manager cabins, conference rooms, boutique offices & open
+          seats. We also noticed the growing demand for day & night shifts in
+          micro offices. Therefore, we considered it in our plan & developed the
+          property for 24-Hour operations. It required a successful
+          transformation of building facilities & features.
         </p>
       </section>
 
@@ -141,12 +146,20 @@ Moreover, we know that after the COVID & lockdown, corporate is searching for ne
             Positive End Result
           </h2>
           <p className="text-gray-600 mb-4">
-          The center’s inauguration in March 2022 was a special moment; we witnessed the successful results of our efforts. Our analysis of adding the flexibility of day & night shifts in our co-working was a great revenue booster. By Dec 2022, the center occupancy passed the mark of 90%. And, the previous showroom building that expected per sqft rental of 30-40rs now saw a sharp rise to 88-93rs.    
+            The center’s inauguration in March 2022 was a special moment; we
+            witnessed the successful results of our efforts. Our analysis of
+            adding the flexibility of day & night shifts in our co-working was a
+            great revenue booster. By Dec 2022, the center occupancy passed the
+            mark of 90%. And, the previous showroom building that expected per
+            sqft rental of 30-40rs now saw a sharp rise to 88-93rs.
           </p>
           <p className="text-gray-600 mb-4">
-          Promising results encouraged the owner, Mr. Jatin, to further expand his vision & earning. And he planned to absorb his other showroom buildings to this high-earning concept. Our expert team has started working on his vision by formulating an even more refined application of this revenue-generating concept.
+            Promising results encouraged the owner, Mr. Jatin, to further expand
+            his vision & earning. And he planned to absorb his other showroom
+            buildings to this high-earning concept. Our expert team has started
+            working on his vision by formulating an even more refined
+            application of this revenue-generating concept.
           </p>
-         
         </div>
       </section>
 

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { FaClipboardCheck } from "react-icons/fa";
 import workv1 from "../../public/workv1.png";
 import workv2 from "../../public/workv2.png";
 const WorkVistarCaseStudy = () => {
@@ -17,7 +16,6 @@ const WorkVistarCaseStudy = () => {
     });
   }, []);
   return (
-    
     <div className="overflow-hidden md:px-16 px-4 ">
       {/* Overview Section */}
       <section className="container  mx-auto mt-20">
@@ -46,11 +44,13 @@ const WorkVistarCaseStudy = () => {
                   src={workv1}
                   alt="Work Vistar Image 1"
                   className="rounded-lg shadow-md w-[80%] h-auto absolute top-0 left-0 transform translate-x-40 translate-y-20"
+                  loading="lazy"
                 />
                 <img
                   src={workv2}
                   alt="Work Vistar Image 2"
                   className="rounded-lg shadow-md w-[80%] h-auto relative z-10"
+                  loading="lazy"
                 />
               </div>
             </div>

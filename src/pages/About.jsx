@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { FaRegLightbulb, FaSearch, FaPenAlt, FaThumbsUp } from 'react-icons/fa';
+import { FaRegLightbulb, FaSearch, FaPenAlt } from 'react-icons/fa';
 import { MdOutlineBusinessCenter } from 'react-icons/md';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { BiBuildingHouse } from 'react-icons/bi';
 import partner4 from '../../public/partner4.webp';
-import partner6 from '../../public/partner6.webp';
 import blogbanner from '../../public/blog-banner.webp'
 const AboutUs = () => {
   useEffect(() => {
@@ -43,6 +42,7 @@ const AboutUs = () => {
               src={blogbanner}
               alt="Workspace Optimization"
               className="w-full rounded-lg shadowlg"
+              loading='lazy'
             />
           </div>
         </div>

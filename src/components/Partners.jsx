@@ -11,7 +11,6 @@ import {
 import { BsArrowRight } from "react-icons/bs";
 import connect from '../../public/connect.png'
 
-import partner from "../../public/partner.webp";
 import plogo from "../../public/plogo.webp";
 import plogo2 from "../../public/plogo2.png";
 import plogo3 from "../../public/plogo3.png";
@@ -62,7 +61,12 @@ const PartnerWebinarPage = () => {
 
           {/* Hero Image */}
           <div className="relative">
-            <img src={connect} alt="Webinar" className="w-full" />
+            <img
+              src={connect}
+              alt="Webinar"
+              className="w-full"
+              loading="lazy"
+            />
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r  rounded-lg"></div>
           </div>
         </div>
@@ -235,6 +239,7 @@ const PartnerWebinarPage = () => {
                   src={client}
                   alt={`Client ${index + 1}`}
                   className="md:w-40 w-28"
+                  loading="lazy"
                 />
               </div>
             )

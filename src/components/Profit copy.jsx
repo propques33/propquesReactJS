@@ -21,6 +21,7 @@ const Profit = () => {
             src={six}
             alt=""
             className="h-10 md:h-20 mb-3 inline-block align-middle"
+            loading="lazy"
           />
         </span>
         Months

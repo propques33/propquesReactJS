@@ -1,29 +1,33 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home.jsx";
-import Book from "../pages/Book.jsx";
-import Contact from "../pages/Contact.jsx";
-import ContactPage from "../pages/ContactPage.jsx";
-import Shop from "../pages/Shop.jsx";
-import About from "../pages/About.jsx";
-import Blog from "../pages/Blog.jsx";
-import Button from "../components/Button.jsx";
-import SuccessPage from "../components/SuccessPage.jsx";
-import PrivacyPolicy from "../components/PrivacyPolicy.jsx";
-import TermsAndConditions from "../components/TermsAndConditions.jsx";
-import Works from "../components/Works.jsx";
-import Webinar from "../components/Webinar.jsx";
-import Partners from "../components/Partners.jsx";
-import OurService from "../components/OurService.jsx";
-import Faq from "../components/Faq.jsx";
-import WorkViaa from "../components/WorkViaa.jsx";
-import WorkVistar from "../components/WorkVistar.jsx";
-import Cubispace from "../components/Cubispace.jsx";
-import SummitSpace from "../components/SummitSpace.jsx";
-import NotFound from "../components/NotFound";
 
-import Author from "../components/Author.jsx";
-import BlogDetailPage from "../components/BlogDetailPage.jsx";
+
+const Home = React.lazy(() => import("../pages/Home.jsx"));
+const Book = React.lazy(() => import("../pages/Book.jsx"));
+const ContactPage = React.lazy(() => import("../pages/ContactPage.jsx"));
+const Shop = React.lazy(() => import("../pages/Shop.jsx"));
+const About = React.lazy(() => import("../pages/About.jsx"));
+const Blog = React.lazy(() => import("../pages/Blog.jsx"));
+
+
+const Button = React.lazy(() => import("../components/Button.jsx"));
+const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
+const PrivacyPolicy = React.lazy(() => import("../components/PrivacyPolicy.jsx"));
+const TermsAndConditions = React.lazy(() => import("../components/TermsAndConditions.jsx"));
+const Works = React.lazy(() => import("../components/Works.jsx"));
+const Webinar = React.lazy(() => import("../components/Webinar.jsx"));
+const Partners = React.lazy(() => import("../components/Partners.jsx"));
+const OurService = React.lazy(() => import("../components/OurService.jsx"));
+const Faq = React.lazy(() => import("../components/Faq.jsx"));
+const WorkViaa = React.lazy(() => import("../components/WorkViaa.jsx"));
+const WorkVistar = React.lazy(() => import("../components/WorkVistar.jsx"));
+const Cubispace = React.lazy(() => import("../components/Cubispace.jsx"));
+const SummitSpace = React.lazy(() => import("../components/SummitSpace.jsx"));
+const NotFound = React.lazy(() => import("../components/NotFound"));
+const Author = React.lazy(() => import("../components/Author.jsx"));
+const BlogDetailPage = React.lazy(() =>
+  import("../components/BlogDetailPage.jsx")
+);
 const Routing = () => {
 
   const blogPosts = [

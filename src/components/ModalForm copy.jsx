@@ -44,7 +44,7 @@ const ModalForm = () => {
     }
 
     if (!executeRecaptcha) {
-      console.log("Execute recaptcha not yet available");
+      // console.log("Execute recaptcha not yet available");
       return;
     }
 

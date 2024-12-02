@@ -55,6 +55,7 @@ const WebinarPage = () => {
               src={c187f5b810329f4d74ed7f30d5d05c197271e}
               alt="Webinar"
               className="w-full rounded-lg shadow-lg"
+              loading="lazy"
             />
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r  rounded-lg"></div>
           </div>

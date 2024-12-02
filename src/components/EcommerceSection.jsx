@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaAmazon, FaEbay } from 'react-icons/fa';
-import { SiShopify, SiEtsy } from 'react-icons/si';
+import { SiShopify } from 'react-icons/si';
 
 const EcommerceSection = () => {
   return (
