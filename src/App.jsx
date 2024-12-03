@@ -1,7 +1,8 @@
 import React, {Suspense} from "react";
-import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
-import Routing from "./utils/Routing.jsx";
+const Navbar = React.lazy(() => import("@/components/Navbar.jsx"));
+const Footer = React.lazy(() => import("@/components/Footer.jsx"));
+const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
+
 import "./App.css";
 import { ModalProvider } from "./ModalContext.jsx"; // Modal Context Provider
 import ModalForm from "./components/ModalForm.jsx"; // The form modal component

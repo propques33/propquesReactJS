@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useMemo, Suspense } from "react";
 const Button = React.lazy(() => import("./Button"));
 import heroimg from "../../public/heroimg.webp"; // Adjust the path based on your project structure
@@ -38,7 +39,7 @@ const Hero = React.memo(() => {
         </h2>
         <div className="w-full flex items-center justify-center">
           {/* Lazy-loaded Button Component */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Button name="Let's Talk" />
           </Suspense>
         </div>
