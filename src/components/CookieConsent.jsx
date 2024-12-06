@@ -55,13 +55,13 @@ const CookieConsent = () => {
             <div className="flex gap-2">
               <button
                 onClick={handleAccept}
-                className="bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition duration-300"
+                className=" hover:bg-blue-400 text-white px-4 py-2 rounded-md bg-blue-500 transition duration-300"
               >
                 Accept
               </button>
               <button
                 onClick={handleReject}
-                className="bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-500 transition duration-300"
+                className="  text-white px-4 py-2  transition duration-300"
               >
                 Reject All
               </button>
