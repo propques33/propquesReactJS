@@ -1,5 +1,5 @@
 {
-  "name": "propques",
+  "name": "assignment-bluerose",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -43,9 +43,5 @@
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.11",
     "vite": "^5.4.1"
-  },
-  "engines": {
-    "node": "6.11.1",
-    "npm": "10.8.2"
   }
 }
