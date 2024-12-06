@@ -2,7 +2,7 @@
 import React, { useMemo, Suspense } from "react";
 const Button = React.lazy(() => import("./Button"));
 import heroimg from "../../public/heroimg.webp"; // Adjust the path based on your project structure
-
+import HeroModel from './HeroModel'
 // Memoized Hero Component
 const Hero = React.memo(() => {
   // Use memoization for static content
@@ -17,44 +17,47 @@ const Hero = React.memo(() => {
       ),
       subtitle: (
         <>
-          Helping property owners, entrepreneurs, and real estate professionals
-          transform and matchmake with{" "}
-          <span className="text-blue-500 font-semibold">coworking</span>
+          Helping property owners, entrepreneurs, & real estate professionals
+          transform & matchmake with{" "}
+          <span className="text-blue-500 font-semibold">coworking.</span>
         </>
       ),
     }),
     [] // Content doesn't depend on any props or state
   );
 
-
   return (
-    <div className="w-full relative bg-white py-40 md:py-40 flex flex-col items-center justify-center px-4 md:px-0 bg-cover overflow-hidden bg-center heroFont">
+    <div className="w-full fle relative bg-white py-20 px-10 flex  items-center justify-center md:px-8 bg-cover overflow-hidden bg-center heroFont">
       {/* Memoized Content */}
-      <div className="py-4 px-6 rounded-xl z-20 flex flex-col items-center justify-center">
-        <h1 className="text-4xl md:text-5xl font-semibold lg:text-7xl text-gray-950 text-center max-w-5xl leading-tight">
-          {content.title}
-        </h1>
-        <h2 className="text-sm md:text-md lg:text-xl max-w-3xl text-center font-semibold py-4 capitalize text-gray-950">
-          {content.subtitle}
-        </h2>
-        <div className="w-full flex items-center justify-center">
-          {/* Lazy-loaded Button Component */}
-          <Suspense fallback={<div></div>}>
-            <Button name="Let's Talk" />
-          </Suspense>
+      <div className="w-[75%] ">
+        <div className="py-4 px-6 rounded-xl z-20 flex flex-col items-cente justify-cente">
+          <h1 className=" font-semibold lg:text-[4rem] text-gray-950 text-  leading-tight">
+            {content.title}
+          </h1>
+          <h2 className="text-sm md:text-2xl max-w-3xl text- font-semibold py-4 capitalize text-gray-950">
+            {content.subtitle}
+          </h2>
+          <div className="w-full flex items-center justify-center">
+            {/* Lazy-loaded Button Component */}
+            {/* <Suspense fallback={<div></div>}>
+              <Button name="Let's Talk" />
+            </Suspense> */}
+          </div>
         </div>
+      </div>
+      <div className="w-[25%] pt-5 z-20">
+        <HeroModel />
       </div>
       {/* Lazy-loaded Image */}
       <img
         src={heroimg}
         alt="Hero Background"
-        className="absolute md:w-full md:p-96 w-60 md:ml-[55vw] ml-[45vw] md:mb-0 -mb-5"
+        className="absolute md:w-full md:p-96  md:ml-[2vw]  md:mt-72  md:mb-0 -mb-5 w-[50vw] h-[80vw]"
         loading="lazy" // Lazy load the image
         decoding="async" // Optimize image decoding
       />
     </div>
   );
 });
-
 
 export default Hero;

@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 
-
 const Home = React.lazy(() => import("../pages/Home.jsx"));
 const Book = React.lazy(() => import("../pages/Book.jsx"));
 const ContactPage = React.lazy(() => import("../pages/ContactPage.jsx"));
@@ -9,11 +8,14 @@ const Shop = React.lazy(() => import("../pages/Shop.jsx"));
 const About = React.lazy(() => import("../pages/About.jsx"));
 const Blog = React.lazy(() => import("../pages/Blog.jsx"));
 
-
 const Button = React.lazy(() => import("../components/Button.jsx"));
 const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
-const PrivacyPolicy = React.lazy(() => import("../components/PrivacyPolicy.jsx"));
-const TermsAndConditions = React.lazy(() => import("../components/TermsAndConditions.jsx"));
+const PrivacyPolicy = React.lazy(() =>
+  import("../components/PrivacyPolicy.jsx")
+);
+const TermsAndConditions = React.lazy(() =>
+  import("../components/TermsAndConditions.jsx")
+);
 const Works = React.lazy(() => import("../components/Works.jsx"));
 const Webinar = React.lazy(() => import("../components/Webinar.jsx"));
 const Partners = React.lazy(() => import("../components/Partners.jsx"));
@@ -29,24 +31,18 @@ const BlogDetailPage = React.lazy(() =>
   import("../components/BlogDetailPage.jsx")
 );
 const Routing = () => {
-
   const blogPosts = [
     {
-      title: 'Five alternatives to boost your coworking space revenue',
-      date: 'April 15, 2024',
-      comments: 'No Comments',
-      image: '/path/to/image1.jpg',
-      description: '...',
-      slug: 'five-alternatives',
-      tag: 'FEATURED'
+      title: "Five alternatives to boost your coworking space revenue",
+      date: "April 15, 2024",
+      comments: "No Comments",
+      image: "/path/to/image1.jpg",
+      description: "...",
+      slug: "five-alternatives",
+      tag: "FEATURED",
     },
     // Add more blog entries...
   ];
-  
-
-
-
-
 
   return (
     <>
@@ -67,16 +63,16 @@ const Routing = () => {
         <Route path="/webinar" element={<Webinar />} />
         <Route path="/partners-with-us" element={<Partners />} />
         <Route path="/author/userpropques" element={<Author />} />
-        <Route path="/blog/:slug" element={<BlogDetailPage blogPosts={blogPosts} />} />
+        <Route
+          path="/blog/:slug"
+          element={<BlogDetailPage blogPosts={blogPosts} />}
+        />
         <Route path="/our-service" element={<OurService />} />
         <Route path="/workviaa" element={<WorkViaa />} />
         <Route path="/cubispace" element={<Cubispace />} />
         <Route path="/work-vistar" element={<WorkVistar />} />
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
-
-        
-
       </Routes>
     </>
   );
