@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CookieManager from "../utils/CookieManager";
+import CookieManager from "../utils/cookieManager";
 import { FaCookieBite } from "react-icons/fa";
 
 const CookieConsent = () => {

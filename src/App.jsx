@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from "react";
 const Navbar = React.lazy(() => import("@/components/Navbar.jsx"));
 const Footer = React.lazy(() => import("@/components/Footer.jsx"));
 const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
-import CookieManager from "./utils/CookieManager";
+import CookieManager from "./utils/cookieManager";
 import CookieConsent from "./components/CookieConsent";
 
 import "./App.css";
@@ -32,14 +32,14 @@ function App() {
      const favorites = JSON.parse(CookieManager.getCookie("favorites"));
      const preferences = JSON.parse(CookieManager.getCookie("preferences"));
 
-     console.log({
-       username,
-       location,
-       gender,
-       lastSearch,
-       favorites,
-       preferences,
-     });
+    //  console.log({
+    //    username,
+    //    location,
+    //    gender,
+    //    lastSearch,
+    //    favorites,
+    //    preferences,
+    //  });
    }, []);
   return (
     <Suspense
