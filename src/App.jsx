@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from "react";
 const Navbar = React.lazy(() => import("@/components/Navbar.jsx"));
 const Footer = React.lazy(() => import("@/components/Footer.jsx"));
 const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
-import CookieManager from "./utils/cookieManager";
+import CookieManager from "./utils/CookieManager";
 import CookieConsent from "./components/CookieConsent";
 
 import "./App.css";
