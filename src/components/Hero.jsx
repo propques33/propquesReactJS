@@ -27,7 +27,7 @@ const Hero = React.memo(() => {
   );
 
   return (
-    <div className="w-full fle relative bg-white py-20 px-10 flex  items-center justify-center md:px-8 bg-cover overflow-hidden bg-center heroFont">
+    <div className="w-full fle relative bg-white py-20 px-10 flex   md:px-8 bg-cover overflow-hidden bg-center heroFont">
       {/* Memoized Content */}
       <div className="w-[75%] ">
         <div className="py-4 px-6 rounded-xl z-20 flex flex-col items-cente justify-cente">
@@ -52,7 +52,7 @@ const Hero = React.memo(() => {
       <img
         src={heroimg}
         alt="Hero Background"
-        className="absolute md:w-full md:p-96  md:ml-[2vw]  md:mt-72  md:mb-0 -mb-5 w-[50vw] h-[80vw]"
+        className="absolute w-[40vw] bottom-16 right-[30%]"
         loading="lazy" // Lazy load the image
         decoding="async" // Optimize image decoding
       />

@@ -39,7 +39,7 @@ const CookieConsent = () => {
   return (
     <>
       {blurBackground && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[9999] transition-opacity duration-300"></div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[1000000000000] transition-opacity duration-300"></div>
       )}
       {showBanner && (
         <div
