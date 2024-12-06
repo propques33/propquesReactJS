@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button'
-
 const Apply = () => {
   const [showApply, setShowApply] = useState(false);
 
