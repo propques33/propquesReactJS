@@ -97,7 +97,7 @@ function App() {
             {/* Canonical URL */}
             <link rel="canonical" href="https://propques.com/" />
           </Helmet>
-          <div className="tracking-tight relative">
+          <div className=" relative">
             <Navbar />
             <Routing />
             <Footer />

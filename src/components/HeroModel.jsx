@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ModalForm = () => {
   const navigate = useNavigate();
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -1114,6 +1115,10 @@ const ModalForm = () => {
       alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
       return;
     }
+    if (!isCheckboxChecked) {
+      alert("Please agree to the privacy policy to proceed.");
+      return;
+    }
 
     setIsLoading(true);
 
@@ -1146,7 +1151,6 @@ const ModalForm = () => {
         propertyDetails: "",
         coworkingOption: "",
       });
-   
     } catch (error) {
       console.error("Error sending data:", error);
       alert("Error sending data.");
@@ -1154,7 +1158,6 @@ const ModalForm = () => {
       setIsLoading(false);
     }
   };
-
 
   return (
     <div className="">
@@ -1296,11 +1299,34 @@ const ModalForm = () => {
               </option>
             </select>
           </div>
+          <label className="fle items-center text-sm text-gray-500">
+            <input
+              type="checkbox"
+              checked={isCheckboxChecked}
+              onChange={(e) => setIsCheckboxChecked(e.target.checked)}
+              className="mr-2"
+              required
+            />
+            I am happy for
+            <a href="https://propques.com/" className="text-blue-500">
+              {" "}
+              propques{" "}
+            </a>
+            to contact me via mail/SMS. By selecting this you agree to our{" "}
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              privacy policy.
+            </a>
+          </label>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className={`bg-blue-500 text-white px-4 py-2 rounded w-full ${
+            className={`bg-blue-500 mt-4 text-white px-4 py-2 rounded w-full ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={isLoading}

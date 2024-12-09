@@ -17,8 +17,8 @@ const Hero = React.memo(() => {
       ),
       subtitle: (
         <>
-          Helping property owners, entrepreneurs, & real estate professionals
-          transform & matchmake with{" "}
+          Helping property owners, entrepreneurs, & <br /> real estate
+          professionals transform & matchmake with{" "}
           <span className="text-blue-500 font-semibold">coworking.</span>
         </>
       ),
@@ -27,14 +27,14 @@ const Hero = React.memo(() => {
   );
 
   return (
-    <div className="w-full fle relative bg-white py-20 px-10 flex   md:px-8 bg-cover overflow-hidden bg-center heroFont">
+    <div className="w-full fle relative bg-white py-16 px-10 flex   md:px-8 bg-cover overflow-hidden bg-center heroFont">
       {/* Memoized Content */}
-      <div className="w-[75%] ">
+      <div className="w-[65%] ">
         <div className="py-4 px-6 rounded-xl z-20 flex flex-col items-cente justify-cente">
-          <h1 className=" font-semibold lg:text-[4rem] text-gray-950 text-  leading-tight">
+          <h1 className=" font-semibold lg:text-[4rem] md:text-[3rem] text-gray-950 text-  leading-tight">
             {content.title}
           </h1>
-          <h2 className="text-sm md:text-2xl max-w-3xl text- font-semibold py-4 capitalize text-gray-950">
+          <h2 className="text-sm md:text-xl lg:text-2xl max-w-3xl text- font-semibold py-4 capitalize text-gray-950">
             {content.subtitle}
           </h2>
           <div className="w-full flex items-center justify-center">
@@ -45,14 +45,14 @@ const Hero = React.memo(() => {
           </div>
         </div>
       </div>
-      <div className="w-[25%] pt-5 z-20">
+      <div className="w-[35%] pt-5 z-20">
         <HeroModel />
       </div>
       {/* Lazy-loaded Image */}
       <img
         src={heroimg}
         alt="Hero Background"
-        className="absolute w-[40vw] bottom-16 right-[30%]"
+        className="absolute w-[40vw] bottom-28 right-[35%]"
         loading="lazy" // Lazy load the image
         decoding="async" // Optimize image decoding
       />

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 const ModalForm = () => {
   const navigate = useNavigate();
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); 
+
   const { isFormOpen, toggleForm } = useModal();
 
   const [formData, setFormData] = useState({
@@ -1084,7 +1086,7 @@ const ModalForm = () => {
       "Yerawada",
       "Yerwada",
     ],
-    Other: ["Other"]
+    Other: ["Other"],
   };
 
   useEffect(() => {
@@ -1116,6 +1118,10 @@ const ModalForm = () => {
       alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
       return;
     }
+     if (!isCheckboxChecked) {
+       alert("Please agree to the privacy policy to proceed.");
+       return;
+     }
 
     setIsLoading(true);
 
@@ -1313,6 +1319,29 @@ const ModalForm = () => {
               </option>
             </select>
           </div>
+          <label className="fle items-center text-sm">
+            <input
+              type="checkbox"
+              checked={isCheckboxChecked}
+              onChange={(e) => setIsCheckboxChecked(e.target.checked)}
+              className="mr-2"
+              required
+            />
+            I am happy for
+            <a href="https://propques.com/" className="text-blue-500">
+              {" "}
+              propques{" "}
+            </a>
+            to contact me via mail/SMS. By selecting this you agree to our{" "}
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              privacy policy.{" "}
+            </a>
+          </label>
 
           {/* Submit Button */}
           <button

@@ -79,7 +79,7 @@ const Offer = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold leading-snug">
             Leverage Our Expertise in Coworking Consultancy
           </h1>
-          <p className="text-zinc-100 md:text-xl  md:px-64  ">
+          <p className="text-zinc-100 md:text-xl    ">
             We are{" "}
             <span className="font-bold underine text-2xl">India’s only</span>{" "}
             coworking consultancy that offers comprehensive services to help you
