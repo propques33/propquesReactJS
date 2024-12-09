@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ModalForm = () => {
   const navigate = useNavigate();
-  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false); 
+  const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
 
   const { isFormOpen, toggleForm } = useModal();
 
@@ -1118,10 +1118,10 @@ const ModalForm = () => {
       alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
       return;
     }
-     if (!isCheckboxChecked) {
-       alert("Please agree to the privacy policy to proceed.");
-       return;
-     }
+    if (!isCheckboxChecked) {
+      alert("Please agree to the privacy policy to proceed.");
+      return;
+    }
 
     setIsLoading(true);
 
@@ -1269,8 +1269,11 @@ const ModalForm = () => {
           {/* Rental Expectation */}
           <div className="mb-4">
             <input
-              type="number"
+              type="text"
               name="rentalExpectation"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               value={formData.rentalExpectation}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
@@ -1282,8 +1285,11 @@ const ModalForm = () => {
           {/* Areas */}
           <div className="mb-4 flex gap-2">
             <input
-              type="number"
+              type="text"
               name="areaSuper"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               value={formData.areaSuper}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
@@ -1291,8 +1297,11 @@ const ModalForm = () => {
               required
             />
             <input
-              type="number"
+              type="text"
               name="areaCarpet"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               value={formData.areaCarpet}
               onChange={handleInputChange}
               className="w-full p-2 border rounded"

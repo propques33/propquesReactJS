@@ -1249,7 +1249,10 @@ const ModalForm = () => {
           {/* Rental Expectation */}
           <div className="mb-4">
             <input
-              type="number"
+              type="text"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               name="rentalExpectation"
               value={formData.rentalExpectation}
               onChange={handleInputChange}
@@ -1262,7 +1265,10 @@ const ModalForm = () => {
           {/* Areas */}
           <div className="mb-4 flex gap-2">
             <input
-              type="number"
+              type="text"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               name="areaSuper"
               value={formData.areaSuper}
               onChange={handleInputChange}
@@ -1271,7 +1277,10 @@ const ModalForm = () => {
               required
             />
             <input
-              type="number"
+              type="text"
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              }}
               name="areaCarpet"
               value={formData.areaCarpet}
               onChange={handleInputChange}
