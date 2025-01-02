@@ -13,7 +13,7 @@
     "@hcaptcha/react-hcaptcha": "^1.11.0",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.28",
-    "axios": "^1.7.7",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
@@ -29,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7",
     "xlsx": "^0.18.5"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",

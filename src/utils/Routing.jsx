@@ -6,7 +6,8 @@ const Book = React.lazy(() => import("../pages/Book.jsx"));
 const ContactPage = React.lazy(() => import("../pages/ContactPage.jsx"));
 const Shop = React.lazy(() => import("../pages/Shop.jsx"));
 const About = React.lazy(() => import("../pages/About.jsx"));
-const Blog = React.lazy(() => import("../pages/Blog.jsx"));
+const BlogList = React.lazy(() => import("../components/BlogList.jsx"));
+const BlogDetails = React.lazy(() => import("../components/BlogDetails.jsx"));
 
 const Button = React.lazy(() => import("../components/Button.jsx"));
 const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
@@ -28,7 +29,7 @@ const SummitSpace = React.lazy(() => import("../components/SummitSpace.jsx"));
 const NotFound = React.lazy(() => import("../components/NotFound"));
 const Author = React.lazy(() => import("../components/Author.jsx"));
 const BlogDetailPage = React.lazy(() =>
-  import("../components/BlogDetailPage.jsx")
+  import("../components/BlogDetails.jsx")
 );
 const Routing = () => {
   const blogPosts = [
@@ -54,7 +55,10 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
-        <Route path="/blogs" element={<Blog />} />
+        
+        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />
+
         <Route path="/faqs" element={<Faq />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

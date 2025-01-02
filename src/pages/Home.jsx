@@ -17,6 +17,8 @@ const Apply = React.lazy(() => import("@/components/Apply"));
 const Impact = React.lazy(() => import("@/components/Impact"));
 const Collab = React.lazy(() => import("@/components/Collab"));
 import HeroFormMobile from "../components/HeroFormMobile.jsx";
+import Blogs from "../components/BlogList.jsx";
+
 
 const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -53,12 +55,10 @@ const Home = () => {
       <div className="md:block lg:block hidden">
         <Hero id="home" />
       </div>
-
       {/* Mobile Hero */}
       <div className="md:hidden lg:hidden block">
         <HeroMobile id="home" />
       </div>
-
       {/* HeroModel Popup */}
       {showPopup && (
         <div className="fixed z-[100000000000000000000000000000] inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
@@ -77,7 +77,6 @@ const Home = () => {
           </div>
         </div>
       )}
-
       {/* Other Components */}
       <Apply />
       <Marqueee id="case" />
@@ -90,7 +89,6 @@ const Home = () => {
       <Collab />
       <Faq id="faq" />
       <Contact id="contact" />
-
       {/* Animation styles */}
       <style jsx>{`
         @keyframes fadeIn {

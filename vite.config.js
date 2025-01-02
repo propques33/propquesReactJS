@@ -12,6 +12,13 @@ export default defineConfig({
   server: {
     port: 8080, // Ensure the app runs on port 8080
     host: true, // Exposes the server to be accessible from external sources
+    proxy: {
+      "/api": {
+        target: "http://localhost:1337", // Strapi backend
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""), // Removes "/api" prefix
+      },
+    },
   },
   build: {
     minify: "esbuild", // Fast and efficient minification
@@ -27,6 +34,3 @@ export default defineConfig({
     },
   },
 });
-
-
-

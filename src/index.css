@@ -48,6 +48,16 @@
     font-style: normal;
     
   }
+ .super-bold {
+  font-weight: 900; /* Maximum font weight */
+  -webkit-text-stroke: 0.8px rgb(58, 58, 58); /* Black stroke around text */
+  color: white; /* Optional: Set text color for contrast */
+}
+.strong{
+  -webkit-text-stroke: 0.1px rgb(0, 0, 0); 
+
+}
+
 
   /* Specific font classes */
   .font {
