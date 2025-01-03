@@ -109,7 +109,8 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { MdArrowOutward } from "react-icons/md";
-
+import FeatureReports from "./FeatureReports";
+import InsightsSection from "./InsightsSection";
 
 const BlogList = () => {
   const [articles, setArticles] = useState([]);
@@ -154,50 +155,10 @@ const BlogList = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        {articles.length > 0 && (
-          <section className="mb-12">
-            <div
-              onClick={() => navigate(`/blogs/${articles[0].documentId}`)}
-              className="cursor-pointer flex flex-col lg:flex-row items-center bg-white shadow-md rounded-lg overflow-hidden transition-transform 
-              "
-            >
-              <img
-                src={`https://blogs-czqjb.ondigitalocean.app${articles[0]?.cover?.[0]?.url}`}
-                alt={articles[0]?.title || "Image"}
-                className="w-full lg:w-1/2 h-64 object-cover"
-              />
-              <div className="p-6 lg:w-1/2">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  {articles[0]?.title}
-                </h2>
-                <p className="text-gray-600 mb-2">
-                  Author:{" "}
-                  <span className="font-medium text-gray-800">
-                    {articles[0]?.author || "Unknown"}
-                  </span>
-                </p>
-                <p className="text-gray-600 mb-2">
-                  Published on{" "}
-                  {new Date(articles[0]?.publishedAt).toLocaleDateString(
-                    "en-US"
-                  )}
-                </p>
-                <p className="text-gray-600 mb-4">
-                  Reading Time:{" "}
-                  <span className="font-medium text-gray-800">
-                    {articles[0]?.reading_time || "N/A"} min
-                  </span>
-                </p>
-                <p className="text-gray-700 line-clamp-3">
-                  {articles[0]?.excerpt || "Read this article to learn more."}
-                </p>
-              </div>
-            </div>
-          </section>
-        )}
+        {/*    */}
 
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.slice(1).map((article) => (
+          {articles.slice(0).map((article) => (
             <div
               key={article.documentId}
               onClick={() => navigate(`/blogs/${article.documentId}`)}
@@ -229,7 +190,8 @@ const BlogList = () => {
                   </span>
                 </p>
                 <p className="text-sm text-gray-700 hover:text-blue-600  flex items-center gap-1">
-                  {article.excerpt || "Read More"} <MdArrowOutward className="" />
+                  {article.excerpt || "Read More"}{" "}
+                  <MdArrowOutward className="" />
                 </p>
               </div>
             </div>
@@ -264,6 +226,35 @@ const BlogList = () => {
           </button>
         </div>
       </main>
+      <div className="bg-blue-50 py-10 ">
+        <div className="container mx-auto text-center px-4">
+          {/* Heading */}
+          <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
+            Want to receive weekly highlights from the flexible office industry
+            in 5 minutes or less?
+          </h2>
+          <p className="text-blue-600 font-medium mb-6">
+            Subscribe For NewsLetter Weekly.
+          </p>
+
+          {/* Subscription Form */}
+          <form className="flex flex-col md:flex-row justify-center items-center gap-4">
+            <input
+              type="email"
+              placeholder="E-mail"
+              className="w-full md:w-1/3 px-4 py-3 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
+      </div>
+      <FeatureReports />
+      {/* <InsightsSection /> */}
     </div>
   );
 };

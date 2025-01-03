@@ -64,7 +64,7 @@ const BlogDetails = () => {
   const authorName = author || "Unknown";
 
   return (
-    <div className="min-h-screen  p-6 lg:p-12 flex flex-col items-center justify-center lg:flex-row gap-10">
+    <div className="min-h-screen  md:px-6 px-0 lg:p-12 flex flex-col items-center justify-center lg:flex-row gap-10">
       {/* Blog Content */}
       <div className="flex-1 max-w-4xl  bg-white  rounded-lg overflow-hidden">
         {/* Back Button */}
@@ -99,7 +99,7 @@ const BlogDetails = () => {
         {/* <h1 className=" bg-red-800">{console.log(article.cover[0].url)}</h1> */}
 
         {/* Content Section */}
-        <div className="p-6 lg:p-0 lg:mt-2">
+        <div className="md:p-6 p-4 lg:p-0 lg:mt-2">
           {/* Meta Information */}
           <div className="flex flex-wrap items-center text-gray-600 text-sm mb-6">
             <FaUser className="mr-2 text-blue-500" />
@@ -112,8 +112,8 @@ const BlogDetails = () => {
                 year: "numeric",
               })}
             </span>
-            <CiTimer className="ml-4 mr-2 text-blue-500 flex" /> Read By{" "}
-            <h2 className="text-end ml-2 "> {article?.reading_time}</h2>
+            <CiTimer className="ml-4 mr-2 text-blue-500 flex" /> Read In{" "}
+            <h2 className="text-end ml-2 ">{article?.reading_time} Mins</h2>
           </div>
 
           {/* Article Content */}
@@ -127,7 +127,7 @@ const BlogDetails = () => {
                       key={index}
                       className={`${
                         block.level === 1
-                          ? "text-4xl font-extrabold text-red-900"
+                          ? "text-4xl font-extrabold "
                           : block.level === 2
                           ? "text-2xl font-semibold text-gray-800"
                           : "text-xl font-medium text-gray-700"
@@ -143,7 +143,7 @@ const BlogDetails = () => {
                         child.type === "text" ? (
                           <span
                             key={i}
-                            className={`${child.bold ? "super-bold" : ""} ${
+                            className={`${child.bold ? "super-bold font-extrabold" : ""} ${
                               child.italic ? "italic" : ""
                             } ${child.underline ? "underline" : ""} ` }
                           >
