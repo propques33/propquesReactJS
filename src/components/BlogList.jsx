@@ -253,7 +253,7 @@ const BlogList = () => {
           </form>
         </div>
       </div>
-      <FeatureReports />
+      {/* <FeatureReports /> */}
       {/* <InsightsSection /> */}
     </div>
   );
