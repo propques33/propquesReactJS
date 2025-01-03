@@ -1,79 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-  /* Define custom fonts */
-  @font-face {
-    font-family: 'HostGrotesk';
-    src: url('./assets/fonts/HostGrotesk-Light.ttf') format('truetype');
-    font-weight: 300; /* Light weight */
-    font-style: normal;
-      font-display: swap;
+/* Define custom fonts */
+@font-face {
+  font-family: "HostGrotesk";
+  src: url("./assets/fonts/HostGrotesk-Light.ttf") format("truetype");
+  font-weight: 300; /* Light weight */
+  font-style: normal;
+  font-display: swap;
+}
 
-  }
+@font-face {
+  font-family: "HeroFont";
+  src: url("./assets/fonts/HostGrotesk-SemiBold.ttf") format("truetype");
+  font-weight: 100; /* SemiBold weight */
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'HeroFont';
-    src: url('./assets/fonts/HostGrotesk-SemiBold.ttf') format('truetype');
-    font-weight: 100; /* SemiBold weight */
-    font-style: normal;
-      font-display: swap;
+@font-face {
+  font-family: "Lobster";
+  src: url("./assets/fonts/Lobster-Regular.ttf") format("truetype");
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+  font-display: swap;
+}
 
-  }
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+  font-display: swap;
+}
 
-  @font-face {
-    font-family: 'Lobster';
-    src: url('./assets/fonts/Lobster-Regular.ttf') format('truetype');
-    font-weight: 400; /* Regular weight */
-    font-style: normal;
-      font-display: swap;
-
-  }
-
-  @font-face {
-    font-family: 'Roboto';
-    src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
-    font-weight: 400; /* Regular weight */
-    font-style: normal;
-      font-display: swap;
-
-  }
-
-
-
-  /* Global font settings */
-  * {
-    font-family: 'HostGrotesk', sans-serif; /* Default font */
-    font-weight: 700; 
-    font-style: normal;
-    
-  }
- .super-bold {
+/* Global font settings */
+* {
+  font-family: "HostGrotesk", sans-serif; /* Default font */
+  /* font-weight: 600; */
+  font-style: normal;
+}
+.super-bold {
   font-weight: 900; /* Maximum font weight */
-  -webkit-text-stroke: 0.8px rgb(58, 58, 58); /* Black stroke around text */
+  /* -webkit-text-stroke: 0.8px rgb(58, 58, 58);  */
   color: white; /* Optional: Set text color for contrast */
 }
-.strong{
-  -webkit-text-stroke: 0.1px rgb(0, 0, 0); 
-
+.strong {
+  -webkit-text-stroke: 0.1px rgb(0, 0, 0);
 }
 
+.poppins {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+/* Specific font classes */
+.font {
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  /* Specific font classes */
-  .font {
-    font-family: 'Lobster', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+.arial {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; /* Light weight */
+  font-style: normal;
+}
 
-  .arial {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300; /* Light weight */
-    font-style: normal;
-  }
-
-  .heroFont {
-    font-family: HeroFont, sans-serif;
-    font-weight: bolder; /* SemiBold weight */
-    font-style: normal;
-  }
+.heroFont {
+  font-family: HeroFont, sans-serif;
+  font-weight: bolder; /* SemiBold weight */
+  font-style: normal;
+}

@@ -15,7 +15,7 @@ const Contact = () => {
     });
   }, []);
   return (
-    <div className="bg-white px-2 sm:px-8">
+    <div className="bg-white px-2 font-extrabold sm:px-8">
       <div className="rounded-lg">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="">

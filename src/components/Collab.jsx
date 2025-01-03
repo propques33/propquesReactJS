@@ -8,7 +8,7 @@ import plogo7 from "../../public/plogo7.webp";
 
 const Collab = () => {
   return (
-    <div>
+    <div className="font-extraboldp">
       <section className="py-12 px-4 md:px-16">
         {/* Left Section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">

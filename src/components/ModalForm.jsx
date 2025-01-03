@@ -1167,7 +1167,7 @@ const ModalForm = () => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100000000000000000] "
+      className="fixed font-extrabold inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100000000000000000] "
       id="contact-btn"
     >
       <div className="relative bg-white  shadow-lg p-8 max-w-2xl w-full rounded-xl">

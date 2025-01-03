@@ -64,7 +64,7 @@ const BlogDetails = () => {
   const authorName = author || "Unknown";
 
   return (
-    <div className="min-h-screen  md:px-6 px-0 lg:p-12 flex flex-col items-center justify-center lg:flex-row gap-10">
+    <div className="min-h-screen poppins  md:px-6 px-0 lg:p-12 flex flex-col items-center justify-center lg:flex-row gap-10">
       {/* Blog Content */}
       <div className="flex-1 max-w-4xl  bg-white  rounded-lg overflow-hidden">
         {/* Back Button */}
@@ -91,7 +91,7 @@ const BlogDetails = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
 
           {/* Title */}
-          <h1 className="absolute bottom-6 left-6 text-3xl lg:text-5xl font-bold text-white shadow-lg drop-shadow-lg">
+          <h1 className="absolute md:bottom-6 md:left-6 left-4 bottom-4 text-3xl lg:text-5xl font-bold text-white shadow-lg drop-shadow-lg">
             {title}
           </h1>
         </div>
@@ -143,9 +143,9 @@ const BlogDetails = () => {
                         child.type === "text" ? (
                           <span
                             key={i}
-                            className={`${child.bold ? "super-bold font-extrabold" : ""} ${
+                            className={`${child.bold ? "font-extrabold" : ""} ${
                               child.italic ? "italic" : ""
-                            } ${child.underline ? "underline" : ""} ` }
+                            } ${child.underline ? "underline" : ""} `}
                           >
                             {child.text}
                           </span>

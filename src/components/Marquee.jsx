@@ -80,7 +80,7 @@ const ReviewCard = ({ img, name, username, body }) => {
 
 export default function Marqueee() {
   return (
-    <div className="md:px-16 px-4 py-">
+    <div className="md:px-16 px-4 py- font-extrabold">
       <div className="px-4 sm:px-8 md:px-0 pt-8">
         {/* Main Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 md:pt-0 py-4 text-center md:text-left">

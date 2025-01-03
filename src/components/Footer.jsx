@@ -11,7 +11,7 @@ import logo from "../../public/footerlogo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-blue-500 to-blue-600  text-white py-12">
+    <footer className="bg-gradient-to-b  from-blue-500 to-blue-600  text-white py-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Section: Newsletter and Description */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
@@ -99,12 +99,12 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Our Products</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="" className="hover:underline">
+                <a href="https://findurspace.tech/" className="hover:underline">
                   Findurspace
                 </a>
               </li>
               <li>
-                <a href="" className="hover:underline">
+                <a href="https://propclean.space/" className="hover:underline">
                   Propclean
                 </a>
               </li>

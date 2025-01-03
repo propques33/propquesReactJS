@@ -71,7 +71,7 @@ const services = [
 
 const Offer = () => {
   return (
-    <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-16 py-8 bg-[#3b82f6] md:rounded-t-[100px] mt-20">
+    <div className="mx-auto font-extrabold px-4 sm:px-6 md:px-8 lg:px-16 py-8 bg-[#3b82f6] md:rounded-t-[100px] mt-20">
       {/* Main Heading */}
       <div className="flex flex-col items-center space-y-8">
         {/* Text Content */}

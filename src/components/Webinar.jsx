@@ -19,7 +19,7 @@ const WebinarPage = () => {
   }, []);
 
   return (
-    <div className="font-sans mt-10 ">
+    <div className="font-sans mt-10 font-extrabold">
       {/* Hero Section */}
       <section className="bg-gray-50 py-16 px-4  md:px-16 ">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">

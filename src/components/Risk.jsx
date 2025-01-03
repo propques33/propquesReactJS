@@ -4,7 +4,7 @@ import blogbanner from "../../public/blog-banner.webp";
 
 const Risk = () => {
   return (
-    <div className="flex flex-col items-center py-8">
+    <div className="flex font-extrabold flex-col items-center py-8">
       <div className="flex flex-col md:flex-row gap-8 md:px-16 px-4 py-4">
         {/* Left Section - Image */}
         <div className="flex-1  md:mb-0">

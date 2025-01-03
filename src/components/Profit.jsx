@@ -7,7 +7,7 @@ import CounterItalic from "./CounterItalic.jsx";
 const Profit = () => {
   return (
     <div
-      className="w-full flex flex-col items-center justify-center px-6 md:px-16 "
+      className="w-full font-extrabold flex flex-col items-center justify-center px-6 md:px-16 "
       // style={{
       //   backgroundImage: `url(${bg})`,
       //   backgroundSize: "cover",

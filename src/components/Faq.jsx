@@ -44,7 +44,7 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 md:py-16 md:px-8 flex flex-col md:flex-row gap-8 w-full">
+    <div className="max-w-7xl font-extrabold mx-auto py-8 px-4 md:py-16 md:px-8 flex flex-col md:flex-row gap-8 w-full">
       {/* Left Section */}
       <div className="bg-blue-500 rounded-xl w-full md:w-1/2 flex items-center justify-center p-6 md:p-8">
         <h1 className="text-white text-3xl sm:text-5xl md:text-7xl font-bold text-center leading-tight">

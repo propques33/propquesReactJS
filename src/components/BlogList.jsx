@@ -135,6 +135,19 @@ const BlogList = () => {
 
     fetchData();
   }, [BASE_URL, currentPage]);
+  useEffect(() => {
+    // Ensure scrolling to the top of the document when the component is mounted
+    window.scrollTo({
+      top: 0,
+      behavior: "auto", // You can use "auto" for instant scroll
+    });
+
+    // As a fallback, scroll the root element
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -143,12 +156,12 @@ const BlogList = () => {
   };
 
   return (
-    <div className="min-h-screen  mt-16">
+    <div className="min-h-screen poppins  mt-16">
       <header className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16 px-4 text-center">
-        <h1 className="text-6xl font-extrabold tracking-tight">
+        <h1 className="md:text-6xl text-4xl font-extrabold tracking-tight">
           Explore Topics That Inspire
         </h1>
-        <p className="mt-4 text-xl max-w-2xl mx-auto">
+        <p className="mt-4 md:text-xl max-w-2xl mx-auto">
           Discover the latest trends, expert insights, and success stories to
           guide your coworking journey.
         </p>

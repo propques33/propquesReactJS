@@ -20,7 +20,7 @@ const OurServicesPage = () => {
   }, []);
 
   return (
-    <div className=" font-sans md:mt-0 mt-20">
+    <div className=" font-sans font-extrabold md:mt-0 mt-20">
       {/* Hero Section */}
       <section className=" text-wite px-6 md:pt-20">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
