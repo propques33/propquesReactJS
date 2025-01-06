@@ -27,9 +27,9 @@ const Hero = React.memo(() => {
   );
 
   return (
-    <div className="w-full fle relative bg-white py-16 px-10 flex   md:px-8 bg-cover overflow-hidden bg-center heroFont">
+    <div className="w-full  fle relative bg-white py-16 px-10 flex   md:px-8 bg-cover overflow-hidden bg-center heroFont">
       {/* Memoized Content */}
-      <div className="w-[65%] ">
+      <div className="w-[65%]  ">
         <div className="py-4 px-6 rounded-xl z-20 flex flex-col items-cente justify-cente">
           <h1 className=" font-semibold lg:text-[4rem] md:text-[3rem] text-gray-950 text-  leading-tight">
             {content.title}

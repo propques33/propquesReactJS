@@ -4,7 +4,7 @@ const Footer = React.lazy(() => import("@/components/Footer.jsx"));
 const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
 import CookieManager from "./utils/cookieManager";
 import CookieConsent from "./components/CookieConsent";
-
+import Whatsapp from "../public/Whatsapp.svg";
 import "./App.css";
 import { ModalProvider } from "./ModalContext.jsx"; // Modal Context Provider
 import ModalForm from "./components/ModalForm.jsx"; // The form modal component
@@ -12,25 +12,25 @@ import { Helmet } from "react-helmet"; // Import Helmet for SEO
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import loading from "../public/loading.gif";
 function App() {
-   useEffect(() => {
-     // Set user data
-     CookieManager.setCookie("username", "John Doe");
-     CookieManager.setCookie("location", "Bangalore");
-     CookieManager.setCookie("gender", "Male");
-     CookieManager.setCookie("lastSearch", "Coworking spaces in Bangalore");
-     CookieManager.setCookie(
-       "favorites",
-       JSON.stringify(["Space A", "Space B"])
-     );
-     CookieManager.setCookie("preferences", JSON.stringify(["Tech", "Gaming"]));
+  useEffect(() => {
+    // Set user data
+    CookieManager.setCookie("username", "John Doe");
+    CookieManager.setCookie("location", "Bangalore");
+    CookieManager.setCookie("gender", "Male");
+    CookieManager.setCookie("lastSearch", "Coworking spaces in Bangalore");
+    CookieManager.setCookie(
+      "favorites",
+      JSON.stringify(["Space A", "Space B"])
+    );
+    CookieManager.setCookie("preferences", JSON.stringify(["Tech", "Gaming"]));
 
-     // Retrieve user data
-     const username = CookieManager.getCookie("username");
-     const location = CookieManager.getCookie("location");
-     const gender = CookieManager.getCookie("gender");
-     const lastSearch = CookieManager.getCookie("lastSearch");
-     const favorites = JSON.parse(CookieManager.getCookie("favorites"));
-     const preferences = JSON.parse(CookieManager.getCookie("preferences"));
+    // Retrieve user data
+    const username = CookieManager.getCookie("username");
+    const location = CookieManager.getCookie("location");
+    const gender = CookieManager.getCookie("gender");
+    const lastSearch = CookieManager.getCookie("lastSearch");
+    const favorites = JSON.parse(CookieManager.getCookie("favorites"));
+    const preferences = JSON.parse(CookieManager.getCookie("preferences"));
 
     //  console.log({
     //    username,
@@ -40,7 +40,7 @@ function App() {
     //    favorites,
     //    preferences,
     //  });
-   }, []);
+  }, []);
   return (
     <Suspense
       fallback={
@@ -50,7 +50,7 @@ function App() {
       }
     >
       <GoogleReCaptchaProvider reCaptchaKey="6LfMEFoqAAAAAPbBd0mRptXaI8AfZN30AI9CqY1N">
-      <CookieConsent />
+        <CookieConsent />
         <ModalProvider>
           <ModalForm /> {/* Modal form that is globally accessible */}
           {/* SEO Tags */}
@@ -99,6 +99,32 @@ function App() {
           </Helmet>
           <div className=" relative">
             <Navbar />
+            <div className="z-[] fixed z-50">
+              <a
+                href="https://wa.me/9044895895"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="md:block lg:block hidden"
+              >
+                <img
+                  src={Whatsapp}
+                  alt="Click to Download"
+                  className="fixed z-40 h-16 bottom-20 right-5 cursor-pointer"
+                />
+              </a>
+              <a
+                href="https://wa.me/9044895895"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="md:hidden lg:hidden block"
+              >
+                <img
+                  src={Whatsapp}
+                  alt="Click to Download"
+                  className="fixed  h-16 bottom-20 right-2 cursor-pointer"
+                />
+              </a>
+            </div>
             <Routing />
             <Footer />
           </div>

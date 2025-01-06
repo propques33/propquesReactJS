@@ -56,7 +56,7 @@ const Home = () => {
         <Hero id="home" />
       </div>
       {/* Mobile Hero */}
-      <div className="md:hidden lg:hidden block">
+      <div className="md:hidden lg:hidden block h-[80vh]">
         <HeroMobile id="home" />
       </div>
       {/* HeroModel Popup */}
