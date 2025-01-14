@@ -14,7 +14,7 @@ const Cubispace = () => {
       top: 0,
       behavior: "smooth",
     });
-}, []);
+  }, []);
   return (
     <div className="overflow-hidden md:px-16 px-4 ">
       {/* Overview Section */}
@@ -31,9 +31,11 @@ const Cubispace = () => {
                 commercial space into a well-facilitated hybrid office to tap
                 the nearby home office needs.
               </p>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
-                Download Case Study
-              </button>
+              <a href="https://www.cubispace.com/">
+                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
+                  Visit Website
+                </button>
+              </a>
             </div>
 
             <div className="md:w-1/2 flex items-center justify-center relative">

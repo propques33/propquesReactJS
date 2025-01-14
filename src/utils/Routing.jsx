@@ -24,8 +24,13 @@ const OurService = React.lazy(() => import("../components/OurService.jsx"));
 const Faq = React.lazy(() => import("../components/Faq.jsx"));
 const WorkViaa = React.lazy(() => import("../components/WorkViaa.jsx"));
 const WorkVistar = React.lazy(() => import("../components/WorkVistar.jsx"));
+const Workjar = React.lazy(() => import("../components/Workjar.jsx"));
 const Cubispace = React.lazy(() => import("../components/Cubispace.jsx"));
 const SummitSpace = React.lazy(() => import("../components/SummitSpace.jsx"));
+const Sapnasangeeta = React.lazy(() => import("../components/Sapnasangeeta.jsx"));
+const WorqSpot = React.lazy(() => import("../components/WorqSpot.jsx"));
+const Workdesq = React.lazy(() => import("../components/Workdesq.jsx"));
+const Karyasthal = React.lazy(() => import("../components/Karyasthal.jsx"));
 const NotFound = React.lazy(() => import("../components/NotFound"));
 const Author = React.lazy(() => import("../components/Author.jsx"));
 const BlogDetailPage = React.lazy(() =>
@@ -55,7 +60,7 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
-        
+
         <Route path="/blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
 
@@ -73,8 +78,13 @@ const Routing = () => {
         />
         <Route path="/our-service" element={<OurService />} />
         <Route path="/workviaa" element={<WorkViaa />} />
+        <Route path="/worqspot" element={<WorqSpot />} />
         <Route path="/cubispace" element={<Cubispace />} />
         <Route path="/work-vistar" element={<WorkVistar />} />
+        <Route path="/workjar" element={<Workjar />} />
+        <Route path="/workdesq" element={<Workdesq />} />
+        <Route path="/karyasthal" element={<Karyasthal />} />
+        <Route path="//sapna-sangeeta-offices" element={<Sapnasangeeta />} />
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -6,6 +6,8 @@ import { IoClose } from "react-icons/io5";
 // const Hero = React.lazy(() => import("@/components/Hero.jsx"));
 
 const Marqueee = React.lazy(() => import("@/components/Marquee.jsx"));
+const FindUrSpaceUI = React.lazy(() => import("@/components/FindUrSpaceUI.jsx"));
+const PropClean = React.lazy(() => import("@/components/PropClean.jsx"));
 const Features = React.lazy(() => import("@/components/Features"));
 const ImagePopup = React.lazy(() => import("@/components/ImagePopup"));
 const Offer2 = React.lazy(() => import("@/components/Offer2"));
@@ -56,7 +58,7 @@ const Home = () => {
         <Hero id="home" />
       </div>
       {/* Mobile Hero */}
-      <div className="md:hidden lg:hidden block h-[80vh]">
+      <div className="md:hidden lg:hidden block h-[70vh]">
         <HeroMobile id="home" />
       </div>
       {/* HeroModel Popup */}
@@ -87,21 +89,12 @@ const Home = () => {
       <Profit id="" />
       <Impact />
       <Collab />
+      {/* <FindUrSpaceUI />
+      <PropClean /> */}
       <Faq id="faq" />
       <Contact id="contact" />
       {/* Animation styles */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-      `}</style>
+    
     </div>
   );
 };

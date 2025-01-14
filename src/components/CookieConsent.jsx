@@ -39,31 +39,44 @@ const CookieConsent = () => {
   return (
     <>
       {blurBackground && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[1000000000000] transition-opacity duration-300"></div>
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[1000] transition-opacity duration-300"></div>
       )}
       {showBanner && (
         <div
-          className={`cookie-banner z-[10000000000000000000000000000000000000000000] fixed bottom-0 md:w-96 w-full bg-gray-800 text-white p-4 flex flex-col items-center justify-between shadow-md transition-transform duration-300 ${
-            animateBanner ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+          className={`cookie-banner z-[100000000000000000000000000000000000000000] fixed  bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/   w-full bg-white text-black p-6 flex flex-col items-center justify-between shadow-xl rounded-lg transition-transform duration-300 ${
+            animateBanner
+              ? "translate-y-0 opacity-100"
+              : "translate-y-full opacity-0"
           }`}
         >
-          <div className="flex flex-col items-center gap-4 z-[10000000000000000000000000000000000000000000]">
-            <p className="text-sm md:text-base text-center">
-              We use cookies to enhance your experience. By continuing, you agree
-              to our use of cookies.
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex justify-between items-start w-full">
+              <h2 className="text-lg font-bold">Cookies</h2>
+              {/* <button
+                onClick={() => setShowBanner(false)}
+                className="text-gray-500 text-2xl hover:text-gray-800"
+              >
+                &times;
+              </button> */}
+            </div>
+            <p className="text-sm text-center">
+              We use cookies and similar technologies to help personalise
+              content, tailor and measure ads, and provide a better experience.
+              By clicking accept, you agree to this, as outlined in our Cookies
+              Policy.
             </p>
             <div className="flex gap-2">
               <button
                 onClick={handleAccept}
-                className=" hover:bg-blue-400 text-white px-4 py-2 rounded-md bg-blue-500 transition duration-300"
+                className="hover:bg-blue-700 bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300"
               >
                 Accept
               </button>
               <button
                 onClick={handleReject}
-                className="  text-white px-4 py-2  transition duration-300"
+                className="hover:bg-gray-300 bg-gray-200 text-black px-4 py-2 rounded-md transition duration-300"
               >
-                Reject All
+                Reject
               </button>
             </div>
           </div>

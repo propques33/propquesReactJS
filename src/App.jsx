@@ -101,7 +101,7 @@ function App() {
             <Navbar />
             <div className="z-[] fixed z-50">
               <a
-                href="https://wa.me/9044895895"
+                href="https://qr.me-qr.com/u8FMG2Mz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="md:block lg:block hidden"
@@ -113,7 +113,7 @@ function App() {
                 />
               </a>
               <a
-                href="https://wa.me/9044895895"
+                href="https://qr.me-qr.com/u8FMG2Mz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="md:hidden lg:hidden block"

@@ -1,12 +1,13 @@
 import { cn } from "../lib/utils";
 import Marquee from "../components/ui/marquee";
-import workvistarlogo from '/workvistarlogo.png'
-import siolimAsset from '/siolimAsset.png'
-import workjarAsset from '/workjarAsset.png'
-import workviaalogo from '/workviaalogo.png'
-import cubilogo from '/cubilogo.png'
-import summit from '/summit.png'
+import workvistarlogo from "/workvistarlogo.png";
+import siolimAsset from "/siolimAsset.png";
+import workjarAsset from "/workjarAsset.png";
+import workviaalogo from "/workviaalogo.png";
+import cubilogo from "/cubilogo.png";
+import summit from "/summit.png";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const reviews = [
   {
@@ -14,59 +15,67 @@ const reviews = [
     username: "@jack",
     body: "An underperforming standalone building was refurbished into an attractive & promising managed office space with a bucketful of recreational facilities—the result was increased revenue with over 90% office occupancy.",
     img: workjarAsset,
+    route: "/",
   },
   {
     name: "Jill",
     username: "@jill",
     body: "Innovative & research-backed facelift of a strategically located commercial space into a well-facilitated hybrid office to tap the nearby home office needs.",
     img: cubilogo,
+    route: "/cubispace",
   },
   {
     name: "John",
     username: "@john",
     body: "Over 1.6X increase in the rental rate of the corporate property.  3X increase in the occupancy rate in just 6 months. Complete marketing & strategic makeover to increase the visibility & revenue generation.",
     img: summit,
+    route: "/summit-space",
   },
   {
     name: "Jane",
     username: "@jane",
     body: "100% occupancy in less than 3 months. Increased rental income by 42 rs. Assistance in revenue increase by 3X. Achieved great results with optimum occupancy with multiple clients,.",
     img: workviaalogo,
+    route: "/workviaa",
   },
- 
   {
     name: "James",
     username: "@james",
     body: "An unoccupied villa refurbished into an attractive and promising coworking café. Rising to optimum occupancy with a bucketful of office facilities along with delectable food.",
     img: siolimAsset,
+    route: "/",
   },
   {
     name: "James",
     username: "@james",
     body: "Growth in the rental income of workspaces by almost 75%. Increased 60-70% occupancy rate throughout the year and continuous cash flow. Complete strategic makeover to increase leads, revenue generation, and proper visibility.",
     img: workvistarlogo,
+    route: "/work-vistar",
   },
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
-// const firstRow = reviews.slice(0, reviews.length / 2);
-// const secondRow = reviews.slice(reviews.length / 2);
 
-const ReviewCard = ({ img, name, username, body }) => {
+const ReviewCard = ({ img, name, username, body, route }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(route);
+  };
+
   return (
     <figure
+      onClick={handleClick}
       className={cn(
         "relative w-96 cursor-pointer overflow-hidden rounded-xl border p-4",
-        // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        // dark styles
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
       <div className="flex flex-row items-center gap-2">
         <img
-          className=" h-16  md:h-16 object-cover"
+          className="h-16 md:h-16 object-cover"
           alt={name}
           src={img}
           loading="lazy"
@@ -82,7 +91,6 @@ export default function Marqueee() {
   return (
     <div className="md:px-16 px-4 py- font-extrabold">
       <div className="px-4 sm:px-8 md:px-0 pt-8">
-        {/* Main Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 md:pt-0 py-4 text-center md:text-left">
           Spaces we have transformed
           <span className="text-blue-500 text-3xl sm:text-4xl rounded-full">
@@ -90,14 +98,13 @@ export default function Marqueee() {
           </span>
         </h1>
 
-        {/* Subtitle with Quotes */}
         <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center md:text-left text-zinc-700">
           <RiDoubleQuotesL
             className="text-blue-500 inline-block mb-2 sm:mb-4"
             size={20}
           />
           Transforming underutilized spaces into thriving,{" "}
-          <span className="font-semibold text-zinc-900  font">
+          <span className="font-semibold text-zinc-900 font">
             revenue-generating commercial hubs
           </span>
           <RiDoubleQuotesR
@@ -107,7 +114,7 @@ export default function Marqueee() {
         </h1>
       </div>
 
-      <div className="relative flex w-full md:mt-4 mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background ">
+      <div className="relative flex w-full md:mt-4 mt-4 flex-col items-center justify-center overflow-hidden rounded-lg bordr bg-background">
         <Marquee pauseOnHover className="[--duration:20s]">
           {firstRow.map((review, key) => (
             <ReviewCard key={key} {...review} />
@@ -124,3 +131,4 @@ export default function Marqueee() {
     </div>
   );
 }
+
