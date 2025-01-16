@@ -1110,10 +1110,10 @@ const ModalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
-      alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
-      return;
-    }
+    // if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
+    //   alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
+    //   return;
+    // }
 
     setIsLoading(true);
 
@@ -1211,7 +1211,7 @@ const ModalForm = () => {
           </div>
 
           {/* City */}
-          <div className="mb-4 gap-2 flex">
+          {/* <div className="mb-4 gap-2 flex">
             <select
               name="city"
               value={formData.city}
@@ -1243,7 +1243,7 @@ const ModalForm = () => {
                   </option>
                 ))}
             </select>
-          </div>
+          </div> */}
 
           {/* Micro Market */}
           {/* <div className="mb-4">
@@ -1251,7 +1251,7 @@ const ModalForm = () => {
           </div> */}
 
           {/* Rental Expectation */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <input
               type="number"
               name="rentalExpectation"
@@ -1261,10 +1261,10 @@ const ModalForm = () => {
               placeholder="Rental Expectation"
               required
             />
-          </div>
+          </div> */}
 
           {/* Areas */}
-          <div className="mb-4 flex gap-2">
+          {/* <div className="mb-4 flex gap-2">
             <input
               type="number"
               name="areaSuper"
@@ -1283,7 +1283,7 @@ const ModalForm = () => {
               placeholder="Carpet Area (sq. ft.)"
               required
             />
-          </div>
+          </div> */}
 
           {/* Coworking Option */}
           <div className="mb-4">

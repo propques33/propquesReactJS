@@ -10,13 +10,13 @@ import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const reviews = [
-  {
-    name: "Jack",
-    username: "@jack",
-    body: "An underperforming standalone building was refurbished into an attractive & promising managed office space with a bucketful of recreational facilities—the result was increased revenue with over 90% office occupancy.",
-    img: workjarAsset,
-    route: "/",
-  },
+  // {
+  //   name: "Jack",
+  //   username: "@jack",
+  //   body: "An underperforming standalone building was refurbished into an attractive & promising managed office space with a bucketful of recreational facilities—the result was increased revenue with over 90% office occupancy.",
+  //   img: workjarAsset,
+  //   route: "/",
+  // },
   {
     name: "Jill",
     username: "@jill",
@@ -25,33 +25,61 @@ const reviews = [
     route: "/cubispace",
   },
   {
+    name: "Jill",
+    username: "@jill",
+    body: "Reached 60% occupancy within the first quarter and 90% by the end of the first year. Monthly rental income increased by 80%, thanks to the coworking model’s premium pricing.",
+    img: "https://www.karyasthal.com/wp-content/uploads/2022/06/logo-2.png.webp",
+    route: "/karyasthal",
+  },
+  {
+    name: "Jill",
+    username: "@jill",
+    body: "Achieved 60% occupancy within three months of launch, with continued growth. Rental income grew from ₹50/sq. ft. to ₹80/sq. ft. under the coworking model.",
+    img: "https://worqspot.com/wp-content/uploads/2023/06/LogoAsset-1.png",
+    route: "/worqspot",
+  },
+  {
+    name: "Jill",
+    username: "@jill",
+    body: " A steady 90-100% occupancy rate has been maintained since launch. The coworking space became a community hub, elevating the Tolani Group's reputation.",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm-ZcsX9pV17OshYBnyieg1C_0-ADQ9qzO2g&s",
+    route: "/sapna-sangeeta-offices",
+  },
+  {
+    name: "Jill",
+    username: "@jill",
+    body: " Achieved a steady 12% occupancy rate within the first year, building a loyal base of professionals and startups. Generated ₹120 per sq. ft. for the owners, significantly outperforming expectations for the area.",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMMeMERTE_nqSagKZl60UwHcWw--o-Qj2UEQ&s",
+    route: "/workdesq",
+  },
+  {
     name: "John",
     username: "@john",
     body: "Over 1.6X increase in the rental rate of the corporate property.  3X increase in the occupancy rate in just 6 months. Complete marketing & strategic makeover to increase the visibility & revenue generation.",
     img: summit,
     route: "/summit-space",
   },
-  {
-    name: "Jane",
-    username: "@jane",
-    body: "100% occupancy in less than 3 months. Increased rental income by 42 rs. Assistance in revenue increase by 3X. Achieved great results with optimum occupancy with multiple clients,.",
-    img: workviaalogo,
-    route: "/workviaa",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "An unoccupied villa refurbished into an attractive and promising coworking café. Rising to optimum occupancy with a bucketful of office facilities along with delectable food.",
-    img: siolimAsset,
-    route: "/",
-  },
-  {
-    name: "James",
-    username: "@james",
-    body: "Growth in the rental income of workspaces by almost 75%. Increased 60-70% occupancy rate throughout the year and continuous cash flow. Complete strategic makeover to increase leads, revenue generation, and proper visibility.",
-    img: workvistarlogo,
-    route: "/work-vistar",
-  },
+  // {
+  //   name: "Jane",
+  //   username: "@jane",
+  //   body: "100% occupancy in less than 3 months. Increased rental income by 42 rs. Assistance in revenue increase by 3X. Achieved great results with optimum occupancy with multiple clients,.",
+  //   img: workviaalogo,
+  //   route: "/workviaa",
+  // },
+  // {
+  //   name: "James",
+  //   username: "@james",
+  //   body: "An unoccupied villa refurbished into an attractive and promising coworking café. Rising to optimum occupancy with a bucketful of office facilities along with delectable food.",
+  //   img: siolimAsset,
+  //   route: "/",
+  // },
+  // {
+  //   name: "James",
+  //   username: "@james",
+  //   body: "Growth in the rental income of workspaces by almost 75%. Increased 60-70% occupancy rate throughout the year and continuous cash flow. Complete strategic makeover to increase leads, revenue generation, and proper visibility.",
+  //   img: workvistarlogo,
+  //   route: "/work-vistar",
+  // },
 ];
 
 const firstRow = reviews.slice(0, reviews.length / 2);

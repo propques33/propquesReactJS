@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed font-extrabold p-4 z-[80] w-full -top-1  py-5 transition-colors ${
-        isScrolled ? "bg-white " : "bg-white "
+        isScrolled ? "bg-white shadow-sm " : "bg-white "
       }`}
     >
       <div className="container mx-auto flex justify-between items-center">
@@ -70,10 +70,19 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+            <li>
+              <Link
+                to="/works"
+                className="text-lg hover:text-blue-400"
+                onClick={toggleMenu}
+              >
+                Works
+              </Link>
+            </li>
 
             <li>
               <Link
-                to="/"
+                to="/blogs"
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               >

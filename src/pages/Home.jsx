@@ -89,8 +89,8 @@ const Home = () => {
       <Profit id="" />
       <Impact />
       <Collab />
-      {/* <FindUrSpaceUI />
-      <PropClean /> */}
+      <FindUrSpaceUI />
+      <PropClean />
       <Faq id="faq" />
       <Contact id="contact" />
       {/* Animation styles */}

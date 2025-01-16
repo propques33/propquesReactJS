@@ -38,8 +38,9 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
             <img src={logo} alt="Logo" className="h-28 mb-4" />
             <p className="text-sm  text-center md:text-left">
-              Design amazing digital experiences that create more happy in the
-              world.
+              Helping property owners, entrepreneurs, and real estate
+              professionals transform and matchmake spaces into profitable
+              coworking business.
             </p>
           </div>
           <div>

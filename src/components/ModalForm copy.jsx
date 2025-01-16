@@ -38,10 +38,10 @@ const ModalForm = () => {
     e.preventDefault();
 
     // Validate Super Area and Carpet Area
-    if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
-      alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
-      return;
-    }
+    // if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
+    //   alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
+    //   return;
+    // }
 
     if (!executeRecaptcha) {
       // console.log("Execute recaptcha not yet available");

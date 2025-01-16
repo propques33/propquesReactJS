@@ -1111,10 +1111,10 @@ const ModalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
-      alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
-      return;
-    }
+    // if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
+    //   alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
+    //   return;
+    // }
     if (!isCheckboxChecked) {
       alert("Please agree to the privacy policy to proceed.");
       return;
@@ -1161,8 +1161,8 @@ const ModalForm = () => {
 
   return (
     <div className="">
-      <div className="relative bg-white  md:shadow-xl border-dashed border-blue-500 md:border-2 lg:border-2 md:px-8 lg:px-8 md:py-4 lg:py-4 py- text-sm w-full rounded-xl">
-        <p className="text-base text-center text-blue-500">
+      <div className="relative bg-white   md:shadow-xl border-dashed border-blue-500 md:border-2 lg:border-2 md:px-8 lg:px-8 md:py-4 lg:py-4 py- text-sm w-full rounded-xl">
+        <p className="text-base text-center text-blue-500 mb-2">
           We will reach out to you if we are a mutual fit
         </p>
 
@@ -1207,7 +1207,7 @@ const ModalForm = () => {
           </div>
 
           {/* City */}
-          <div className="mb-4 gap-2 flex">
+          {/* <div className="mb-4 gap-2 flex">
             <select
               name="city"
               value={formData.city}
@@ -1239,7 +1239,7 @@ const ModalForm = () => {
                   </option>
                 ))}
             </select>
-          </div>
+          </div> */}
 
           {/* Micro Market */}
           {/* <div className="mb-4">
@@ -1247,7 +1247,7 @@ const ModalForm = () => {
           </div> */}
 
           {/* Rental Expectation */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <input
               type="text"
               onInput={(e) => {
@@ -1260,10 +1260,10 @@ const ModalForm = () => {
               placeholder="Rental Expectation"
               required
             />
-          </div>
+          </div> */}
 
           {/* Areas */}
-          <div className="mb-4 flex gap-2">
+          {/* <div className="mb-4 flex gap-2">
             <input
               type="text"
               onInput={(e) => {
@@ -1288,7 +1288,7 @@ const ModalForm = () => {
               placeholder="Carpet Area (sq. ft.)"
               required
             />
-          </div>
+          </div> */}
 
           {/* Coworking Option */}
           <div className="mb-4">

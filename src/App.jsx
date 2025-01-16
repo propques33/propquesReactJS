@@ -101,7 +101,7 @@ function App() {
             <Navbar />
             <div className="z-[] fixed z-50">
               <a
-                href="https://qr.me-qr.com/u8FMG2Mz"
+                href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="md:block lg:block hidden"
@@ -113,7 +113,7 @@ function App() {
                 />
               </a>
               <a
-                href="https://qr.me-qr.com/u8FMG2Mz"
+                href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="md:hidden lg:hidden block"

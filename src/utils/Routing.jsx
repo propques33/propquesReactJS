@@ -11,6 +11,8 @@ const BlogDetails = React.lazy(() => import("../components/BlogDetails.jsx"));
 
 const Button = React.lazy(() => import("../components/Button.jsx"));
 const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
+const SuccessPageMatch = React.lazy(() => import("../components/SuccessPageMatch.jsx"));
+const SuccessPageStart = React.lazy(() => import("../components/SuccessPageStart.jsx"));
 const PrivacyPolicy = React.lazy(() =>
   import("../components/PrivacyPolicy.jsx")
 );
@@ -18,6 +20,8 @@ const TermsAndConditions = React.lazy(() =>
   import("../components/TermsAndConditions.jsx")
 );
 const Works = React.lazy(() => import("../components/Works.jsx"));
+const StartYourOwnCoworking = React.lazy(() => import("../components/StartYourOwnCoworking.jsx"));
+const MatchMaking = React.lazy(() => import("../components/MatchMaking.jsx"));
 const Webinar = React.lazy(() => import("../components/Webinar.jsx"));
 const Partners = React.lazy(() => import("../components/Partners.jsx"));
 const OurService = React.lazy(() => import("../components/OurService.jsx"));
@@ -60,6 +64,14 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
+        <Route
+          path="/matchmaking-for-coworking-operators-thankyou"
+          element={<SuccessPageMatch />}
+        />
+        <Route
+          path="/start-your-own-coworking-space-thankyou"
+          element={<SuccessPageStart />}
+        />
 
         <Route path="/blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />
@@ -78,6 +90,14 @@ const Routing = () => {
         />
         <Route path="/our-service" element={<OurService />} />
         <Route path="/workviaa" element={<WorkViaa />} />
+        <Route
+          path="/matchmaking-for-coworking-operators"
+          element={<MatchMaking />}
+        />
+        <Route
+          path="/start-your-own-coworking-space"
+          element={<StartYourOwnCoworking />}
+        />
         <Route path="/worqspot" element={<WorqSpot />} />
         <Route path="/cubispace" element={<Cubispace />} />
         <Route path="/work-vistar" element={<WorkVistar />} />
