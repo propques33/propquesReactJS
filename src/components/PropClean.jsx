@@ -39,6 +39,9 @@ const PropCleanHowItWorks = () => {
             <span className="text-gray-700">Stock Management</span>
           </li> */}
         </ul>
+        <button className="mt-8 bg-blue-500 w-full shadow-xl sm:w-auto text-center hover:bg-blue-600 transition-all ease-in-out px-6 py-2 sm:px-6 sm:py-3 rounded-xl text-white  sm:text-md md:text-[15px] flex items-center justify-center gap-2">
+          <a href="https://propclean.space/">Visit Website</a>
+        </button>
       </div>
 
       {/* Image Section */}
