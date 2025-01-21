@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SYOC = () => {
+  useEffect(() => {
+    // Ensure scrolling to the top of the document when the component is mounted
+    window.scrollTo({
+      top: 0,
+      behavior: "auto", // You can use "auto" for instant scroll
+    });
+
+    // As a fallback, scroll the root element
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   const [formData, setFormData] = useState({
     ownershipType: "",
     flexDevelopmentStage: "",

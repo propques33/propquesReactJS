@@ -4,10 +4,10 @@ import fur from "../../public/fur.jpg";
 const fINDURSPACE = () => {
   return (
     <>
-      <p className="w-full text-center text-4xl font-extrabold">
-        Propques <span className="text-blue-600">Ecosystem</span>
+      <p className="w-full text-center text-4xl font-extrabold ">
+        Propques <span className="text-blue-600 mb-4">Ecosystem</span>
       </p>
-      <div className="bg-white p-8 rounded-lg shadow-md flex flex-col md:flex-row items-center max-w-5xl mx-auto mb-10">
+      <div className="bg-white p-8 shadow-md rounded-2xl  border-[1.5px] border-zinc-200 flex flex-col md:flex-row items-center max-w-5xl mx-auto mb-10">
         {/* Text Section */}
 
         <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
@@ -75,7 +75,7 @@ const fINDURSPACE = () => {
         </div>
 
         {/* Image Section */}
-        <div className="md:w-1/2 relative">
+        <div className="md:w-1/2 relative ">
           <div className="rounded-lg p- shadow-g">
             <div className="absolute top-4 right-4 bg-blue-600 text-white text-sm px-3 py-1 rounded-full">
               Launched in November 2024

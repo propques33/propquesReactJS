@@ -1114,10 +1114,11 @@ const ModalForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (formData.areaCarpet < 3500 || formData.areaSuper < 3500) {
-    //   alert("Both Carpet Area and Super Area must be at least 3500 sq. ft.");
-    //   return;
-    // }
+    if (formData.areaCarpet < 3500) {
+      alert(" Carpet Area must be at least 3500 sq. ft.");
+      return;
+    }
+
     if (!isCheckboxChecked) {
       alert("Please agree to the privacy policy to proceed.");
       return;
@@ -1283,8 +1284,8 @@ const ModalForm = () => {
           </div> */}
 
           {/* Areas */}
-          {/* <div className="mb-4 flex gap-2">
-            <input
+          <div className="mb-4 flex gap-2">
+            {/* <input
               type="text"
               name="areaSuper"
               onInput={(e) => {
@@ -1295,7 +1296,7 @@ const ModalForm = () => {
               className="w-full p-2 border rounded"
               placeholder="Super Area (sq. ft.)"
               required
-            />
+            /> */}
             <input
               type="text"
               name="areaCarpet"
@@ -1308,7 +1309,7 @@ const ModalForm = () => {
               placeholder="Carpet Area (sq. ft.)"
               required
             />
-          </div> */}
+          </div>
 
           {/* Coworking Option */}
           <div className="mb-4">

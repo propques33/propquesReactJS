@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const MatchmakingForm = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    // Ensure scrolling to the top of the document when the component is mounted
+    window.scrollTo({
+      top: 0,
+      behavior: "auto", // You can use "auto" for instant scroll
+    });
+
+    // As a fallback, scroll the root element
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,6 +34,7 @@ const MatchmakingForm = () => {
     email: "",
     phone: "",
     notes: "",
+    domain: "",
   });
 
   const handleChange = (e) => {
@@ -49,45 +63,44 @@ const MatchmakingForm = () => {
       "usp",
     ];
 
-    for (const field of requiredFields) {
-      if (!formData[field]?.trim()) return false;
-    }
+  
+  };
 
-    return (
-      formData.coworkingStyles.length > 0 && formData.spaceSizes.length > 0
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
+  console.log("Form submission started");
+
+  // if (!validateForm()) {
+  //   alert("Please fill in all required fields.");
+  //   console.log("Form validation failed", formData); // Debugging form data
+  //   return;
+  // }
+
+  setIsLoading(true);
+
+  const dateObj = new Date();
+  const currentDate = `${String(dateObj.getDate()).padStart(2, "0")}-${String(
+    dateObj.getMonth() + 1
+  ).padStart(2, "0")}-${dateObj.getFullYear()}`;
+
+  const inquiryData = { ...formData, date: currentDate };
+  console.log("Inquiry Data:", inquiryData); // Debugging inquiry data
+
+  try {
+    const response = await axios.post(
+      "https://hook.eu2.make.com/1qfsjrk5wlsqoxwyb7x3iqqyg8egmt45",
+      inquiryData
     );
-  };
+    console.log("Submission Response:", response); // Debugging response
+    navigate("/matchmaking-for-coworking-operators-thankyou");
+  } catch (error) {
+    console.error("Error submitting the form:", error);
+    alert("Error submitting the form.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
-    setIsLoading(true);
-
-    const dateObj = new Date();
-    const currentDate = `${String(dateObj.getDate()).padStart(2, "0")}-${String(
-      dateObj.getMonth() + 1
-    ).padStart(2, "0")}-${dateObj.getFullYear()}`;
-
-    const inquiryData = { ...formData, date: currentDate };
-
-    try {
-      await axios.post(
-        "https://hook.eu2.make.com/1qfsjrk5wlsqoxwyb7x3iqqyg8egmt45",
-        inquiryData
-      );
-      navigate("/matchmaking-for-coworking-operators-thankyou");
-    } catch (error) {
-      console.error("Error submitting the form:", error);
-      alert("Error submitting the form.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen mt-20 bg-gray-100 flex flex-col lg:flex-row items-start justify-center md:p-6 lg:p-6 p-0 space-y-6 lg:space-y-0 lg:space-x-6">
@@ -128,7 +141,7 @@ const MatchmakingForm = () => {
         {/* Brand Name */}
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Coworking Brand Name
+            Coworking Brand Name<span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -144,6 +157,7 @@ const MatchmakingForm = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700">
             In Which City You Are Planning To Expand
+            <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -155,10 +169,39 @@ const MatchmakingForm = () => {
             className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            On which coworking model are you planning to expand?
+            <span className="text-red-600">*</span>
+          </label>
+          <div className="grid grid-cols-2 md:gap-4 lg:gap-4 gap-2 mt-2">
+            {[
+              "Revenue Sharing  Model ",
+              "Profit Sharing Model",
+              "Franchise Model",
+              "Lease Model",
+              "Others",
+            ].map((style) => (
+              <label key={style} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  name="domain"
+                  value={style}
+                  onChange={handleChange}
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                />
+                <span>{style}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
         {/* Coworking Style */}
         <div>
           <label className="block text-sm font-medium text-gra">
             Coworking Style (Select all that apply)
+            <span className="text-red-600">*</span>
           </label>
           <div className="grid grid-cols-2 md:gap-4 lg:gap-4 gap-2 mt-2">
             {[
@@ -191,7 +234,7 @@ const MatchmakingForm = () => {
         {/* Space Sizes */}
         <div>
           <label className="block text-sm font-medium text-gra">
-            Space Sizes You Operate In
+            Space Sizes You Operate In<span className="text-red-600">*</span>
           </label>
           <div className="flex flex-wrap gap-4 mt-2">
             {[
@@ -235,6 +278,7 @@ const MatchmakingForm = () => {
         <div>
           <label className="block text-sm font-medium text-gra">
             Current City or Region of Operation
+            <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
@@ -243,6 +287,7 @@ const MatchmakingForm = () => {
             onChange={handleChange}
             placeholder="Enter your city or region"
             className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
           />
         </div>
 
@@ -298,9 +343,13 @@ const MatchmakingForm = () => {
         </h2>
 
         <div>
-          <label className="block text-sm font-medium text-gra">Name</label>
+          <label className="block text-sm font-medium text-gra">
+            Name<span className="text-red-600">*</span>
+          </label>
+
           <input
             type="text"
+            required
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -311,7 +360,9 @@ const MatchmakingForm = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gra">Email</label>
+            <label className="block text-sm font-medium text-gra">
+              Email<span className="text-red-600">*</span>
+            </label>
             <input
               type="email"
               name="email"
@@ -322,9 +373,13 @@ const MatchmakingForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gra">Phone</label>
+            <label className="block text-sm font-medium text-gra">
+              Phone<span className="text-red-600">*</span>
+            </label>
+
             <input
               type="tel"
+              required
               name="phone"
               value={formData.phone}
               onChange={handleChange}

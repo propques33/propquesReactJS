@@ -72,9 +72,15 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Menu</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/blogs" className="hover:underline">
+                {/* <Link to="/blogs" className="hover:underline">
                   Blog
-                </Link>
+                </Link> */}
+                <a
+                  href="https://www.linkedin.com/newsletters/modern-coworking-tribe-6916957544120803328/"
+                  className="hover:underline"
+                >
+                  Blog
+                </a>
               </li>
               <li>
                 <a

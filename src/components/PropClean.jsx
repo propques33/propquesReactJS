@@ -4,7 +4,7 @@ import propcleanlogo from "../../public/propcleanlogo.png";
 
 const PropCleanHowItWorks = () => {
   return (
-    <div className="bg-white px-8 rounded-lg shadow-md flex flex-col md:flex-row items-center max-w-5xl mx-auto">
+    <div className="bg-white px-8 rounded-2xl  border-[1.5px] border-zinc-200 shadow-md flex flex-col md:flex-row items-center max-w-5xl mx-auto">
       {/* Text Section */}
       <div className="md:w-1/2  md:mb-0 ">
         <img

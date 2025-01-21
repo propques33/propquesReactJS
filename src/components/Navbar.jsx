@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { FiX } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import logo from '/weblogo.png'
+import React, { useState, useEffect } from "react";
+import { FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import logo from "/weblogo.png";
 import { RiMenu3Fill } from "react-icons/ri";
 
 const Navbar = () => {
@@ -22,9 +22,9 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -70,6 +70,24 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+            <li className="">
+              <Link
+                to="/start-your-own-coworking-space"
+                className="text-lg hover:text-blue-400"
+                onClick={toggleMenu}
+              >
+                For Property Owner{" "}
+              </Link>
+            </li>
+            <li className="">
+              <Link
+                to="/matchmaking-for-coworking-operators"
+                className="text-lg hover:text-blue-400"
+                onClick={toggleMenu}
+              >
+                For Coworking Operator{" "}
+              </Link>
+            </li>
             <li>
               <Link
                 to="/works"
@@ -81,13 +99,19 @@ const Navbar = () => {
             </li>
 
             <li>
-              <Link
+              {/* <Link
                 to="/blogs"
+                className="text-lg hover:text-blue-400"
+                onClick={toggleMenu}
+              > */}
+              <a
+                href="https://www.linkedin.com/newsletters/modern-coworking-tribe-6916957544120803328/"
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               >
                 Blogs
-              </Link>
+              </a>
+              {/* </Link> */}
             </li>
             <li className="">
               <Link
