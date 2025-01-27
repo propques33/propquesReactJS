@@ -76,7 +76,7 @@ const Footer = () => {
                   Blog
                 </Link> */}
                 <a
-                  href="https://www.linkedin.com/newsletters/modern-coworking-tribe-6916957544120803328/"
+                  href="https://propques.beehiiv.com/"
                   className="hover:underline"
                 >
                   Blog

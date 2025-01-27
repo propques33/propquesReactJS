@@ -23,6 +23,7 @@ const MatchmakingForm = () => {
     coworkingBrand: "",
     coworkingCity: "", // Added unique key for city
     coworkingStyles: [],
+     customCity: "",
     spaceSizes: [],
     experienceLevel: "",
     region: "",
@@ -36,6 +37,28 @@ const MatchmakingForm = () => {
     notes: "",
     domain: "",
   });
+
+  const cityOptions = [
+    "Ahmedabad",
+    "Bangalore",
+    "Chandigarh",
+    "Chennai",
+    "Coimbatore",
+    "Delhi",
+    "Ghaziabad",
+    "Goa",
+    "Gurgaon",
+    "Hyderabad",
+    "Indore",
+    "Jaipur",
+    "Kochi",
+    "Kolkata",
+    "Lucknow",
+    "Mumbai",
+    "Noida",
+    "Pune",
+    "Other",
+  ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -101,7 +124,6 @@ const handleSubmit = async (e) => {
   }
 };
 
-
   return (
     <div className="min-h-screen mt-20 bg-gray-100 flex flex-col lg:flex-row items-start justify-center md:p-6 lg:p-6 p-0 space-y-6 lg:space-y-0 lg:space-x-6">
       {/* Insights Section */}
@@ -154,21 +176,39 @@ const handleSubmit = async (e) => {
           />
         </div>
         {/* Expension Area Name */}
-        <div>
+       <div className="">
           <label className="block text-sm font-medium text-gray-700">
             In Which City You Are Planning To Expand
             <span className="text-red-600">*</span>
           </label>
-          <input
-            type="text"
+          <select
             name="coworkingCity"
             value={formData.coworkingCity}
             onChange={handleChange}
-            placeholder="Enter city name"
-            required
             className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
+          >
+            <option value="">Select a city</option>
+            {cityOptions.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          {formData.coworkingCity === "Other" && (
+            <input
+              type="text"
+              name="customCity"
+              value={formData.customCity}
+              onChange={handleChange}
+              placeholder="Enter your city name"
+              className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          )}
         </div>
+
+
+
+        
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -403,6 +443,16 @@ const handleSubmit = async (e) => {
             className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           ></textarea>
         </div>
+
+        <div class="my-">
+  <label class="flex items-start space-x-2">
+    <input type="checkbox" required class="mt-1" />
+    <span class="text-sm text-gray-700">
+      By submitting, you agree to list your property on <strong>Propques</strong>. Your contact details will be shared based on your selected preferences.
+    </span>
+  </label>
+</div>
+
 
         {/* Submit Button */}
         <button

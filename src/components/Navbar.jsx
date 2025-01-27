@@ -105,7 +105,7 @@ const Navbar = () => {
                 onClick={toggleMenu}
               > */}
               <a
-                href="https://www.linkedin.com/newsletters/modern-coworking-tribe-6916957544120803328/"
+                href="hhttps://propques.beehiiv.com/"
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               >
