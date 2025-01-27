@@ -11,6 +11,8 @@ import ModalForm from "./components/ModalForm.jsx"; // The form modal component
 import { Helmet } from "react-helmet"; // Import Helmet for SEO
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import loading from "../public/loading.gif";
+import { AuthProvider } from "./contexts/AuthContext";
+
 function App() {
   useEffect(() => {
     // Set user data
@@ -98,7 +100,7 @@ function App() {
             <link rel="canonical" href="https://propques.com/" />
           </Helmet>
           <div className=" relative">
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="z-[] fixed z-50">
               <a
                 href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"

@@ -37,6 +37,16 @@ const Workdesq = React.lazy(() => import("../components/Workdesq.jsx"));
 const Karyasthal = React.lazy(() => import("../components/Karyasthal.jsx"));
 const NotFound = React.lazy(() => import("../components/NotFound"));
 const Author = React.lazy(() => import("../components/Author.jsx"));
+
+import AdminDashboard from '../components/AdminDashboard';
+import AuthorDashboard from '../components/AuthorDashboard';
+import LoginForm from "../components/LoginForm";
+
+import ProtectedRoute from "../components/ProtectedRoute";
+import { AuthProvider } from "../contexts/AuthContext";
+
+
+
 const BlogDetailPage = React.lazy(() =>
   import("../components/BlogDetails.jsx")
 );
@@ -56,6 +66,8 @@ const Routing = () => {
 
   return (
     <>
+        <AuthProvider>
+
       <Routes>
         <Route path="/form" element={<Button />} />
         <Route path="/" element={<Home />} />
@@ -64,6 +76,8 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/author" element={<AuthorDashboard />} />
         <Route
           path="/matchmaking-for-coworking-operators-thankyou"
           element={<SuccessPageMatch />}
@@ -107,7 +121,29 @@ const Routing = () => {
         <Route path="//sapna-sangeeta-offices" element={<Sapnasangeeta />} />
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
+
+
+{/* Blog */}
+         <Route path="/login" element={<LoginForm />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/author"
+            element={
+              <ProtectedRoute role="author">
+                <AuthorDashboard />
+              </ProtectedRoute>
+            }
+          />
       </Routes>
+          </AuthProvider>
+
     </>
   );
 };
