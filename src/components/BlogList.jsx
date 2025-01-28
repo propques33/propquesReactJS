@@ -306,22 +306,41 @@ const BlogList = () => {
   };
 
   return (
-    <div>
-      <h2>Blog List</h2>
-      <ul>
-        {blogs.map((blog) => (
-          <li key={blog._id}>
-            {blog.title} - {blog.visibility ? "Visible" : "Hidden"}
-            <button onClick={() => toggleVisibility(blog._id, blog.visibility)}>
-              {blog.visibility ? "Hide" : "Show"}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+      <div className="bg-white shadow-lg rounded-lg w-full max-w-4xl p-6">
+        <h2 className="text-2xl font-bold text-center mb-6">Blog List</h2>
+        {blogs.length > 0 ? (
+          <ul className="space-y-4">
+            {blogs.map((blog) => (
+              <li
+                key={blog._id}
+                className="flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-gray-100"
+              >
+                <div>
+                  <p className="text-lg font-semibold">{blog.title}</p>
+                  <p className="text-sm text-gray-500">
+                    {blog.visibility ? "Visible" : "Hidden"}
+                  </p>
+                </div>
+                <button
+                  onClick={() => toggleVisibility(blog._id, blog.visibility)}
+                  className={`px-4 py-2 text-sm font-medium rounded-lg ${
+                    blog.visibility
+                      ? "bg-red-500 text-white hover:bg-red-600"
+                      : "bg-green-500 text-white hover:bg-green-600"
+                  }`}
+                >
+                  {blog.visibility ? "Hide" : "Show"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center text-gray-500">No blogs available.</p>
+        )}
+      </div>
     </div>
   );
 };
 
 export default BlogList;
-
-
