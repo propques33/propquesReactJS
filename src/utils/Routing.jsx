@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-
+import ProtectedRoute from "@/components/ProtectedRoute";
 const Home = React.lazy(() => import("../pages/Home.jsx"));
 const Book = React.lazy(() => import("../pages/Book.jsx"));
 const ContactPage = React.lazy(() => import("../pages/ContactPage.jsx"));
@@ -11,8 +11,12 @@ const BlogDetails = React.lazy(() => import("../components/BlogDetails.jsx"));
 
 const Button = React.lazy(() => import("../components/Button.jsx"));
 const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
-const SuccessPageMatch = React.lazy(() => import("../components/SuccessPageMatch.jsx"));
-const SuccessPageStart = React.lazy(() => import("../components/SuccessPageStart.jsx"));
+const SuccessPageMatch = React.lazy(() =>
+  import("../components/SuccessPageMatch.jsx")
+);
+const SuccessPageStart = React.lazy(() =>
+  import("../components/SuccessPageStart.jsx")
+);
 const PrivacyPolicy = React.lazy(() =>
   import("../components/PrivacyPolicy.jsx")
 );
@@ -20,7 +24,9 @@ const TermsAndConditions = React.lazy(() =>
   import("../components/TermsAndConditions.jsx")
 );
 const Works = React.lazy(() => import("../components/Works.jsx"));
-const StartYourOwnCoworking = React.lazy(() => import("../components/StartYourOwnCoworking.jsx"));
+const StartYourOwnCoworking = React.lazy(() =>
+  import("../components/StartYourOwnCoworking.jsx")
+);
 const MatchMaking = React.lazy(() => import("../components/MatchMaking.jsx"));
 const Webinar = React.lazy(() => import("../components/Webinar.jsx"));
 const Partners = React.lazy(() => import("../components/Partners.jsx"));
@@ -31,21 +37,18 @@ const WorkVistar = React.lazy(() => import("../components/WorkVistar.jsx"));
 const Workjar = React.lazy(() => import("../components/Workjar.jsx"));
 const Cubispace = React.lazy(() => import("../components/Cubispace.jsx"));
 const SummitSpace = React.lazy(() => import("../components/SummitSpace.jsx"));
-const Sapnasangeeta = React.lazy(() => import("../components/Sapnasangeeta.jsx"));
+const Sapnasangeeta = React.lazy(() =>
+  import("../components/Sapnasangeeta.jsx")
+);
 const WorqSpot = React.lazy(() => import("../components/WorqSpot.jsx"));
 const Workdesq = React.lazy(() => import("../components/Workdesq.jsx"));
 const Karyasthal = React.lazy(() => import("../components/Karyasthal.jsx"));
 const NotFound = React.lazy(() => import("../components/NotFound"));
 const Author = React.lazy(() => import("../components/Author.jsx"));
 
-import AdminDashboard from '../components/AdminDashboard';
-import AuthorDashboard from '../components/AuthorDashboard';
+import AdminDashboard from "../components/AdminDashboard";
+import AuthorDashboard from "../components/AuthorDashboard";
 import LoginForm from "../components/LoginForm";
-
-import ProtectedRoute from "../components/ProtectedRoute";
-import { AuthProvider } from "../contexts/AuthContext";
-
-
 
 const BlogDetailPage = React.lazy(() =>
   import("../components/BlogDetails.jsx")
@@ -66,8 +69,6 @@ const Routing = () => {
 
   return (
     <>
-        <AuthProvider>
-
       <Routes>
         <Route path="/form" element={<Button />} />
         <Route path="/" element={<Home />} />
@@ -76,9 +77,7 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/author" element={<AuthorDashboard />} />
-        <Route
+               <Route
           path="/matchmaking-for-coworking-operators-thankyou"
           element={<SuccessPageMatch />}
         />
@@ -122,28 +121,26 @@ const Routing = () => {
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
 
+        {/* Blog */}
+        <Route path="/login" element={<LoginForm />} />
 
-{/* Blog */}
-         <Route path="/login" element={<LoginForm />} />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute role="admin">
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/author"
-            element={
-              <ProtectedRoute role="author">
-                <AuthorDashboard />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["author"]}>
+              <AuthorDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/author-dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-          </AuthProvider>
-
     </>
   );
 };
