@@ -3,6 +3,7 @@ import { FiLogOut } from "react-icons/fi"; // React Icon for logout
 import UserApproval from "./UserApproval";
 import BlogList from "./BlogList";
 import BlogForm from "./BlogForm";
+import EditBlog from "./EditBlog";
 
 const AdminDashboard = () => {
   const handleSignOut = () => {
@@ -15,7 +16,7 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <header className="flex items-center justify-between bg-green-600 text-white p-4 shadow-lg">
+      <header className="flex items-center justify-between bg-green-600 text-white p-4 shadow-lg pt-20">
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <button
           onClick={handleSignOut}
@@ -27,23 +28,32 @@ const AdminDashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="p-4 space-y-6">
+      <main className=" space-y-6">
         {/* Section: User Approval */}
-        <section className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-xl font-semibold border-b pb-2 mb-4">User Approvals</h2>
-          <UserApproval />
-        </section>
+       
+          <BlogForm />
 
         {/* Section: Blog List */}
         <section className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-xl font-semibold border-b pb-2 mb-4">Manage Blogs</h2>
+          <h2 className="text-xl font-semibold border-b pb-2 mb-4">
+            Manage Blogs
+          </h2>
           <BlogList />
         </section>
+        {/* <section className="bg-white shadow rounded-lg p-4">
+          <h2 className="text-xl font-semibold border-b pb-2 mb-4">
+            Edit Blogs
+          </h2>
+          <EditBlog />
+        </section> */}
 
         {/* Section: Blog Form */}
+
         <section className="bg-white shadow rounded-lg p-4">
-          <h2 className="text-xl font-semibold border-b pb-2 mb-4">Add New Blog</h2>
-          <BlogForm />
+          <h2 className="text-xl font-semibold border-b pb-2 mb-4">
+            User Approvals
+          </h2>
+          <UserApproval />
         </section>
       </main>
     </div>

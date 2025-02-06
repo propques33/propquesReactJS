@@ -93,7 +93,7 @@ function App() {
               <link rel="canonical" href="https://propques.com/" />
             </Helmet>
             <div className=" relative">
-              {/* <Navbar /> */}
+              <Navbar />
               <div className="z-[] fixed z-50">
                 <a
                   href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"

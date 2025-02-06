@@ -15,7 +15,7 @@
 //     setLoading(true);
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:5000/api/users/login",
+//         "https://propques-backend-jsqqh.ondigitalocean.app/api/users/login",
 //         {
 //           email,
 //           password,
@@ -89,17 +89,14 @@
 
 // export default LoginForm;
 
-import { useState } from "react";
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaLock } from "react-icons/fa";
 
 export default function AuthForm() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [userType, setUserType] = useState("author"); // 'admin' or 'author'
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -108,12 +105,18 @@ export default function AuthForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const endpoint =
-      userType === "admin"
-        ? "http://localhost:5000/api/admin/login"
-        : isSignUp
-        ? "http://localhost:5000/api/author/signup"
-        : "http://localhost:5000/api/author/login";
+
+    // Determine correct endpoint based on role + action
+    let endpoint;
+    if (userType === "admin") {
+      endpoint = isSignUp
+        ? "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/signup"
+        : "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/login";
+    } else {
+      endpoint = isSignUp
+        ? "https://propques-backend-jsqqh.ondigitalocean.app/api/author/signup"
+        : "https://propques-backend-jsqqh.ondigitalocean.app/api/author/login";
+    }
 
     try {
       const response = await fetch(endpoint, {
@@ -121,16 +124,34 @@ export default function AuthForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       });
+
       const data = await response.json();
       console.log("Response:", data);
 
+      // If server responded with success
       if (response.ok) {
-        navigate(
-          userType === "admin" ? "/admin-dashboard" : "/author-dashboard"
-        );
+        // Example: store token & role
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
+        if (data.user?.role) {
+          localStorage.setItem("role", data.user.role);
+        }
+
+        // Navigate to relevant dashboard
+        if (data.user?.role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (data.user?.role === "author") {
+          navigate("/author-dashboard");
+        } else {
+          alert("Logged in, but role is not recognized.");
+        }
+      } else {
+        alert(data.message || "Authentication failed.");
       }
     } catch (error) {
       console.error("Error:", error);
+      alert("Server error occurred.");
     }
   };
 
@@ -140,9 +161,11 @@ export default function AuthForm() {
         <h2 className="text-2xl font-bold text-center mb-4">
           {isSignUp ? "Sign Up" : "Sign In"} ({userType})
         </h2>
+
+        {/* Role Selector */}
         <div className="flex justify-center mb-4">
           <button
-            className={`px-4 py-2 mx-2 rounded-lg ${
+            className={`px-4 py-2 mx-2 rounded-md ${
               userType === "author" ? "bg-blue-500 text-white" : "bg-gray-300"
             }`}
             onClick={() => setUserType("author")}
@@ -150,7 +173,7 @@ export default function AuthForm() {
             Author
           </button>
           <button
-            className={`px-4 py-2 mx-2 rounded-lg ${
+            className={`px-4 py-2 mx-2 rounded-md ${
               userType === "admin" ? "bg-blue-500 text-white" : "bg-gray-300"
             }`}
             onClick={() => setUserType("admin")}
@@ -158,44 +181,40 @@ export default function AuthForm() {
             Admin
           </button>
         </div>
+
+        {/* Form */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block mb-1 text-gray-600">Email</label>
-            <div className="flex items-center border rounded-lg px-3 py-2 bg-gray-100">
-              <FaUser className="text-gray-500" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                className="ml-2 w-full bg-transparent focus:outline-none"
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <label className="block mb-1 text-gray-600">Password</label>
-            <div className="flex items-center border rounded-lg px-3 py-2 bg-gray-100">
-              <FaLock className="text-gray-500" />
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                className="ml-2 w-full bg-transparent focus:outline-none"
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-          </div>
+          <label className="block mb-2 text-gray-700">Email</label>
+          <input
+            name="email"
+            type="email"
+            className="w-full mb-4 p-2 border rounded-md"
+            placeholder="Enter your email"
+            onChange={handleInputChange}
+            required
+          />
+
+          <label className="block mb-2 text-gray-700">Password</label>
+          <input
+            name="password"
+            type="password"
+            className="w-full mb-6 p-2 border rounded-md"
+            placeholder="Enter your password"
+            onChange={handleInputChange}
+            required
+          />
+
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </button>
         </form>
+
+        {/* Toggle between Sign In / Sign Up */}
         <p className="text-center mt-4">
-          {isSignUp ? "Already have an account? " : "Don't have an account? "}
+          {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
           <button
             className="text-blue-500 hover:underline"
             onClick={() => setIsSignUp(!isSignUp)}
@@ -207,4 +226,3 @@ export default function AuthForm() {
     </div>
   );
 }
-  

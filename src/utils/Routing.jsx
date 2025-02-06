@@ -8,7 +8,11 @@ const Shop = React.lazy(() => import("../pages/Shop.jsx"));
 const About = React.lazy(() => import("../pages/About.jsx"));
 const BlogList = React.lazy(() => import("../components/BlogList.jsx"));
 const BlogDetails = React.lazy(() => import("../components/BlogDetails.jsx"));
+const AllBlogsList = React.lazy(() => import("../components/AllBlogsList.jsx"));
 
+const UserViewBlogs = React.lazy(() =>
+  import("../components/UserViewBlogs.jsx")
+);
 const Button = React.lazy(() => import("../components/Button.jsx"));
 const SuccessPage = React.lazy(() => import("../components/SuccessPage.jsx"));
 const SuccessPageMatch = React.lazy(() =>
@@ -49,23 +53,18 @@ const Author = React.lazy(() => import("../components/Author.jsx"));
 import AdminDashboard from "../components/AdminDashboard";
 import AuthorDashboard from "../components/AuthorDashboard";
 import LoginForm from "../components/LoginForm";
-
+import SinglePostPage from "@/components/SinglePostPage";
+import Write from "@/components/Write";
+import PostListPage from "@/components/PostListPage.jsx";
+import AdminSignup from "@/components/AdminSignup.jsx";
+import AdminLogin from "@/components/AdminLogin.jsx";
+import EditBlog from "@/components/EditBlog";
 const BlogDetailPage = React.lazy(() =>
   import("../components/BlogDetails.jsx")
 );
 const Routing = () => {
-  const blogPosts = [
-    {
-      title: "Five alternatives to boost your coworking space revenue",
-      date: "April 15, 2024",
-      comments: "No Comments",
-      image: "/path/to/image1.jpg",
-      description: "...",
-      slug: "five-alternatives",
-      tag: "FEATURED",
-    },
-    // Add more blog entries...
-  ];
+  
+
 
   return (
     <>
@@ -77,7 +76,7 @@ const Routing = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
-               <Route
+        <Route
           path="/matchmaking-for-coworking-operators-thankyou"
           element={<SuccessPageMatch />}
         />
@@ -86,8 +85,14 @@ const Routing = () => {
           element={<SuccessPageStart />}
         />
 
-        <Route path="/blogs" element={<BlogList />} />
-        <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/blogs" element={<UserViewBlogs />} />
+        <Route path="/blog/:id" element={<BlogDetails />} />
+        <Route path="/edit-blog/:slug" element={<EditBlog />} />
+
+        {/* <Route
+          path="/blog/:slug"
+          element={<BlogDetailPage blogPosts={blogPosts} />}
+        /> */}
 
         <Route path="/faqs" element={<Faq />} />
         <Route path="/about-us" element={<About />} />
@@ -97,10 +102,7 @@ const Routing = () => {
         <Route path="/webinar" element={<Webinar />} />
         <Route path="/partners-with-us" element={<Partners />} />
         <Route path="/author/userpropques" element={<Author />} />
-        <Route
-          path="/blog/:slug"
-          element={<BlogDetailPage blogPosts={blogPosts} />}
-        />
+
         <Route path="/our-service" element={<OurService />} />
         <Route path="/workviaa" element={<WorkViaa />} />
         <Route
@@ -120,12 +122,17 @@ const Routing = () => {
         <Route path="//sapna-sangeeta-offices" element={<Sapnasangeeta />} />
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/all-blogs-list" element={<AllBlogsList />} />
 
         {/* Blog */}
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<AdminSignup />} />
+        <Route path="/posts" element={<PostListPage />} />
+        <Route path="/write" element={<Write />} />
+        <Route path="/:slug" element={<SinglePostPage />} />
 
         <Route
-          path="/admin-dashboard"
+          path="/author-dashboard"
           element={
             <ProtectedRoute allowedRoles={["author"]}>
               <AuthorDashboard />
@@ -133,7 +140,7 @@ const Routing = () => {
           }
         />
         <Route
-          path="/author-dashboard"
+          path="/admin-dashboard"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
               <AdminDashboard />

@@ -1,250 +1,146 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { FaArrowLeft, FaUser, FaCalendarAlt } from "react-icons/fa";
-import { CiTimer } from "react-icons/ci";
+import SwithenIntro from "./SwithenIntro";
 
 const BlogDetails = () => {
-  const [article, setArticle] = useState(null); // State for the selected article
-  const [relatedArticles, setRelatedArticles] = useState([]); // State for other articles
   const { id } = useParams();
-  const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL || "/api"; // Use environment variable or proxy
+  const [blog, setBlog] = useState(null);
+  const [relatedBlogs, setRelatedBlogs] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+   useEffect(() => {
+      // Ensure scrolling to the top of the document when the component is mounted
+      window.scrollTo({
+        top: 0,
+        behavior: "auto", // You can use "auto" for instant scroll
+      });
+  
+      // As a fallback, scroll the root element
+      document.documentElement.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }, []);
   useEffect(() => {
-    const fetchArticle = async () => {
+    const getBlog = async () => {
       try {
-        const res = await axios.get(
-          `https://blogs-czqjb.ondigitalocean.app/api/articles/${id}?populate=*`
+        const { data } = await axios.get(
+          `https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${id}`
         );
-        setArticle(res.data.data);
-      } catch (error) {
-        console.error("Error fetching article:", error);
+        setBlog(data);
+      } catch (err) {
+        console.error("Error fetching blog:", err);
+        setError("Failed to fetch blog. Please try again.");
+      } finally {
+        setLoading(false);
       }
     };
 
-    const fetchData = async () => {
+    const getRelatedBlogs = async () => {
       try {
-        const res = await axios.get(
-          `https://blogs-czqjb.ondigitalocean.app/api/articles/?populate=*`
-          
+        const { data } = await axios.get(
+          "https://propques-backend-jsqqh.ondigitalocean.app/api/blogs"
         );
-        setRelatedArticles(res.data.data);
-      } catch (error) {
-        console.error("Error fetching articles:", error);
+
+        if (data.blogs) {
+          // Extract only visible blogs
+          const visibleBlogs = data.blogs.filter((b) => b.visibility === true);
+          // Remove current blog from related ones & limit to 4
+          const filteredBlogs = visibleBlogs
+            .filter((b) => b._id !== id)
+            .slice(0, 4);
+          setRelatedBlogs(filteredBlogs);
+        }
+      } catch (err) {
+        console.error("Error fetching related blogs:", err);
       }
     };
 
-    fetchData();
+    getBlog();
+    getRelatedBlogs();
+  }, [id]);
 
-    fetchArticle();
-  }, [BASE_URL, id]);
-  useEffect(() => {
-    // Ensure scrolling to the top of the document when the component is mounted
-    window.scrollTo({
-      top: 0,
-      behavior: "auto", // You can use "auto" for instant scroll
-    });
-
-    // As a fallback, scroll the root element
-    document.documentElement.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
-  if (!article)
-    return (
-      <div className="text-center h-screen w-full flex items-center justify-center mt-16 text-gray-600 text-lg">
-        Loading article...
-      </div>
-    );
-
-  const { title, description, publishedAt, cover, author } = article;
-  const coverImage = cover?.url;
-  const authorName = author || "Unknown";
+  if (error) return <p className="text-red-500 text-center mt-6">{error}</p>;
+  if (loading)
+    return <p className="text-gray-500 text-center mt-6">Loading...</p>;
 
   return (
-    <div className="min-h-screen poppins  md:px-6 px-0 lg:p-12 flex flex-col items-center justify-center lg:flex-row gap-10">
-      {/* Blog Content */}
-      <div className="flex-1 max-w-4xl  bg-white  rounded-lg overflow-hidden">
-        {/* Back Button */}
-        {/* <button
-          onClick={() => navigate("/")}
-          className="text-blue-600 hover:text-blue-800 flex items-center mb-4 transition-transform transform hover:-translate-x-1 p-4"
-        >
-          <FaArrowLeft className="mr-2" />
-          <span>Back to Articles</span>
-        </button> */}
-
-        {/* Cover Image */}
-
-        <div className="relative w-full h-[450px] bg-slate-950">
-          {/* Background Image */}
+    <div className="max-w-5xl mx-auto p-6 pt-20">
+      {/* Cover Image */}
+      {blog.coverImage && (
+        <div className="mb-6">
           <img
-            src={`https://blogs-czqjb.ondigitalocean.app${article?.cover?.[0]?.url}`}
-            alt={title || "Image"}
-            loading="lazy"
-            className="w-full h-full object-cover"
+            src={blog.coverImage}
+            alt={blog.title}
+            className="w-full h-72 object-cover rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300"
           />
-
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-
-          {/* Title */}
-          <h1 className="absolute md:bottom-6 md:left-6 left-4 bottom-4 text-3xl lg:text-5xl font-bold text-white shadow-lg drop-shadow-lg">
-            {title}
-          </h1>
         </div>
+      )}
 
-        {/* <h1 className=" bg-red-800">{console.log(article.cover[0].url)}</h1> */}
+      {/* Blog Title */}
+      <h1 className="text-5xl font-extrabold mb-4 text-gray-900 poppins">
+        {blog.title}
+      </h1>
 
-        {/* Content Section */}
-        <div className="md:p-6 p-4 lg:p-0 lg:mt-2">
-          {/* Meta Information */}
-          <div className="flex flex-wrap items-center text-gray-600 text-sm mb-6">
-            <FaUser className="mr-2 text-blue-500" />
-            <span className="mr-4 font-medium text-gray-700">{authorName}</span>
-            <FaCalendarAlt className="mr-2 text-blue-500" />
-            <span>
-              {new Date(publishedAt).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </span>
-            <CiTimer className="ml-4 mr-2 text-blue-500 flex" /> Read In{" "}
-            <h2 className="text-end ml-2 ">{article?.reading_time} Mins</h2>
-          </div>
-
-          {/* Article Content */}
-          <div className="leading-relaxed space-y-6 text-lg text-gray-800">
-            {description?.map((block, index) => {
-              switch (block.type) {
-                case "heading":
-                  const HeadingTag = `h${block.level}`; // Dynamically choose the heading tag
-                  return (
-                    <HeadingTag
-                      key={index}
-                      className={`${
-                        block.level === 1
-                          ? "text-4xl font-extrabold "
-                          : block.level === 2
-                          ? "text-2xl font-semibold text-gray-800"
-                          : "text-xl font-medium text-gray-700"
-                      }`}
-                    >
-                      {block.children.map((child) => child.text).join(" ")}
-                    </HeadingTag>
-                  );
-                case "paragraph":
-                  return (
-                    <p key={index} className="text-gray-700">
-                      {block.children.map((child, i) =>
-                        child.type === "text" ? (
-                          <span
-                            key={i}
-                            className={`${child.bold ? "font-extrabold" : ""} ${
-                              child.italic ? "italic" : ""
-                            } ${child.underline ? "underline" : ""} `}
-                          >
-                            {child.text}
-                          </span>
-                        ) : child.type === "link" ? (
-                          <a
-                            key={i}
-                            href={child.url}
-                            className="text-blue-500 underline"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {child.children
-                              .map((linkChild) => linkChild.text)
-                              .join(" ")}
-                          </a>
-                        ) : null
-                      )}
-                    </p>
-                  );
-                case "image": // New case to handle images
-                  return (
-                    <div key={index} className="my-4">
-                      <img
-                        src={`${block.image.url}`}
-                        alt={block.alt || "Article image"}
-                        className="w-full h-auto object-contain rounded-lg"
-                        loading="lazy"
-                      />
-                      {block.caption && (
-                        <p className="text-sm text-gray-500 mt-2 text-center">
-                          {block.caption}
-                        </p>
-                      )}
-                    </div>
-                  );
-                case "list":
-                  return block.format === "unordered" ? (
-                    <ul key={index} className="list-disc pl-6">
-                      {block.children.map((item, i) => (
-                        <li key={i}>
-                          {item.children.map((child) => child.text).join(" ")}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <ol key={index} className="list-decimal pl-6">
-                      {block.children.map((item, i) => (
-                        <li key={i}>
-                          {item.children.map((child) => child.text).join(" ")}
-                        </li>
-                      ))}
-                    </ol>
-                  );
-                default:
-                  return null;
-              }
-            })}
-          </div>
-        </div>
+      {/* Blog Metadata */}
+      <div className="text-md text-gray-600 mb-4 flex items-center space-x-4 poppins">
+        <span>🕒 {blog.readingTime} read</span>
+        <span className="font-semibold">By {blog.authors[0].name}</span>
       </div>
 
-      {/* Sidebar for Related Articles */}
-      {/* <div className="w-full lg:w-1/3 mt-5">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-          Related Articles
-        </h2>
-        <div className="space-y-4">
-          {relatedArticles.map((article) => {
-            const { documentId, title, publishedAt, cover, author } = article;
-            const coverImage = cover?.url;
-            const authorName = author || "Unknown";
+      {/* Blog Content */}
+      <div
+        className="prose prose-lg prose-blue max-w-none poppins leading-relaxed text-gray-800"
+        dangerouslySetInnerHTML={{ __html: blog.description }}
+      />
+<hr />
+      {/* Author Section */}
+      <SwithenIntro />
 
-            return (
-              <div
-                key={documentId}
-                onClick={() => navigate(`/blogs/${documentId}`)} // Navigate to article details
-                className="cursor-pointer bg-white shadow-md rounded-xl overflow-hidden flex items-center gap-4 p-4"
+      {/* Related Blogs Section */}
+      {relatedBlogs.length > 0 && (
+        <div className="mt-12 poppins">
+          <h2 className="text-2xl font-bold mb-4 text-gray-900">
+            Related Blogs
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedBlogs.map((related) => (
+              <Link
+                key={related._id}
+                to={`/blog/${related.slug}`}
+                className="block bg-white rounded-lg  overflow-hidden hover:shadow-xl "
               >
-               
                 <img
-                  src={`https://blogs-czqjb.ondigitalocean.app${relatedArticles[0]?.cover?.url}`}
-                  alt={title || "Image"}
-                  loading="lazy"
-                  className="w-full h-56 object-cover"
+                  src={related.coverImage || "https://via.placeholder.com/400"}
+                  alt={related.title}
+                  className="w-full h-48 object-cover"
                 />
-                {console.log(relatedArticles)}
-
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                    {title}
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {related.title.split(" ").length > 5
+                      ? related.title.split(" ").slice(0, 5).join(" ") + "..."
+                      : related.title}
                   </h3>
 
-                  <p className="text-sm text-gray-600">Author: {authorName}</p>
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm text-gray-600 mt-1">
+                      {related.readingTime} read
+                    </p>
+                    <span className="text-sm text-gray-600 mt-1 ">
+                      By {blog.authors[0].name}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+                <p className="bg-blue-500 rounded text-white text-center py-2">
+                  Read More
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div> */}
+      )}
     </div>
   );
 };

@@ -1,46 +1,129 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // User state
-  const [loading, setLoading] = useState(true); // Loading state
+  const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null); // "admin" or "author"
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get("http://localhost:5000/api/users/validate", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
-          setUser(response.data.user);
-        })
-        .catch(() => {
-          localStorage.removeItem("token");
-          setUser(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "https://propques-backend-jsqqh.ondigitalocean.app/",
+  //         {
+  //           withCredentials: true, // Ensures session persistence
+  //         }
+  //       );
+  //       console.log(response)
+
+  //       if (response.data) {
+  //         setUser(response.data.user);
+  //         console.log(response.data.user);
+  //         setRole(response.data.role); // Assuming backend sends role in response
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to fetch user", error);
+  //       setUser(null);
+  //       setRole(null);
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, []);
+
+  // ✅ Author Login
+  const loginAuthor = async (email, password) => {
+    try {
+      const response = await axios.post(
+        "https://propques-backend-jsqqh.ondigitalocean.app/api/author/login",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      setUser(response.data.user);
+      setRole("author");
+    } catch (error) {
+      console.error("Author login failed:", error.response?.data || error);
     }
-  }, []);
-
-  const login = (userData) => { 
-    setUser(userData);
-    localStorage.setItem("token", userData.token);
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("token");
+  // ✅ Admin Login
+  const loginAdmin = async (email, password) => {
+    try {
+      const response = await axios.post(
+        "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/login",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      setUser(response.data.user);
+      setRole("admin");
+    } catch (error) {
+      console.error("Admin login failed:", error.response?.data || error);
+    }
+  };
+
+  // ✅ Author Signup
+  const signupAuthor = async (name, email, password) => {
+    try {
+      const response = await axios.post(
+        "https://propques-backend-jsqqh.ondigitalocean.app/api/author/signup",
+        { name, email, password },
+        { withCredentials: true }
+      );
+
+      setUser(response.data.user);
+      setRole("author");
+    } catch (error) {
+      console.error("Author signup failed:", error.response?.data || error);
+    }
+  };
+
+  // ✅ Admin Signup
+  const signupAdmin = async (name, email, password) => {
+    try {
+      const response = await axios.post(
+        "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/signup",
+        { name, email, password },
+        { withCredentials: true }
+      );
+
+      setUser(response.data.user);
+      setRole("admin");
+    } catch (error) {
+      console.error("Admin signup failed:", error.response?.data || error);
+    }
+  };
+
+  // ✅ Logout (For both Admin & Author)
+  const logout = async () => {
+    try {
+      await axios.post(
+        "https://propques-backend-jsqqh.ondigitalocean.app/api/auth/logout",
+        {},
+        { withCredentials: true }
+      );
+      setUser(null);
+      setRole(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        role,
+        loginAuthor,
+        loginAdmin,
+        signupAuthor,
+        signupAdmin,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
