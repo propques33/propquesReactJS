@@ -105,7 +105,7 @@ const Navbar = () => {
                 onClick={toggleMenu}
               > */}
               <a
-                href="hhttps://propques.beehiiv.com/"
+                href="/blogs"
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               >

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaClock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const UserViewBlogs = () => {
@@ -8,29 +7,21 @@ const UserViewBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-   useEffect(() => {
-      // Ensure scrolling to the top of the document when the component is mounted
-      window.scrollTo({
-        top: 0,
-        behavior: "auto", // You can use "auto" for instant scroll
-      });
-  
-      // As a fallback, scroll the root element
-      document.documentElement.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   useEffect(() => {
     axios
       .get("https://propques-backend-jsqqh.ondigitalocean.app/api/blogs")
-      // .get("https://blogs-propques.onrender.com/api/blogs")
       .then((res) => {
         const blogs = Array.isArray(res.data.blogs) ? res.data.blogs : [];
-        const visibleBlogs = blogs.filter((blog) => blog.visibility === true); // Filter visible blogs
+        const visibleBlogs = blogs
+          .filter((blog) => blog.visibility === true)
+          .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by latest
         setData(visibleBlogs);
-        console.log(visibleBlogs);
         setError(null);
       })
       .catch((err) => {
@@ -54,107 +45,129 @@ const UserViewBlogs = () => {
 
   return (
     <div className="mx-auto pt-20 p-6">
-      <div className="relative w-full py-16 flex items-center justify-center text-center bg-gradient-to-r from-blue-500 to-blue-400 text-white">
+      {/* Page Header */}
+      <div className="relative w-full py-20 flex items-center justify-center text-center bg-gradient-to-r from-blue-600 to-blue-400 text-white">
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
+          className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
             backgroundImage:
-              "url('https://source.unsplash.com/1600x900/?reading,books,blogging')",
+              "url('https://source.unsplash.com/1600x900/?coworking,office,workspace')",
           }}
         ></div>
 
         {/* Overlay Content */}
-        <div className="relative z-10 max-w-3xl px-6 t">
+        <div className="relative z-10 max-w-3xl px-6">
           <h1 className="text-4xl md:text-5xl font-bold">
-            Welcome to Our <span className="">Knowledge Hub</span>
+            Coworking Space <span className="text-yellow-300">Insights</span>
           </h1>
-          <p className="mt-3 text-lg text-gray-100">
-            Discover insightful articles, expert opinions, and inspiring
-            stories. Expand your knowledge with our curated content.
+          <p className="mt-4 text-lg text-gray-100">
+            Stay ahead with expert opinions, workspace trends, and industry
+            news. Explore insights to optimize and grow your coworking business.
           </p>
         </div>
       </div>
 
+      {/* Blog Layout */}
       {data.length === 0 ? (
         <p className="text-center text-lg">No blogs available.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-          {data.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white  rounded-xl overflow-hidden p-4 border cursor-pointer hover:shadow-xl transition"
-              onClick={() => navigate(`/blog/${item.slug}`)}
-            >
-              {console.log(item)}
-              {item.coverImage && (
-                <img
-                  src={item.coverImage}
-                  alt={item.title}
-                  className="w-full h-60 object-cover rounded-lg"
-                />
-              )}
-              <h2 className="text-xl font-semibold mt-3">{item.title}</h2>
-              <div className="flex items-center text-gray-600 mt-2">
-                <FaUser className="mr-2" />
-                <p className="text-sm">
-                  <strong>Author(s):</strong>{" "}
-                  {item.authors.map((author) => author.name).join(", ") ||
-                    "Unknown"}
-                </p>
+        <>
+          {/* First Three Blogs */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+            {/* Latest Blog (Large) */}
+            {data.length > 0 && (
+              <div
+                className="lg:col-span-2 bg-white rounded-xl overflow-hidden cursor-pointer transition relative"
+                onClick={() => navigate(`/blog/${data[0].slug}`)}
+              >
+                <div className="relative">
+                  <img
+                    src={data[0].coverImage}
+                    alt={data[0].title}
+                    className="w-full h-[450px] object-cover rounded-lg"
+                  />
+                  <div className="absolute w-full h-full bottom-0 left-0 bg-gradient-to-t from-[#0000008c] to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 z-10">
+                    <span className="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded">
+                      FEATURED
+                    </span>
+                    <h2 className="text-3xl font-semibold text-white mt-2">
+                      {data[0].title}
+                    </h2>
+                    <p className="text-sm text-gray-300 mt-2">
+                      {new Date(data[0].date).toDateString()}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center text-gray-600 mt-2">
-                <FaClock className="mr-2" />
-                <p className="text-sm">
-                  <strong>Reading Time:</strong> {item.readingTime || "Unknown"}{" "}
-                </p>
+            )}
+
+            {/* Next 2 Blogs (Smaller) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+              {data.slice(1, 3).map((item) => (
+                <div
+                  key={item._id}
+                  className="relative bg-white rounded-xl overflow-hidden cursor-pointer transition"
+                  onClick={() => navigate(`/blog/${item.slug}`)}
+                >
+                  <div className="relative">
+                    <img
+                      src={item.coverImage}
+                      alt={item.title}
+                      className="w-full h-[200px] object-cover rounded-lg"
+                    />
+                    <div className="absolute w-full h-full bottom-0 left-0 bg-gradient-to-t from-[#000000d3]  to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 z-10">
+                      <h2 className="text-lg font-semibold text-white">
+                        {item.title}
+                      </h2>
+                      <p className="text-xs text-gray-300 mt-1">
+                        {new Date(item.date).toDateString()}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Remaining Blogs (Grid Layout) */}
+          {data.length > 3 && (
+            <div className="mt-12">
+              <h2 className="text-2xl font-bold mb-4">More Blogs</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {data.slice(3).map((item) => (
+                  <div
+                    key={item._id}
+                    className="relative bg-white rounded-xl overflow-hidden cursor-pointer transition"
+                    onClick={() => navigate(`/blog/${item.slug}`)}
+                  >
+                    <div className="relative">
+                      <img
+                        src={item.coverImage}
+                        alt={item.title}
+                        className="w-full h-[180px] object-cover rounded-lg"
+                      />
+                      <div className="absolute w-full h-full bottom-0 left-0 bg-gradient-to-t from-[#000000d3] to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 z-10">
+                        <h2 className="text-md font-semibold text-white">
+                          {item.title}
+                        </h2>
+                        <p className="text-xs text-gray-300 mt-1">
+                          {new Date(item.date).toDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   );
 };
 
 export default UserViewBlogs;
-
-// import React, { useEffect, useState } from "react";
-// import { fetchBlogs } from "../services/api";
-// import { Link } from "react-router-dom";
-
-// const BlogList = () => {
-//   const [blogs, setBlogs] = useState([]);
-//   const [page, setPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(1);
-
-//   useEffect(() => {
-//     const getBlogs = async () => {
-//       const data = await fetchBlogs(page);
-//       setBlogs(data.blogs);
-//       setTotalPages(data.pages);
-//     };
-//     getBlogs();
-//   }, [page]);
-
-//   return (
-//     <div>
-//       <h2>Blogs</h2>
-//       <ul>
-//         {blogs.map((blog) => (
-//           <li key={blog._id}>
-//             <Link to={`/blogs/${blog._id}`}>{blog.title}</Link>
-//           </li>
-//         ))}
-//       </ul>
-//       <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-//         Prev
-//       </button>
-//       <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
-//         Next
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default BlogList;
