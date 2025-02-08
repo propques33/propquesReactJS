@@ -13,7 +13,7 @@ const PincodeSearch = () => {
     if (value.length > 2) {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/pincode/${value}`
+          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
         );
         setResults(res.data);
       } catch (error) {
