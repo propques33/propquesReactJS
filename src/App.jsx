@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 const Navbar = React.lazy(() => import("@/components/Navbar.jsx"));
+const Pincode = React.lazy(() => import("@/components/Pincode.jsx"));
 const Footer = React.lazy(() => import("@/components/Footer.jsx"));
 const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
 import CookieManager from "./utils/cookieManager";
@@ -93,7 +94,9 @@ function App() {
               <link rel="canonical" href="https://propques.com/" />
             </Helmet>
             <div className=" relative">
+              {/* <Pincode /> */}
               <Navbar />
+
               <div className="z-[] fixed z-50">
                 <a
                   href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"

@@ -104,13 +104,13 @@ const Navbar = () => {
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               > */}
-              <a
-                href="/blogs"
+              <Link
+                to="/blogs"
                 className="text-lg hover:text-blue-400"
                 onClick={toggleMenu}
               >
                 Blogs
-              </a>
+              </Link>
               {/* </Link> */}
             </li>
             <li className="">
