@@ -3,21 +3,21 @@ import Hero from "../components/Hero.jsx";
 import HeroMobile from "../components/HeroMobile.jsx";
 import { IoClose } from "react-icons/io5";
 
-// const Hero = React.lazy(() => import("@/components/Hero.jsx"));
+// const Hero = React.lazy(() => import("../components/Hero.jsx"));
 
-const Marqueee = React.lazy(() => import("@/components/Marquee.jsx"));
-const FindUrSpaceUI = React.lazy(() => import("@/components/FindUrSpaceUI.jsx"));
-const PropClean = React.lazy(() => import("@/components/PropClean.jsx"));
-const Features = React.lazy(() => import("@/components/Features"));
-const ImagePopup = React.lazy(() => import("@/components/ImagePopup"));
-const Offer2 = React.lazy(() => import("@/components/Offer2"));
-const Profit = React.lazy(() => import("@/components/Profit"));
-const Risk = React.lazy(() => import("@/components/Risk"));
+const Marqueee = React.lazy(() => import("../components/Marquee.jsx"));
+const FindUrSpaceUI = React.lazy(() => import("../components/FindUrSpaceUI.jsx"));
+const PropClean = React.lazy(() => import("../components/PropClean.jsx"));
+const Features = React.lazy(() => import("../components/Features"));
+const ImagePopup = React.lazy(() => import("../components/ImagePopup"));
+const Offer2 = React.lazy(() => import("../components/Offer2"));
+const Profit = React.lazy(() => import("../components/Profit"));
+const Risk = React.lazy(() => import("../components/Risk"));
 const Contact = React.lazy(() => import("./Contact"));
-const Faq = React.lazy(() => import("@/components/Faq"));
-const Apply = React.lazy(() => import("@/components/Apply"));
-const Impact = React.lazy(() => import("@/components/Impact"));
-const Collab = React.lazy(() => import("@/components/Collab"));
+const Faq = React.lazy(() => import("../components/Faq"));
+const Apply = React.lazy(() => import("../components/Apply"));
+const Impact = React.lazy(() => import("../components/Impact"));
+const Collab = React.lazy(() => import("../components/Collab"));
 import HeroFormMobile from "../components/HeroFormMobile.jsx";
 import Blogs from "../components/BlogList.jsx";
 

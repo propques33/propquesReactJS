@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
-import ModalForm from "@/components/ModalForm";
-import GetInTouch from "@/components/GetInTouch";
+import ModalForm from "../components/ModalForm";
+import GetInTouch from "../components/GetInTouch";
 const offices = [
   {
     name: "Corporate office",

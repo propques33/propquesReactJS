@@ -1,12 +1,9 @@
-import React from "react";
-import { SignUp } from "@clerk/clerk-react";
+import React from 'react'
 
-const AdminLogin = () => {
+const AdminSignup = () => {
   return (
-    <div className="mt-10 flex items-center w-full justify-center">
-      <SignUp signUpUrl="/signin" />
-    </div>
-  );
-};
+    <div>AdminSignup</div>
+  )
+}
 
-export default AdminLogin;
+export default AdminSignup

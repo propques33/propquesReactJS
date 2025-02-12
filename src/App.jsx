@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect } from "react";
-const Navbar = React.lazy(() => import("@/components/Navbar.jsx"));
-const Pincode = React.lazy(() => import("@/components/Pincode.jsx"));
-const Footer = React.lazy(() => import("@/components/Footer.jsx"));
-const Routing = React.lazy(() => import("@/utils/Routing.jsx"));
+const Navbar = React.lazy(() => import("./components/Navbar.jsx"));
+const Pincode = React.lazy(() => import("./components/Pincode.jsx"));
+const Footer = React.lazy(() => import("./components/Footer.jsx"));
+const Routing = React.lazy(() => import("./utils/Routing.jsx"));
 import CookieManager from "./utils/cookieManager";
 import CookieConsent from "./components/CookieConsent";
 import Whatsapp from "../public/Whatsapp.svg";
@@ -34,7 +34,6 @@ function App() {
     const lastSearch = CookieManager.getCookie("lastSearch");
     const favorites = JSON.parse(CookieManager.getCookie("favorites"));
     const preferences = JSON.parse(CookieManager.getCookie("preferences"));
-
   }, []);
   return (
     <AuthProvider>

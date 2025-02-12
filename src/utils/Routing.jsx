@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "../components/ProtectedRoute";
 const Home = React.lazy(() => import("../pages/Home.jsx"));
 const Book = React.lazy(() => import("../pages/Book.jsx"));
 const ContactPage = React.lazy(() => import("../pages/ContactPage.jsx"));
@@ -53,19 +53,16 @@ const Author = React.lazy(() => import("../components/Author.jsx"));
 import AdminDashboard from "../components/AdminDashboard";
 import AuthorDashboard from "../components/AuthorDashboard";
 import LoginForm from "../components/LoginForm";
-import SinglePostPage from "@/components/SinglePostPage";
-import Write from "@/components/Write";
-import PostListPage from "@/components/PostListPage.jsx";
-import AdminSignup from "@/components/AdminSignup.jsx";
-import AdminLogin from "@/components/AdminLogin.jsx";
-import EditBlog from "@/components/EditBlog";
+import SinglePostPage from "../components/SinglePostPage";
+import Write from "../components/Write";
+import PostListPage from "../components/PostListPage.jsx";
+import AdminSignup from "../components/AdminSignup.jsx";
+import AdminLogin from "../components/AdminLogin.jsx";
+import EditBlog from "../components/EditBlog";
 const BlogDetailPage = React.lazy(() =>
   import("../components/BlogDetails.jsx")
 );
 const Routing = () => {
-  
-
-
   return (
     <>
       <Routes>
