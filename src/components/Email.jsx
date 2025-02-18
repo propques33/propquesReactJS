@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useModal } from "../ModalContext"; // <-- Import your modal context
-import HeroModel from './HeroModel'
+
 export default function ContactForm() {
   const navigate = useNavigate();
-  const { isFormOpen, toggleForm } = useModal(); // <-- Destructure modal controls
 
   const [formData, setFormData] = useState({
     name: "",
@@ -242,10 +240,10 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isOtpVerified) {
-      alert("Verify OTP before submitting.");
-      return;
-    }
+        if (!isOtpVerified) {
+          alert("Verify OTP before submitting.");
+          return;
+        }
     // Ensure phone starts with +91 when sending
     const formattedPhone = formData.phone.startsWith("+91")
       ? formData.phone
@@ -263,12 +261,8 @@ export default function ContactForm() {
     };
 
     try {
-      await axios.post(
-        "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
-        payload
-      );
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/contact",
+        "http://localhost:5000/api/contact",
         payload,
         {
           headers: {
@@ -277,34 +271,132 @@ export default function ContactForm() {
         }
       );
       console.log("Response:", response.data);
-      // alert("Form submitted successfully!");
-      navigate("/thankyou");
+      alert("Form submitted successfully!");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       alert("Error submitting form!");
     }
   };
-    if (!isFormOpen) return null;
-
 
   return (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      onClick={toggleForm}
-    >
-      <div
-        className="relative bg-white p-6 rounded-lg shadow-md max-w-md w-full"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* X Button */}
-        <button
-          onClick={toggleForm}
-          className="absolute top-2 right-2 text-gray-600 hover:text-black"
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          name="name"
+          placeholder="Your Name"
+          onChange={handleChange}
+          required
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+        />
+        <div className="flex space-x-2">
+          <input
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            onChange={handleChange}
+            className="flex-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+            required
+          />
+          {!isOtpVerified && (
+            <button
+              type="button"
+              onClick={handleSendOtp}
+              disabled={disableOtpBtn}
+              className="bg-blue-500 text-white px-4  w-40 rounded"
+            >
+              {disableOtpBtn ? `Resend OTP in ${timer}s` : "Send OTP"}
+            </button>
+          )}
+        </div>
+        {isOtpSent && !isOtpVerified && (
+          <div className="flex items-center gap-2 mb-4">
+            <input
+              type="text"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              className="w-full p-2 border rounded"
+              placeholder="Enter OTP"
+              maxLength="6"
+            />
+            <button
+              type="button"
+              onClick={handleVerifyOtp}
+              className="bg-green-500 text-white px-4 py-2 rounded flex items-center"
+              disabled={isOtpLoading}
+            >
+              {isOtpLoading ? <FaSpinner className="animate-spin" /> : "Verify"}
+            </button>
+          </div>
+        )}
+        {/* Mobile Number Field */}
+        <input
+          name="phone"
+          placeholder="Enter Mobile Number"
+          onChange={handleChange}
+          required
+          className="flex-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+        />
+        {/* Pincode Search & Auto-Fill */}
+        <div className="relative">
+          <input
+            type="text"
+            value={pincodeQuery}
+            onChange={handlePincodeSearch}
+            placeholder="Enter Pincode"
+            className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+          />
+          {pincodeResults.length > 0 && (
+            <ul className="absolute left-0 w-full border rounded shadow-md bg-white max-h-40 overflow-y-auto mt-1 z-10">
+              {pincodeResults.map((item, index) => (
+                <li
+                  key={index}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handlePincodeSelect(item)}
+                >
+                  {item.pincode} - {item.locations?.[0] || "N/A"}, {item.city},{" "}
+                  {item.state}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Carpet Area */}
+        <input
+          type="text"
+          name="decimalCustomField2"
+          // value={formData.decimalCustomField2}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          placeholder="Carpet Area (sq. ft.)"
+          required
+        />
+        {/* Coworking Option */}
+        <select
+          name="textCustomField2"
+          onChange={handleChange}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
         >
-          &#10005;
+          <option value="">Select Coworking Option</option>
+          <option value="Start Your Own Coworking">
+            Start Your Own Coworking
+          </option>
+          <option value="Match Making With Coworking">
+            Match Making With Coworking
+          </option>
+        </select>
+        <label className="flex items-center text-sm text-gray-500">
+          <input type="checkbox" className="mr-2" required />I am happy for
+          propques to contact me via mail/SMS. By selecting this you agree to
+          our privacy policy.
+        </label>
+        <button
+          type="submit"
+          className="w-full p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          Let's Talk
         </button>
-      <HeroModel />
-      </div>
+      </form>
     </div>
   );
 }

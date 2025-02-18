@@ -3,8 +3,11 @@ const Navbar = React.lazy(() => import("./components/Navbar.jsx"));
 const Pincode = React.lazy(() => import("./components/Pincode.jsx"));
 const Footer = React.lazy(() => import("./components/Footer.jsx"));
 const Routing = React.lazy(() => import("./utils/Routing.jsx"));
+
+import Email from "./components/Email.jsx";
 import CookieManager from "./utils/cookieManager";
 import CookieConsent from "./components/CookieConsent";
+import PincodeSelector from "./components/PincodeSelector";
 import Whatsapp from "../public/Whatsapp.svg";
 import "./App.css";
 import { ModalProvider } from "./ModalContext.jsx"; // Modal Context Provider
@@ -13,7 +16,7 @@ import { Helmet } from "react-helmet"; // Import Helmet for SEO
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import loading from "../public/loading.gif";
 import { AuthProvider } from "./contexts/AuthContext";
-
+import SalesMateChatWidget from './components/SalesMateChatWidget'
 function App() {
   useEffect(() => {
     // Set user data
@@ -94,10 +97,12 @@ function App() {
             </Helmet>
             <div className=" relative">
               {/* <Pincode /> */}
+              {/* <Email /> */}
+              {/* <PincodeSelector /> */}
               <Navbar />
-
-              <div className="z-[] fixed z-50">
-                <a
+              {/* <OTPCompo /> */}
+              <div className="z-[] fixed z-50 top-20 ">
+                {/* <a
                   href="https://wa.me/917392037856?text=Hello!%20I%20would%20like%20to%20inquire%20about%20your%20coworking%20matchmaking%20and%20starting%20your%20own%20coworking%C2%A0business%C2%A0model"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -120,7 +125,8 @@ function App() {
                     alt="Click to Download"
                     className="fixed  h-16 bottom-20 right-2 cursor-pointer"
                   />
-                </a>
+                </a> */}
+                {/* <SalesMateChatWidget /> */}
               </div>
               <Routing />
               <Footer />

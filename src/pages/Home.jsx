@@ -62,7 +62,7 @@ const Home = () => {
         <HeroMobile id="home" />
       </div>
       {/* HeroModel Popup */}
-      {showPopup && (
+      {/* {showPopup && (
         <div className="fixed z-[100000000000000000000000000000] inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
           <div
             className="bg-white rounded-xl  px-8 py-10 shadow-lg transform transition-transform duration-500 scale-100 opacity-100"
@@ -78,7 +78,7 @@ const Home = () => {
             <HeroFormMobile />
           </div>
         </div>
-      )}
+      )} */}
       {/* Other Components */}
       <Apply />
       <Marqueee id="case" />

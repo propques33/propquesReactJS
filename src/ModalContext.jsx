@@ -11,7 +11,7 @@ export const ModalProvider = ({ children }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const toggleForm = () => {
-    setIsFormOpen(!isFormOpen);
+    setIsFormOpen((prev) => !prev);
   };
 
   // console.log("Modal is open?", isFormOpen); // Log to check if state is changing
