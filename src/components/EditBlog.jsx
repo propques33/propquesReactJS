@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import RichTextEditor from "./RichTextEditor";
 
 const EditBlog = () => {
   const { slug } = useParams();
@@ -165,43 +166,7 @@ const EditBlog = () => {
         )}
 
         {/* 📝 React Quill Editor */}
-        <ReactQuill
-  value={editorContent}
-  onChange={setEditorContent}
-  theme="snow"
-  modules={{
-    toolbar: {
-      container: [
-        [{ font: [] }],
-        [{ size: ['small', false, 'large', 'huge'] }],
-        [{ header: [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link', 'image'],
-        ['clean'],
-      ],
-      handlers: {
-        image: customImageHandler, 
-      },
-    },
-  }}
-  
-  formats={[
-    'font',
-    'size',
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'list',
-    'bullet',
-    'link',
-    'image',
-  ]}
-  
-  className="bg-white border rounded p-2 min-h-[200px]"
-/>
+        <RichTextEditor/>
 
 
         <label className="block font-semibold">Publish On</label>

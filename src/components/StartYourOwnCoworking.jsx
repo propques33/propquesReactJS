@@ -176,26 +176,17 @@ const SYOC = () => {
       {/* Insights Section */}
       <aside className="lg:w-1/3 bg-gradient-to-br from-blue-600 to-blue-400 text-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-4">
-          Drive 3x revenue from your property with Coworking space
+        Make Your Space Work for You—3X Revenue with Coworking
         </h2>
         <p className="text-base mb-4">
-          Embarking on the journey to start your own coworking space is not just
-          about creating a shared workspace—it's about building a vibrant
-          community where creativity, collaboration, and innovation thrive.
+        Stop letting valuable space sit idle. In today’s flexible work era, your commercial property has the potential to generate up to 3x higher returns—simply by transforming it into a coworking space.
         </p>
 
         <p className="mt-4 text-base font-medium">
-          With the rise of flexible work textCustomField8s and the demand for
-          dynamic environments, coworking spaces offer a unique opportunity to
-          cater to freelancers, startups, and enterprises looking for more than
-          just an office. From designing inspiring interiors to curating a
-          culture that fosters networking and growth, launching your coworking
-          venture allows you to redefine how people work together.
+        Whether it’s an empty floor, a low-occupancy building, or an old office setup, you can unlock its full earning potential by catering to the growing demand from freelancers, growing startups, and enterprise clients seeking flexible, plug-and-play workspaces.
         </p>
         <p className="mt-4 text-base font-medium">
-          Whether you're transforming a vacant building into a bustling hub or
-          reimagining shared offices, this venture can be as rewarding as it is
-          impactful.
+        From layout planning to tenant acquisition, we help you transform your space into a premium coworking destination. 
         </p>
       </aside>
 

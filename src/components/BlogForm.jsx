@@ -4,6 +4,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import RichTextEditor from "./RichTextEditor";
 
 const BlogForm = () => {
   const [formData, setFormData] = useState({
@@ -24,11 +25,13 @@ const BlogForm = () => {
       phone: "",
     },
   });
+  const [editorContent, setEditorContent] = useState(""); // <-- ✅ Add this
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [uploading, setUploading] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [newSchemaInput, setNewSchemaInput] = useState("");
+
 
   // ===== Handlers =====
 
@@ -89,9 +92,8 @@ const BlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const contentBody = draftToHtml(
-      convertToRaw(editorState.getCurrentContent())
-    );
+    const contentBody = editorContent;
+  
     try {
       await axios.post("http://localhost:3000/api/blogs", {
         ...formData,
@@ -104,6 +106,7 @@ const BlogForm = () => {
       alert("Failed to create blog");
     }
   };
+  
 
   const addSchemaMarkup = () => {
     try {
@@ -189,26 +192,9 @@ const BlogForm = () => {
         </div>
 
         {/* Rich Text Editor */}
-        <Editor
-          editorState={editorState}
-          onEditorStateChange={setEditorState}
-          toolbar={{
-            image: {
-              uploadCallback: async (file) => {
-                const data = new FormData();
-                data.append("image", file);
-                const res = await axios.post(
-                  "http://localhost:3000/api/blogs/upload-image",
-                  data
-                );
-                return { data: { link: res.data.url } };
-              },
-              previewImage: true,
-            },
-          }}
-          wrapperClassName="border rounded"
-          editorClassName="p-2 min-h-[200px]"
-        />
+        <RichTextEditor content={editorContent} onChange={setEditorContent} />
+
+
 
         {/* Schema Markup Paste Section */}
         <h3 className="font-semibold mt-4">Schema Markup (Paste JSON)</h3>

@@ -30,13 +30,13 @@ const BlogList = () => {
   return (
     <>
       {/* 🟦 Blog Banner */}
-      <div className="bg-gradient-to-r mt-20 from-blue-600 to-indigo-600 text-white py-12 text-center rounded-b-3xl shadow-lg">
-        <h1 className="text-4xl font-bold mb-2">Propques Blog</h1>
-        <p className="text-lg text-white/90">Insights, ideas & guides from India's coworking experts</p>
+      <div className="bg-gradient-to-r mt-12 from-blue-600 to-blue-600 text-white py-12 text-center rounded-b-3xl shadow-lg">
+        <h1 className="md:text-4xl text-2xl font-bold mb-2">Propques Blog</h1>
+        <p className="md:text-lg text-sm text-white/90">Insights, ideas & guides from India's coworking experts</p>
       </div>
 
       {/* 🟩 Blog Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto px-4 md:py-12 py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 md:gap-10 gap-4">
         {blogs.map((blog) => (
           <div
             key={blog._id}
