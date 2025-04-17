@@ -83,13 +83,10 @@ const Routing = () => {
         />
 
         <Route path="/blogs" element={<UserViewBlogs />} />
-        <Route path="/blog/:id" element={<BlogDetails />} />
-        <Route path="/edit-blog/:slug" element={<EditBlog />} />
+        <Route path="/blog/:slug" element={<BlogDetails />} />
+        <Route path="/admin/edit/:slug" element={<EditBlog />} />
 
-        {/* <Route
-          path="/blog/:slug"
-          element={<BlogDetailPage blogPosts={blogPosts} />}
-        /> */}
+   
 
         <Route path="/faqs" element={<Faq />} />
         <Route path="/about-us" element={<About />} />
@@ -126,7 +123,7 @@ const Routing = () => {
         <Route path="/register" element={<AdminSignup />} />
         <Route path="/posts" element={<PostListPage />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/:slug" element={<SinglePostPage />} />
+        <Route path="/:urlSlug" element={<SinglePostPage />} />
 
         <Route
           path="/author-dashboard"

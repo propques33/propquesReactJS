@@ -10,7 +10,7 @@ const UserApproval = () => {
 
   const fetchPendingUsers = async () => {
     try {
-      const response = await axios.get("https://propques-backend-jsqqh.ondigitalocean.app/api/users/pending");
+      const response = await axios.get("https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/users/pending");
       setPendingUsers(response.data);
     } catch (error) {
       console.error("Error fetching pending users", error);
@@ -19,7 +19,7 @@ const UserApproval = () => {
 
   const handleApproval = async (userId, approve) => {
     try {
-      await axios.post(`https://propques-backend-jsqqh.ondigitalocean.app/api/users/approve/${userId}`, {
+      await axios.post(`https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/users/approve/${userId}`, {
         approved: approve,
       });
       fetchPendingUsers();

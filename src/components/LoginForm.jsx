@@ -15,7 +15,7 @@
 //     setLoading(true);
 //     try {
 //       const response = await axios.post(
-//         "https://propques-backend-jsqqh.ondigitalocean.app/api/users/login",
+//         "http://localhost:3000/api/users/login",
 //         {
 //           email,
 //           password,
@@ -106,16 +106,16 @@ export default function AuthForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Determine correct endpoint based on role + action
+
     let endpoint;
     if (userType === "admin") {
       endpoint = isSignUp
-        ? "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/signup"
-        : "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/login";
+        ? "http://localhost:3000/api/admin/signup"
+        : "http://localhost:3000/api/admin/login";
     } else {
       endpoint = isSignUp
-        ? "https://propques-backend-jsqqh.ondigitalocean.app/api/author/signup"
-        : "https://propques-backend-jsqqh.ondigitalocean.app/api/author/login";
+        ? "http://localhost:3000/api/author/signup"
+        : "http://localhost:3000/api/author/login";
     }
 
     try {

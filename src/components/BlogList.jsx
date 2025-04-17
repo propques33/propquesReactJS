@@ -1,162 +1,116 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaEye, FaEyeSlash, FaRegCalendarAlt, FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff, Pencil, Globe } from "lucide-react";
 
-const BlogList = () => {
+const AdminBlogDashboard = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/blogs");
+        setBlogs(res.data.pages || []);
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchBlogs();
   }, []);
 
-  const fetchBlogs = async () => {
-    setLoading(true);
-    setError(null);
-
+  const toggleVisibility = async (slug, currentVisible) => {
     try {
-      const response = await axios.get(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/blogs"
+      const updated = await axios.put(`http://localhost:3000/api/blogs/${slug}`, {
+        visible: !currentVisible,
+      });
+
+      setBlogs((prev) =>
+        prev.map((b) =>
+          b.urlSlug === slug ? { ...b, visible: updated.data.page.visible } : b
+        )
       );
-      console.log(response.data.blogs);
-      setBlogs(response.data.blogs);
     } catch (err) {
-      console.error("Error fetching blogs:", err);
-      setError("Failed to load blogs. Please try again.");
-    } finally {
-      setLoading(false);
+      console.error("Error toggling visibility:", err);
+      alert("Could not update visibility");
     }
   };
 
-  const toggleVisibility = async (blogId, currentVisibility) => {
-    const newVisibility = !currentVisibility;
-    const token = localStorage.getItem("token");
-
-    console.log(
-      `Toggling visibility for Blog ID: ${blogId} to ${newVisibility}`
-    );
-
-    try {
-      const response = await axios.patch(
-        `https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${blogId}/visibility`,
-        { visibility: newVisibility },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      console.log("Updated Blog Data:", response.data);
-      fetchBlogs();
-    } catch (error) {
-      console.error(
-        "Error toggling visibility:",
-        error.response?.data || error
-      );
-    }
+  const handleEdit = (slug) => {
+    navigate(`/admin/edit/${slug}`);
   };
+
+  const groupedBlogs = {
+    Propques: blogs.filter((b) => b.publishOn === "Propques"),
+    Findurspace: blogs.filter((b) => b.publishOn === "Findurspace"),
+    Others: blogs.filter((b) => !b.publishOn),
+  };
+
+  const renderSection = (title, blogs) => (
+    <div className="mb-10">
+      <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
+        <Globe className="w-5 h-5" /> {title}
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {blogs.map((blog) => (
+          <div
+            key={blog._id}
+            className="border rounded-lg p-4 shadow-sm hover:shadow-md transition bg-white"
+          >
+            {blog.featuredImage && (
+              <img
+                src={blog.featuredImage}
+                alt={blog.pageTitle}
+                className="w-full h-40 object-cover rounded mb-3"
+              />
+            )}
+            <h4 className="text-lg font-semibold truncate">{blog.pageTitle}</h4>
+            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+              {blog.metaDescription}
+            </p>
+
+            <div className="flex justify-between items-center mt-4">
+              <button
+                onClick={() => handleEdit(blog.urlSlug)}
+                className="flex items-center gap-1 text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+              >
+                <Pencil className="w-4 h-4" />
+                Edit
+              </button>
+
+              <button
+                onClick={() => toggleVisibility(blog.urlSlug, blog.visible)}
+                className={`flex items-center gap-1 text-sm px-3 py-1 rounded ${
+                  blog.visible
+                    ? "bg-green-600 text-white hover:bg-green-700"
+                    : "bg-gray-400 text-white hover:bg-gray-500"
+                }`}
+              >
+                {blog.visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                {blog.visible ? "Visible" : "Hidden"}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  if (loading) return <p className="p-6">Loading blogs...</p>;
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="bg-white shadow-lg rounded-lg w-full">
-        {loading ? (
-          <div className="flex justify-center items-center py-10">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-blue-500"></div>
-            <p className="ml-3 text-gray-600">Loading blogs...</p>
-          </div>
-        ) : error ? (
-          <div className="text-center text-red-500">
-            <p>{error}</p>
-          </div>
-        ) : blogs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {blogs.map((blog) => (
-              <div
-                key={blog._id}
-                className={`p-5 rounded-lg shadow-md transition ${
-                  !blog.visibility ? "opacity-50" : "opacity-100"
-                } bg-gray-50 hover:bg-gray-100`}
-              >
-                {console.log(blog)}
-                {/* Blog Image */}
-                <img
-                  src={blog.coverImage || "https://via.placeholder.com/300"}
-                  alt={blog.title}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
+    <div className="max-w-7xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-8">🛠 Admin Blog Dashboard</h2>
 
-                {/* Blog Content */}
-                <div className="flex flex-col">
-                  <h3 className="text-lg font-semibold text-gray-800">
-                    {blog.title}
-                  </h3>
-                  {/* <p className="text-sm text-gray-500 mt-1">
-                    {blog.description.length > 100
-                      ? blog.description.substring(0, 100) + "..."
-                      : blog.description}
-                  </p> */}
-
-                  {/* Date & Visibility Info */}
-                  <div className="flex items-center text-gray-600 mt-2 text-sm">
-                    <FaRegCalendarAlt className="mr-2" />
-                    <span>{new Date(blog.date).toLocaleDateString()}</span>
-                  </div>
-                  {/* <div className="mt-2 flex items-center">
-                    {blog.visibility ? (
-                      <FaEye className="text-green-500 mr-2" />
-                    ) : (
-                      <FaEyeSlash className="text-red-500 mr-2" />
-                    )}
-                    <span className="text-sm">
-                      {blog.visibility ? "Visible" : "Hidden"}
-                    </span>
-                  </div> */}
-                </div>
-
-                {/* Visibility Toggle Button */}
-                <button
-                  onClick={() => toggleVisibility(blog._id, blog.visibility)}
-                  className={`w-full mt-4 px-4 py-2 text-sm font-medium rounded-lg transition flex items-center justify-center ${
-                    blog.visibility
-                      ? "bg-red-500 text-white hover:bg-red-600"
-                      : "bg-green-500 text-white hover:bg-green-600"
-                  }`}
-                >
-                  {blog.visibility ? (
-                    <FaEyeSlash className="mr-2" />
-                  ) : (
-                    <FaEye className="mr-2" />
-                  )}
-                  {blog.visibility ? "Hide" : "Show"}
-                </button>
-
-                {/* Edit Blog Button */}
-                <button
-                  onClick={() => navigate(`/edit-blog/${blog.slug}`)}
-                  className="w-full mt-2 px-4 py-2 text-sm font-medium rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition flex items-center justify-center"
-                >
-                  <FaEdit className="mr-2" />
-                  Edit Blog
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-10 text-gray-500">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png"
-              alt="No data"
-              className="w-32 h-32 opacity-50"
-            />
-            <p className="mt-4 text-lg font-medium">No blogs available.</p>
-            <p className="text-sm">Check back later or add new blogs.</p>
-          </div>
-        )}
-      </div>
+      {renderSection(" Propques Blogs", groupedBlogs.Propques)}
+      {renderSection(" Findurspace Blogs", groupedBlogs.Findurspace)}
+      {renderSection(" Other Blogs", groupedBlogs.Others)}
     </div>
   );
 };
 
-export default BlogList;
+export default AdminBlogDashboard;

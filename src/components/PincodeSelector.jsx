@@ -19,7 +19,7 @@ const PincodeSearch = () => {
     if (value.length > 2) {
       try {
         const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
+          `https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/pincode/${value}`
         );
         setResults(Array.isArray(res.data) ? res.data : [res.data]); // Ensure data is an array
       } catch (error) {

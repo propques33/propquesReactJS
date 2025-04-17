@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://propques-backend-jsqqh.ondigitalocean.app/blogs"; // Update if hosted on a server
+const API_URL = "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/blogs"; // Update if hosted on a server
 
 export const fetchBlogs = async (page = 1, limit = 10) => {
   const response = await axios.get(`${API_URL}?page=${page}&limit=${limit}`);

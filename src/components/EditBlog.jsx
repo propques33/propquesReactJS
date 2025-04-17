@@ -1,362 +1,226 @@
-// import axios from "axios";
-// import React, { useEffect, useState } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
-
-// const EditBlog = () => {
-//   const { slug } = useParams(); // Get the slug from the URL
-//   const navigate = useNavigate();
-
-//   const [blog, setBlog] = useState({
-//     title: "",
-//     description: "",
-//     coverImage: "",
-//     authors: [],
-//     readingTime: "",
-//     visibility: true,
-//   });
-
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   // Fetch blog details
-//   useEffect(() => {
-//     axios
-//       .get(`https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${slug}`)
-//       .then((res) => {
-//         setBlog(res.data);
-//         setLoading(false);
-//       })
-//       .catch((err) => {
-//         console.error("Error fetching blog:", err);
-//         setError("Failed to load blog.");
-//         setLoading(false);
-//       });
-//   }, [slug]);
-
-//   // Handle form input changes
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setBlog({ ...blog, [name]: value });
-//   };
-
-//   // Handle form submission
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await axios.put(`https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${slug}`, blog);
-//       alert("Blog updated successfully!");
-//       navigate(`/blog/${slug}`); // Redirect to the updated blog
-//     } catch (err) {
-//       console.error("Error updating blog:", err);
-//       alert("Failed to update the blog.");
-//     }
-//   };
-
-//   if (loading) return <p>Loading blog...</p>;
-//   if (error) return <p className="text-red-500">{error}</p>;
-
-//   return (
-//     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-//       <h1 className="text-2xl font-bold mb-4">Edit Blog</h1>
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <div>
-//           <label className="block font-semibold">Title</label>
-//           <input
-//             type="text"
-//             name="title"
-//             value={blog.title}
-//             onChange={handleChange}
-//             className="w-full p-2 border rounded"
-//             required
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-semibold">Description</label>
-//           <textarea
-//             name="description"
-//             value={blog.description}
-//             onChange={handleChange}
-//             className="w-full p-2 border rounded"
-//             required
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-semibold">Cover Image URL</label>
-//           <input
-//             type="text"
-//             name="coverImage"
-//             value={blog.coverImage}
-//             onChange={handleChange}
-//             className="w-full p-2 border rounded"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-semibold">Reading Time (mins)</label>
-//           <input
-//             type="text"
-//             name="readingTime"
-//             value={blog.readingTime}
-//             onChange={handleChange}
-//             className="w-full p-2 border rounded"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-semibold">Visibility</label>
-//           <select
-//             name="visibility"
-//             value={blog.visibility}
-//             onChange={(e) =>
-//               setBlog({ ...blog, visibility: e.target.value === "true" })
-//             }
-//             className="w-full p-2 border rounded"
-//           >
-//             <option value="true">Visible</option>
-//             <option value="false">Hidden</option>
-//           </select>
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="bg-blue-500 text-white px-4 py-2 rounded"
-//         >
-//           Update Blog
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default EditBlog;
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
-import htmlToDraft from "html-to-draftjs";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const EditBlog = () => {
-  const { slug } = useParams(); // Get the blog slug from the URL
+  const { slug } = useParams();
   const navigate = useNavigate();
 
-  // Blog state
   const [blog, setBlog] = useState({
-    title: "",
-    coverImage: "",
-    description: "",
+    pageTitle: "",
+    metaTitle: "",
+    metaDescription: "",
+    canonicalUrl: "",
+    featuredImage: "",
+    visible: true,
+    publishOn: "",
   });
 
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorContent, setEditorContent] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
   const [coverImageProgress, setCoverImageProgress] = useState(0);
 
-  // Fetch blog details
   useEffect(() => {
     axios
-      .get(
-        `https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${slug}`
-      )
+      .get(`http://localhost:3000/api/blogs/${slug}`)
       .then((res) => {
-        const blogData = res.data;
-
-        // Set the blog state
+        const data = res.data;
         setBlog({
-          title: blogData.title,
-          coverImage: blogData.coverImage,
-          description: blogData.description,
+          pageTitle: data.pageTitle,
+          metaTitle: data.metaTitle || "",
+          metaDescription: data.metaDescription || "",
+          canonicalUrl: data.canonicalUrl || "",
+          featuredImage: data.featuredImage || "",
+          visible: data.visible,
+          publishOn: data.publishOn || "",
         });
-
-        // Convert HTML to Draft.js editor state
-        const blocksFromHtml = htmlToDraft(blogData.description);
-        const { contentBlocks, entityMap } = blocksFromHtml;
-        const contentState = ContentState.createFromBlockArray(
-          contentBlocks,
-          entityMap
-        );
-        setEditorState(EditorState.createWithContent(contentState));
-
+        setEditorContent(data.contentBody || "");
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching blog:", err);
-        setError("Failed to load blog.");
         setLoading(false);
       });
   }, [slug]);
 
-  /**
-   * 📌 Handle Cover Image Upload
-   */
-  const handleCoverImageUpload = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const result = await uploadImage(file, setCoverImageProgress);
-      if (result) setBlog({ ...blog, coverImage: result.data.link });
-    }
-  };
-
-  /**
-   * 📌 Handle Content Image Upload
-   */
-  const handleContentImageUpload = async (file) => {
-    return await uploadImage(file, setUploadProgress);
-  };
-
-  /**
-   * 📌 Generic Image Upload Function with Progress Tracking
-   */
   const uploadImage = async (file, setProgress) => {
     const formData = new FormData();
     formData.append("image", file);
-
     try {
-      setProgress(0);
-
+      setProgress?.(0);
       const { data } = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/upload-image",
+        "http://localhost:3000/api/blogs/upload-image",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
-          onUploadProgress: (progressEvent) => {
-            let percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setProgress(percentCompleted);
+          onUploadProgress: (e) => {
+            if (setProgress) {
+              setProgress(Math.round((e.loaded * 100) / e.total));
+            }
           },
         }
       );
-
-      setProgress(100);
-      setTimeout(() => setProgress(0), 1500);
-
-      return { data: { link: data.url } }; // Required by Draft.js
-    } catch (error) {
-      console.error("Image Upload Failed:", error);
-      setProgress(0);
+      setProgress?.(100);
+      setTimeout(() => setProgress?.(0), 1000);
+      return data.url;
+    } catch (err) {
+      console.error("Image upload failed", err);
       return null;
     }
   };
 
-  /**
-   * 📌 Handle Blog Update
-   */
+  const handleCoverImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = await uploadImage(file, setCoverImageProgress);
+      if (url) setBlog((prev) => ({ ...prev, featuredImage: url }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    const contentBody = editorContent;
 
     try {
-      await axios.put(`https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/${slug}`, {
-        title: blog.title,
-        description: content,
-        coverImage: blog.coverImage,
+      await axios.put(`http://localhost:3000/api/blogs/${slug}`, {
+        ...blog,
+        contentBody,
       });
 
-      alert("Blog updated successfully!");
-      navigate(`/blog/${slug}`);
+      alert("✅ Blog updated successfully!");
+      navigate("/blogs");
     } catch (err) {
       console.error("Error updating blog:", err);
-      alert("Failed to update the blog.");
+      alert("❌ Failed to update blog.");
     }
   };
 
   if (loading) return <p>Loading blog...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-4xl mx-auto p-6 mt-10 bg-white shadow rounded">
       <h1 className="text-2xl font-bold mb-4">Edit Blog</h1>
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Blog Title */}
-        <div>
-          <label className="block font-semibold">Title</label>
+        <input
+          type="text"
+          placeholder="Page Title"
+          value={blog.pageTitle}
+          onChange={(e) => setBlog({ ...blog, pageTitle: e.target.value })}
+          className="w-full p-2 border rounded"
+          required
+        />
+
+        <input
+          type="text"
+          placeholder="Meta Title"
+          value={blog.metaTitle}
+          onChange={(e) => setBlog({ ...blog, metaTitle: e.target.value })}
+          className="w-full p-2 border rounded"
+        />
+
+        <textarea
+          placeholder="Meta Description"
+          value={blog.metaDescription}
+          onChange={(e) =>
+            setBlog({ ...blog, metaDescription: e.target.value })
+          }
+          className="w-full p-2 border rounded"
+        />
+
+        <input
+          type="text"
+          placeholder="Canonical URL"
+          value={blog.canonicalUrl}
+          onChange={(e) => setBlog({ ...blog, canonicalUrl: e.target.value })}
+          className="w-full p-2 border rounded"
+        />
+
+        <label className="flex items-center space-x-2">
           <input
-            type="text"
-            name="title"
-            value={blog.title}
-            onChange={(e) => setBlog({ ...blog, title: e.target.value })}
-            className="w-full p-2 border rounded"
-            required
+            type="checkbox"
+            checked={blog.visible}
+            onChange={(e) => setBlog({ ...blog, visible: e.target.checked })}
           />
-        </div>
+          <span>Visible on UI</span>
+        </label>
 
-        {/* Cover Image Upload */}
-        <div>
-          <label className="block font-semibold">Cover Image</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleCoverImageUpload}
-            className="block w-full p-2 border rounded"
+        <input type="file" onChange={handleCoverImageUpload} />
+        {blog.featuredImage && (
+          <img
+            src={blog.featuredImage}
+            alt="Cover"
+            className="h-40 mt-2 rounded"
           />
-          {blog.coverImage && (
-            <img
-              src={blog.coverImage}
-              alt="Cover"
-              className="w-full h-40 object-cover mt-2 rounded-lg"
-            />
-          )}
-          {coverImageProgress > 0 && (
-            <div className="w-full bg-gray-200 rounded-lg mt-2">
-              <div
-                className="h-2 bg-green-500 rounded-lg transition-all"
-                style={{ width: `${coverImageProgress}%` }}
-              ></div>
-            </div>
-          )}
-        </div>
-
-        {/* Rich Text Editor */}
-        <div className="border border-gray-300 rounded-lg p-2 bg-white ">
-          <Editor
-            editorState={editorState}
-            onEditorStateChange={(newState) => setEditorState(newState)}
-            toolbar={{
-              options: [
-                "inline",
-                "blockType",
-                "list",
-                "link",
-                "image",
-                "history",
-              ],
-              inline: { options: ["bold", "italic", "underline"] },
-              blockType: { options: ["Normal", "H1", "H2", "H3"] },
-              list: { options: ["unordered", "ordered"] },
-              image: {
-                uploadCallback: handleContentImageUpload,
-                previewImage: true,
-                alt: { present: true, mandatory: false },
-              },
-            }}
-            editorClassName="custom-editor"
-          />
-        </div>
-
-        {/* Content Image Upload Progress */}
-        {uploadProgress > 0 && (
+        )}
+        {coverImageProgress > 0 && (
           <div className="w-full bg-gray-200 rounded-lg mt-2">
             <div
-              className="h-2 bg-blue-500 rounded-lg transition-all"
-              style={{ width: `${uploadProgress}%` }}
+              className="h-2 bg-green-500 rounded-lg transition-all"
+              style={{ width: `${coverImageProgress}%` }}
             ></div>
           </div>
         )}
 
-        {/* Submit Button */}
+        {/* 📝 React Quill Editor */}
+        <ReactQuill
+  value={editorContent}
+  onChange={setEditorContent}
+  theme="snow"
+  modules={{
+    toolbar: {
+      container: [
+        [{ font: [] }],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link', 'image'],
+        ['clean'],
+      ],
+      handlers: {
+        image: customImageHandler, 
+      },
+    },
+  }}
+  
+  formats={[
+    'font',
+    'size',
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'list',
+    'bullet',
+    'link',
+    'image',
+  ]}
+  
+  className="bg-white border rounded p-2 min-h-[200px]"
+/>
+
+
+        <label className="block font-semibold">Publish On</label>
+        <select
+          value={blog.publishOn || ""}
+          onChange={(e) => setBlog({ ...blog, publishOn: e.target.value })}
+          className="w-full p-2 border rounded"
+          required
+        >
+          <option value="">Select Platform</option>
+          <option value="Propques">Propques</option>
+          <option value="Findurspace">Findurspace</option>
+        </select>
+
         <button
           type="submit"
-          className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
         >
-          💾 Update Blog
+          Save Changes
         </button>
       </form>
     </div>

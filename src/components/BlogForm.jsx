@@ -1,411 +1,391 @@
-// import React, { useState, useRef } from "react";
-// import axios from "axios";
-
-// const BlogForm = () => {
-//   const [title, setTitle] = useState("");
-//   const [coverImage, setCoverImage] = useState("");
-//   const [content, setContent] = useState(""); // HTML content
-//   const [uploadProgress, setUploadProgress] = useState(0); // Progress Bar State
-//   const editorRef = useRef(null);
-
-//   /**
-//    * 📌 Handle Image Upload to Cloudinary with Progress Bar
-//    */
-//   const handleImageUpload = async (event) => {
-//     const file = event.target.files[0];
-//     if (!file) return;
-
-//     const formData = new FormData();
-//     formData.append("image", file);
-
-//     try {
-//       setUploadProgress(0); // Reset progress
-
-//       const { data } = await axios.post(
-//         "http://localhost:5000/api/blogs/upload-image",
-//         formData,
-//         {
-//           headers: { "Content-Type": "multipart/form-data" },
-//           onUploadProgress: (progressEvent) => {
-//             let percentCompleted = Math.round(
-//               (progressEvent.loaded * 100) / progressEvent.total
-//             );
-//             setUploadProgress(percentCompleted);
-//           },
-//         }
-//       );
-
-//       setUploadProgress(100); // Ensure it completes
-
-//       if (editorRef.current) {
-//         const imgTag = `<p><img src="${data.url}" class="max-w-full h-auto" /></p>`;
-//         editorRef.current.innerHTML += imgTag;
-//         setContent(editorRef.current.innerHTML);
-//       }
-
-//       setTimeout(() => setUploadProgress(0), 1000); // Hide progress bar
-//     } catch (error) {
-//       console.error("Image Upload Failed:", error);
-//       setUploadProgress(0); // Reset progress on failure
-//     }
-//   };
-
-//   /**
-//    * 📌 Handle Text Formatting (Bold, Italic, Underline, Lists, Headings, Links)
-//    */
-//   const applyFormatting = (command, value = null) => {
-//     document.execCommand(command, false, value);
-//     setContent(editorRef.current.innerHTML);
-//   };
-
-//   /**
-//    * 📌 Handle Headings (H1, H2, H3) with Tailwind Classes
-//    */
-//   const applyHeading = (level) => {
-//     document.execCommand("formatBlock", false, `<h${level}>`);
-//     setContent(editorRef.current.innerHTML);
-//   };
-
-//   /**
-//    * 📌 Handle Content Change (Ensures Real-time Updates)
-//    */
-//   const handleContentChange = () => {
-//     setContent(editorRef.current.innerHTML);
-//   };
-
-//   /**
-//    * 📌 Handle Blog Submission
-//    */
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await axios.post("http://localhost:5000/api/blogs", {
-//         title,
-//         description: content,
-//         coverImage,
-//         authorId: "6799c7cf845df102d171f728", // Replace with actual user ID
-//       });
-
-//       console.log("Blog Created:", response.data);
-//       alert("Blog created successfully");
-
-//       setTitle("");
-//       setCoverImage("");
-//       setContent("");
-//       editorRef.current.innerHTML = ""; // Clear editor
-//     } catch (error) {
-//       console.error("Error creating blog:", error);
-//       alert("Failed to create blog");
-//     }
-//   };
-
-//   return (
-//     <div className="flex justify-center items-center p-6">
-//       <div className="bg-white w-full max-w-4xl p-6 shadow-lg rounded-lg">
-//         <h2 className="text-2xl font-bold text-center mb-6">
-//           ✍️ Write Your Blog
-//         </h2>
-
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           {/* Blog Title */}
-//           <input
-//             type="text"
-//             placeholder="Blog Title"
-//             value={title}
-//             onChange={(e) => setTitle(e.target.value)}
-//             required
-//             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-//           />
-
-//           {/* Cover Image */}
-//           <input
-//             type="text"
-//             placeholder="Cover Image URL"
-//             value={coverImage}
-//             onChange={(e) => setCoverImage(e.target.value)}
-//             required
-//             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-//           />
-
-//           {/* Toolbar */}
-//           <div className="flex flex-wrap space-x-2 mb-2 bg-gray-100 p-2 rounded-md">
-//             {/* Text Styles */}
-//             <button type="button" onClick={() => applyFormatting("bold")} className="p-2 font-bold border rounded">
-//               B
-//             </button>
-//             <button type="button" onClick={() => applyFormatting("italic")} className="p-2 italic border rounded">
-//               I
-//             </button>
-//             <button type="button" onClick={() => applyFormatting("underline")} className="p-2 underline border rounded">
-//               U
-//             </button>
-
-//             {/* Headings */}
-//             <button type="button" onClick={() => applyHeading(1)} className="p-2 border rounded">
-//               H1
-//             </button>
-//             <button type="button" onClick={() => applyHeading(2)} className="p-2 border rounded">
-//               H2
-//             </button>
-//             <button type="button" onClick={() => applyHeading(3)} className="p-2 border rounded">
-//               H3
-//             </button>
-
-//             {/* Lists */}
-//             <button type="button" onClick={() => applyFormatting("insertUnorderedList")} className="p-2 border rounded">
-//               • List
-//             </button>
-//             <button type="button" onClick={() => applyFormatting("insertOrderedList")} className="p-2 border rounded">
-//               1. List
-//             </button>
-
-//             {/* Link */}
-//             <button
-//               type="button"
-//               onClick={() => {
-//                 const url = prompt("Enter URL:");
-//                 if (url) applyFormatting("createLink", url);
-//               }}
-//               className="p-2 border rounded"
-//             >
-//               🔗 Link
-//             </button>
-
-//             {/* Image Upload */}
-//             <label className="p-2 border rounded cursor-pointer">
-//               📷
-//               <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
-//             </label>
-//           </div>
-
-//           {/* Upload Progress Bar */}
-//           {uploadProgress > 0 && (
-//             <div className="w-full bg-gray-200 rounded-lg">
-//               <div className="h-2 bg-blue-500 rounded-lg" style={{ width: `${uploadProgress}%` }}></div>
-//             </div>
-//           )}
-
-//           {/* Editable Content Area */}
-//           <div
-//             ref={editorRef}
-//             contentEditable
-//             onInput={handleContentChange}
-//             className="w-full h-60 p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500"
-//             style={{ minHeight: "150px", overflowY: "auto" }}
-//           ></div>
-
-//           {/* Submit Button */}
-//           <button type="submit" className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-//             📝 Create Blog
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BlogForm;
-
-
-
-
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { EditorState, convertToRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "./editorStyles.css"; // Import custom styles
 
 const BlogForm = () => {
-  const [title, setTitle] = useState("");
-  const [coverImage, setCoverImage] = useState("");
+  const [formData, setFormData] = useState({
+    pageTitle: "",
+    metaTitle: "",
+    metaDescription: "",
+    canonicalUrl: "",
+    featuredImage: "",
+    faqBlock: [{ question: "", answer: "" }],
+    schemaMarkup: [],
+    ampCompatibility: false,
+    brokenLinkDetector: false,
+    redirectManager: [{ from: "", to: "", type: "301" }],
+    locationLandingPages: [],
+    napFields: {
+      name: "",
+      address: "",
+      phone: "",
+    },
+  });
+
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [coverImageProgress, setCoverImageProgress] = useState(0);
+  const [uploading, setUploading] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState("");
+  const [newSchemaInput, setNewSchemaInput] = useState("");
 
-  /**
-   * 📌 Handle Image Upload to Cloudinary (For Content Images)
-   */
-  const handleContentImageUpload = async (file) => {
-    return await uploadImage(file, setUploadProgress);
-  };
+  // ===== Handlers =====
 
-  /**
-   * 📌 Handle Cover Image Upload (Uploads and Sets URL)
-   */
-  const handleCoverImageUpload = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const result = await uploadImage(file, setCoverImageProgress);
-      if (result) setCoverImage(result.data.link);
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (name.includes("napFields.")) {
+      const field = name.split(".")[1];
+      setFormData((prev) => ({
+        ...prev,
+        napFields: {
+          ...prev.napFields,
+          [field]: value,
+        },
+      }));
+    } else if (type === "checkbox") {
+      setFormData((prev) => ({ ...prev, [name]: checked }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
-  /**
-   * 📌 Generic Image Upload Function with Progress Tracking
-   */
-  const uploadImage = async (file, setProgress) => {
-    const formData = new FormData();
-    formData.append("image", file);
-
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const data = new FormData();
+    data.append("image", file);
+    setUploading(true);
     try {
-      setProgress(0);
-
-      const { data } = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/blogs/upload-image",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          onUploadProgress: (progressEvent) => {
-            let percentCompleted = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-            setProgress(percentCompleted);
-          },
-        }
+      const res = await axios.post(
+        "http://localhost:3000/api/blogs/upload-image",
+        data
       );
-
-      setProgress(100);
-      setTimeout(() => setProgress(0), 1500);
-
-      return { data: { link: data.url } }; // Required by Draft.js
-    } catch (error) {
-      console.error("Image Upload Failed:", error);
-      setProgress(0);
-      return null;
+      setFormData((prev) => ({ ...prev, featuredImage: res.data.url }));
+    } catch {
+      alert("Image upload failed");
     }
+    setUploading(false);
   };
 
-  /**
-   * 📌 Handle Blog Submission
-   */
+  const handleFaqChange = (index, field, value) => {
+    const updatedFaqs = [...formData.faqBlock];
+    updatedFaqs[index][field] = value;
+    setFormData({ ...formData, faqBlock: updatedFaqs });
+  };
+
+  const addFaq = () => {
+    setFormData((prev) => ({
+      ...prev,
+      faqBlock: [...prev.faqBlock, { question: "", answer: "" }],
+    }));
+  };
+
+  const handleRedirectChange = (index, field, value) => {
+    const updated = [...formData.redirectManager];
+    updated[index][field] = value;
+    setFormData((prev) => ({ ...prev, redirectManager: updated }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-
+    const contentBody = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
     try {
-      const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/blogs",
-        {
-          title,
-          description: content,
-          coverImage,
-          authorId: "6799c7cf845df102d171f728",
-        }
-      );
-
-      console.log("Blog Created:", response.data);
-      alert("Blog created successfully");
-
-      setTitle("");
-      setCoverImage("");
-      setEditorState(EditorState.createEmpty());
-    } catch (error) {
-      console.error("Error creating blog:", error);
+      await axios.post("http://localhost:3000/api/blogs", {
+        ...formData,
+        contentBody,
+        publishOn: selectedPlatform,
+      });
+      alert("Blog created successfully!");
+    } catch (err) {
+      console.error(err);
       alert("Failed to create blog");
     }
   };
 
+  const addSchemaMarkup = () => {
+    try {
+      const parsed = JSON.parse(newSchemaInput);
+      setFormData((prev) => ({
+        ...prev,
+        schemaMarkup: [...prev.schemaMarkup, JSON.stringify(parsed)],
+      }));
+      setNewSchemaInput("");
+    } catch (err) {
+      alert("Invalid JSON format. Please check and try again.");
+    }
+  };
+
+  const removeSchemaMarkup = (index) => {
+    const updated = [...formData.schemaMarkup];
+    updated.splice(index, 1);
+    setFormData({ ...formData, schemaMarkup: updated });
+  };
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        await axios.get("http://localhost:3000/api/blogs", {
+          params: selectedPlatform ? { publishOn: selectedPlatform } : {},
+        });
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      }
+    };
+    fetchBlogs();
+  }, [selectedPlatform]);
+
+  // ===== Render =====
+
   return (
-    <div className="flex justify-center items-center ">
-      <div className="bg-white w-full  p-6 shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          ✍️ Write Your Blog
-        </h2>
+    <div className="max-w-4xl mx-auto p-6 space-y-4">
+      <h2 className="text-2xl font-bold">Create New Blog</h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4 ">
-          {/* Blog Title */}
-          <input
-            type="text"
-            placeholder="Blog Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Title & Meta Fields */}
+        <input
+          name="pageTitle"
+          value={formData.pageTitle}
+          onChange={handleInputChange}
+          placeholder="Page Title"
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          name="metaTitle"
+          value={formData.metaTitle}
+          onChange={handleInputChange}
+          placeholder="Meta Title"
+          className="w-full p-2 border rounded"
+        />
+        <textarea
+          name="metaDescription"
+          value={formData.metaDescription}
+          onChange={handleInputChange}
+          placeholder="Meta Description"
+          className="w-full p-2 border rounded"
+        />
+        <input
+          name="canonicalUrl"
+          value={formData.canonicalUrl}
+          onChange={handleInputChange}
+          placeholder="Canonical URL"
+          className="w-full p-2 border rounded"
+        />
 
-          {/* Cover Image Upload */}
-          <div>
-            <label className="block text-gray-700 font-bold mb-2">
-              Upload Cover Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleCoverImageUpload}
-              className="block w-full p-2 border border-gray-300 rounded-lg"
+        {/* Cover Image */}
+        <div>
+          <input type="file" accept="image/*" onChange={handleImageUpload} />
+          {uploading && <p>Uploading...</p>}
+          {formData.featuredImage && (
+            <img
+              src={formData.featuredImage}
+              alt="cover"
+              className="w-full h-48 object-cover mt-2 rounded"
             />
-            {/* Show uploaded cover image preview */}
-            {coverImage && (
-              <img
-                src={coverImage}
-                alt="Cover"
-                className="w-full h-40 object-cover mt-2 rounded-lg"
-              />
-            )}
-            {/* Cover Image Upload Progress */}
-            {coverImageProgress > 0 && (
-              <div className="w-full bg-gray-200 rounded-lg mt-2">
-                <div
-                  className="h-2 bg-green-500 rounded-lg transition-all"
-                  style={{ width: `${coverImageProgress}%` }}
-                ></div>
-              </div>
-            )}
-          </div>
-
-          {/* Editor with Custom Styles */}
-          <div className="border border-gray-300 rounded-lg p-2 bg-white ">
-            <Editor
-              editorState={editorState}
-              onEditorStateChange={(newState) => setEditorState(newState)}
-              toolbar={{
-                options: [
-                  "inline",
-                  "blockType",
-                  "list",
-                  "link",
-                  "image",
-                  "history",
-                ],
-                inline: { options: ["bold", "italic", "underline"] },
-                blockType: {
-                  options: ["Normal", "H1", "H2", "H3"],
-                },
-                list: { options: ["unordered", "ordered"] },
-                image: {
-                  uploadCallback: handleContentImageUpload,
-                  previewImage: true,
-                  alt: { present: true, mandatory: false },
-                },
-              }}
-              editorClassName="custom-editor"
-            />
-          </div>
-
-          {/* Content Image Upload Progress */}
-          {uploadProgress > 0 && (
-            <div className="w-full bg-gray-200 rounded-lg mt-2">
-              <div
-                className="h-2 bg-blue-500 rounded-lg transition-all"
-                style={{ width: `${uploadProgress}%` }}
-              ></div>
-            </div>
           )}
+        </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-          >
-            📝 Create Blog
-          </button>
-        </form>
-      </div>
+        {/* Rich Text Editor */}
+        <Editor
+          editorState={editorState}
+          onEditorStateChange={setEditorState}
+          toolbar={{
+            image: {
+              uploadCallback: async (file) => {
+                const data = new FormData();
+                data.append("image", file);
+                const res = await axios.post(
+                  "http://localhost:3000/api/blogs/upload-image",
+                  data
+                );
+                return { data: { link: res.data.url } };
+              },
+              previewImage: true,
+            },
+          }}
+          wrapperClassName="border rounded"
+          editorClassName="p-2 min-h-[200px]"
+        />
+
+        {/* Schema Markup Paste Section */}
+        <h3 className="font-semibold mt-4">Schema Markup (Paste JSON)</h3>
+        <textarea
+          value={newSchemaInput}
+          onChange={(e) => setNewSchemaInput(e.target.value)}
+          placeholder="Paste JSON-LD schema markup"
+          className="w-full p-2 border rounded"
+          rows={4}
+        />
+        <button
+          type="button"
+          onClick={addSchemaMarkup}
+          className="bg-gray-700 text-white px-3 py-1 rounded mt-2"
+        >
+          + Add Schema
+        </button>
+        <ul className="list-disc list-inside text-sm text-gray-700 mt-2">
+          {formData.schemaMarkup.map((schema, i) => (
+            <li
+              key={i}
+              className="flex justify-between items-center border p-2 rounded"
+            >
+              <span>Schema #{i + 1}</span>
+              <button
+                type="button"
+                onClick={() => removeSchemaMarkup(i)}
+                className="text-red-600 text-xs"
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* FAQ Section */}
+        <h3 className="font-semibold">FAQs</h3>
+        {formData.faqBlock.map((faq, index) => (
+          <div key={index} className="space-y-2 mb-4 border p-3 rounded">
+            <input
+              type="text"
+              placeholder="Question"
+              value={faq.question}
+              onChange={(e) =>
+                handleFaqChange(index, "question", e.target.value)
+              }
+              className="w-full p-2 border rounded"
+            />
+            <textarea
+              placeholder="Answer"
+              value={faq.answer}
+              onChange={(e) => handleFaqChange(index, "answer", e.target.value)}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={addFaq}
+          className="bg-gray-700 text-white px-3 py-1 rounded mb-4"
+        >
+          + Add FAQ
+        </button>
+
+        {/* Redirect Manager */}
+        <h3 className="font-semibold">Redirect Manager</h3>
+        {formData.redirectManager.map((redirect, i) => (
+          <div key={i} className="flex gap-2 mb-2">
+            <input
+              type="text"
+              placeholder="/from"
+              value={redirect.from}
+              onChange={(e) => handleRedirectChange(i, "from", e.target.value)}
+              className="p-2 border rounded w-1/3"
+            />
+            <input
+              type="text"
+              placeholder="/to"
+              value={redirect.to}
+              onChange={(e) => handleRedirectChange(i, "to", e.target.value)}
+              className="p-2 border rounded w-1/3"
+            />
+            <select
+              value={redirect.type}
+              onChange={(e) => handleRedirectChange(i, "type", e.target.value)}
+              className="p-2 border rounded w-1/3"
+            >
+              <option value="301">301</option>
+              <option value="302">302</option>
+              <option value="410">410</option>
+            </select>
+          </div>
+        ))}
+
+        {/* Location Landing Pages */}
+        <input
+          type="text"
+          placeholder="Landing Locations (comma separated)"
+          value={formData.locationLandingPages.join(",")}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              locationLandingPages: e.target.value
+                .split(",")
+                .map((s) => s.trim()),
+            })
+          }
+          className="w-full p-2 border rounded"
+        />
+
+        {/* NAP Fields */}
+        <input
+          type="text"
+          name="napFields.name"
+          value={formData.napFields.name}
+          onChange={handleInputChange}
+          placeholder="Business Name"
+          className="w-full p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="napFields.address"
+          value={formData.napFields.address}
+          onChange={handleInputChange}
+          placeholder="Address"
+          className="w-full p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="napFields.phone"
+          value={formData.napFields.phone}
+          onChange={handleInputChange}
+          placeholder="Phone"
+          className="w-full p-2 border rounded"
+        />
+
+        {/* Platform Selector */}
+        <select
+          className="border p-2 rounded mb-4"
+          value={selectedPlatform}
+          onChange={(e) => setSelectedPlatform(e.target.value)}
+        >
+          <option value="">All Platforms</option>
+          <option value="Propques">Propques</option>
+          <option value="Findurspace">Findurspace</option>
+        </select>
+
+        {/* Toggles */}
+        <div className="flex gap-4">
+          <label>
+            <input
+              type="checkbox"
+              name="ampCompatibility"
+              checked={formData.ampCompatibility}
+              onChange={handleInputChange}
+            />{" "}
+            AMP Compatibility
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="brokenLinkDetector"
+              checked={formData.brokenLinkDetector}
+              onChange={handleInputChange}
+            />{" "}
+            Broken Link Detector
+          </label>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Create Blog
+        </button>
+      </form>
     </div>
   );
 };

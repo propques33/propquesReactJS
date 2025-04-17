@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function ContactForm() {
@@ -12,110 +11,66 @@ export default function ContactForm() {
     phone: "+91",
     email: "",
     billingZipCode: "",
-    decimalCustomField2: "", // Carpet Area
-    textCustomField7: "", // Micromarket
-    textCustomField2: "",
+    decimalCustomField2: "",
+    textCustomField7: "", // micromarket
+    textCustomField2: "", // coworking option
     billingCity: "",
     billingState: "",
     agreeToContact: true,
   });
 
-  const [pincodeQuery, setPincodeQuery] = useState("");
-  const [pincodeResults, setPincodeResults] = useState([]);
-  
+  const [pincodeOptions, setPincodeOptions] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  // OTP states
-  const [isOtpSent, setIsOtpSent] = useState(false);
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
-  const [isOtpLoading, setIsOtpLoading] = useState(false);
-  const [otp, setOtp] = useState("");
-
-  // Send-OTP cooldown
-  const [disableOtpBtn, setDisableOtpBtn] = useState(false);
-  const [timer, setTimer] = useState(0);
-
-  // Redirect on success
-  useEffect(() => {
-    if (isSuccess) navigate("/thankyou");
-  }, [isSuccess, navigate]);
-
-  // OTPless callback
-  const otplessCallback = (eventCallback) => {
-    const { responseType, response } = eventCallback;
-    switch (responseType) {
-      case "ONETAP":
-      case "VERIFIED":
-      case "SUCCESS":
-        setIsOtpLoading(false);
-        setIsOtpVerified(true);
-        break;
-      case "OTP_AUTO_READ":
-        setOtp(response.otp);
-        break;
-      case "FAILED":
-        setIsOtpLoading(false);
-        setIsOtpVerified(false);
-        break;
-      default:
-        break;
+  const fetchPincodeDetails = async (pincode) => {
+    try {
+      const res = await axios.get(`https://api.postalpincode.in/pincode/${pincode}`);
+      if (res.data[0].Status === "Success") {
+        return res.data[0].PostOffice.map((details) => ({
+          city: details.Block || details.District,
+          state: details.State,
+          micromarket: details.Name,
+        }));
+      }
+      return [];
+    } catch (err) {
+      console.error("Failed to fetch pincode info", err);
+      return [];
     }
   };
 
-  // Initialize OTPless
-  useEffect(() => {
-    if (window.OTPless) {
-      window.OTPlessSignin = new window.OTPless(otplessCallback);
-    } else {
-      console.warn("OTPless SDK not found.");
-    }
-  }, []);
-
-  // Timer for resend
-  useEffect(() => {
-    let interval;
-    if (disableOtpBtn && timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prev) => {
-          if (prev <= 1) {
-            clearInterval(interval);
-            setDisableOtpBtn(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => interval && clearInterval(interval);
-  }, [disableOtpBtn, timer]);
-
-  // Pincode search
   const handleSearch = async (e) => {
     const value = e.target.value;
     setQuery(value);
-    if (value.length > 2) {
+  
+    if (value.length === 6) {
       try {
-        const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
-        );
-        setResults(res.data);
+        const res = await axios.get(`https://api.postalpincode.in/pincode/${value}`);
+        if (res.data[0].Status === "Success") {
+          const mapped = res.data[0].PostOffice.map((po) => ({
+            pincode: po.Pincode,
+            locations: po.Name,
+            city: po.Block || po.District || "",
+            state: po.State,
+          }));
+          setResults(mapped);
+        } else {
+          setResults([]);
+        }
       } catch (error) {
-        console.error(error);
+        console.error("India Post API error:", error);
+        setResults([]);
       }
     } else {
       setResults([]);
     }
   };
 
-  // Select pincode
+
   const handleSelect = (item) => {
-    setQuery(
-      `${item.pincode} - ${item.locations}, ${item.city}, ${item.state}`
-    );
-    setFormData((prev) => ({
-      ...prev,
+    setQuery(`${item.pincode} - ${item.locations}, ${item.city}, ${item.state}`);
+    setFormData((prevData) => ({
+      ...prevData,
       pincode: item.pincode,
       location: item.locations,
       city: item.city,
@@ -123,291 +78,165 @@ export default function ContactForm() {
     }));
     setResults([]);
   };
+  
+  
 
-  // Send OTP
-  const handleSendOtp = (e) => {
-    e.preventDefault();
-    if (!formData.email) {
-      alert("Enter an email first.");
-      return;
-    }
-    if (window.OTPlessSignin) {
-      setIsOtpSent(true);
-      setDisableOtpBtn(true);
-      setTimer(120);
-      window.OTPlessSignin.initiate({
-        channel: "EMAIL",
-        email: formData.email,
-      });
-    }
-  };
-
-  // Verify OTP
-  const handleVerifyOtp = () => {
-    if (!otp) {
-      alert("Please enter the OTP.");
-      return;
-    }
-    setIsOtpLoading(true);
-    if (window.OTPlessSignin) {
-      window.OTPlessSignin.verify({
-        channel: "EMAIL",
-        email: formData.email,
-        otp: otp,
-      });
-    }
-  };
-
-  // Fetch City, State & Micromarket using Pincode
-  const fetchLocationDetails = async (pincode) => {
-    if (pincode.length !== 6) return;
-
-    try {
-      const response = await axios.get(
-        `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${pincode}`
-      );
-
-      if (Array.isArray(response.data) && response.data.length > 0) {
-        const location = response.data[0];
-
-        setFormData((prev) => ({
-          ...prev,
-          billingCity: location.city,
-          billingState: location.state,
-          textCustomField7: location.locations?.[0] || "N/A", // Micromarket
-        }));
-      }
-    } catch (error) {
-      console.error("Error fetching location:", error);
-    }
-  };
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    setFormData((prev) => {
-      const updatedForm = {
-        ...prev,
-        [name]: type === "checkbox" ? checked : value,
-      };
-
-      if (name === "name") {
-        updatedForm.lastname = value; // Auto-fill last name
-      }
-
-      if (name === "billingZipCode" && value.length === 6) {
-        fetchLocationDetails(value); // Fetch details when pincode is entered
-      }
-
-      return updatedForm;
-    });
-  };
-
-  // Handle Pincode Search as user types
-  const handlePincodeSearch = async (e) => {
+  const handlePincodeInput = async (e) => {
     const value = e.target.value;
-    setPincodeQuery(value);
+    setFormData((prev) => ({ ...prev, billingZipCode: value }));
 
-    if (value.length > 2) {
-      try {
-        const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
-        );
-        setPincodeResults(Array.isArray(res.data) ? res.data : [res.data]);
-      } catch (error) {
-        console.error("Error fetching pincode details:", error);
-        setPincodeResults([]);
-      }
+    if (value.length === 6) {
+      const results = await fetchPincodeDetails(value);
+      setPincodeOptions(results);
     } else {
-      setPincodeResults([]);
+      setPincodeOptions([]);
     }
   };
 
-  // Select pincode from search results
-  const handlePincodeSelect = (item) => {
-    setPincodeQuery(`${item.pincode} - ${item.city}, ${item.state}`);
+  const handlePincodeSelect = (location) => {
     setFormData((prev) => ({
       ...prev,
-      billingZipCode: item.pincode,
-      billingCity: item.city,
-      billingState: item.state,
-      textCustomField7: item.locations?.[0] || "N/A", // Micromarket
+      billingCity: location.city || "",
+      billingState: location.state || "",
+      textCustomField7: location.micromarket || "",
     }));
-    setPincodeResults([]);
+    setPincodeOptions([]);
+  };
+  
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+      ...(name === "name" && { lastname: value }),
+    }));
   };
 
-  // Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    if (!isOtpVerified) {
-      alert("Verify OTP before submitting.");
-      return;
-    }
-    // Ensure phone starts with +91 when sending
-    const formattedPhone = formData.phone.startsWith("+91")
-      ? formData.phone
-      : `+91${formData.phone}`;
-
-    const payload = {
-      ...formData,
-      phone: formattedPhone, // Ensures submission has +91
-
-      company: 1,
-      owner: 1,
-      website: "www.propques.com",
-      skypeId: "12345",
-      otherPhone: formData.mobile,
-    };
+    
 
     try {
-        await axios.post(
-          "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
-          payload
-        );
-      const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/contact",
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Response:", response.data);
-      // alert("Form submitted successfully!");
-       navigate("/thankyou");
+      const now = new Date();
+      const offset = 330;
+      const istDate = new Date(now.getTime() + offset * 60 * 1000);
+      const timestamp = istDate.toISOString().replace("T", " ").split(".")[0];
+
+      // Safety: convert all values to strings to avoid API issues
+      const clean = (v) =>
+        typeof v === "string" ? v : v === undefined || v === null ? "" : v.toString();
+
+      const dataToSend = {
+        name: clean(formData.name),
+        lastname: clean(formData.lastname),
+        phone: clean(formData.phone),
+        email: clean(formData.email),
+        billingZipCode: clean(formData.billingZipCode),
+        decimalCustomField2: clean(formData.decimalCustomField2),
+        textCustomField7: clean(formData.textCustomField7), // micromarket
+        textCustomField2: clean(formData.textCustomField2), // coworking option
+        billingCity: clean(formData.billingCity),
+        billingState: clean(formData.billingState),
+        agreeToContact: true,
+        timestamp,
+        type: "New",
+        tags: "Landing Page Form"
+      };
+
+      // 1. Send to Make
+      await axios.post("https://hook.eu2.make.com/irpno6z3m67rk2ft6m4q1txlqc3wu2rw", dataToSend);
+
+      // 2. Send to backend
+      await axios.post("https://pq-backend-fus-pq-blog-z5iz7.ondigitalocean.app/api/contact", dataToSend);
+
+      navigate("/start-your-own-coworking-space-thankyou");
     } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
-      alert("Error submitting form!");
+      console.error("Error submitting form:", error.response?.data || error.message);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-md">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <p className="text-blue-500 text-center w-full mx-auto">
-          We will reach out to you if we are a mutual fit
-        </p>
+    <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
+      <p className="text-blue-500 text-center">
+        We will reach out to you if we are a mutual fit
+      </p>
+      <input
+        name="name"
+        placeholder="Your Name"
+        onChange={handleChange}
+        required
+        className="w-full p-2 border rounded"
+      />
+      <input
+        name="email"
+        type="email"
+        placeholder="Your Email"
+        onChange={handleChange}
+        required
+        className="w-full p-2 border rounded"
+      />
+      <input
+        name="phone"
+        placeholder="Enter Mobile Number"
+        onChange={handleChange}
+        required
+        className="w-full p-2 border rounded"
+      />
+      <div className="relative">
         <input
-          name="name"
-          placeholder="Your Name"
-          onChange={handleChange}
+          name="billingZipCode"
+          placeholder="Enter Pincode"
+          value={formData.billingZipCode}
+          onChange={handlePincodeInput}
           required
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
+          className="w-full p-2 border rounded"
         />
-        <div className="flex space-x-2">
-          <input
-            name="email"
-            type="email"
-            placeholder="Your Email"
-            onChange={handleChange}
-            className="flex-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-            required
-          />
-          {!isOtpVerified && (
-            <button
-              type="button"
-              onClick={handleSendOtp}
-              disabled={disableOtpBtn}
-              className="bg-blue-500 text-white px-4  w-40 rounded"
-            >
-              {disableOtpBtn ? `Resend OTP in ${timer}s` : "Send OTP"}
-            </button>
-          )}
-        </div>
-        {isOtpSent && !isOtpVerified && (
-          <div className="flex items-center gap-2 mb-4">
-            <input
-              type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              className="w-full p-2 border rounded"
-              placeholder="Enter OTP"
-              maxLength="6"
-            />
-            <button
-              type="button"
-              onClick={handleVerifyOtp}
-              className="bg-green-500 text-white px-4 py-2 rounded flex items-center"
-              disabled={isOtpLoading}
-            >
-              {isOtpLoading ? <FaSpinner className="animate-spin" /> : "Verify"}
-            </button>
-          </div>
+        {pincodeOptions.length > 0 && (
+          <ul className="absolute bg-white border rounded w-full z-10 max-h-40 overflow-y-auto">
+            {pincodeOptions.map((option, index) => (
+              <li
+                key={index}
+                className="p-2 cursor-pointer hover:bg-gray-200"
+                onClick={() => handlePincodeSelect(option)}
+              >
+                {option.micromarket}, {option.city}, {option.state}
+              </li>
+            ))}
+          </ul>
         )}
-        {/* Mobile Number Field */}
-        <input
-          name="phone"
-          placeholder="Enter Mobile Number"
-          onChange={handleChange}
-          required
-          className="flex-1 w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-        />
-        <div className="flex gap-2 w-full">
-          {/* Pincode Search & Auto-Fill */}
-          <div className="relative w-1/2 ">
-            <input
-              type="text"
-              value={pincodeQuery}
-              onChange={handlePincodeSearch}
-              placeholder="Enter Pincode"
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-            />
-            {pincodeResults.length > 0 && (
-              <ul className="absolute left-0 w-full border rounded shadow-md bg-white max-h-40 overflow-y-auto mt-1 z-10">
-                {pincodeResults.map((item, index) => (
-                  <li
-                    key={index}
-                    className="p-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => handlePincodeSelect(item)}
-                  >
-                    {item.pincode} - {item.locations?.[0] || "N/A"}, {item.city}
-                    , {item.state}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Carpet Area */}
-          <input
-            type="text"
-            name="decimalCustomField2"
-            // value={formData.decimalCustomField2}
-            onChange={handleChange}
-            className="w-1/2 p-2 border rounded"
-            placeholder="Carpet Area (sq. ft.)"
-            required
-          />
-        </div>
-        {/* Coworking Option */}
-        <select
-          name="textCustomField2"
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200"
-        >
-          <option value="">Select Coworking Option</option>
-          <option value="Start Your Own Coworking">
-            Start Your Own Coworking
-          </option>
-          <option value="Match Making With Coworking">
-            Match Making With Coworking
-          </option>
-        </select>
-        <label className="flex items-center text-sm text-gray-500">
-          <input type="checkbox" className="mr-2" required />I am happy for
-          propques to contact me via mail/SMS. By selecting this you agree to
-          our privacy policy.
-        </label>
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Let's Talk
-        </button>
-      </form>
-    </div>
+      </div>
+      
+      <input
+        type="text"
+        name="decimalCustomField2"
+        onChange={handleChange}
+        className="w-full p-2 border rounded"
+        placeholder="Carpet Area (sq. ft.)"
+        required
+      />
+      <select
+        name="textCustomField2"
+        onChange={handleChange}
+        className="w-full p-2 border rounded"
+        required
+      >
+        <option value="">Select Coworking Option</option>
+        <option value="Start Your Own Coworking">Start Your Own Coworking</option>
+        <option value="Match Making With Coworking">Match Making With Coworking</option>
+      </select>
+      <label className="flex items-center text-sm text-gray-500">
+        <input type="checkbox" className="mr-2" required />
+        I am happy for propques to contact me via mail/SMS. By selecting this you agree to our privacy policy.
+      </label>
+      <button type="submit" disabled={isSubmitting} className="w-full p-2 bg-blue-600 text-white rounded">
+        {isSubmitting ? "Submitting..." : "Let's Talk"}
+      </button>
+    </form>
   );
 }

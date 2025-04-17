@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   //   const fetchUser = async () => {
   //     try {
   //       const response = await axios.get(
-  //         "https://propques-backend-jsqqh.ondigitalocean.app/",
+  //         "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/",
   //         {
   //           withCredentials: true, // Ensures session persistence
   //         }
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const loginAuthor = async (email, password) => {
     try {
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/author/login",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/author/login",
         { email, password },
         { withCredentials: true }
       );
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   const loginAdmin = async (email, password) => {
     try {
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/login",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/admin/login",
         { email, password },
         { withCredentials: true }
       );
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   const signupAuthor = async (name, email, password) => {
     try {
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/author/signup",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/author/signup",
         { name, email, password },
         { withCredentials: true }
       );
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
   const signupAdmin = async (name, email, password) => {
     try {
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/admin/signup",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/admin/signup",
         { name, email, password },
         { withCredentials: true }
       );
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/auth/logout",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/auth/logout",
         {},
         { withCredentials: true }
       );

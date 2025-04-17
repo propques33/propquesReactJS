@@ -3,14 +3,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SYOC = () => {
-
   const [formData, setFormData] = useState({
     textCustomField3: "",
+    mobile: "",
     flexDevelopmentStage: "",
+    textCustomField7: "",
+    textCustomField4: "",
+    textCustomField11: "",
+    textCustomField12: "",
     textCustomField5: "",
     textCustomField6: [],
     textCustomField8: [],
-    pincode: "",
+    billingZipCode: "",
+    textCustomField15: "",
     decimalCustomField2: "",
     textCustomField10: "",
     name: "",
@@ -19,21 +24,33 @@ const SYOC = () => {
     notes: "",
     domain: [],
     furnishCost: "",
-    rentalInvest: "",
+   
+    tags: "SYOC Form",
   });
 
   const handleSearch = async (e) => {
     const value = e.target.value;
     setQuery(value);
 
-    if (value.length > 2) {
+    if (value.length === 6) {
       try {
         const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
+          `https://api.postalpincode.in/pincode/${value}`
         );
-        setResults(res.data);
+        if (res.data[0].Status === "Success") {
+          const mapped = res.data[0].PostOffice.map((po) => ({
+            billingZipCode: po.Pincode, // Zip Code
+            textCustomField7: po.Name, // Micro Market
+            billingCity: po.Block || po.District, // City
+            billingState: po.State, // State
+          }));
+
+          setResults(mapped);
+        } else {
+          setResults([]);
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching from India Post API:", error);
       }
     } else {
       setResults([]);
@@ -42,15 +59,17 @@ const SYOC = () => {
 
   const handleSelect = (item) => {
     setQuery(
-      `${item.pincode} - ${item.locations}, ${item.city}, ${item.state}`
+      `${item.billingZipCode} - ${item.textCustomField7}, ${item.billingCity}, ${item.billingState}`
     );
+
     setFormData((prevData) => ({
       ...prevData,
-      pincode: item.pincode,
-      location: item.locations,
-      city: item.city,
-      state: item.state,
+      billingZipCode: item.billingZipCode,
+      textCustomField7: item.textCustomField7, // Micro Market
+      billingCity: item.billingCity,
+      billingState: item.billingState,
     }));
+
     setResults([]);
   };
 
@@ -61,63 +80,32 @@ const SYOC = () => {
 
   const navigate = useNavigate();
 
-  // const handleChange = (e) => {
-  //   const { name, value, type, checked } = e.target;
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
 
-  //   if (type === "checkbox") {
-  //     if (name === "textCustomField6") {
-  //       setFormData((prevData) => ({
-  //         ...prevData,
-  //         textCustomField6: checked
-  //           ? [...prevData.textCustomField6, value]
-  //           : prevData.textCustomField6.filter((style) => style !== value),
-  //       }));
-  //     }
-  //   } else if (name === "textCustomField8") {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       textCustomField8: checked
-  //         ? [...prevData.domain, value] 
-  //         : prevData.domain.filter((textCustomField8) => textCustomField8 !== value),
-  //     }));
-  //   } else {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
-
-
-
-   const handleChange = (e) => {
-     const { name, value, type, checked } = e.target;
-
-     if (type === "checkbox") {
-       if (name === "textCustomField6") {
-         setFormData((prevData) => ({
-           ...prevData,
-           textCustomField6: checked
-             ? [...prevData.textCustomField6, value]
-             : prevData.textCustomField6.filter((style) => style !== value),
-         }));
-       } else if (name === "textCustomField8") {
-         setFormData((prevData) => ({
-           ...prevData,
-           textCustomField8: checked
-             ? [...prevData.textCustomField8, value] // ✅ FIXED: Add value to textCustomField8 array
-             : prevData.textCustomField8.filter((item) => item !== value), // ✅ Remove if unchecked
-         }));
-       }
-     } else {
-       setFormData((prevData) => ({
-         ...prevData,
-         [name]: value,
-       }));
-     }
-   };
-
+    if (type === "checkbox") {
+      if (name === "textCustomField6") {
+        setFormData((prevData) => ({
+          ...prevData,
+          textCustomField6: checked
+            ? [...prevData.textCustomField6, value]
+            : prevData.textCustomField6.filter((style) => style !== value),
+        }));
+      } else if (name === "textCustomField8") {
+        setFormData((prevData) => ({
+          ...prevData,
+          textCustomField8: checked
+            ? [...prevData.textCustomField8, value] // ✅ FIXED: Add value to textCustomField8 array
+            : prevData.textCustomField8.filter((item) => item !== value), // ✅ Remove if unchecked
+        }));
+      }
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
 
   const validateForm = () => {
     const requiredFields = [
@@ -142,38 +130,42 @@ const SYOC = () => {
       }
     }
 
-
-
     setErrorMessage("");
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!validateForm()) {
-    //   return alert("Please fill all the required fields");
-    // }
-
     setIsSubmitting(true);
 
     try {
       const now = new Date();
-      const offset = 330; // IST offset in minutes
+      const offset = 330;
       const istDate = new Date(now.getTime() + offset * 60 * 1000);
       const timestamp = istDate.toISOString().replace("T", " ").split(".")[0];
 
       const dataToSend = {
         ...formData,
-               timestamp,
+        textCustomField6: formData.textCustomField6.join(", "),
+        textCustomField8: formData.textCustomField8.join(", "),
+        domain: formData.domain.join(", "),
+        timestamp,
+        type: "New",
       };
 
+      // Send to Make.com
       await axios.post(
         "https://hook.eu2.make.com/irpno6z3m67rk2ft6m4q1txlqc3wu2rw",
         dataToSend
       );
+
+      // Send to your backend
+      await axios.post("https://pq-backend-fus-pq-blog-z5iz7.ondigitalocean.app/api/contact", dataToSend);
+
       navigate("/start-your-own-coworking-space-thankyou");
     } catch (error) {
       console.error("Error submitting form:", error);
+      alert("Submission failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -193,12 +185,12 @@ const SYOC = () => {
         </p>
 
         <p className="mt-4 text-base font-medium">
-          With the rise of flexible work textCustomField8s and the demand for dynamic
-          environments, coworking spaces offer a unique opportunity to cater to
-          freelancers, startups, and enterprises looking for more than just an
-          office. From designing inspiring interiors to curating a culture that
-          fosters networking and growth, launching your coworking venture allows
-          you to redefine how people work together.
+          With the rise of flexible work textCustomField8s and the demand for
+          dynamic environments, coworking spaces offer a unique opportunity to
+          cater to freelancers, startups, and enterprises looking for more than
+          just an office. From designing inspiring interiors to curating a
+          culture that fosters networking and growth, launching your coworking
+          venture allows you to redefine how people work together.
         </p>
         <p className="mt-4 text-base font-medium">
           Whether you're transforming a vacant building into a bustling hub or
@@ -299,7 +291,7 @@ const SYOC = () => {
           <label className="block text-sm font-extrabold text-gray-900 mb-1">
             Enter Your Property's Pincode
           </label>
-          {/* Pincode Search */}
+          {/* billingZipCode Search */}
           <div className="mb-4 relative ">
             <input
               type="text"
@@ -309,14 +301,11 @@ const SYOC = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {results.length > 0 && (
-              <ul className="absolute mt-2 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 bg-slate-200 z-20 overflow-y-auto w-full">
+              <ul className="dropdown">
                 {results.map((item, index) => (
-                  <li
-                    key={index}
-                    onClick={() => handleSelect(item)}
-                    className="p-3 cursor-pointer hover:bg-gray-100 transition"
-                  >
-                    {item.pincode} - {item.locations}, {item.city}, {item.state}
+                  <li key={index} onClick={() => handleSelect(item)}>
+                    {item.billingZipCode} - {item.textCustomField7},{" "}
+                    {item.billingCity}, {item.billingState}
                   </li>
                 ))}
               </ul>
@@ -328,15 +317,15 @@ const SYOC = () => {
 
         <div>
           <label className="block text-sm font-bold text-gray-700">
-            On which coworking textCustomField8 are you planning to expand?
+            On which coworking model are you planning to expand?
             <span className="text-red-600">*</span>
           </label>
           <div className="grid grid-cols-2 md:gap-4 lg:gap-4 gap-2 mt-2">
             {[
-              "Lease textCustomField8",
-              "Revenue Sharing textCustomField8",
-              "Profit Sharing textCustomField8",
-              "Franchise textCustomField8",
+              "Lease Model",
+              "Revenue Sharing Model",
+              "Profit Sharing Model",
+              "Franchise Model",
               "Others",
             ].map((style) => (
               <label key={style} className="flex items-center space-x-2">
@@ -360,8 +349,8 @@ const SYOC = () => {
             client's preferences, with the cost adjusted in the rental?
           </label>
           <select
-            name="rentalInvest"
-            value={formData.rentalInvest}
+            name="textCustomField11"
+            value={formData.textCustomField11}
             onChange={handleChange}
             className="mt-1 text-sm w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
@@ -375,8 +364,8 @@ const SYOC = () => {
             The cost of furnishing would be:
           </label>
           <select
-            name="furnishCost"
-            value={formData.furnishCost}
+            name="textCustomField12"
+            value={formData.textCustomField12}
             onChange={handleChange}
             className="mt-1 text-sm w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
@@ -389,14 +378,14 @@ const SYOC = () => {
         {/* num of space */}
         <div>
           <label className="block text-sm font-extrabold text-gray-900">
-            What is the carpet decimalCustomField2 of the space in square feet?
+            What is the carpet area of the space in square feet?
           </label>
           <input
             type="text"
             name="decimalCustomField2"
             value={formData.decimalCustomField2}
             onChange={handleChange}
-            placeholder="Enter carpet decimalCustomField2"
+            placeholder="Enter carpet area"
             className="mt-1 text-sm w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
@@ -469,8 +458,8 @@ const SYOC = () => {
             Any other notes for us?
           </label>
           <textarea
-            name="notes"
-            value={formData.notes}
+            name="textCustomField15"
+            value={formData.textCustomField15}
             onChange={handleChange}
             rows="4"
             placeholder="Add any additional information here"

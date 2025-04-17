@@ -99,7 +99,7 @@ export default function ContactForm() {
     if (value.length > 2) {
       try {
         const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
+          `https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/pincode/${value}`
         );
         setResults(res.data);
       } catch (error) {
@@ -165,7 +165,7 @@ export default function ContactForm() {
 
     try {
       const response = await axios.get(
-        `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${pincode}`
+        `https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/pincode/${pincode}`
       );
 
       if (Array.isArray(response.data) && response.data.length > 0) {
@@ -213,7 +213,7 @@ export default function ContactForm() {
     if (value.length > 2) {
       try {
         const res = await axios.get(
-          `https://propques-backend-jsqqh.ondigitalocean.app/api/pincode/${value}`
+          `https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/pincode/${value}`
         );
         setPincodeResults(Array.isArray(res.data) ? res.data : [res.data]);
       } catch (error) {
@@ -268,7 +268,7 @@ export default function ContactForm() {
         payload
       );
       const response = await axios.post(
-        "https://propques-backend-jsqqh.ondigitalocean.app/api/contact",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/contact",
         payload,
         {
           headers: {

@@ -53,7 +53,7 @@ const AdminDashboard = () => {
           <h2 className="text-xl font-semibold border-b pb-2 mb-4">
             User Approvals
           </h2>
-          <UserApproval />
+          {/* <UserApproval /> */}
         </section>
       </main>
     </div>

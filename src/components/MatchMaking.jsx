@@ -19,14 +19,17 @@ const MatchmakingForm = () => {
   }, []);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
   const [formData, setFormData] = useState({
     coworkingBrand: "",
     coworkingCity: "", // Added unique key for city
     coworkingStyles: [],
-     customCity: "",
+    customCity: "",
     spaceSizes: [],
     experienceLevel: "",
-    region: "",
+    mobile: "",
     usp: "",
     marketPosition: "",
     deskPercentage: "",
@@ -36,6 +39,12 @@ const MatchmakingForm = () => {
     phone: "",
     notes: "",
     domain: "",
+    type: "MatchMaking Form",
+
+    billingZipCode: "",
+    billingCity: "",
+    billingState: "",
+    textCustomField7: "", // micro market
   });
 
   const cityOptions = [
@@ -85,44 +94,89 @@ const MatchmakingForm = () => {
       "phone",
       "usp",
     ];
-
-  
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault(); // Prevent default form submission behavior
-  console.log("Form submission started");
+  const handleSearch = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
 
-  // if (!validateForm()) {
-  //   alert("Please fill in all required fields.");
-  //   console.log("Form validation failed", formData); // Debugging form data
-  //   return;
-  // }
+    if (value.length === 6) {
+      try {
+        const res = await axios.get(
+          `https://api.postalpincode.in/pincode/${value}`
+        );
+        if (res.data[0].Status === "Success") {
+          const mapped = res.data[0].PostOffice.map((po) => ({
+            billingZipCode: po.Pincode,
+            billingCity: po.Block || po.District,
+            billingState: po.State,
+            textCustomField7: po.Name,
+          }));
+          setResults(mapped);
+        } else {
+          setResults([]);
+        }
+      } catch (err) {
+        console.error("Pincode fetch error:", err);
+        setResults([]);
+      }
+    } else {
+      setResults([]);
+    }
+  };
 
-  setIsLoading(true);
-
-  const dateObj = new Date();
-  const currentDate = `${String(dateObj.getDate()).padStart(2, "0")}-${String(
-    dateObj.getMonth() + 1
-  ).padStart(2, "0")}-${dateObj.getFullYear()}`;
-
-  const inquiryData = { ...formData, date: currentDate };
-  console.log("Inquiry Data:", inquiryData); // Debugging inquiry data
-
-  try {
-    const response = await axios.post(
-      "https://hook.eu2.make.com/1qfsjrk5wlsqoxwyb7x3iqqyg8egmt45",
-      inquiryData
+  const handleSelect = (item) => {
+    setQuery(
+      `${item.billingZipCode} - ${item.textCustomField7}, ${item.billingCity}, ${item.billingState}`
     );
-    console.log("Submission Response:", response); // Debugging response
-    navigate("/matchmaking-for-coworking-operators-thankyou");
-  } catch (error) {
-    console.error("Error submitting the form:", error);
-    alert("Error submitting the form.");
-  } finally {
-    setIsLoading(false);
-  }
-};
+    setFormData((prev) => ({
+      ...prev,
+      billingZipCode: item.billingZipCode,
+      billingCity: item.billingCity,
+      billingState: item.billingState,
+      textCustomField7: item.textCustomField7,
+    }));
+    setResults([]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    console.log("Form submission started");
+
+    // if (!validateForm()) {
+    //   alert("Please fill in all required fields.");
+    //   console.log("Form validation failed", formData); // Debugging form data
+    //   return;
+    // }
+
+    setIsLoading(true);
+
+    const dateObj = new Date();
+    const currentDate = `${String(dateObj.getDate()).padStart(2, "0")}-${String(
+      dateObj.getMonth() + 1
+    ).padStart(2, "0")}-${dateObj.getFullYear()}`;
+
+    const inquiryData = { ...formData, date: currentDate };
+    console.log("Inquiry Data:", inquiryData); // Debugging inquiry data
+
+    try {
+      const response = await axios.post(
+        "https://hook.eu2.make.com/1qfsjrk5wlsqoxwyb7x3iqqyg8egmt45",
+        inquiryData
+      );
+
+
+      await axios.post("https://pq-backend-fus-pq-blog-z5iz7.ondigitalocean.app/api/contact", inquiryData);
+
+      console.log("Submission Response:", response); // Debugging response
+      navigate("/matchmaking-for-coworking-operators-thankyou");
+    } catch (error) {
+      console.error("Error submitting the form:", error);
+      alert("Error submitting the form.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen mt-20 bg-gray-100 flex flex-col lg:flex-row items-start justify-center md:p-6 lg:p-6 p-0 space-y-6 lg:space-y-0 lg:space-x-6">
@@ -176,7 +230,7 @@ const handleSubmit = async (e) => {
           />
         </div>
         {/* Expension Area Name */}
-       <div className="">
+        <div className="">
           <label className="block text-sm font-medium text-gray-700">
             In Which City You Are Planning To Expand
             <span className="text-red-600">*</span>
@@ -206,9 +260,32 @@ const handleSubmit = async (e) => {
           )}
         </div>
 
-
-
-        
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Property Pincode
+          </label>
+          <input
+            type="text"
+            value={query}
+            onChange={handleSearch}
+            placeholder="Enter Pincode"
+            className="mt-2 w-full border border-gray-300 rounded-lg p-3"
+          />
+          {results.length > 0 && (
+            <ul className="bg-white border mt-1 rounded shadow-lg max-h-48 overflow-y-auto">
+              {results.map((item, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleSelect(item)}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  {item.billingZipCode} - {item.textCustomField7},{" "}
+                  {item.billingCity}, {item.billingState}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -322,8 +399,8 @@ const handleSubmit = async (e) => {
           </label>
           <input
             type="text"
-            name="region"
-            value={formData.region}
+            name="mobile"
+            value={formData.mobile}
             onChange={handleChange}
             placeholder="Enter your city or region"
             className="mt-2 w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -445,14 +522,15 @@ const handleSubmit = async (e) => {
         </div>
 
         <div class="my-">
-  <label class="flex items-start space-x-2">
-    <input type="checkbox" required class="mt-1" />
-    <span class="text-sm text-gray-700">
-      By submitting, you agree to list your property on <strong>Propques</strong>. Your contact details will be shared based on your selected preferences.
-    </span>
-  </label>
-</div>
-
+          <label class="flex items-start space-x-2">
+            <input type="checkbox" required class="mt-1" />
+            <span class="text-sm text-gray-700">
+              By submitting, you agree to list your property on{" "}
+              <strong>Propques</strong>. Your contact details will be shared
+              based on your selected preferences.
+            </span>
+          </label>
+        </div>
 
         {/* Submit Button */}
         <button
