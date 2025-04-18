@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const BlogsData = () => {
-  const API_URL = "http://localhost:3000/api/blogs"; // Backend API URL
+  const API_URL = "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs"; // Backend API URL
   const [blogs, setBlogs] = useState([]); // State for blogs
   const [error, setError] = useState(null); // State for errors
   const [loading, setLoading] = useState(true); // State for loading

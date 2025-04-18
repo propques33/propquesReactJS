@@ -166,7 +166,7 @@ const MatchmakingForm = () => {
       );
 
 
-      await axios.post("https://pq-backend-fus-pq-blog-z5iz7.ondigitalocean.app/api/contact", inquiryData);
+      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/contact", inquiryData);
 
       console.log("Submission Response:", response); // Debugging response
       navigate("/matchmaking-for-coworking-operators-thankyou");

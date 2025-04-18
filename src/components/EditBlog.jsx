@@ -25,7 +25,7 @@ const EditBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/blogs/${slug}`)
+      .get(`https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`)
       .then((res) => {
         const data = res.data;
         setBlog({
@@ -52,7 +52,7 @@ const EditBlog = () => {
     try {
       setProgress?.(0);
       const { data } = await axios.post(
-        "http://localhost:3000/api/blogs/upload-image",
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -85,7 +85,7 @@ const EditBlog = () => {
     const contentBody = editorContent;
 
     try {
-      await axios.put(`http://localhost:3000/api/blogs/${slug}`, {
+      await axios.put(`https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`, {
         ...blog,
         contentBody,
       });
@@ -166,7 +166,7 @@ const EditBlog = () => {
         )}
 
         {/* 📝 React Quill Editor */}
-        <RichTextEditor/>
+        <RichTextEditor content={editorContent} onChange={setEditorContent}/>
 
 
         <label className="block font-semibold">Publish On</label>

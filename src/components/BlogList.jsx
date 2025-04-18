@@ -11,7 +11,7 @@ const AdminBlogDashboard = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/blogs");
+        const res = await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs");
         setBlogs(res.data.pages || []);
       } catch (err) {
         console.error("Failed to fetch blogs:", err);
@@ -25,7 +25,7 @@ const AdminBlogDashboard = () => {
 
   const toggleVisibility = async (slug, currentVisible) => {
     try {
-      const updated = await axios.put(`http://localhost:3000/api/blogs/${slug}`, {
+      const updated = await axios.put(`https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`, {
         visible: !currentVisible,
       });
 

@@ -14,7 +14,9 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/blogs/${slug}`);
+        const res = await axios.get(
+          `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`
+        );
         setBlog(res.data);
       } catch (err) {
         console.error("Failed to fetch blog:", err);
@@ -28,6 +30,22 @@ const BlogDetails = () => {
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
+
+  // Clean up <li> styling manually once HTML is rendered
+  useEffect(() => {
+    const cleanupListTags = () => {
+      const container = document.querySelector("#blog-content");
+      if (container) {
+        const lis = container.querySelectorAll("li");
+        lis.forEach((li) => {
+          li.style.listStyle = "none";
+          li.style.margin = "0";
+          li.style.padding = "0";
+        });
+      }
+    };
+    cleanupListTags();
+  }, [blog]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (!blog) return <p className="text-center mt-10 text-red-500">Blog not found</p>;
@@ -77,7 +95,8 @@ const BlogDetails = () => {
 
       {/* Blog Content */}
       <div
-        className="prose max-w-none"
+        id="blog-content"
+        className="prose max-w-none prose-li:list-none prose-li:marker:hidden prose-li:p-0 prose-li:m-0 prose-p:my-2 prose-img:rounded prose-h2:mt-6 prose-h3:mt-4"
         dangerouslySetInnerHTML={{ __html: blog.contentBody }}
       />
 
@@ -88,7 +107,7 @@ const BlogDetails = () => {
           {blog.faqBlock.map((faq, i) => (
             <div
               key={i}
-              className="border rounded p-4 mb-3 cursor-pointer bg-gray-50"
+              className="border rounded p-4 mb-3 cursor-pointer bg-gray-50 hover:bg-gray-100 transition"
               onClick={() => toggleFaq(i)}
             >
               <div className="flex justify-between items-center font-medium">

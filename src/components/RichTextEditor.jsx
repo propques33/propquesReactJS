@@ -47,7 +47,7 @@ const RichTextEditor = ({ content, onChange }) => {
       formData.append("image", file);
 
       try {
-        const res = await fetch("http://localhost:3000/api/blogs/upload-image", {
+        const res = await fetch("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image", {
           method: "POST",
           body: formData,
         });

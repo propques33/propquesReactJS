@@ -15,7 +15,7 @@
 //     setLoading(true);
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:3000/api/users/login",
+//         "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/users/login",
 //         {
 //           email,
 //           password,
@@ -110,12 +110,12 @@ export default function AuthForm() {
     let endpoint;
     if (userType === "admin") {
       endpoint = isSignUp
-        ? "http://localhost:3000/api/admin/signup"
-        : "http://localhost:3000/api/admin/login";
+        ? "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/admin/signup"
+        : "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/admin/login";
     } else {
       endpoint = isSignUp
-        ? "http://localhost:3000/api/author/signup"
-        : "http://localhost:3000/api/author/login";
+        ? "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/author/signup"
+        : "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/author/login";
     }
 
     try {

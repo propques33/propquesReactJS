@@ -61,7 +61,7 @@ const BlogForm = () => {
     setUploading(true);
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/blogs/upload-image",
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image",
         data
       );
       setFormData((prev) => ({ ...prev, featuredImage: res.data.url }));
@@ -93,9 +93,9 @@ const BlogForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const contentBody = editorContent;
-  
+    
     try {
-      await axios.post("http://localhost:3000/api/blogs", {
+      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs", {
         ...formData,
         contentBody,
         publishOn: selectedPlatform,
@@ -130,7 +130,7 @@ const BlogForm = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        await axios.get("http://localhost:3000/api/blogs", {
+        await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs", {
           params: selectedPlatform ? { publishOn: selectedPlatform } : {},
         });
       } catch (err) {
