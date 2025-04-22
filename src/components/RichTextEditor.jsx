@@ -6,6 +6,12 @@ import TextStyle from "@tiptap/extension-text-style";
 import FontSize from "@tiptap/extension-font-size";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import Heading from "@tiptap/extension-heading";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import ListItem from "@tiptap/extension-list-item";
+import Blockquote from "@tiptap/extension-blockquote";
+
 
 import {
   FaBold,
@@ -28,6 +34,11 @@ const RichTextEditor = ({ content, onChange }) => {
       Link.configure({
         openOnClick: false,
       }),
+      Heading.configure({ levels: [1, 2, 3] }),
+      BulletList,
+      OrderedList,
+      ListItem,
+      Blockquote,
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -141,6 +152,44 @@ const RichTextEditor = ({ content, onChange }) => {
         >
           <FaUnlink />
         </button>
+
+
+        <button
+  type="button"
+  onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+  className="p-2 border rounded bg-gray-100 hover:bg-indigo-100"
+  title="Heading 2"
+>
+  H2
+</button>
+
+<button
+  type="button"
+  onClick={() => editor.chain().focus().toggleBulletList().run()}
+  className="p-2 border rounded bg-gray-100 hover:bg-indigo-100"
+  title="Bullet List"
+>
+  • List
+</button>
+
+<button
+  type="button"
+  onClick={() => editor.chain().focus().toggleOrderedList().run()}
+  className="p-2 border rounded bg-gray-100 hover:bg-indigo-100"
+  title="Number List"
+>
+  1. List
+</button>
+
+<button
+  type="button"
+  onClick={() => editor.chain().focus().toggleBlockquote().run()}
+  className="p-2 border rounded bg-gray-100 hover:bg-indigo-100"
+  title="Blockquote"
+>
+  “
+</button>
+
       </div>
 
       {/* Editor Content */}

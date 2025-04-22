@@ -48,7 +48,8 @@ const BlogDetails = () => {
   }, [blog]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!blog) return <p className="text-center mt-10 text-red-500">Blog not found</p>;
+  if (!blog)
+    return <p className="text-center mt-10 text-red-500">Blog not found</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6 mt-16">
@@ -74,57 +75,71 @@ const BlogDetails = () => {
         <img
           src={blog.featuredImage}
           alt={blog.pageTitle}
-          className="w-full h-96 object-cover rounded mb-6"
+          className="w-full h-96 object-cover rounded-xl shadow-md mb-6"
         />
       )}
 
       {/* Blog Title */}
-      <h1 className="text-3xl font-bold mb-2">{blog.pageTitle}</h1>
+      <h1 className="text-4xl font-extrabold leading-tight mb-4 text-gray-900">
+        {blog.pageTitle}
+      </h1>
 
       {/* Date + Author */}
-      <div className="flex items-center gap-4 text-gray-500 text-sm mb-6">
-        <div className="flex items-center gap-1">
-          <CalendarDays size={16} />
-          <span>{format(new Date(blog.createdAt), "dd MMMM yyyy")}</span>
+      <div className="flex items-center gap-6 text-gray-600 text-sm mb-8 border-b pb-4">
+        <div className="flex items-center gap-2">
+          <CalendarDays size={18} />
+          <span>{format(new Date(blog.createdAt), "dd MMM yyyy")}</span>
         </div>
-        <div className="flex items-center gap-1">
-          <User size={16} />
-          <span>Adarsh Mohan Dixit</span>
+        <div className="flex items-center gap-2">
+          <User size={18} />
+          <span className="font-medium">Adarsh Mohan Dixit</span>
         </div>
       </div>
 
       {/* Blog Content */}
       <div
-        id="blog-content"
-        className="prose max-w-none prose-li:list-none prose-li:marker:hidden prose-li:p-0 prose-li:m-0 prose-p:my-2 prose-img:rounded prose-h2:mt-6 prose-h3:mt-4"
-        dangerouslySetInnerHTML={{ __html: blog.contentBody }}
-      />
+  className="prose prose-lg max-w-none prose-img:rounded-lg prose-a:text-blue-600 hover:prose-a:underline"
+  dangerouslySetInnerHTML={{ __html: blog.contentBody }}
+></div>
+
 
       {/* FAQ Section */}
-      {blog.faqBlock?.length > 0 && (
-        <div className="mt-10">
-          <h2 className="text-xl font-semibold mb-4">FAQs</h2>
-          {blog.faqBlock.map((faq, i) => (
-            <div
-              key={i}
-              className="border rounded p-4 mb-3 cursor-pointer bg-gray-50 hover:bg-gray-100 transition"
-              onClick={() => toggleFaq(i)}
-            >
-              <div className="flex justify-between items-center font-medium">
-                <p>{faq.question}</p>
-                {openFaqIndex === i ? (
-                  <ChevronUp size={18} />
-                ) : (
-                  <ChevronDown size={18} />
-                )}
-              </div>
-              {openFaqIndex === i && (
-                <p className="text-gray-700 mt-2">{faq.answer}</p>
-              )}
-            </div>
-          ))}
+    {/* FAQ Section */}
+{blog.faqBlock?.length > 0 && (
+  <div className="mt-12">
+    <h2 className="text-2xl font-semibold mb-5">FAQs</h2>
+    {blog.faqBlock.map((faq, i) => (
+      <div
+        key={i}
+        className={`border rounded-lg p-5 mb-4 transition-all duration-300 ease-in-out shadow-sm ${
+          openFaqIndex === i
+            ? "bg-white shadow-md"
+            : "bg-gray-50 hover:bg-gray-100"
+        }`}
+        onClick={() => toggleFaq(i)}
+      >
+        <div className="flex justify-between items-center text-lg font-semibold">
+          <p>{faq.question}</p>
+          {openFaqIndex === i ? (
+            <ChevronUp size={20} />
+          ) : (
+            <ChevronDown size={20} />
+          )}
         </div>
-      )}
+        <div
+          className={`mt-3 text-gray-700 text-sm transition-all duration-300 ease-in-out ${
+            openFaqIndex === i
+              ? "opacity-100 max-h-40"
+              : "opacity-0 max-h-0 overflow-hidden"
+          }`}
+        >
+          {faq.answer}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Editor } from "react-draft-wysiwyg";
+import Editor from "./Editor";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -32,6 +32,7 @@ const BlogForm = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [newSchemaInput, setNewSchemaInput] = useState("");
 
+  const [submitting, setSubmitting] = useState(false);
 
   // ===== Handlers =====
 
@@ -92,21 +93,25 @@ const BlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true); // Disable the button
+
     const contentBody = editorContent;
-    
+
     try {
-      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs", {
-        ...formData,
-        contentBody,
-        publishOn: selectedPlatform,
-      });
+      await axios.post(
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs",
+        {
+          ...formData,
+          contentBody,
+          publishOn: selectedPlatform,
+        }
+      );
       alert("Blog created successfully!");
     } catch (err) {
       console.error(err);
       alert("Failed to create blog");
     }
   };
-  
 
   const addSchemaMarkup = () => {
     try {
@@ -130,9 +135,12 @@ const BlogForm = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs", {
-          params: selectedPlatform ? { publishOn: selectedPlatform } : {},
-        });
+        await axios.get(
+          "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs",
+          {
+            params: selectedPlatform ? { publishOn: selectedPlatform } : {},
+          }
+        );
       } catch (err) {
         console.error("Failed to fetch blogs:", err);
       }
@@ -192,9 +200,7 @@ const BlogForm = () => {
         </div>
 
         {/* Rich Text Editor */}
-        <RichTextEditor content={editorContent} onChange={setEditorContent} />
-
-
+        <Editor value={editorContent} onChange={setEditorContent} />
 
         {/* Schema Markup Paste Section */}
         <h3 className="font-semibold mt-4">Schema Markup (Paste JSON)</h3>
@@ -367,9 +373,10 @@ const BlogForm = () => {
         {/* Submit */}
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={submitting}
         >
-          Create Blog
+          {submitting ? "Creating..." : "Create Blog"}
         </button>
       </form>
     </div>

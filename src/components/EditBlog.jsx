@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import RichTextEditor from "./RichTextEditor";
+import Editor from "./Editor";
+
 
 const EditBlog = () => {
   const { slug } = useParams();
@@ -22,6 +24,8 @@ const EditBlog = () => {
   const [editorContent, setEditorContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [coverImageProgress, setCoverImageProgress] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
+
 
   useEffect(() => {
     axios
@@ -79,6 +83,24 @@ const EditBlog = () => {
       if (url) setBlog((prev) => ({ ...prev, featuredImage: url }));
     }
   };
+
+
+{!showPreview ? (
+<Editor value={editorContent} onChange={setEditorContent} />
+) : (
+  <div
+    className="prose max-w-none border rounded p-4 bg-gray-500"
+    dangerouslySetInnerHTML={{ __html: editorContent }}
+  />
+)}
+
+<button
+  type="button"
+  className="text-sm underline text-blue-600"
+  onClick={() => setShowPreview(!showPreview)}
+>
+  {showPreview ? "Back to Editor" : "Preview Blog"}
+</button>
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -166,7 +188,7 @@ const EditBlog = () => {
         )}
 
         {/* 📝 React Quill Editor */}
-        <RichTextEditor content={editorContent} onChange={setEditorContent}/>
+        <Editor value={editorContent} onChange={setEditorContent} />
 
 
         <label className="block font-semibold">Publish On</label>
