@@ -4,6 +4,7 @@ import PSTrustedClients from './PSTrustedClients.jsx'
 import PSSpecializedSolutions from './PSSpecializedSolutions.jsx'
 import PSProcessSection from './PSProcessSection.jsx'
 import PSFeaturedProjects from './PSFeaturedProjects.jsx'
+import PSWhyChooseUs from './PSWhyChooseUs.jsx'
 
 const PropquesStudio = () => {
   return (
@@ -13,6 +14,7 @@ const PropquesStudio = () => {
       <PSSpecializedSolutions />
       <PSProcessSection />
       <PSFeaturedProjects />
+      <PSWhyChooseUs />
     </div>
   )
 }
