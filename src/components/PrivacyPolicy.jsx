@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -16,6 +17,14 @@ const PrivacyPolicy = () => {
   }, []);
   return (
     <div className="px-8 md:px-16 py-16 font-extrabold">
+      <Helmet>
+        <title>Privacy Policy</title>
+        <meta
+          name="description"
+          content="Read Propques' privacy policy to understand how we handle your data and privacy."
+        />
+        <link rel="canonical" href="https://propques.com/privacy-policy" />
+      </Helmet>
       <br />
       <h1 className="text-3xl font-bold mb-6  text-blue-500 ">
         Privacy Policy
@@ -702,5 +711,3 @@ const PrivacyPolicy = () => {
 };
 
 export default PrivacyPolicy;
-
-      

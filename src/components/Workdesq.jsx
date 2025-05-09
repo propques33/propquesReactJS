@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import wdo from '../../public/wdo.jpg'
+import wdo from "../../public/wdo.jpg";
+import { Helmet } from "react-helmet";
 const WorkDesqCaseStudy = () => {
   useEffect(() => {
     window.scrollTo({
@@ -14,14 +15,23 @@ const WorkDesqCaseStudy = () => {
 
   return (
     <div className="overflow-hidden md:px-16 px-4">
+      <Helmet>
+        <title>WorkDesq: Flexible Workspaces in Indore</title>
+        <meta
+          name="description"
+          content="WorkDesq by Propques provides flexible and modern coworking spaces in Indore."
+        />
+        <link rel="canonical" href="https://propques.com/case-study/workdesq" />
+      </Helmet>
+
       {/* Overview Section */}
       <section className="container mx-auto mt-20 md:mt-0 lg:mt-0">
         <div className="py-12 rounded-lg w-full mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left md:w-1/2">
               <h1 className="text-4xl font-bold text-gray-800">
-                WorkDesq – Transforming Pharma-Owned Real Estate into a Thriving
-                Coworking Hub
+                WorkDesq Indore – Transforming Pharma-Owned Real Estate into a
+                Thriving Coworking Hub
               </h1>
               <h2 className="text-5xl font-semibold mb-4 text-gray-900">
                 Unlocking Potential in Emerging Markets

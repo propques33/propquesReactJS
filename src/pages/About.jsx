@@ -5,6 +5,7 @@ import { HiOutlineUsers } from 'react-icons/hi';
 import { BiBuildingHouse } from 'react-icons/bi';
 import partner4 from '../../public/partner4.webp';
 import blogbanner from '../../public/blog-banner.webp'
+import { Helmet } from 'react-helmet';
 const AboutUs = () => {
   useEffect(() => {
     // Ensure scrolling to the top of the document when the component is mounted
@@ -21,6 +22,14 @@ const AboutUs = () => {
   }, []);
   return (
     <div className="font-sans md:mt-0 mt-20">
+      <Helmet>
+  <title>About Propques: Coworking Consultancy in India</title>
+  <meta
+    name="description"
+    content="Learn about Propques, India's leading coworking consultancy, offering tailored solutions for flexible workspaces."
+  />
+  <link rel="canonical" href="https://propques.com/about-us" />
+</Helmet>
       {/* Hero Section */}
 
       <section className=" text-wite px-6 md:pt-20">
@@ -28,9 +37,11 @@ const AboutUs = () => {
           {/* Left Side: Text Content */}
           <div className="space-y-3">
             <h1 className="text-4xl font-bold">
-              Join us as we set out on your quest toward a versatile workspace
+            About Propques
+             
             </h1>
             <p className="text-lg">
+            Join us as we set out on your quest toward a versatile workspace. <br />
               We aim to offer spaces that inspire, empower, and elevate your
               journey.
             </p>
@@ -47,24 +58,7 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      {/* <section className="bg-white flex py-16 px-4 md:px-8 lg:px-16 ">
-        <div className='w-1/2'>
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Join us as we set out on your quest toward a versatile workspace
-          </h1>
-          <p className="text-base md:text-lg lg:text-xl text-gray-700">
-            We aim to offer spaces that inspire, empower, and elevate your
-            journey.
-          </p>
-        </div>
-        <div>
-          <img
-            src={blogbanner}
-            alt="Workspace Optimization"
-            className="w-full rounded-lg shadowlg"
-          />
-        </div>
-      </section> */}
+     
 
       {/* Intro Section */}
       <section className="py-12 px-4 md:px-8 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -132,17 +126,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Revolution Ideology */}
-      {/* <section className="py-16 px-4 md:px-8 lg:px-32">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-center">Revolutionary Ideology</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <img src={partner6} alt="Revolution ideology" className="w-full rounded-md" />
-          <p className="text-gray-600 text-sm md:text-base">
-            We develop our coworking spaces with a forward-thinking approach, incorporating eco-friendly solutions and well-structured designs that cater to the modern professional.
-          </p>
-        </div>
-      </section> */}
-
       {/* Process Section */}
       <section className=" py-16 px-4 md:px-8 lg:px-32">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-center">
@@ -207,13 +190,7 @@ const AboutUs = () => {
               prioritizing the end-users of the space.
             </p>
           </div>
-          {/* <div className="text-center">
-            <FaThumbsUp className="text-5xl md:text-6xl mb-4 text-blue-500 mx-auto" />
-            <h3 className="text-lg md:text-xl font-semibold capitalized">industry experience</h3>
-            <p className="text-gray-600 text-sm md:text-base">
-              To reduce expenses, we merge our design and strategy into a single framework.
-            </p>
-          </div> */}
+   
         </div>
       </section>
     </div>

@@ -98,6 +98,13 @@ const Navbar = () => {
               </Link>
             </li>
 
+            <Link
+              to="/propques-studio"
+              className="text-lg hover:text-blue-400"
+            >
+              Propques Studio
+            </Link>
+
             <li>
               {/* <Link
                 to="/blogs"

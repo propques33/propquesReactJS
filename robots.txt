@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /thankyou
 Disallow: /login
 Disallow: /register
+Disallow: /write
 Disallow: /admin-dashboard
 Disallow: /author-dashboard
 Disallow: /author/userpropques

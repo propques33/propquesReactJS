@@ -1,9 +1,6 @@
 import { cn } from "../lib/utils";
 import Marquee from "../components/ui/marquee";
-import workvistarlogo from "/workvistarlogo.png";
-import siolimAsset from "/siolimAsset.png";
-import workjarAsset from "/workjarAsset.png";
-import workviaalogo from "/workviaalogo.png";
+
 import cubilogo from "/cubilogo.png";
 import summit from "/summit.png";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
@@ -22,42 +19,42 @@ const reviews = [
     username: "@jill",
     body: "Innovative & research-backed facelift of a strategically located commercial space into a well-facilitated hybrid office to tap the nearby home office needs.",
     img: cubilogo,
-    route: "/cubispace",
+    route: "/case-study/cubispace",
   },
   {
     name: "Jill",
     username: "@jill",
     body: "Reached 60% occupancy within the first quarter and 90% by the end of the first year. Monthly rental income increased by 80%, thanks to the coworking model’s premium pricing.",
     img: "https://www.karyasthal.com/wp-content/uploads/2022/06/logo-2.png.webp",
-    route: "/karyasthal",
+    route: "/case-study/karyasthal",
   },
   {
     name: "Jill",
     username: "@jill",
     body: "Achieved 60% occupancy within three months of launch, with continued growth. Rental income grew from ₹50/sq. ft. to ₹80/sq. ft. under the coworking model.",
     img: "https://worqspot.com/wp-content/uploads/2023/06/LogoAsset-1.png",
-    route: "/worqspot",
+    route: "/case-study/worqspot",
   },
   {
     name: "Jill",
     username: "@jill",
     body: " A steady 90-100% occupancy rate has been maintained since launch. The coworking space became a community hub, elevating the Tolani Group's reputation.",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm-ZcsX9pV17OshYBnyieg1C_0-ADQ9qzO2g&s",
-    route: "/sapna-sangeeta-offices",
+    route: "/case-study/sapna-sangeeta-offices",
   },
   {
     name: "Jill",
     username: "@jill",
     body: " Achieved a steady 12% occupancy rate within the first year, building a loyal base of professionals and startups. Generated ₹120 per sq. ft. for the owners, significantly outperforming expectations for the area.",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMMeMERTE_nqSagKZl60UwHcWw--o-Qj2UEQ&s",
-    route: "/workdesq",
+    route: "/case-study/workdesq",
   },
   {
     name: "John",
     username: "@john",
     body: "Over 1.6X increase in the rental rate of the corporate property.  3X increase in the occupancy rate in just 6 months. Complete marketing & strategic makeover to increase the visibility & revenue generation.",
     img: summit,
-    route: "/summit-space",
+    route: "/case-study/summit-space",
   },
   // {
   //   name: "Jane",

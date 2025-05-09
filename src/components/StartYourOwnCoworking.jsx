@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const SYOC = () => {
   const [formData, setFormData] = useState({
@@ -173,6 +174,14 @@ const SYOC = () => {
 
   return (
     <div className="min-h-screen mt-20 text-sm bg-gray-100 flex flex-col lg:flex-row items-start justify-center md:p-6 lg:p-6 p-0 space-y-6 lg:space-y-0 lg:space-x-6">
+           <Helmet>
+        <title>Start Your Own Coworking Space with Propques</title>
+        <meta
+          name="description"
+          content="Learn how Propques can help you establish a successful coworking space in India."
+        />
+        <link rel="canonical" href="https://propques.com/start-your-own-coworking-space" />
+      </Helmet>
       {/* Insights Section */}
       <aside className="lg:w-1/3 bg-gradient-to-br from-blue-600 to-blue-400 text-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-4">
@@ -195,9 +204,9 @@ const SYOC = () => {
         className="lg:w-2/3 bg-white p-8 rounded-lg shadow-lg space-y-8"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Information
-        </h2>
+        <h1 className="text-2xl font-semibold text-gray-800 mb-4">
+        Start Your Coworking Space
+        </h1>
 
         {/* Ownership Type Dropdown */}
         <div>

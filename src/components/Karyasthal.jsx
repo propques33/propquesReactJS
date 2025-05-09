@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const KaryasthalSpacesCaseStudy = () => {
   useEffect(() => {
@@ -14,14 +15,22 @@ const KaryasthalSpacesCaseStudy = () => {
 
   return (
     <div className="overflow-hidden md:px-16 px-4">
+      <Helmet>
+  <title>Karyasthal: Professional Coworking Spaces in India</title>
+  <meta
+    name="description"
+    content="Karyasthal by Propques offers professional coworking environments across India."
+  />
+  <link rel="canonical" href="https://propques.com/case-study/sapna-sangeeta-offices" />
+</Helmet>
+
       {/* Overview Section */}
       <section className="container mx-auto mt-20">
         <div className="py-12 rounded-lg w-full mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left md:w-1/2">
               <h1 className="text-4xl font-bold text-gray-800">
-                Karyasthal Spaces – Transforming Real Estate into Profitable
-                Coworking Hub
+                Karyasthal Indore 
               </h1>
               <h2 className="text-5xl font-semibold mb-4 text-gray-900">
                 Unlocking Potential in Bhawarkua, Indore

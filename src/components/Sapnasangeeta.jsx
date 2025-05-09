@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const SapnaSangeetaCaseStudy = () => {
   useEffect(() => {
@@ -14,6 +15,18 @@ const SapnaSangeetaCaseStudy = () => {
 
   return (
     <div className="overflow-hidden md:px-16 px-4">
+      <Helmet>
+        <title>Sapna Sangeeta Offices: Coworking in Indore</title>
+        <meta
+          name="description"
+          content="Explore Sapna Sangeeta Offices by Propques, premium coworking spaces in Indore."
+        />
+        <link
+          rel="canonical"
+          href="https://propques.com/case-study/sapna-sangeeta-offices"
+        />
+      </Helmet>
+
       {/* Overview Section */}
       <section className="container mx-auto mt-20 md:mt-0 lg:pt-0">
         <div className="py-12 rounded-lg w-full mb-8">

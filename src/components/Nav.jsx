@@ -68,10 +68,16 @@ const Navbar = () => {
                   <FaProjectDiagram size={20} /> Case Studies
                 </Link>
                 <Link
+                  to="/propques-studio"
+                  className="text-zinc-900 flex gap-1 items-center hover:bg-zinc-700 transition-all ease-in-out hover:text-white px-3 py-2 rounded-md text-md font-medium"
+                >
+                  <RiQuestionAnswerLine size={20} />Propques Studio
+                </Link>
+                <Link
                   to="/faqs"
                   className="text-zinc-900 flex gap-1 items-center hover:bg-zinc-700 transition-all ease-in-out hover:text-white px-3 py-2 rounded-md text-md font-medium"
                 >
-                  <RiQuestionAnswerLine size={20} /> FAQ's
+                  <RiQuestionAnswerLine size={20} /> FAQ
                 </Link>
               </div>
               <div>
@@ -121,6 +127,12 @@ const Navbar = () => {
             >
               <FaProjectDiagram size={20} /> Case Studies
             </Link>
+            <Link
+                  to="/propques-studio"
+                  className="text-zinc-900 flex gap-1 items-center hover:bg-zinc-700 transition-all ease-in-out hover:text-white px-3 py-2 rounded-md text-md font-medium"
+                >
+                  <RiQuestionAnswerLine size={20} />Propques Studio
+                </Link>
             <Link
               to="/faqs"
               className="text-zinc-900 flex gap-1 items-center hover:bg-zinc-700 transition-all ease-in-out hover:text-white block px-3 py-2 rounded-md text-base font-medium"

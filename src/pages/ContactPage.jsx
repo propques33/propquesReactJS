@@ -1,6 +1,7 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import ModalForm from "../components/ModalForm";
 import GetInTouch from "../components/GetInTouch";
+import { Helmet } from "react-helmet";
 const offices = [
   {
     name: "Corporate office",
@@ -46,6 +47,15 @@ const Contact = () => {
   }, []);
   return (
     <div className="bg-white mt-20">
+      <Helmet>
+        <title>Contact Propques: Coworking Consultancy in India</title>
+        <meta
+          name="description"
+          content="Get in touch with Propques for expert coworking consultancy and solutions in India."
+        />
+        <link rel="canonical" href="https://propques.com/contact-us" />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="relative bg-blue-500 text-white py-16 text-center">
         <div className="container mx-auto">
@@ -85,9 +95,7 @@ const Contact = () => {
               <h2 className="text-3xl font-bold text-blue-500 mb-4">
                 Corporate Office
               </h2>
-              <p className="text-lg text-zinc-800">
-                {offices[0].schedule}
-              </p>
+              <p className="text-lg text-zinc-800">{offices[0].schedule}</p>
               <p className="text-lg font-semibold text-black mb-4">
                 {offices[0].address}
               </p>

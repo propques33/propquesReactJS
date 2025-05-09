@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { FaClipboardCheck } from 'react-icons/fa';
+import React, { useEffect } from "react";
+import { FaClipboardCheck } from "react-icons/fa";
 import sspace from "../../public/sspace.png";
+import { Helmet } from "react-helmet";
 const SummitSpaceCaseStudy = () => {
   useEffect(() => {
     // Ensure scrolling to the top of the document when the component is mounted
@@ -17,6 +18,18 @@ const SummitSpaceCaseStudy = () => {
   }, []);
   return (
     <div className=" font-sans md:px-8 px-4">
+      <Helmet>
+        <title>Summit Space: Premium Coworking in India</title>
+        <meta
+          name="description"
+          content="Summit Space by Propques offers premium coworking environments across India."
+        />
+        <link
+          rel="canonical"
+          href="https://propques.com/case-study/summit-space"
+        />
+      </Helmet>
+
       {/* Header Section */}
       {/* <header className="bg-white shadow-md ">
         <div className="container  text-center">
@@ -155,6 +168,6 @@ const SummitSpaceCaseStudy = () => {
       </footer> */}
     </div>
   );
-}
+};
 
 export default SummitSpaceCaseStudy;

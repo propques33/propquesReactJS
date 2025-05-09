@@ -21,6 +21,7 @@ import pImg from "../../public/pImg.jpg";
 import Button from "./Button";
 import partner9 from "../../public/partner9.webp";
 import partner8 from "../../public/partner8.webp";
+import { Helmet } from "react-helmet";
 
 const PartnerWebinarPage = () => {
   useEffect(() => {
@@ -33,6 +34,15 @@ const PartnerWebinarPage = () => {
 
   return (
     <div className="font-sans md:mt-0 mt-20 font-extrabold">
+      <Helmet>
+  <title>Partner with Propques: Coworking Opportunities</title>
+  <meta
+    name="description"
+    content="Collaborate with Propques to explore coworking opportunities and partnerships in India."
+  />
+  <link rel="canonical" href="https://propques.com/partners-with-us" />
+</Helmet>
+
       <section className=" py-1 md:px-16 px-4">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}

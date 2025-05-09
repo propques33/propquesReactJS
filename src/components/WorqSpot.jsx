@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const WorqSpotCaseStudy = () => {
   useEffect(() => {
@@ -14,14 +15,21 @@ const WorqSpotCaseStudy = () => {
 
   return (
     <div className="overflow-hidden md:px-16 px-4">
+       <Helmet>
+        <title>WorqSpot: Premium Coworking Space in Navi Mumbai</title>
+        <meta
+          name="description"
+          content="Explore WorqSpot by Propques, offering premium coworking spaces in Navi Mumbai."
+        />
+        <link rel="canonical" href="https://propques.com/case-study/worqspot" />
+      </Helmet>
       {/* Overview Section */}
       <section className="container mx-auto mt-20 md:mt-0 lg:mt-0">
         <div className="py-12 rounded-lg w-full mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-center md:text-left md:w-1/2">
               <h1 className="text-4xl font-bold text-gray-800">
-                WorqSpot – Transforming Prime Real Estate into a Thriving
-                Coworking Space
+              WorqSpot Navi Mumbai
               </h1>
               <h2 className="text-5xl font-semibold mb-4 text-gray-900">
                 Unlocking the Potential of Premium Locations

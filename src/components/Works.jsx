@@ -26,6 +26,7 @@ import workjarAsset from "../../public/workjarAsset.png";
 import workvistar from "../../public/workvistar.png";
 import partner8 from "../../public/partner8.webp";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Works = () => {
   useEffect(() => {
@@ -35,13 +36,22 @@ const Works = () => {
 
   return (
     <div className="font-sans mt-20">
+      <Helmet>
+        <title>Our Projects: Coworking Spaces by Propques</title>
+        <meta
+          name="description"
+          content="Explore successful coworking projects developed by Propques across India."
+        />
+        <link rel="canonical" href="https://propques.com/works" />
+      </Helmet>
+
       {/* Hero Section */}
       <section
         className="bg-cover relative mt-20 bg-center py-32 h-80 text-white text-center flex items-center justify-center"
         style={{ backgroundImage: `url(${partner8})` }}
       >
         <div className="absolute z-20 text-center px-4 md:px-0">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Case Studies</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">Our Projects</h1>
           <p className="text-base md:text-lg">
             Enabling the workforce of the future - We are motivated by a sense
             of community in all we do, from the businesses we support to the

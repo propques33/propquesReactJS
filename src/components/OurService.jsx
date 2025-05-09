@@ -13,6 +13,7 @@ import { MdOutlineBusinessCenter } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi";
 import { BiBuildingHouse } from "react-icons/bi";
 import blogbanner from '../../public/blog-banner.webp'
+import { Helmet } from "react-helmet";
 
 const OurServicesPage = () => {
   useEffect(() => {
@@ -21,6 +22,15 @@ const OurServicesPage = () => {
 
   return (
     <div className=" font-sans font-extrabold md:mt-0 mt-20">
+      <Helmet>
+  <title>Our Services: Coworking Consultancy by Propques</title>
+  <meta
+    name="description"
+    content="Discover the range of coworking consultancy services offered by Propques in India."
+  />
+  <link rel="canonical" href="https://propques.com/our-service" />
+</Helmet>
+
       {/* Hero Section */}
       <section className=" text-wite px-6 md:pt-20">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">

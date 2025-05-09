@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import RichTextEditor from "./RichTextEditor";
 import Editor from "./Editor";
-
 
 const EditBlog = () => {
   const { slug } = useParams();
@@ -19,13 +15,19 @@ const EditBlog = () => {
     featuredImage: "",
     visible: true,
     publishOn: "",
+    ampCompatibility: false,
+    brokenLinkDetector: false,
+    redirectManager: [{ from: "", to: "", type: "301" }],
+    locationLandingPages: [],
+    napFields: { name: "", address: "", phone: "" },
+    schemaMarkup: [],
+    faqBlock: [{ question: "", answer: "" }],
   });
 
   const [editorContent, setEditorContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [coverImageProgress, setCoverImageProgress] = useState(0);
-  const [showPreview, setShowPreview] = useState(false);
-
+  const [newSchemaInput, setNewSchemaInput] = useState("");
 
   useEffect(() => {
     axios
@@ -33,13 +35,12 @@ const EditBlog = () => {
       .then((res) => {
         const data = res.data;
         setBlog({
-          pageTitle: data.pageTitle,
-          metaTitle: data.metaTitle || "",
-          metaDescription: data.metaDescription || "",
-          canonicalUrl: data.canonicalUrl || "",
-          featuredImage: data.featuredImage || "",
-          visible: data.visible,
-          publishOn: data.publishOn || "",
+          ...data,
+          redirectManager: data.redirectManager || [{ from: "", to: "", type: "301" }],
+          faqBlock: data.faqBlock?.length ? data.faqBlock : [{ question: "", answer: "" }],
+          locationLandingPages: data.locationLandingPages || [],
+          napFields: data.napFields || { name: "", address: "", phone: "" },
+          schemaMarkup: data.schemaMarkup || [],
         });
         setEditorContent(data.contentBody || "");
         setLoading(false);
@@ -54,7 +55,6 @@ const EditBlog = () => {
     const formData = new FormData();
     formData.append("image", file);
     try {
-      setProgress?.(0);
       const { data } = await axios.post(
         "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image",
         formData,
@@ -67,8 +67,6 @@ const EditBlog = () => {
           },
         }
       );
-      setProgress?.(100);
-      setTimeout(() => setProgress?.(0), 1000);
       return data.url;
     } catch (err) {
       console.error("Image upload failed", err);
@@ -84,34 +82,71 @@ const EditBlog = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (name.includes("napFields.")) {
+      const field = name.split(".")[1];
+      setBlog((prev) => ({
+        ...prev,
+        napFields: { ...prev.napFields, [field]: value },
+      }));
+    } else if (type === "checkbox") {
+      setBlog((prev) => ({ ...prev, [name]: checked }));
+    } else {
+      setBlog((prev) => ({ ...prev, [name]: value }));
+    }
+  };
 
-{!showPreview ? (
-<Editor value={editorContent} onChange={setEditorContent} />
-) : (
-  <div
-    className="prose max-w-none border rounded p-4 bg-gray-500"
-    dangerouslySetInnerHTML={{ __html: editorContent }}
-  />
-)}
+  const handleFaqChange = (index, field, value) => {
+    const updated = [...blog.faqBlock];
+    updated[index][field] = value;
+    setBlog((prev) => ({ ...prev, faqBlock: updated }));
+  };
 
-<button
-  type="button"
-  className="text-sm underline text-blue-600"
-  onClick={() => setShowPreview(!showPreview)}
->
-  {showPreview ? "Back to Editor" : "Preview Blog"}
-</button>
+  const addFaq = () => {
+    setBlog((prev) => ({
+      ...prev,
+      faqBlock: [...prev.faqBlock, { question: "", answer: "" }],
+    }));
+  };
+
+  const removeFaq = (index) => {
+    if (blog.faqBlock.length <= 1) return;
+    const updated = blog.faqBlock.filter((_, i) => i !== index);
+    setBlog((prev) => ({ ...prev, faqBlock: updated }));
+  };
+
+  const handleRedirectChange = (index, field, value) => {
+    const updated = [...blog.redirectManager];
+    updated[index][field] = value;
+    setBlog((prev) => ({ ...prev, redirectManager: updated }));
+  };
+
+  const addSchemaMarkup = () => {
+    try {
+      const parsed = JSON.parse(newSchemaInput);
+      setBlog((prev) => ({
+        ...prev,
+        schemaMarkup: [...prev.schemaMarkup, JSON.stringify(parsed)],
+      }));
+      setNewSchemaInput("");
+    } catch {
+      alert("Invalid JSON");
+    }
+  };
+
+  const removeSchemaMarkup = (index) => {
+    const updated = blog.schemaMarkup.filter((_, i) => i !== index);
+    setBlog((prev) => ({ ...prev, schemaMarkup: updated }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const contentBody = editorContent;
-
     try {
-      await axios.put(`https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`, {
-        ...blog,
-        contentBody,
-      });
-
+      await axios.put(
+        `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`,
+        { ...blog, contentBody: editorContent }
+      );
       alert("✅ Blog updated successfully!");
       navigate("/blogs");
     } catch (err) {
@@ -123,92 +158,54 @@ const EditBlog = () => {
   if (loading) return <p>Loading blog...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 mt-10 bg-white shadow rounded">
+    <div className="max-w-4xl mx-auto p-6 mt-10">
       <h1 className="text-2xl font-bold mb-4">Edit Blog</h1>
-
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Page Title"
-          value={blog.pageTitle}
-          onChange={(e) => setBlog({ ...blog, pageTitle: e.target.value })}
-          className="w-full p-2 border rounded"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Meta Title"
-          value={blog.metaTitle}
-          onChange={(e) => setBlog({ ...blog, metaTitle: e.target.value })}
-          className="w-full p-2 border rounded"
-        />
-
-        <textarea
-          placeholder="Meta Description"
-          value={blog.metaDescription}
-          onChange={(e) =>
-            setBlog({ ...blog, metaDescription: e.target.value })
-          }
-          className="w-full p-2 border rounded"
-        />
-
-        <input
-          type="text"
-          placeholder="Canonical URL"
-          value={blog.canonicalUrl}
-          onChange={(e) => setBlog({ ...blog, canonicalUrl: e.target.value })}
-          className="w-full p-2 border rounded"
-        />
-
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={blog.visible}
-            onChange={(e) => setBlog({ ...blog, visible: e.target.checked })}
-          />
-          <span>Visible on UI</span>
-        </label>
+        <input name="pageTitle" value={blog.pageTitle} onChange={handleChange} className="w-full p-2 border" placeholder="Page Title" />
+        <input name="metaTitle" value={blog.metaTitle} onChange={handleChange} className="w-full p-2 border" placeholder="Meta Title" />
+        <textarea name="metaDescription" value={blog.metaDescription} onChange={handleChange} className="w-full p-2 border" placeholder="Meta Description" />
+        <input name="canonicalUrl" value={blog.canonicalUrl} onChange={handleChange} className="w-full p-2 border" placeholder="Canonical URL" />
 
         <input type="file" onChange={handleCoverImageUpload} />
-        {blog.featuredImage && (
-          <img
-            src={blog.featuredImage}
-            alt="Cover"
-            className="h-40 mt-2 rounded"
-          />
-        )}
-        {coverImageProgress > 0 && (
-          <div className="w-full bg-gray-200 rounded-lg mt-2">
-            <div
-              className="h-2 bg-green-500 rounded-lg transition-all"
-              style={{ width: `${coverImageProgress}%` }}
-            ></div>
-          </div>
-        )}
+        {blog.featuredImage && <img src={blog.featuredImage} className="h-40 mt-2" alt="cover" />}
 
-        {/* 📝 React Quill Editor */}
         <Editor value={editorContent} onChange={setEditorContent} />
 
+        <h3 className="font-semibold">FAQs</h3>
+        {blog.faqBlock.map((faq, i) => (
+          <div key={i} className="space-y-2 border p-2">
+            <input className="w-full p-2 border" value={faq.question} onChange={(e) => handleFaqChange(i, "question", e.target.value)} placeholder="Question" />
+            <textarea className="w-full p-2 border" value={faq.answer} onChange={(e) => handleFaqChange(i, "answer", e.target.value)} placeholder="Answer" />
+            <button type="button" onClick={() => removeFaq(i)} className="text-red-600 text-sm">Remove FAQ</button>
+          </div>
+        ))}
+        <button type="button" onClick={addFaq} className="bg-gray-700 text-white px-3 py-1 rounded">+ Add FAQ</button>
 
-        <label className="block font-semibold">Publish On</label>
-        <select
-          value={blog.publishOn || ""}
-          onChange={(e) => setBlog({ ...blog, publishOn: e.target.value })}
-          className="w-full p-2 border rounded"
-          required
-        >
+        <h3 className="font-semibold">Schema Markup</h3>
+        <textarea value={newSchemaInput} onChange={(e) => setNewSchemaInput(e.target.value)} className="w-full p-2 border" />
+        <button type="button" onClick={addSchemaMarkup} className="bg-blue-600 text-white px-3 py-1 rounded">+ Add</button>
+        <ul className="text-sm">
+          {blog.schemaMarkup.map((item, i) => (
+            <li key={i} className="flex justify-between border p-2 mt-2">
+              <span>Schema #{i + 1}</span>
+              <button type="button" onClick={() => removeSchemaMarkup(i)} className="text-red-600 text-xs">Remove</button>
+            </li>
+          ))}
+        </ul>
+
+        <input name="napFields.name" value={blog.napFields.name} onChange={handleChange} className="w-full p-2 border" placeholder="Business Name" />
+        <input name="napFields.address" value={blog.napFields.address} onChange={handleChange} className="w-full p-2 border" placeholder="Address" />
+        <input name="napFields.phone" value={blog.napFields.phone} onChange={handleChange} className="w-full p-2 border" placeholder="Phone" />
+
+
+    
+        <select value={blog.publishOn} onChange={(e) => setBlog({ ...blog, publishOn: e.target.value })} className="w-full p-2 border">
           <option value="">Select Platform</option>
           <option value="Propques">Propques</option>
           <option value="Findurspace">Findurspace</option>
         </select>
 
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Save Changes
-        </button>
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Save Changes</button>
       </form>
     </div>
   );

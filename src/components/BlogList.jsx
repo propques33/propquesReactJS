@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Pencil, Globe } from "lucide-react";
+import { Eye, EyeOff, Pencil, Globe , Trash2} from "lucide-react";
 
 const AdminBlogDashboard = () => {
   const [blogs, setBlogs] = useState([]);
@@ -39,6 +39,20 @@ const AdminBlogDashboard = () => {
       alert("Could not update visibility");
     }
   };
+
+  const handleDelete = async (slug) => {
+    if (!window.confirm("Really delete this blog?")) return;
+    try {
+      await axios.delete(
+        `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`
+      );
+      setBlogs(prev => prev.filter(b => b.urlSlug !== slug));
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("Could not delete blog");
+    }
+  };
+  
 
   const handleEdit = (slug) => {
     navigate(`/admin/edit/${slug}`);
@@ -79,7 +93,7 @@ const AdminBlogDashboard = () => {
                 className="flex items-center gap-1 text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
               >
                 <Pencil className="w-4 h-4" />
-                Edit
+                
               </button>
 
               <button
@@ -93,6 +107,15 @@ const AdminBlogDashboard = () => {
                 {blog.visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 {blog.visible ? "Visible" : "Hidden"}
               </button>
+
+              <button
+  onClick={() => handleDelete(blog.urlSlug)}
+  className="flex items-center gap-1 text-sm bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+>
+  <Trash2 className="w-4 h-4" />
+  
+</button>
+
             </div>
           </div>
         ))}

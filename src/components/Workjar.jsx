@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import workjar1 from "../../public/workv1.png"; // Replace with actual image paths
 import workjar2 from "../../public/workv2.png"; // Replace with actual image paths
+import { Helmet } from "react-helmet";
 
 const WorkJarCaseStudy = () => {
   useEffect(() => {
@@ -11,12 +12,21 @@ const WorkJarCaseStudy = () => {
 
   return (
     <div className="overflow-hidden md:px-16 px-4 ">
+      <Helmet>
+  <title>Workjar: Innovative Coworking Solutions in India</title>
+  <meta
+    name="description"
+    content="Workjar by Propques offers innovative coworking solutions tailored to your needs."
+  />
+  <link rel="canonical" href="https://propques.com/case-study/workjar" />
+</Helmet>
+
       {/* Overview Section */}
       <section className="container mx-auto mt-20">
         <div className="py-12 rounded-lg w-full mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center ">
             <div className="text-center md:text-left md:w-1/2">
-              <h1 className="text-4xl font-bold text-gray-800">Work Jar</h1>
+              <h1 className="text-4xl font-bold text-gray-800">Workjar Coworking Solutions</h1>
               <h2 className="text-5xl font-semibold mb-4 text-gray-900">
                 An underperforming standalone building was refurbished into a
                 promising managed office space.

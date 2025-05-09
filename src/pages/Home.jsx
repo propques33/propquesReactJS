@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Hero from "../components/Hero.jsx";
 import HeroMobile from "../components/HeroMobile.jsx";
 import { IoClose } from "react-icons/io5";
+import { Helmet } from "react-helmet";
 
 // const Hero = React.lazy(() => import("../components/Hero.jsx"));
 
@@ -53,6 +54,15 @@ const Home = () => {
 
   return (
     <div>
+      <Helmet>
+  <title>Propques: Coworking Consultancy & Solutions in India</title>
+  <meta
+    name="description"
+    content="Propques provides expert coworking consultancy and solutions for flexible workspaces in India."
+  />
+  <link rel="canonical" href="https://propques.com/" />
+</Helmet>
+
       {/* Desktop Hero */}
       <div className="md:block lg:block hidden">
         <Hero id="home" />

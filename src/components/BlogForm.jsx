@@ -91,11 +91,33 @@ const BlogForm = () => {
     setFormData((prev) => ({ ...prev, redirectManager: updated }));
   };
 
+  const removeFaq = (index) => {
+    if (formData.faqBlock.length <= 1) {
+      alert("At least one FAQ is required.");
+      return;
+    }
+    const updatedFaqs = [...formData.faqBlock];
+    updatedFaqs.splice(index, 1);
+    setFormData((prev) => ({ ...prev, faqBlock: updatedFaqs }));
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitting(true); // Disable the button
+    setSubmitting(true);
 
     const contentBody = editorContent;
+
+    // Validate FAQ Block
+    for (let i = 0; i < formData.faqBlock.length; i++) {
+      const { question, answer } = formData.faqBlock[i];
+      if (!question.trim() || !answer.trim()) {
+        alert(
+          `FAQ #${i + 1} is incomplete. Please fill both question and answer.`
+        );
+        setSubmitting(false);
+        return;
+      }
+    }
 
     try {
       await axios.post(
@@ -109,7 +131,12 @@ const BlogForm = () => {
       alert("Blog created successfully!");
     } catch (err) {
       console.error(err);
-      alert("Failed to create blog");
+      alert(
+        "Failed to create blog: " + err?.response?.data?.error ||
+          "Unknown error"
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -239,8 +266,8 @@ const BlogForm = () => {
         {/* FAQ Section */}
         <h3 className="font-semibold">FAQs</h3>
         {formData.faqBlock.map((faq, index) => (
-          <div key={index} className="space-y-2 mb-4 border p-3 rounded">
-            <input
+          <div key={index} className="space-y-2 mb-4 border p-3 rounded relative">
+          <input
               type="text"
               placeholder="Question"
               value={faq.question}
@@ -255,6 +282,14 @@ const BlogForm = () => {
               onChange={(e) => handleFaqChange(index, "answer", e.target.value)}
               className="w-full p-2 border rounded"
             />
+
+            <button
+              type="button"
+              onClick={() => removeFaq(index)}
+              className="absolut text-red-500 text-sm"
+            >
+              Remove FAQ 
+            </button>
           </div>
         ))}
         <button

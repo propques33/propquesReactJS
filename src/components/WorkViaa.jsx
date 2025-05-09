@@ -4,11 +4,12 @@ import {
   FaClipboardList,
   FaRegHandshake,
   FaLightbulb,
-  FaClipboardCheck
+  FaClipboardCheck,
 } from "react-icons/fa";
-import {  AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineDownload } from "react-icons/ai";
 import workviaa1 from "../../public/workviaa1.png";
 import workviaa2 from "../../public/workviaa2.png";
+import { Helmet } from "react-helmet";
 const WorkViaa = () => {
   useEffect(() => {
     // Ensure scrolling to the top of the document when the component is mounted
@@ -25,10 +26,18 @@ const WorkViaa = () => {
   }, []);
   return (
     <div className=" font-sans px-16">
+      <Helmet>
+        <title>Workviaa: Flexible Coworking Spaces in India</title>
+        <meta
+          name="description"
+          content="Discover Workviaa by Propques, offering flexible coworking solutions across India."
+        />
+        <link rel="canonical" href="https://propques.com/workviaa" />
+      </Helmet>
       {/* Header Section */}
       <section className="container mx-auto py-16 text-center mt-24 flex flex-col items-center">
         <h1 className="text-4xl font-semibold text-gray-800 mb-4">
-          Discover the Power of 100% Occupancy
+          Workviaa Coworking Spaces
         </h1>
         <p className=" text-gray-600 mb-6">
           Learn how we helped increase rental income and occupancy rates to new

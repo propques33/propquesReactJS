@@ -4,12 +4,15 @@ import axios from "axios";
 import { CalendarDays, ChevronDown, ChevronUp, User } from "lucide-react";
 import { format } from "date-fns";
 import { Helmet } from "react-helmet-async";
+import parse from "html-react-parser";
+import DOMPurify from "dompurify"; // Optional but recommended for extra sanitization
 
 const BlogDetails = () => {
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [allBlogs, setAllBlogs] = useState([]);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -26,6 +29,24 @@ const BlogDetails = () => {
     };
     fetchBlog();
   }, [slug]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get(
+          "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques"
+        );
+
+        setAllBlogs(res.data.pages || []);
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [blog, slug]);
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -97,49 +118,79 @@ const BlogDetails = () => {
       </div>
 
       {/* Blog Content */}
-      <div
-  className="prose prose-lg max-w-none prose-img:rounded-lg prose-a:text-blue-600 hover:prose-a:underline"
-  dangerouslySetInnerHTML={{ __html: blog.contentBody }}
-></div>
-
+      <div className="blog-body text-base md:text-lg leading-relaxed text-gray-800 space-y-6">
+        {parse(DOMPurify.sanitize(blog.contentBody))}
+      </div>
 
       {/* FAQ Section */}
-    {/* FAQ Section */}
-{blog.faqBlock?.length > 0 && (
-  <div className="mt-12">
-    <h2 className="text-2xl font-semibold mb-5">FAQs</h2>
-    {blog.faqBlock.map((faq, i) => (
-      <div
-        key={i}
-        className={`border rounded-lg p-5 mb-4 transition-all duration-300 ease-in-out shadow-sm ${
-          openFaqIndex === i
-            ? "bg-white shadow-md"
-            : "bg-gray-50 hover:bg-gray-100"
-        }`}
-        onClick={() => toggleFaq(i)}
-      >
-        <div className="flex justify-between items-center text-lg font-semibold">
-          <p>{faq.question}</p>
-          {openFaqIndex === i ? (
-            <ChevronUp size={20} />
-          ) : (
-            <ChevronDown size={20} />
-          )}
+      {blog.faqBlock?.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-2xl font-semibold mb-5">FAQs</h2>
+          {blog.faqBlock.map((faq, i) => (
+            <div
+              key={i}
+              className={`border rounded-lg p-5 mb-4 transition-all duration-300 ease-in-out shadow-sm ${
+                openFaqIndex === i
+                  ? "bg-white shadow-md"
+                  : "bg-gray-50 hover:bg-gray-100"
+              }`}
+              onClick={() => toggleFaq(i)}
+            >
+              <div className="flex justify-between items-center text-lg font-semibold">
+                <p>{faq.question}</p>
+                {openFaqIndex === i ? (
+                  <ChevronUp size={20} />
+                ) : (
+                  <ChevronDown size={20} />
+                )}
+              </div>
+              <div
+                className={`mt-3 text-gray-700 text-sm transition-all duration-300 ease-in-out ${
+                  openFaqIndex === i
+                    ? "opacity-100 max-h-40"
+                    : "opacity-0 max-h-0 overflow-hidden"
+                }`}
+              >
+                {faq.answer}
+              </div>
+            </div>
+          ))}
         </div>
-        <div
-          className={`mt-3 text-gray-700 text-sm transition-all duration-300 ease-in-out ${
-            openFaqIndex === i
-              ? "opacity-100 max-h-40"
-              : "opacity-0 max-h-0 overflow-hidden"
-          }`}
-        >
-          {faq.answer}
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+      )}
 
+      {/* <div className="mt-4">
+        {allBlogs.length > 0 && (
+          <div className="mt-20">
+            {console.log(allBlogs)}
+            <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+              Suggested Blogs
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {allBlogs.slice(0, 3).map((item) => (
+                <a
+                  key={item._id}
+                  href={`/blog/${item.urlSlug}`}
+                  className="block border rounded-xl overflow-hidden shadow hover:shadow-lg transition duration-300 bg-white"
+                >
+                  <img
+                    src={item.featuredImage}
+                    alt={item.pageTitle}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-gray-900 leading-snug">
+                      {item.pageTitle}
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-2">
+                      {item.metaDescription?.slice(0, 80)}...
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </div> */}
     </div>
   );
 };

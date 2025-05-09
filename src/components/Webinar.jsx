@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { BsArrowRight } from "react-icons/bs";
 import c187f5b810329f4d74ed7f30d5d05c197271e from "../../public/webinarimg.png";
+import { Helmet } from "react-helmet";
 
 const WebinarPage = () => {
   useEffect(() => {
@@ -20,14 +21,25 @@ const WebinarPage = () => {
 
   return (
     <div className="font-sans mt-10 font-extrabold">
+       <Helmet>
+        <title>Propques Webinars: Insights into Coworking Spaces</title>
+        <meta
+          name="description"
+          content=" Join Propques webinars to gain insights and trends in the coworking industry."
+        />
+        <link
+          rel="canonical"
+          href="https://propques.com/webinar"
+        />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gray-50 py-16 px-4  md:px-16 ">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* Text Content */}
           <div className="space-y-6 text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+            <p className="text-3xl md:text-4xl font-bold text-gray-800">
               Monetize Your Commercial Assets for Stable & Rapid Income
-            </h1>
+            </p>
             <p className="text-md text-gray-600">
               Are you ready to turn your commercial assets into consistent,
               high-yield revenue streams?
@@ -187,7 +199,7 @@ const WebinarPage = () => {
 
       {/* Call to Action Section */}
       <section className="bg-blue-500 py-16 px-8 text-center flex flex-col items-center text-white">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Register Now!</h2>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Webinars</h1>
         <p className="text-lg max-w-3xl mx-auto mb-8">
           Don’t miss this opportunity to transform your commercial properties
           into powerful income-generating assets.

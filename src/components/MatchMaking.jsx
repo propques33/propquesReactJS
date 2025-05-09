@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const MatchmakingForm = () => {
   const navigate = useNavigate();
@@ -180,6 +181,15 @@ const MatchmakingForm = () => {
 
   return (
     <div className="min-h-screen mt-20 bg-gray-100 flex flex-col lg:flex-row items-start justify-center md:p-6 lg:p-6 p-0 space-y-6 lg:space-y-0 lg:space-x-6">
+       <Helmet>
+        <title>Coworking Matchmaking Services in India</title>
+        <meta
+          name="description"
+          content="Propques connects property owners with coworking operators for profitable partnerships."
+        />
+        <link rel="canonical" href="https://propques.com/matchmaking-for-coworking-operators" />
+      </Helmet>
+      
       {/* Insights Section */}
       <aside className="lg:w-1/3 bg-gradient-to-br from-blue-600 to-blue-400 text-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold mb-4">

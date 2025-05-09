@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import cubii1 from "../../public/cubii1.jpg";
 import cubii2 from "../../public/cubii2.jpg";
+import { Helmet } from "react-helmet";
 const Cubispace = () => {
   useEffect(() => {
     // Ensure scrolling to the top of the document when the component is mounted
@@ -17,6 +18,14 @@ const Cubispace = () => {
   }, []);
   return (
     <div className="overflow-hidden md:px-16 px-4 ">
+       <Helmet>
+        <title>Cubispace: Best Coworking Space in Lucknow</title>
+        <meta
+          name="description"
+          content="Discover Cubispace by Propques, the top coworking space in Jankipuram, Lucknow."
+        />
+        <link rel="canonical" href="https://propques.com/case-study/cubispace" />
+      </Helmet>
       {/* Overview Section */}
       <section className="container  mx-auto mt-20">
         <div className="  py-12 rounded-lg w-full mb-8">

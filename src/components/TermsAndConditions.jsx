@@ -1,5 +1,6 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { FiPhoneCall, FiMail } from "react-icons/fi";
+import { Helmet } from "react-helmet";
 
 const TermsAndConditions = () => {
   useEffect(() => {
@@ -17,6 +18,15 @@ const TermsAndConditions = () => {
   }, []);
   return (
     <div className="px-8 md:px-16 py-16 font-extrabold ">
+      <Helmet>
+        <title>Terms and Conditions</title>
+        <meta
+          name="description"
+          content="Review the terms and conditions for using Propques' services and website."
+        />
+        <link rel="canonical" href="https://propques.com/terms-and-conditions" />
+      </Helmet>
+
       <br />
       <h1 className="text-3xl font-bold mb-6  text-blue-500">
         Terms and Conditions
