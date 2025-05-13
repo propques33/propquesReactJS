@@ -91,12 +91,12 @@ const PSContactSection = () => {
                             <ContactInfo
                                 icon={HiOutlinePhone}
                                 title="Contact Number"
-                                value="+91-7316981583"
+                                value="+91-7392037856"
                             />
                             <ContactInfo
                                 icon={HiOutlineMail}
                                 title="Email"
-                                value="info@propquestudio.com"
+                                value="buzz@propques.com"
                             />
                         </div>
                     </motion.div>
