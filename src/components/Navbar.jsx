@@ -30,106 +30,78 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed  font-extrabold p-4 z-[80] w-full -top-1  py-5 transition-colors ${
-        isScrolled ? "bg-white shadow-sm " : "bg-white "
-      }`}
+      className={`fixed top-0 left-0 right-0 font-extrabold z-[80] w-full transition-all duration-300 ${
+  isScrolled
+    ? "bg-white/90 backdrop-blur-md shadow-lg"
+    : "bg-white/95 shadow-md"
+}`}
     >
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo in the center */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Link to="/" className="text-white text-2xl font-bold">
-            <img src={logo} alt="Logo" className="w-32 " loading="lazy" />
-          </Link>
-        </div>
-
-        {/* Hamburger Menu on the right */}
-        <div className="ml-auto z-40 flex gap-4 ">
-          {/* <Button name="Let's Talk" /> */}
-
-          <button
-            onClick={toggleMenu}
-            className="text-zinc-800 text-3xl focus:outline-none"
-          >
-            {isOpen ? <FiX /> : <RiMenu3Fill />}
-          </button>
-        </div>
-
-        {/* Menu Links */}
-        <div
-          className={`fixed top-0 right-0 bg-wite shadow-md w-80 backdrop-blur-xl h-screen transition-transform ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <ul className="flex flex-col text-zinc-800 mt-28 space-y-6 text-center">
-            <li>
-              <Link
-                to="/"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="">
-              <Link
-                to="/start-your-own-coworking-space"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                For Property Owner{" "}
-              </Link>
-            </li>
-            <li className="">
-              <Link
-                to="/matchmaking-for-coworking-operators"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                For Coworking Operator{" "}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/works"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                Works
-              </Link>
-            </li>
-
-            <Link
-              to="/propques-studio"
-              className="text-lg hover:text-blue-400"
-            >
-              Propques Studio
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo in the center */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <Link to="/" className="block">
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-28 transition-transform duration-300 hover:scale-105"
+                loading="lazy"
+              />
             </Link>
+          </div>
 
-            <li>
-              {/* <Link
-                to="/blogs"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              > */}
-              <Link
-                to="/blogs"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                Blogs
-              </Link>
-              {/* </Link> */}
-            </li>
-            <li className="">
-              <Link
-                to="https://propques.zohorecruit.in/jobs/Careers"
-                className="text-lg hover:text-blue-400"
-                onClick={toggleMenu}
-              >
-                Careers{" "}
-              </Link>
-            </li>
-          </ul>
+          {/* Hamburger Menu on the right */}
+          <div className="ml-auto z-40">
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-lg text-zinc-800 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              {isOpen ? <FiX className="w-6 h-6" /> : <RiMenu3Fill className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Menu Links */}
+          <div
+            className={`fixed top-0 right-0 bg-white/95 backdrop-blur-md shadow-xl w-80 h-screen transition-all duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "translate-x-full"
+              }`}
+          >
+            <div className="h-full flex flex-col">
+              <div className="p-6 border-b border-gray-100">
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="w-28 transition-transform duration-300 hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <ul className="flex-1 overflow-y-auto p-6 space-y-4">
+                {[
+                  { path: "/", label: "Home" },
+                  { path: "/start-your-own-coworking-space", label: "For Property Owner" },
+                  { path: "/matchmaking-for-coworking-operators", label: "For Coworking Operator" },
+                  { path: "/works", label: "Works" },
+                  { path: "/propques-studio", label: "Propques Studio" },
+                  { path: "/blogs", label: "Blogs" },
+                  { path: "https://propques.zohorecruit.in/jobs/Careers", label: "Careers" }
+                ].map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="block text-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 py-2"
+                      onClick={toggleMenu}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="p-6 border-t border-gray-100">
+                <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-full font-medium hover:bg-blue-700 transition-colors duration-200">
+                  Get Free Consultation
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
