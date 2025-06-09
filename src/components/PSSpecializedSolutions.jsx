@@ -3,11 +3,16 @@ import { MdOutlineBusinessCenter } from "react-icons/md";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { PiOfficeChairLight } from "react-icons/pi"; // Chair icon for coworking
 import { BsCheck2Circle } from "react-icons/bs";
+import ps5 from '../assets/ps5.png'
+import ps4 from '../assets/ps4.png'
+import ps3 from '../assets/ps3.png'
+
+
 
 const solutions = [
   {
     icon: <MdOutlineBusinessCenter size={32} className="text-blue-700 drop-shadow-md" />,
-    image: "https://plus.unsplash.com/premium_photo-1661964030420-15481be20d5f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvbW1lcmNpYWwlMjBvZmZpY2V8ZW58MHx8MHx8fDA%3D",
+    image: ps5,
     title: "Small Workspace Design",
     size: "Size: 500 - 5000 Sqft",
     description: "Custom-made, Compact, Tailored Workspaces",
@@ -21,7 +26,7 @@ const solutions = [
   },
   {
     icon: <PiOfficeChairLight size={32} className="text-blue-700 drop-shadow-md" />,
-    image: "https://images.unsplash.com/photo-1614070776241-fb47cec38278?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvd29ya2luZyUyMHNwYWNlfGVufDB8fDB8fHww",
+    image: ps4,
     title: "Coworking Workspace Design",
     size: "Size: 5000 Sqft+",
     description: "Agile & Collaborative workspaces for community",
@@ -35,7 +40,7 @@ const solutions = [
   },
   {
     icon: <HiOutlineOfficeBuilding size={32} className="text-blue-700 drop-shadow-md" />,
-    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvcnBvcmF0ZSUyMG9mZmljZXxlbnwwfHwwfHx8MA%3D%3D",
+    image: ps3,
     title: "Corporate Workspace Design",
     size: "Size: 5000 Sqft+",
     description: "Enterprise-Grade Interior Systems",

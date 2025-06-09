@@ -2,9 +2,8 @@ import React, { useEffect, useState, useRef, memo } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { BsBuildings } from "react-icons/bs";
 import { MdOutlineArchitecture, MdOutlineSquareFoot, MdOutlineVerifiedUser } from "react-icons/md";
-import sampleImg from "../assets/SPACETIME-44-62275.webp";
+import sampleImg from "../assets/ps3.png";
 
-// Memoized Counter component for better performance
 const Counter = memo(({ end, suffix, duration = 2000 }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);

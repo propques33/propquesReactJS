@@ -59,6 +59,7 @@ const Routing = () => {
         <Route path="/" element={<Home />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/thankyou" element={<SuccessPage />} />
+        <Route path="/studio-thank-you" element={<SuccessPage />} />
         <Route
           path="/matchmaking-for-coworking-operators-thankyou"
           element={<SuccessPageMatch />}

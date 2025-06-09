@@ -2,27 +2,32 @@ import React, { useState, useRef, useEffect } from "react";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { PiOfficeChairLight } from "react-icons/pi";
 import { TbRulerMeasure, TbLayout2 } from "react-icons/tb";
+import ps8 from '../assets/ps8.png'
+import ps9 from '../assets/ps7.png'
+import ps10 from '../assets/ps6.png'
+import ps11 from '../assets/ps5.png'
+import ps12 from '../assets/ps4.png'
 
 const projects = [
   {
     title: "Modern Tech Office",
     category: "Corporate",
-    image: "https://media.gettyimages.com/id/1178582089/photo/the-hub-of-creativity-and-success.jpg?s=612x612&w=0&k=20&c=XMOYdHZ2s4TNXKtHUBA-cTY6p5I3gPAmcyWdRak7upo="
+    image: ps8
   },
   {
     title: "Premium Coworking Hub",
     category: "Coworking",
-    image: "https://tse2.mm.bing.net/th?id=OIP.5NpkWN90ik-66jVWAKtRCgHaEK&pid=Api&P=0&h=220"
+    image: ps9
   },
   {
     title: "Startup Incubator Space",
     category: "Coworking",
-    image: "https://images.unsplash.com/photo-1594732832278-abd644401426?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHN0YXJ0dXAlMjBpbmN1YmF0b3IlMjBzcGFjZXxlbnwwfHwwfHx8MA%3D%3D"
+    image: ps10
   },
   {
     title: "Creative Agency",
     category: "Corporate",
-    image: "https://plus.unsplash.com/premium_photo-1661962318201-c7faa790617b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y3JlYXRpdmUlMjBhZ2VuY3klMjBvZmZpY2V8ZW58MHx8MHx8fDA%3D"
+    image: ps11
   }
 ];
 

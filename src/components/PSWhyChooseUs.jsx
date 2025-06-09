@@ -9,8 +9,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from "../assets/gallery-6.jpeg";
-import img2 from "../assets/DSC06199.webp";
-import img3 from "../assets/DSC06200.webp";
+import img2 from "../assets/ps2.png";
+import img3 from "../assets/ps1.png";
 
 const images = [
   "https://myspacetime.in/assets/img/SPACETIME-44-62231.webp",img2,img3

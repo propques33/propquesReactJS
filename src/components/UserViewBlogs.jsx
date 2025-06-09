@@ -11,7 +11,8 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques");
+        const res = await axios.get("http://localhost:3000/api/blogs?publishOn=Propques");
+        // const res = await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques");
         const visibleBlogs = res.data.pages?.filter(blog => blog.visible) || [];
         setBlogs(visibleBlogs);
       } catch (err) {
@@ -30,7 +31,7 @@ const BlogList = () => {
   return (
     <>
       {/* 🟦 Blog Banner */}
-      <div className="bg-gradient-to-r mt-12 from-blue-600 to-blue-600 text-white py-12 text-center rounded-b-3xl shadow-lg">
+      <div className="bg-gradient-to-r mt-12 from-blue-900 to-blue-600 text-white py-12 text-center rounded-b-3xl shadow-lg">
         <h1 className="md:text-4xl text-2xl font-bold mb-2">Propques Blog</h1>
         <p className="md:text-lg text-sm text-white/90">Insights, ideas & guides from India's coworking experts</p>
       </div>
@@ -62,6 +63,7 @@ const BlogList = () => {
             </div>
           </div>
         ))}
+        {console.log}
       </div>
     </>
   );

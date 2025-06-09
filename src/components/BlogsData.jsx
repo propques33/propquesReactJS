@@ -34,7 +34,7 @@ const BlogsData = () => {
   return (
     <div>
       <h1 className="mt-60 bg-red-600 h-screen w-full">Blogs</h1>
-      dsncdk
+       
       <ul>
         {blogs.map((blog) => (
           <li key={blog.id}>
