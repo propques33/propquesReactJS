@@ -31,7 +31,7 @@ const ConsultationForm = () => {
 
     try {
       const response = await fetch(
-        "https://hook.eu2.make.com/e1dmgdn8bkmzln1vku0x5tf6hbogto6x",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/propques-studio-consultation",
         {
           method: "POST",
           headers: {

@@ -3,7 +3,6 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import TextStyle from "@tiptap/extension-text-style";
-import FontSize from "@tiptap/extension-font-size";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import Heading from "@tiptap/extension-heading";

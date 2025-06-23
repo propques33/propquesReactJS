@@ -34,6 +34,7 @@ const PSContactSection = () => {
     email: "",
     phone: "",
     projectType: "",
+    message: "",
   });
 
   const [status, setStatus] = useState("");
@@ -56,11 +57,11 @@ const PSContactSection = () => {
 
     try {
       const response = await fetch(
-        "https://hook.eu2.make.com/e1dmgdn8bkmzln1vku0x5tf6hbogto6x",
+        "https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/propques-studio-consultation",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Type": "application/json",
           },
           body: new URLSearchParams(formData),
         }
@@ -68,7 +69,7 @@ const PSContactSection = () => {
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", phone: "", projectType: "" });
+        setFormData({ name: "", email: "", phone: "", projectType: "", message: "" });
         navigate("/studio-thank-you");
       } else {
         setStatus("error");
@@ -238,10 +239,13 @@ const PSContactSection = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-white/50 border border-blue-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
                     placeholder="Brief description of your project"
-                  ></textarea>
+                  />
                 </motion.div>
 
                 <motion.button
