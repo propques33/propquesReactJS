@@ -22,6 +22,9 @@ const EditBlog = () => {
     napFields: { name: "", address: "", phone: "" },
     schemaMarkup: [],
     faqBlock: [{ question: "", answer: "" }],
+    category: "",
+    workspaceType: "none",
+    city: "",
   });
 
   const [editorContent, setEditorContent] = useState("");
@@ -165,6 +168,48 @@ const EditBlog = () => {
         <input name="metaTitle" value={blog.metaTitle} onChange={handleChange} className="w-full p-2 border" placeholder="Meta Title" />
         <textarea name="metaDescription" value={blog.metaDescription} onChange={handleChange} className="w-full p-2 border" placeholder="Meta Description" />
         <input name="canonicalUrl" value={blog.canonicalUrl} onChange={handleChange} className="w-full p-2 border" placeholder="Canonical URL" />
+
+        <select
+          name="category"
+          value={blog.category}
+          onChange={handleChange}
+          className="w-full p-2 border"
+          required
+        >
+          <option value="">Select Category</option>
+          <option value="Workspace Guides">Workspace Guides</option>
+          <option value="Neighborhood Watch">Neighborhood Watch</option>
+          <option value="Workspace Hacks">Workspace Hacks</option>
+          <option value="Future of Work">Future of Work</option>
+          <option value="Insider Insights">Insider Insights</option>
+          <option value="NextMovein Updates">NextMovein Updates</option>
+          <option value="Space Essentials">Space Essentials</option>
+        </select>
+
+        <select
+          name="workspaceType"
+          value={blog.workspaceType}
+          onChange={handleChange}
+          className="w-full p-2 border"
+          required
+        >
+          <option value="">Select Workspace Type</option>
+          <option value="none">None</option>
+          <option value="day pass">Day Pass</option>
+          <option value="private cabin">Private Cabin</option>
+          <option value="meeting rooms">Meeting Rooms</option>
+          <option value="dedicated desk">Dedicated Desk</option>
+          <option value="managed office">Managed Office</option>
+        </select>
+
+        <input
+          name="city"
+          value={blog.city}
+          onChange={handleChange}
+          placeholder="City"
+          className="w-full p-2 border"
+          required
+        />
 
         <input type="file" onChange={handleCoverImageUpload} />
         {blog.featuredImage && <img src={blog.featuredImage} className="h-40 mt-2" alt="cover" />}
