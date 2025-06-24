@@ -43,8 +43,28 @@ const ConsultationForm = () => {
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", phone: "", projectType: "" });
-        navigate("/studio-thank-you");
+        
+        let redirected = false;
+        const afterSubmit = () => {
+            if (!redirected) {
+                redirected = true;
+                setFormData({ name: "", email: "", phone: "", projectType: "" });
+                navigate("/studio-thank-you");
+            }
+        };
+
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'generate_lead', {});
+            window.gtag('event', 'conversion', {
+                'send_to': 'AW-561475110/FKRwCOuG5N8ZEKbc3YsC',
+                'value': 1.0,
+                'currency': 'INR',
+                'event_callback': afterSubmit
+            });
+            setTimeout(afterSubmit, 2000); 
+        } else {
+            afterSubmit();
+        }
       } else {
         setStatus("error");
       }

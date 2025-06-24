@@ -8,38 +8,48 @@ import PSWhyChooseUs from './PSWhyChooseUs.jsx'
 import USPSection from './USPSection.jsx'
 import PSTestimonial from './PSTestimonial.jsx'
 import PSContactSection from './PSContactSection.jsx'
-import ConsultationModal from './ConsultationModal'; // new
+import ConsultationModal from './ConsultationModal';
 
 const PropquesStudio = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [closeCount, setCloseCount] = useState(0);
 
+  // Show modal on initial load
   useEffect(() => {
-    const openOnce = () => {
-      if (!sessionStorage.getItem('consultationShown')) {
-        sessionStorage.setItem('consultationShown', 'true');
-        setTimeout(() => setModalOpen(true), 3000); // 3 seconds after scroll
+    const timer = setTimeout(() => {
+      if (closeCount < 2) {
+        setModalOpen(true);
+      }
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []); // Runs once on mount
+
+  // Re-show modal on scroll if it has been closed
+  useEffect(() => {
+    if (isModalOpen || closeCount >= 2) {
+      return;
+    }
+
+    const handleScroll = () => {
+      if (closeCount > 0) { // Only show on scroll if closed at least once
+        const scrollPercentage =
+          (window.scrollY /
+            (document.documentElement.scrollHeight - window.innerHeight)) *
+          100;
+        if (scrollPercentage > 30) {
+          setModalOpen(true);
+        }
       }
     };
-  
-    const handleScroll = () => {
-      openOnce();
-      window.removeEventListener('scroll', handleScroll); // ensure it runs once
-    };
-  
-    // ⏱ Fallback: if user doesn’t scroll in 15s, open anyway
-    const fallbackTimer = setTimeout(() => {
-      openOnce();
-      window.removeEventListener('scroll', handleScroll);
-    }, 15000);
-  
+
     window.addEventListener('scroll', handleScroll);
-  
-    return () => {
-      clearTimeout(fallbackTimer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isModalOpen, closeCount]);
+
+  const handleClose = () => {
+    setModalOpen(false);
+    setCloseCount((prevCount) => prevCount + 1);
+  };
 
   return (
     <div className=' poppins'>
@@ -52,9 +62,9 @@ const PropquesStudio = () => {
       <PSFeaturedProjects onOpenModal={() => setModalOpen(true)} />
       {/* <PSTestimonial /> */}
       <PSContactSection />
-      <ConsultationModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+      <ConsultationModal isOpen={isModalOpen} onClose={handleClose} />
     </div>
   )
 }
 
-export default PropquesStudio
+export default PropquesStudio;
