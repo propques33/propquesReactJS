@@ -11,8 +11,8 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/blogs?publishOn=Propques");
-        // const res = await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques");
+        // const res = await axios.get("http://localhost:3000/api/blogs?publishOn=Propques");
+        const res = await axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques");
         const visibleBlogs = res.data.pages?.filter(blog => blog.visible) || [];
         setBlogs(visibleBlogs);
       } catch (err) {

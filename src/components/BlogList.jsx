@@ -13,8 +13,10 @@ const AdminBlogDashboard = () => {
     const fetchAllBlogs = async () => {
       try {
         const [fusRes, pqRes] = await Promise.all([
-          axios.get("http://localhost:3000/api/blogs?publishOn=Findurspace"),
-          axios.get("http://localhost:3000/api/blogs?publishOn=Propques"),
+          // axios.get("http://localhost:3000/api/blogs?publishOn=Findurspace"),
+          // axios.get("http://localhost:3000/api/blogs?publishOn=Propques"),
+          axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Findurspace"),
+          axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques"),
         ]);
 
         setFusBlogs(fusRes.data.pages || []);
