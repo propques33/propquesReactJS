@@ -51,6 +51,7 @@ import SinglePostPage from "../components/SinglePostPage";
 import AdminSignup from "../components/AdminSignup.jsx";
 import EditBlog from "../components/EditBlog";
 import PropquesStudio from "../components/PropquesStudio.jsx";
+import PSAgency from "../components/PSAgency";
 
 const Routing = () => {
   return (
@@ -127,7 +128,8 @@ const Routing = () => {
 
 
         {/* studio */}
-        <Route path="/propques-studio" element={<PropquesStudio />} />
+        <Route path="/studio" element={<PropquesStudio />} />
+        <Route path="/agency" element={<PSAgency />} />
 
       </Routes>
     </>
