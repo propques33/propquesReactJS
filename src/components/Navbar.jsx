@@ -13,23 +13,6 @@ const Navbar = () => {
   const [logoClass, setLogoClass] = useState("w-28");
   const location = useLocation();
 
-  useEffect(() => {
-    switch (location.pathname) {
-      case '/agency':
-        setCurrentLogo(agencyLogo);
-        setLogoClass("w-40");
-        break;
-      case '/studio':
-        setCurrentLogo(studioLogo);
-        setLogoClass("w-40");
-        break;
-      default:
-        setCurrentLogo(logo);
-        setLogoClass("w-28");
-        break;
-    }
-  }, [location.pathname]);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -90,7 +73,7 @@ const Navbar = () => {
             <div className="h-full flex flex-col">
               <div className="p-6 border-b border-gray-100">
                 <img
-                  src={currentLogo}
+                  src={logo}
                   alt="Logo"
                   className={`${logoClass} transition-transform duration-300 hover:scale-105`}
                   loading="lazy"
