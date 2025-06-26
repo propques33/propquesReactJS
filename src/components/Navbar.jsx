@@ -102,6 +102,7 @@ const Navbar = () => {
                   { path: "/start-your-own-coworking-space", label: "For Property Owner" },
                   { path: "/matchmaking-for-coworking-operators", label: "For Coworking Operator" },
                   { path: "/works", label: "Works" },
+                  { path: "/agency", label: "Propques Agency" },
                   { path: "/studio", label: "Propques Studio" },
                   { path: "/blogs", label: "Blogs" },
                   { path: "https://propques.zohorecruit.in/jobs/Careers", label: "Careers" }
