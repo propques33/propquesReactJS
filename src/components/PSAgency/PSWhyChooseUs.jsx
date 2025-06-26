@@ -1,48 +1,71 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Users, TrendingUp, Zap } from 'lucide-react';
+import { Target, Users, TrendingUp, Zap, ArrowUpRight } from 'lucide-react';
 
 const features = [
   {
     icon: Target,
-    title: "Automated Advertising",
-    description: "Precision-targeted ad campaigns that reach your ideal audience and run on autopilot, generating leads while you focus on your community."
+    title: "Eliminate Lead Leakage",
+    description: "Automatically capture and organize leads from websites, social media, and landing pages directly into your CRM, ensuring no prospect slips through the cracks.",
+    cta: {
+      text: "Stop Lead Leakage",
+      color: "bg-blue-600 hover:bg-blue-700 text-white"
+    }
   },
   {
     icon: Users,
-    title: "CRM & Lead Nurturing",
-    description: "We plug the leaks in your sales funnel with a smart, automated CRM system that tracks, follows up, and converts inquiries efficiently."
+    title: "Seamless WhatsApp & Email Integration",
+    description: "Engage your leads with personalized messages and timely follow-ups through WhatsApp and email, fostering stronger connections and higher conversion rates.",
+    cta: {
+      text: "Boost Engagement",
+      color: "bg-green-600 hover:bg-green-700 text-white"
+    }
   },
   {
     icon: TrendingUp,
-    title: "Dominant Local SEO",
-    description: "Climb to the top of local search results with strategic SEO that drives high-quality, organic traffic to your website month after month."
+    title: "Intelligent Lead Scoring",
+    description: "Prioritize your leads effectively by leveraging intelligent scoring based on engagement and interactions, allowing you to focus on high-potential prospects.",
+    cta: {
+      text: "Score More Leads",
+      color: "bg-purple-600 hover:bg-purple-700 text-white"
+    }
   },
   {
     icon: Zap,
-    title: "High-Conversion Websites",
-    description: "We don't just build beautiful websites—we build lead generation machines designed to turn visitors into booked tours and paying members."
+    title: "Unified CRM Experience",
+    description: "Integrate with popular CRM systems to centralize your lead management, providing a cohesive and efficient workflow for your sales team.",
+    cta: {
+      text: "Unify My CRM",
+      color: "bg-pink-600 hover:bg-pink-700 text-white"
+    }
   }
 ];
 
-const FeatureCard = ({ icon: Icon, title, description, index }) => (
+const FeatureCard = ({ icon: Icon, title, description, cta, index }) => (
   <motion.div
-    className="relative group p-6 rounded-2xl bg-white/50 backdrop-blur-lg border border-white/60 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+    className="relative group p-6 rounded-2xl bg-white/50 backdrop-blur-lg border border-white/60 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 flex flex-col justify-between max-w-max mx-auto"
     variants={{
       hidden: { opacity: 0, y: 20 },
       visible: { opacity: 1, y: 0 }
     }}
     transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
   >
-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
-    <div className="relative z-10">
+    <div className="relative z-10 flex-1">
       <div className="flex items-center gap-x-4 mb-4">
         <div className="flex-shrink-0 p-3 bg-white rounded-full shadow-md">
           <Icon className="h-7 w-7 text-blue-600 group-hover:text-purple-600 transition-colors duration-300" />
         </div>
         <h3 className="text-xl font-bold text-gray-900">{title}</h3>
       </div>
-      <p className="text-gray-600 leading-relaxed pl-[52px]">{description}</p>
+      <p className="text-gray-600 leading-relaxed ">{description}</p>
+    </div>
+    <div className="mt-6 flex justify-center">
+      <a href="https://calendly.com/thomas-agency/growth-call?month=2025-06" target="_blank" rel="noopener noreferrer" className="w-full">
+        <button className={`w-full flex items-center justify-between px-6 py-3 rounded-full font-semibold shadow-md transition-all duration-300 ${cta.color}`}>
+          <span>{cta.text}</span>
+          <ArrowUpRight className="ml-2 h-5 w-5" />
+        </button>
+      </a>
     </div>
   </motion.div>
 );
@@ -63,14 +86,14 @@ const PSWhyChooseUs = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            A{' '}
+            Why Choose {' '}
             <span className="relative inline-block">
               <span className="absolute inset-0 bg-gradient-to-r from-blue-300 to-purple-400 rounded-lg blur-xl opacity-70 animate-pulse-slow"></span>
               <span className="relative bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Growth Engine
+                Propques Agency 
               </span>
             </span>
-            , Not Just a Service
+            ?
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             In a competitive market, just having a space isn't enough. We build systems that turn your coworking business into a predictable, scalable, and highly profitable asset.
@@ -90,6 +113,7 @@ const PSWhyChooseUs = () => {
             <FeatureCard key={index} {...feature} index={index} />
           ))}
         </motion.div>
+        
       </div>
       <style jsx>{`
         @keyframes pulse-slow {

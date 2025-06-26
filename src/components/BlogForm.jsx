@@ -231,6 +231,15 @@ const BlogForm = () => {
           <option value="Insider Insights">Insider Insights</option>
           <option value="NextMovein Updates">NextMovein Updates</option>
           <option value="Space Essentials">Space Essentials</option>
+          <option value="Asset Playbook or Leasing Intelligence">Asset Playbook or Leasing Intelligence</option>
+          <option value="The Deal Room">The Deal Room</option>
+          <option value="Space Market Pulse">Space Market Pulse</option>
+          <option value="Design Logic">Design Logic</option>
+          <option value="The Living Office or Greenprint">The Living Office or Greenprint</option>
+          <option value="PropTech Insights">PropTech Insights</option>
+          <option value="Propques Labs">Propques Labs</option>
+          <option value="Monetize & Manage">Monetize & Manage</option>
+          <option value="PropTech & Analytics ">PropTech & Analytics </option>
         </select>
 
         {/* Workspace Type Dropdown */}

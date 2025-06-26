@@ -49,7 +49,7 @@ const testimonials = [
 ];
 
 const locations = [
-  "Dubai", "Doha", "Singapore", "Kuala Lumpur", "Manama", "Bangkok", "Jakarta"
+  "India", "UAE", "Singapore", "Dubai"
 ];
 
 const PSSuccessStories = () => {
@@ -64,24 +64,13 @@ const PSSuccessStories = () => {
       </div>
       <div className="container mx-auto px-4 relative z-10 overflow-x-hidden">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Success Stories That Speak for Themselves
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 flex items-center justify-center gap-3">
+            <Sparkles className="h-8 w-8 text-blue-500 -mt-1" />
+            Real Growth Stories
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Across the Gulf and Southeast Asia, coworking operators who've worked with Propques have seen:
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            See how Propques Agency transforms coworking spaces with proven results.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {locations.map((location, index) => (
-              <Badge 
-                key={index} 
-                variant="outline" 
-                className="px-4 py-2 border-blue-200 text-blue-700 bg-white/60 backdrop-blur-sm hover:bg-blue-50 transition-colors animate-scale-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {location}
-              </Badge>
-            ))}
-          </div>
           {/* Toggle */}
           <div className="flex justify-center gap-4 mb-8">
             <button
@@ -140,17 +129,17 @@ const PSSuccessStories = () => {
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-12 text-center text-white animate-scale-in shadow-xl">
           <div className="max-w-4xl mx-auto">
             <Sparkles className="h-12 w-12 mx-auto mb-6 animate-float" />
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Join Our Success Stories?
+            <h3 className="text-3xl md:text-4xl font-bold mb-6 flex items-center justify-center gap-3">
+              <Sparkles className="h-7 w-7 text-white -mt-1" />
+              Unlock Your Growth Story
             </h3>
             <p className="text-xl opacity-90 mb-8">
-              Our proven strategies have helped coworking spaces across 7 countries increase their occupancy rates, 
-              build stronger communities, and establish dominant market positions.
+              Join the coworking brands scaling faster with <span className="font-semibold">Propques Agency</span>.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-8">
               <div>
                 <div className="text-3xl font-bold">50+</div>
-                <div className="text-sm opacity-80">Spaces Transformed</div>
+                <div className="text-sm opacity-80">Spaces Grown</div>
               </div>
               <div>
                 <div className="text-3xl font-bold">2M+</div>
@@ -161,13 +150,13 @@ const PSSuccessStories = () => {
                 <div className="text-sm opacity-80">Avg Occupancy Rate</div>
               </div>
               <div>
-                <div className="text-3xl font-bold">7</div>
-                <div className="text-sm opacity-80">Countries Served</div>
+                <div className="text-3xl font-bold">4</div>
+                <div className="text-sm opacity-80">Countries Impacted</div>
               </div>
             </div>
             <a href="https://calendly.com/thomas-agency/growth-call?month=2025-06" target="_blank" rel="noopener noreferrer">
               <button className="bg-white text-blue-700 font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-blue-50 transition-all duration-300 text-lg">
-                Book Your Growth Call
+                Book Your Free Growth Call
               </button>
             </a>
           </div>

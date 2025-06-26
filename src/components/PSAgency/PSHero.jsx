@@ -82,15 +82,15 @@ const PSHero = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="w-full mx-auto text-center">
-          {/* Badge */}
+          {/* Brand Badge */}
           <motion.div
-            className="inline-flex items-center justify-center bg-white/60 backdrop-blur-sm shadow-lg px-4 py-2 rounded-full mb-6 border border-white/50"
+            className="inline-flex items-center justify-center bg-white/80 backdrop-blur-sm shadow-lg px-4 py-2 rounded-full mb-8 border border-white/50 mx-auto"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <Rocket className="h-5 w-5 mr-2 text-purple-600" />
-            <span className="font-medium text-gray-800 text-sm tracking-wider">Growth System for Coworking</span>
+            <span className="font-semibold text-blue-700 text-base tracking-wider">Propques Agency</span>
           </motion.div>
           
           {/* Main Headline */}
@@ -102,7 +102,6 @@ const PSHero = () => {
           >
             Don't Just List a Space. <br/> Launch a{' '}
             <span className="relative inline-block">
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur-lg opacity-60 animate-pulse-slow"></span>
               <span className="relative bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Brand.
               </span>

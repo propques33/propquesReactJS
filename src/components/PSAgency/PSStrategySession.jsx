@@ -101,16 +101,6 @@ const PSStrategySession = () => {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </a>
-                <a href="https://calendly.com/thomas-agency/growth-call?month=2025-06" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="text-base px-8 py-6 rounded-full border-2 border-blue-300 text-blue-800 hover:bg-blue-50 transition-all duration-300 w-full sm:w-auto"
-                  >
-                    <Phone className="mr-2 h-5 w-5" />
-                    Call Now
-                  </Button>
-                </a>
               </div>
             </CardContent>
           </Card>

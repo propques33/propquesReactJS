@@ -1,70 +1,107 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { CheckCircle, FileText, Layers, Zap, Target, MailCheck, BarChart, Users } from 'lucide-react';
+import { CheckCircle, FileText, Layers, Zap, Target, MailCheck, BarChart, Users, ArrowUpRight } from 'lucide-react';
 
 const services = [
   {
-    icon: Layers,
-    number: "01",
-    title: "Strategic Foundation",
-    description: "We audit your digital presence to identify key opportunities and build a rock-solid foundation for growth.",
-    features: ["Brand Message Clarity", "Competitor Analysis", "Website Performance Audit", "SEO Health Check"],
-    output: "A comprehensive Growth Blueprint and a high-converting website ready for traffic.",
+    icon: () => <span className="text-3xl">🧠</span>,
+    number: "1.",
+    title: "GTM Strategy Kit",
+    description: "Launch your space like a brand, not a listing. Built by Propques Agency for ambitious operators.",
+    features: [
+      "Micro-market analysis",
+      "Competitor benchmarking",
+      "Audience targeting (freelancers, remote teams)",
+      "Tiered pricing + value prop",
+      "Channel plan: Meta, Google, LinkedIn, OTAs"
+    ],
+    output: "GTM strategy PDF + Ad copy bank + Loom walkthrough",
     gradient: "from-blue-100 to-indigo-100",
+    cta: {
+      text: "Get My GTM Plan",
+      colorClass: "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
+    }
   },
   {
-    icon: Zap,
-    number: "02",
-    title: "The Conversion Engine",
-    description: "We transform your website from a simple brochure into a powerful lead-generation machine that captures interest and drives tour bookings.",
-    features: ["Compelling Copywriting", "Strategic Calls-to-Action", "Tour Booking Integration", "A/B Tested Layouts"],
-    output: "A website that converts visitors into qualified leads at a predictable rate.",
+    icon: () => <span className="text-3xl">⚙️</span>,
+    number: "2.",
+    title: "CRM Setup & Automation",
+    description: "Stop leaking leads. Automate your follow-ups.",
+    features: [
+      "Salesmate / Zoho / HubSpot setup",
+      "WhatsApp + email drip flows",
+      "Lead scoring + visit reminders",
+      "Smart dashboards & reporting"
+    ],
+    output: "CRM live in 10 days with SOPs + 4 workflows",
     gradient: "from-purple-100 to-indigo-100",
+    cta: {
+      text: "Automate My CRM",
+      colorClass: "bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700"
+    }
   },
   {
-    icon: Target,
-    number: "03",
-    title: "Targeted Lead Flow",
-    description: "We don't just get you traffic; we get you the right traffic. We use a multi-channel approach to attract high-intent prospects.",
-    features: ["Hyper-Local SEO", "Google & Social Media Ads", "Content Marketing", "Partnership Outreach"],
-    output: "A consistent stream of qualified leads from multiple sources.",
+    icon: () => <span className="text-3xl">🎯</span>,
+    number: "3.",
+    title: "Conversion Optimization",
+    description: "Turn visits into leads—before the tour.",
+    features: [
+      "Mobile-first landing page",
+      "Live chat + callback widget",
+      "Exit intent popups & retargeting",
+      "Lead magnets: day pass, ROI calculator"
+    ],
+    output: "High-converting microsite + CRO dashboard",
     gradient: "from-sky-100 to-blue-100",
+    cta: {
+      text: "Boost My Conversions",
+      colorClass: "bg-gradient-to-r from-sky-500 to-blue-600 text-white hover:from-sky-600 hover:to-blue-700"
+    }
   },
   {
-    icon: MailCheck,
-    number: "04",
-    title: "Automated Nurturing",
-    description: "Never let a lead go cold again. Our automated CRM and nurturing sequences engage prospects and guide them towards becoming members.",
-    features: ["Instant Lead Notifications", "Automated Email/SMS Drips", "Lead Scoring & Segmentation", "Pipeline Management"],
-    output: "A fully automated sales pipeline that maximizes conversion rates.",
+    icon: () => <span className="text-3xl">📞</span>,
+    number: "4.",
+    title: "Sales Training (CloseMax15™)",
+    description: "Your team knows the leads. We show them how to close, with Propques Agency's proven playbooks.",
+    features: [
+      "Sales SOP + objection playbook",
+      "WhatsApp + call follow-up scripts",
+      "CRM-based nurture flows",
+      "Tour reactivation system"
+    ],
+    output: "15-hour coaching + SOPs + recordings",
     gradient: "from-fuchsia-100 to-purple-100",
+    cta: {
+      text: "Train My Team",
+      colorClass: "bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white hover:from-fuchsia-700 hover:to-purple-700"
+    }
   },
   {
-    icon: BarChart,
-    number: "05",
-    title: "Data-Driven Scaling",
-    description: "We continuously analyze performance data to optimize your entire growth system, ensuring sustainable growth and maximizing your ROI.",
-    features: ["Performance Dashboards", "Bi-Weekly Strategy Calls", "ROI Tracking", "Continuous Optimization"],
-    output: "A scalable growth engine with clear, actionable insights for long-term success.",
+    icon: () => <span className="text-3xl">💰</span>,
+    number: "5.",
+    title: "Paid Growth Engine",
+    description: "Scale your growth with ROI-focused performance ads.",
+    features: [
+      "Meta + Google ad setup",
+      "Creatives + offer testing",
+      "OTA campaign management",
+      "Source-level ROI tracking"
+    ],
+    output: "Monthly ad creative packs + Real-time CAC + ROI dashboard + 5x ROAS goal in 60 days",
     gradient: "from-rose-100 to-fuchsia-100",
-  },
-  {
-    icon: Users,
-    number: "06",
-    title: "Community & Retention",
-    description: "We help you foster a thriving community and maximize member retention with engagement strategies and upsell systems.",
-    features: ["Member Events & Networking", "Feedback Loops", "Loyalty & Referral Programs", "Upsell Opportunities"],
-    output: "A loyal, engaged member base and increased lifetime value for your coworking space.",
-    gradient: "from-green-100 to-blue-100",
+    cta: {
+      text: "Scale My Ads",
+      colorClass: "bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white hover:from-rose-600 hover:to-fuchsia-700"
+    }
   },
 ];
 
-const GrowthStepCard = ({ icon: Icon, title, description, features, output, gradient }) => {
+const GrowthStepCard = ({ icon: Icon, title, description, features, output, gradient, cta }) => {
   return (
     <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300">
       <div className="flex items-center gap-4 mb-4">
         <div className="flex-shrink-0 p-3 bg-white rounded-xl shadow-md">
-          <Icon className="h-7 w-7 text-blue-600" />
+          <Icon />
         </div>
         <h3 className="text-2xl font-bold text-gray-900">{title}</h3>
       </div>
@@ -77,13 +114,19 @@ const GrowthStepCard = ({ icon: Icon, title, description, features, output, grad
           </div>
         ))}
       </div>
-      <div className={`bg-gradient-to-tr ${gradient} rounded-lg p-4`}>
+      <div className={`bg-gradient-to-tr ${gradient} rounded-lg p-4 mb-6`}>
         <div className="flex items-center mb-2">
           <FileText className="h-5 w-5 text-blue-800/80 mr-2" />
           <span className="font-semibold text-blue-900/90">Key Output:</span>
         </div>
         <p className="text-blue-900/80 font-medium">{output}</p>
       </div>
+      <a href="https://calendly.com/thomas-agency/growth-call?month=2025-06" target="_blank" rel="noopener noreferrer">
+        <button className={`w-full py-3 px-6 rounded-full font-semibold shadow-md transition-all duration-300 text-lg flex items-center justify-center gap-2 ${cta.colorClass}`}>
+          <span>{cta.text}</span>
+          <ArrowUpRight className="h-5 w-5 -mt-1" />
+        </button>
+      </a>
     </div>
   );
 };
@@ -128,12 +171,15 @@ const PSGrowthSystem = () => {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6 }}
         >
+          <div className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 font-semibold text-base tracking-wide shadow-sm">
+            Powered by Propques Agency
+          </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             Our Proven 5-Step Growth System
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Each solution builds on the last, creating a complete growth engine
-            that turns your coworking space into a predictable revenue machine.
+            Each solution builds on the last, creating a complete growth engine that turns your coworking space into a predictable revenue machine.<br/>
+            <span className="font-semibold text-blue-700">Propques Agency's</span> system is trusted by leading coworking operators.
           </p>
         </motion.div>
 

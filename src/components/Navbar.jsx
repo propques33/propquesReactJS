@@ -1,12 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "/weblogo.png";
+import agencyLogo from "/logo1.png";
+import studioLogo from "/logo2.png";
 import { RiMenu3Fill } from "react-icons/ri";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentLogo, setCurrentLogo] = useState(logo);
+  const [logoClass, setLogoClass] = useState("w-28");
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/agency':
+        setCurrentLogo(agencyLogo);
+        setLogoClass("w-40");
+        break;
+      case '/studio':
+        setCurrentLogo(studioLogo);
+        setLogoClass("w-40");
+        break;
+      default:
+        setCurrentLogo(logo);
+        setLogoClass("w-28");
+        break;
+    }
+  }, [location.pathname]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -42,9 +64,9 @@ const Navbar = () => {
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <Link to="/" className="block">
               <img
-                src={logo}
+                src={currentLogo}
                 alt="Logo"
-                className="w-28 transition-transform duration-300 hover:scale-105"
+                className={`${logoClass} transition-transform duration-300 scale-125`}
                 loading="lazy"
               />
             </Link>
@@ -68,9 +90,9 @@ const Navbar = () => {
             <div className="h-full flex flex-col">
               <div className="p-6 border-b border-gray-100">
                 <img
-                  src={logo}
+                  src={currentLogo}
                   alt="Logo"
-                  className="w-28 transition-transform duration-300 hover:scale-105"
+                  className={`${logoClass} transition-transform duration-300 hover:scale-105`}
                   loading="lazy"
                 />
               </div>
