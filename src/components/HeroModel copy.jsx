@@ -156,8 +156,10 @@ export default function ContactForm() {
     };
 
     try {
-      await axios.post("https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1", payload);
-      await axios.post("https://propq-com-backend-blog-fus-propq-czviz.ondigitalocean.app/api/contact", payload);
+      await axios.post(
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/hero-model-copy",
+        payload
+      );
       navigate("/thankyou");
     } catch (err) {
       console.error("Submission Error", err);

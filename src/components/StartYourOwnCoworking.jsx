@@ -147,9 +147,6 @@ const SYOC = () => {
 
       const dataToSend = {
         ...formData,
-        textCustomField6: formData.textCustomField6.join(", "),
-        textCustomField8: formData.textCustomField8.join(", "),
-        domain: formData.domain.join(", "),
         timestamp,
         type: "New",
       };
@@ -161,7 +158,10 @@ const SYOC = () => {
       );
 
       // Send to your backend
-      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/contact", dataToSend);
+      await axios.post(
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/start-your-own-coworking",
+        dataToSend
+      );
 
       navigate("/start-your-own-coworking-space-thankyou");
     } catch (error) {
@@ -188,11 +188,11 @@ const SYOC = () => {
         Make Your Space Work for You—3X Revenue with Coworking
         </h2>
         <p className="text-base mb-4">
-        Stop letting valuable space sit idle. In today’s flexible work era, your commercial property has the potential to generate up to 3x higher returns—simply by transforming it into a coworking space.
+        Stop letting valuable space sit idle. In today's flexible work era, your commercial property has the potential to generate up to 3x higher returns—simply by transforming it into a coworking space.
         </p>
 
         <p className="mt-4 text-base font-medium">
-        Whether it’s an empty floor, a low-occupancy building, or an old office setup, you can unlock its full earning potential by catering to the growing demand from freelancers, growing startups, and enterprise clients seeking flexible, plug-and-play workspaces.
+        Whether it's an empty floor, a low-occupancy building, or an old office setup, you can unlock its full earning potential by catering to the growing demand from freelancers, growing startups, and enterprise clients seeking flexible, plug-and-play workspaces.
         </p>
         <p className="mt-4 text-base font-medium">
         From layout planning to tenant acquisition, we help you transform your space into a premium coworking destination. 
@@ -241,17 +241,17 @@ const SYOC = () => {
               I'm a broker looking to help my client
             </option>
 
-            <option value="I’m eager to start my own coworking space to maximize profitability.">
-              I’m eager to start my own coworking space to maximize
+            <option value="I'm eager to start my own coworking space to maximize profitability.">
+              I'm eager to start my own coworking space to maximize
               profitability.
             </option>
-            <option value="I’d prefer to partner with an established operator, as I don’t have time to build my own brand..">
-              I’d prefer to partner with an established operator, as I don’t
-              have time to build my own brand.
+            <option value="I'd prefer to partner with an established operator, as I don't have time to build my own brand..">
+              I'd prefer to partner with an established operator, as I don't
+              have time to build my own brand.
             </option>
 
-            <option value="I’m not sure yet. Let’s talk.">
-              I’m not sure yet. Let’s talk.
+            <option value="I'm not sure yet. Let's talk.">
+              I'm not sure yet. Let's talk.
             </option>
           </select>
         </div>
@@ -393,7 +393,7 @@ const SYOC = () => {
         {/* Honest Market Rate */}
         <div>
           <label className="block text-sm font-extrabold text-gray-900">
-            What is an honest market rent on carpet area (INR per Sqft)?
+            What is an honest market rent on carpet area (INR per Sqft)?
           </label>
           <input
             type="text"

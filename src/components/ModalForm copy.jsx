@@ -78,19 +78,8 @@ const ModalForm = () => {
 
     try {
       await axios.post(
-        "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
-        {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          rentalExpectation: formData.rentalExpectation,
-          city: formData.city,
-          microMarket: formData.microMarket,
-          areaCarpet: formData.areaCarpet,
-          areaSuper: formData.areaSuper,
-          propertyDetails: formData.propertyDetails,
-          coworkingOption: formData.coworkingOption,
-        }
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/modal-form-copy",
+        formData
       );
       // Send form data using EmailJS
       await emailjs.send(

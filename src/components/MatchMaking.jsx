@@ -162,10 +162,9 @@ const MatchmakingForm = () => {
 
     try {
       const response = await axios.post(
-        "https://hook.eu2.make.com/1qfsjrk5wlsqoxwyb7x3iqqyg8egmt45",
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/matchmaking",
         inquiryData
       );
-
 
       await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/contact", inquiryData);
 
@@ -209,7 +208,7 @@ const MatchmakingForm = () => {
         </p>
         <p className="mt-4 text-base font-medium">
           If you're ready to partner with property owners eager to integrate
-          coworking into their spaces, fill out our brief form, and we’ll get
+          coworking into their spaces, fill out our brief form, and we'll get
           back to you promptly with tailored opportunities to help your brand
           grow.
         </p>

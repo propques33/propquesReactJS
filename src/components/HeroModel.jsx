@@ -150,7 +150,10 @@ export default function ContactForm() {
       await axios.post("https://hook.eu2.make.com/irpno6z3m67rk2ft6m4q1txlqc3wu2rw", dataToSend);
 
       // 2. Send to backend
-      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/contact", dataToSend);
+      await axios.post(
+        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/hero-model",
+        dataToSend
+      );
 
       navigate("/start-your-own-coworking-space-thankyou");
     } catch (error) {

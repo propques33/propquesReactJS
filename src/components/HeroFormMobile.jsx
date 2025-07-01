@@ -149,7 +149,7 @@ const ModalForm = () => {
        };
 
        await axios.post(
-         "https://hook.eu2.make.com/b8iebbyrokw9p15vrpl6y8ehca5c22o1",
+         "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/hero-form-mobile",
          dataToSend
        );
 
