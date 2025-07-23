@@ -11,7 +11,7 @@ import logo from "../../public/footerlogo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b  from-blue-500 to-blue-600  text-white py-12">
+    <footer className="bg-gradient-to-b  from-blue-500 to-blue-600  text-white py-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Section: Newsletter and Description */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
@@ -118,7 +118,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-lg mb-4">Follow Us</h4>
+            <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
             <ul className="flex gap-4 text-lg">
               <li>
                 <a
@@ -150,17 +150,20 @@ const Footer = () => {
                 </a>
               </li> */}
             </ul>
+            <div className="mt-4 flex items-center justify-center md:justify-start">
+              <a href="tel:+917392037856" className="flex items-center gap-2 text-white hover:text-blue-200 transition-colors text-base font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h0a2.25 2.25 0 002.25-2.25v-2.386a2.25 2.25 0 00-1.687-2.183l-2.272-.568a2.25 2.25 0 00-2.591 1.01l-.422.704a11.978 11.978 0 01-5.31-5.31l.704-.422a2.25 2.25 0 001.01-2.591l-.568-2.272A2.25 2.25 0 006.886 2.25H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+                +91-7392037856
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Bottom Section */}
         <div className="mt-8 border-t border-white/20 pt-4 text-center text-sm">
-          {/* <div className="text-center mb-4 text-sm text-white">
-            <p>
-              
-              
-            </p>
-          </div> */}
+          
           <p>
             {" "}
             <Link to="/privacy-policy" className="hover:underline">
