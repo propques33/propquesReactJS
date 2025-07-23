@@ -31,6 +31,8 @@ const EditBlog = () => {
   const [loading, setLoading] = useState(true);
   const [coverImageProgress, setCoverImageProgress] = useState(0);
   const [newSchemaInput, setNewSchemaInput] = useState("");
+  const [editingSchemaIndex, setEditingSchemaIndex] = useState(null);
+  const [editingSchemaValue, setEditingSchemaValue] = useState("");
 
   useEffect(() => {
     axios
@@ -151,7 +153,7 @@ const EditBlog = () => {
         { ...blog, contentBody: editorContent }
       );
       alert("✅ Blog updated successfully!");
-      navigate("/blogs");
+      navigate("/admin-dashboard");
     } catch (err) {
       console.error("Error updating blog:", err);
       alert("❌ Failed to update blog.");
@@ -236,13 +238,81 @@ const EditBlog = () => {
         <button type="button" onClick={addFaq} className="bg-gray-700 text-white px-3 py-1 rounded">+ Add FAQ</button>
 
         <h3 className="font-semibold">Schema Markup</h3>
-        <textarea value={newSchemaInput} onChange={(e) => setNewSchemaInput(e.target.value)} className="w-full p-2 border" />
+        <textarea
+          value={newSchemaInput}
+          onChange={(e) => setNewSchemaInput(e.target.value)}
+          className="w-full p-2 border"
+        />
         <button type="button" onClick={addSchemaMarkup} className="bg-blue-600 text-white px-3 py-1 rounded">+ Add</button>
         <ul className="text-sm">
           {blog.schemaMarkup.map((item, i) => (
-            <li key={i} className="flex justify-between border p-2 mt-2">
-              <span>Schema #{i + 1}</span>
-              <button type="button" onClick={() => removeSchemaMarkup(i)} className="text-red-600 text-xs">Remove</button>
+            <li key={i} className="flex flex-col border p-2 mt-2">
+              {editingSchemaIndex === i ? (
+                <>
+                  <textarea
+                    className="w-full p-2 border mb-2"
+                    value={editingSchemaValue}
+                    onChange={(e) => setEditingSchemaValue(e.target.value)}
+                    rows={6}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      className="bg-green-600 text-white px-2 py-1 rounded"
+                      onClick={() => {
+                        // Validate JSON
+                        try {
+                          JSON.parse(editingSchemaValue);
+                          const updated = [...blog.schemaMarkup];
+                          updated[i] = editingSchemaValue;
+                          setBlog((prev) => ({ ...prev, schemaMarkup: updated }));
+                          setEditingSchemaIndex(null);
+                          setEditingSchemaValue("");
+                        } catch {
+                          alert("Invalid JSON");
+                        }
+                      }}
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-gray-400 text-white px-2 py-1 rounded"
+                      onClick={() => {
+                        setEditingSchemaIndex(null);
+                        setEditingSchemaValue("");
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <pre className="whitespace-pre-wrap break-all bg-gray-100 p-2 rounded mb-2 text-xs max-h-40 overflow-auto">
+                    {(() => { try { return JSON.stringify(JSON.parse(item), null, 2); } catch { return item; } })()}
+                  </pre>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      className="bg-yellow-500 text-white px-2 py-1 rounded"
+                      onClick={() => {
+                        setEditingSchemaIndex(i);
+                        setEditingSchemaValue(item);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => removeSchemaMarkup(i)}
+                      className="bg-red-600 text-white px-2 py-1 rounded"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </>
+              )}
             </li>
           ))}
         </ul>

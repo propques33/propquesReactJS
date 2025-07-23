@@ -45,3 +45,23 @@
 .transition-all {
   transition: width 0.3s ease-in-out;
 }
+
+/* Sticky Quill toolbar for blog editor */
+.editor-scroll-wrapper {
+  max-height: 500px;
+  overflow: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.editor-scroll-wrapper .ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}

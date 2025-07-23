@@ -5,6 +5,7 @@ import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import RichTextEditor from "./RichTextEditor";
+import { useNavigate } from "react-router-dom";
 
 const BlogForm = () => {
   const [formData, setFormData] = useState({
@@ -36,6 +37,7 @@ const BlogForm = () => {
   const [newSchemaInput, setNewSchemaInput] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   // ===== Handlers =====
 
@@ -132,6 +134,7 @@ const BlogForm = () => {
         }
       );
       alert("Blog created successfully!");
+      navigate("/admin-dashboard");
     } catch (err) {
       console.error(err);
       alert(
