@@ -15,8 +15,8 @@ const AdminBlogDashboard = () => {
         const [fusRes, pqRes] = await Promise.all([
           // axios.get("http://localhost:3000/api/blogs?publishOn=Findurspace"),
           // axios.get("http://localhost:3000/api/blogs?publishOn=Propques"),
-          axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Findurspace"),
-          axios.get("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs?publishOn=Propques"),
+          axios.get("https://api.flexmidas.com/api/blogs?publishOn=Findurspace"),
+          axios.get("https://api.flexmidas.com/api/blogs?publishOn=Propques"),
         ]);
 
         setFusBlogs(fusRes.data.pages || []);
@@ -34,7 +34,7 @@ const AdminBlogDashboard = () => {
   const toggleVisibility = async (slug, currentVisible) => {
     try {
       const updated = await axios.put(
-        `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`,
+        `https://api.flexmidas.com/api/blogs/${slug}`,
         { visible: !currentVisible }
       );
 
@@ -56,7 +56,7 @@ const AdminBlogDashboard = () => {
 
     try {
       await axios.delete(
-        `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`
+        `https://api.flexmidas.com/api/blogs/${slug}`
       );
 
       setFusBlogs((prev) => prev.filter((b) => b.urlSlug !== slug));

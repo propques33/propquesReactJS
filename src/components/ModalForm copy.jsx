@@ -78,7 +78,7 @@ const ModalForm = () => {
 
     try {
       await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/modal-form-copy",
+        "https://api.flexmidas.com/api/modal-form-copy",
         formData
       );
       // Send form data using EmailJS

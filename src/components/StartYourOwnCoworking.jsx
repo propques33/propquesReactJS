@@ -159,7 +159,7 @@ const SYOC = () => {
 
       // Send to your backend
       await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/start-your-own-coworking",
+        "https://api.flexmidas.com/api/start-your-own-coworking",
         dataToSend
       );
 

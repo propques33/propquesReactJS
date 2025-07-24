@@ -151,7 +151,7 @@ export default function ContactForm() {
 
       // 2. Send to backend
       await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/hero-model",
+        "https://api.flexmidas.com/api/hero-model",
         dataToSend
       );
 

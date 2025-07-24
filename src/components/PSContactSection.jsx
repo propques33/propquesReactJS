@@ -57,7 +57,7 @@ const PSContactSection = () => {
 
     try {
       const response = await fetch(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/propques-studio-consultation",
+        "https://api.flexmidas.com/api/propques-studio-consultation",
         {
           method: "POST",
           headers: {

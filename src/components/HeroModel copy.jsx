@@ -157,7 +157,7 @@ export default function ContactForm() {
 
     try {
       await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/hero-model-copy",
+        "https://api.flexmidas.com/api/hero-model-copy",
         payload
       );
       navigate("/thankyou");

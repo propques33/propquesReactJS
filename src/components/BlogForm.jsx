@@ -67,7 +67,7 @@ const BlogForm = () => {
     setUploading(true);
     try {
       const res = await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image",
+        "https://api.flexmidas.com/api/blogs/upload-image",
         data
       );
       setFormData((prev) => ({ ...prev, featuredImage: res.data.url }));
@@ -126,7 +126,7 @@ const BlogForm = () => {
 
     try {
       await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs",
+        "https://api.flexmidas.com/api/blogs",
         {
           ...formData,
           contentBody,
@@ -169,7 +169,7 @@ const BlogForm = () => {
     const fetchBlogs = async () => {
       try {
         await axios.get(
-          "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs",
+          "https://api.flexmidas.com/api/blogs",
           {
             params: selectedPlatform ? { publishOn: selectedPlatform } : {},
           }

@@ -110,12 +110,12 @@ export default function AuthForm() {
     let endpoint;
     if (userType === "admin") {
       endpoint = isSignUp
-        ? "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/admin/signup"
-        : "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/admin/login";
+        ? "https://api.flexmidas.com/api/admin/signup"
+        : "https://api.flexmidas.com/api/admin/login";
     } else {
       endpoint = isSignUp
-        ? "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/author/signup"
-        : "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/author/login";
+        ? "https://api.flexmidas.com/api/author/signup"
+        : "https://api.flexmidas.com/api/author/login";
     }
 
     try {

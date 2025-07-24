@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api';
+const API_URL = 'https://api.flexmidas.com/api';
 
 // Cache blogs in session storage for 5 minutes
 export const getBlogs = async () => {

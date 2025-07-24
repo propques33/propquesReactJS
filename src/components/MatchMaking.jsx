@@ -162,11 +162,11 @@ const MatchmakingForm = () => {
 
     try {
       const response = await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/matchmaking",
+        "https://api.flexmidas.com/api/matchmaking",
         inquiryData
       );
 
-      await axios.post("https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/contact", inquiryData);
+      await axios.post("https://api.flexmidas.com/api/contact", inquiryData);
 
       console.log("Submission Response:", response); // Debugging response
       navigate("/matchmaking-for-coworking-operators-thankyou");

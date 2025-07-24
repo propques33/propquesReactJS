@@ -36,7 +36,7 @@ const EditBlog = () => {
 
   useEffect(() => {
     axios
-      .get(`https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`)
+      .get(`https://api.flexmidas.com/api/blogs/${slug}`)
       .then((res) => {
         const data = res.data;
         setBlog({
@@ -61,7 +61,7 @@ const EditBlog = () => {
     formData.append("image", file);
     try {
       const { data } = await axios.post(
-        "https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/upload-image",
+        "https://api.flexmidas.com/api/blogs/upload-image",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -149,7 +149,7 @@ const EditBlog = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://pq-backend-fus-pq-blogs-elbtf.ondigitalocean.app/api/blogs/${slug}`,
+        `https://api.flexmidas.com/api/blogs/${slug}`,
         { ...blog, contentBody: editorContent }
       );
       alert("✅ Blog updated successfully!");
