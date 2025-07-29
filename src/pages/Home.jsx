@@ -3,6 +3,7 @@ import Hero from "../components/Hero.jsx";
 import HeroMobile from "../components/HeroMobile.jsx";
 import { IoClose } from "react-icons/io5";
 import { Helmet } from "react-helmet";
+import FloatingContactButtons from "../components/FloatingContactButtons.jsx";
 
 // const Hero = React.lazy(() => import("../components/Hero.jsx"));
 
@@ -106,7 +107,7 @@ const Home = () => {
       <Faq id="faq" />
       <Contact id="contact" />
       {/* Animation styles */}
-    
+      <FloatingContactButtons />
     </div>
   );
 };
