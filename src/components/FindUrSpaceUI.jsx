@@ -1,5 +1,5 @@
 import React from "react";
-import fur from "../../public/fur.jpg";
+import fur from "../assets/fur.png";
 
 const fINDURSPACE = () => {
   return (
@@ -12,12 +12,12 @@ const fINDURSPACE = () => {
 
         <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
           <img
-            src="https://findurspace.tech/static/images/logo.webp" // Replace with your actual logo URL
-            alt="FindUrSpace Logo"
+            src="https://nextmovein.com/static/nextmovein-BLOBYEeC.png" // Replace with your actual logo URL
+            alt="NextMovein Logo"
             className="mb-4 h-12"
           />
           <p className="text-gray-700 mb-6">
-            FindUrSpace caters to unique co-working spaces for preferred
+            NextMovein caters to unique co-working spaces for preferred
             locations tailored to your needs.
           </p>
           {/* <h2 className="text-2xl font-bold mb-4">Why Choose Us?</h2> */}
@@ -70,7 +70,7 @@ const fINDURSPACE = () => {
           </li> */}
           </ul>
           <button className="mt-8 bg-blue-500 w-full shadow-xl sm:w-auto text-center hover:bg-blue-600 transition-all ease-in-out px-6 py-2 sm:px-6 sm:py-3 rounded-xl text-white  sm:text-md md:text-[15px] flex items-center justify-center gap-2">
-            <a href="https://findurspace.tech/">Visit Website</a>
+            <a href="https://nextmovein.com/">Visit Website</a>
           </button>
         </div>
 
@@ -82,7 +82,7 @@ const fINDURSPACE = () => {
             </div>
             <img
               src={fur} // Replace with your actual image URL
-              alt="FindUrSpace"
+              alt="Nextmovein"
               className="rounded-lg"
             />
           </div>

@@ -47,7 +47,7 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="https://findurspace.tech/" className="hover:underline">
+                <a href="https://nextmovein.com/" className="hover:underline">
                   Looking for Offices
                 </a>
               </li>
@@ -106,8 +106,8 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Our Products</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="https://findurspace.tech/" className="hover:underline">
-                  Findurspace
+                <a href="https://nextmovein.com/" className="hover:underline">
+                  NextMovein
                 </a>
               </li>
               <li>
