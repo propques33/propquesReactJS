@@ -94,13 +94,13 @@ const Routing = () => {
           path="/start-your-own-coworking-space"
           element={<StartYourOwnCoworking />}
         />
-        <Route path="/case-study/worqspot" element={<WorqSpot />} />
-        <Route path="/case-study/cubispace" element={<Cubispace />} />
-        <Route path="/case-study/work-vistar" element={<WorkVistar />} />
-        <Route path="/case-study/workjar" element={<Workjar />} />
-        <Route path="/case-study/workdesq" element={<Workdesq />} />
-        <Route path="/case-study/karyasthal" element={<Karyasthal />} />
-        <Route path="/case-study/sapna-sangeeta-offices" element={<Sapnasangeeta />} />
+        <Route path="/worqspot" element={<WorqSpot />} />
+        <Route path="/cubispace" element={<Cubispace />} />
+        <Route path="/work-vistar" element={<WorkVistar />} />
+        <Route path="/workjar" element={<Workjar />} />
+        <Route path="/workdesq" element={<Workdesq />} />
+        <Route path="/karyasthal" element={<Karyasthal />} />
+        <Route path="/sapna-sangeeta-offices" element={<Sapnasangeeta />} />
         <Route path="/summit-space" element={<SummitSpace />} />
         <Route path="*" element={<NotFound />} />
 
